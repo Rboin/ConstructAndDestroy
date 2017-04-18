@@ -133,7 +133,6 @@ set(SOURCE_FILES
         src/neighbourhood/neighbourhood_manager.cpp
 
         src/sorting/sort_strategy.h src/sorting/quicksort_strategy.cpp src/sorting/quicksort_strategy.h
-        src/sorting/sort_strategy.h src/sorting/quicksort_strategy.cpp src/sorting/quicksort_strategy.h
 
         src/simulation.cpp src/simulation.h
 
