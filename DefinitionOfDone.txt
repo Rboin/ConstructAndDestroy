@@ -1,0 +1,11 @@
+1. Acceptation Criteria is met.
+2. Code is commented where needed.
+3. Has been reviewed by at least one other team member.
+4. Builds without errors.
+5. Unit tests are written and passing.
+6. Merge conflicts are resolved.
+7. Technical Design Document is updated.
+8. Testreport is updated.
+9. Voldoet aan code standaarden (Zie linter)
+
+

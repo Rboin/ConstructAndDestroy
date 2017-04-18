@@ -137,6 +137,7 @@ set(SOURCE_FILES
         src/simulation.cpp src/simulation.h
 
         src/ui/eventhandler/event_handler.h
+
         src/ui/ui_component.h src/ui/ui_component.cpp
         src/ui/panel/world_panel.h src/ui/panel/world_panel.cpp
         src/ui/window/simulation_window.h src/ui/window/simulation_window.cpp
