@@ -5,7 +5,7 @@
 #include <entity/goal/moving_entity_goal/atomic_goal_type.h>
 #include <behaviour/strategy/obstacle_avoidance_strategy.h>
 #include "obstacle_avoidance_goal.h"
-#include "neighbourhood/neighbourhood_manager.h"
+#include "neighbourhood_manager.h"
 #include "entity/moving/moving_entity.h"
 #include "vector.h"
 #include "behaviour/behaviour.h"

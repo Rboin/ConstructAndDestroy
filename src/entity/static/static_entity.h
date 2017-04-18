@@ -6,7 +6,7 @@
 #define C_AND_D_PROJECT_STATIC_ENTITY_H
 
 
-#include "entity/base_entity.h"
+#include "base_entity.h"
 
 class StaticEntity : public BaseEntity {
 public:

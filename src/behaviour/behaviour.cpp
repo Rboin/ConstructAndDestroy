@@ -3,10 +3,10 @@
 //
 
 #include <vector>
-#include "behaviour.h"
+#include "behaviour/behaviour.h"
 #include "vector.h"
-#include "calculator/force_calculator.h"
-#include "behaviour/strategy/behaviour_strategy.h"
+#include "behaviour/force_calculator.h"
+#include "behaviour/behaviour_strategy.h"
 
 Behaviour::Behaviour(ForceCalculator *fc) {
     _calculator = fc;

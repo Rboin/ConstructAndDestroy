@@ -4,7 +4,7 @@
 
 #include "vector.h"
 #include "basic_force_calculator.h"
-#include "behaviour/strategy/behaviour_strategy.h"
+#include "behaviour/behaviour_strategy.h"
 
 vec2 BasicForceCalculator::calculate(MovingEntity &entity,
                                      std::vector<BehaviourStrategy *> strategies,

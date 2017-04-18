@@ -3,7 +3,7 @@
 //
 
 #include <vector.h>
-#include <neighbourhood/neighbourhood_manager.h>
+#include <neighbourhood_manager.h>
 #include <entity/entity_types.h>
 #include "mouse_handler.h"
 #include "graph/graph.h"

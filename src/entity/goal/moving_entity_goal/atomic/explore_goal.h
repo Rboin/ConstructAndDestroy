@@ -6,7 +6,7 @@
 #define C_AND_D_PROJECT_EXPLORE_GOAL_H
 
 
-#include "entity/goal/atomic_goal.h"
+#include "goal/atomic_goal.h"
 
 class MovingEntity;
 class ResourceManager;

@@ -37,7 +37,7 @@
 #include "behaviour/strategy/arrive_strategy.h"
 #include "behaviour/strategy/obstacle_avoidance_strategy.h"
 #include "tree/bsp_tree.h"
-#include "neighbourhood/neighbourhood_manager.h"
+#include "neighbourhood_manager.h"
 #include "simulation.h"
 
 

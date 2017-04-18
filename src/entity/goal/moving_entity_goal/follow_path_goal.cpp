@@ -10,7 +10,7 @@
 #include "graph/graph.h"
 #include "entity/goal/moving_entity_goal/strategy_goal_type.h"
 #include "entity/moving/moving_entity.h"
-#include "entity/goal/evaluator/goal_evaluator.h"
+#include "goal/goal_evaluator.h"
 #include "entity/goal/moving_entity_goal/atomic/wander_goal.h"
 #include "behaviour/behaviour.h"
 

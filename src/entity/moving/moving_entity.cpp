@@ -4,15 +4,15 @@
 
 #include <cmath>
 #include <cfloat>
-#include "entity/weapon/weapon.h"
+#include "weapon.h"
 #include <entity/weapon/axe_weapon.h>
 #include <entity/weapon/bow_weapon.h>
 #include "moving_entity.h"
 #include "matrix.h"
 #include "behaviour/behaviour.h"
 #include "tree/bsp_tree.h"
-#include "neighbourhood/neighbourhood_manager.h"
-#include "behaviour/strategy/behaviour_strategy.h"
+#include "neighbourhood_manager.h"
+#include "behaviour/behaviour_strategy.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/entity_types.h"
 #include "entity/goal/moving_entity_goal/job_type.h"

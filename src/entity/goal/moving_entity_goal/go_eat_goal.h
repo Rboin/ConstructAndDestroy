@@ -6,7 +6,7 @@
 #define C_AND_D_PROJECT_GO_EAT_GOAL_H
 
 
-#include <entity/goal/composite_goal.h>
+#include <goal/composite_goal.h>
 #include <vector>
 #include "job_type.h"
 

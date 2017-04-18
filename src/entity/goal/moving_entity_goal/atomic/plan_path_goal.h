@@ -8,7 +8,7 @@
 #include <vector>
 #include <types.h>
 #include <queue>
-#include <entity/goal/atomic_goal.h>
+#include <goal/atomic_goal.h>
 
 class MovingEntity;
 

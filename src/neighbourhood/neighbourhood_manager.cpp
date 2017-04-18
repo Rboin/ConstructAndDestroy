@@ -7,7 +7,7 @@
 #include "vector.h"
 #include "tree/bsp_tree.h"
 #include "tree/bsp_node.h"
-#include "entity/base_entity.h"
+#include "base_entity.h"
 #include "sorting/quicksort_strategy.h"
 
 NeighbourhoodManager *NeighbourhoodManager::instance = nullptr;

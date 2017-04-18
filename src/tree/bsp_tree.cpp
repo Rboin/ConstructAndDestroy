@@ -5,7 +5,7 @@
 #include "vector.h"
 #include "bsp_tree.h"
 #include "bsp_node.h"
-#include "entity/base_entity.h"
+#include "base_entity.h"
 
 BSPTree::BSPTree(vec2 v1, vec2 v2) {
     generate(v1, v2);

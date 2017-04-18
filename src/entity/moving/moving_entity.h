@@ -6,8 +6,8 @@
 #define C_AND_D_PROJECT_MOVINGENTITY_H
 
 #include <fuzzy/fuzzy_module.h>
-#include <entity/weapon/weapon.h>
-#include "entity/base_entity.h"
+#include <weapon.h>
+#include "base_entity.h"
 #include "entity/goal/moving_entity_goal/job_type.h"
 
 //=================== Forward declarations ===================

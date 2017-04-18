@@ -5,7 +5,7 @@
 #ifndef C_AND_D_PROJECT_BASIC_FORCE_CALCULATOR_H
 #define C_AND_D_PROJECT_BASIC_FORCE_CALCULATOR_H
 
-#include "force_calculator.h"
+#include "behaviour/force_calculator.h"
 
 class BasicForceCalculator : public ForceCalculator {
 

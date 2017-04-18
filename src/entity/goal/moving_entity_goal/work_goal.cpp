@@ -6,7 +6,7 @@
 #include <entity/goal/moving_entity_goal/atomic/plan_path_goal.h>
 #include <graph/graph_manager.h>
 #include <graph/graph.h>
-#include <entity/goal/composite_goal.h>
+#include <goal/composite_goal.h>
 #include <entity/goal/moving_entity_goal/atomic/gather_resource_goal.h>
 #include <entity/goal/moving_entity_goal/atomic/drop_resources_goal.h>
 #include "work_goal.h"

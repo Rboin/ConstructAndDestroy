@@ -5,7 +5,7 @@
 #ifndef C_AND_D_PROJECT_GATHER_RESOURCE_GOAL_H
 #define C_AND_D_PROJECT_GATHER_RESOURCE_GOAL_H
 
-#include "entity/goal/atomic_goal.h"
+#include "goal/atomic_goal.h"
 
 class MovingEntity;
 

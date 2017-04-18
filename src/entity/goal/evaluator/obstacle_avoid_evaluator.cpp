@@ -5,7 +5,7 @@
 #include "obstacle_avoid_evaluator.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/entity_types.h"
-#include "neighbourhood/neighbourhood_manager.h"
+#include "neighbourhood_manager.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 
 const float ObstacleAvoidEvaluator::calculate_desirability(MovingEntity *t) {

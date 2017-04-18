@@ -8,7 +8,7 @@
 #include <entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h>
 #include "think_goal.h"
 #include "strategy_goal_type.h"
-#include "entity/goal/evaluator/goal_evaluator.h"
+#include "goal/goal_evaluator.h"
 #include "entity/goal/moving_entity_goal/atomic/wander_goal.h"
 #include "vector.h"
 #include "follow_path_goal.h"

@@ -7,7 +7,7 @@
 
 
 #include <entity/goal/moving_entity_goal/job_type.h>
-#include "goal_evaluator.h"
+#include "goal/goal_evaluator.h"
 
 class MovingEntity;
 

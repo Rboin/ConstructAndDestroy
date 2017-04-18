@@ -5,7 +5,7 @@
 #ifndef C_AND_D_PROJECT_OBSTACLEAVOIDEVALUATOR_H
 #define C_AND_D_PROJECT_OBSTACLEAVOIDEVALUATOR_H
 
-#include "goal_evaluator.h"
+#include "goal/goal_evaluator.h"
 #include "types.h"
 class MovingEntity;
 

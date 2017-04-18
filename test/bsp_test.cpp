@@ -25,7 +25,7 @@ TEST(BSPTree, Insert) {
             {-20, 20},
     };
     mesh base = {4, default_shape};
-    BaseEntity e = StaticEntity(&base, {0, 400}, 1.0f);
+    BaseEntity e = StaticEntity(&base, {0, 400}, 1.0f, TextureTypes::CAMPFIRETEXTURE);
     ASSERT_NO_THROW(tree->insert(&e));
 }
 
@@ -39,7 +39,7 @@ TEST(BSPTree, Find) {
             {-20, 20},
     };
     mesh base = {4, default_shape};
-    BaseEntity e = StaticEntity(&base, {780, 590}, 1.0f);
+    BaseEntity e = StaticEntity(&base, {780, 590}, 1.0f, TextureTypes::CAMPFIRETEXTURE);
     tree->insert(&e);
     bsp_node *node;
     ASSERT_NO_THROW(node = tree->find(e));
@@ -58,7 +58,7 @@ TEST(BSPTree, Remove) {
             {-20, 20},
     };
     mesh base = {4, default_shape};
-    BaseEntity e = StaticEntity(&base, {10, 400}, 1.0f);
+    BaseEntity e = StaticEntity(&base, {10, 400}, 1.0f, TextureTypes::CAMPFIRETEXTURE);
     tree->insert(&e);
 
     ASSERT_NO_THROW(tree->remove(&e));

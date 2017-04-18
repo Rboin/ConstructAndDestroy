@@ -4,7 +4,7 @@
 
 #include <ctime>
 #include <SDL_events.h>
-#include <neighbourhood/neighbourhood_manager.h>
+#include <neighbourhood_manager.h>
 #include <SDL_video.h>
 #include "world.h"
 #include "tree/bsp_tree.h"

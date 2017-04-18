@@ -4,7 +4,7 @@
 
 #include "quicksort_strategy.h"
 #include "vector.h"
-#include "entity/base_entity.h"
+#include "base_entity.h"
 
 std::vector<BaseEntity *> QuicksortStrategy::sort(BaseEntity *b, std::vector<BaseEntity *> entities) const {
     if (entities.size() > 1) {

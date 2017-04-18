@@ -5,7 +5,7 @@
 #ifndef C_AND_D_PROJECT_ARRIVESTRATEGY_H
 #define C_AND_D_PROJECT_ARRIVESTRATEGY_H
 
-#include "behaviour_strategy.h"
+#include "behaviour/behaviour_strategy.h"
 
 class ArriveStrategy : public BehaviourStrategy {
 public:

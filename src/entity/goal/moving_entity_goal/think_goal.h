@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "types.h"
-#include "entity/goal/composite_goal.h"
+#include "goal/composite_goal.h"
 #include "job_type.h"
 #include "strategy_goal_type.h"
 #include "atomic_goal_type.h"

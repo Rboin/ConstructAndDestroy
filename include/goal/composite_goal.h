@@ -8,7 +8,7 @@
 #include <deque>
 #include <algorithm>
 #include "goal.h"
-#include "moving_entity_goal/level_type.h"
+#include "entity/goal/moving_entity_goal/level_type.h"
 
 template<typename T>
 class GoalComposite : public Goal<T> {

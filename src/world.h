@@ -9,7 +9,7 @@
 #include <SDL2/SDL.h>
 #include <graph/graph.h>
 #include "types.h"
-#include "entity/base_entity.h"
+#include "base_entity.h"
 
 class BSPTree;
 class MovingEntity;

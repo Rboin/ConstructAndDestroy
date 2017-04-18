@@ -7,9 +7,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <sstream>
-#include <entity/goal/goal.h>
+#include <goal/goal.h>
 #include <entity/goal/moving_entity_goal/level_type.h>
-#include <entity/goal/composite_goal.h>
+#include <goal/composite_goal.h>
 #include "observer/observable.h"
 #include "entity/moving/moving_entity.h"
 

@@ -6,7 +6,7 @@
 #define C_AND_D_PROJECT_FOLLOW_PATH_EVALUATOR_H
 
 
-#include "goal_evaluator.h"
+#include "goal/goal_evaluator.h"
 
 class MovingEntity;
 

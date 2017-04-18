@@ -8,7 +8,7 @@
 #include <vector>
 #include <queue>
 #include "types.h"
-#include "entity/goal/composite_goal.h"
+#include "goal/composite_goal.h"
 
 class MovingEntity;
 
