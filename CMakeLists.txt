@@ -1,11 +1,5 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.2)
 project(construct_and_destroy)
-
-if (UNIX)
-    set(CMAKE_CXX_STANDARD 11)
-elseif (WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lmingw32 -mwindows")
-endif (UNIX)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
@@ -179,8 +173,9 @@ add_custom_command(TARGET construct_and_destroy POST_BUILD
         ${CMAKE_SOURCE_DIR}/res $<TARGET_FILE_DIR:construct_and_destroy>/res)
 
 if (GTEST_FOUND)
+    find_package(Threads REQUIRED)
     enable_testing()
     add_executable(tests ${TEST_FILES})
-    target_link_libraries(tests ${GTEST_LIBRARY} cd_lib)
+    target_link_libraries(tests ${GTEST_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} cd_lib)
     add_test(NAME tests COMMAND bin/tests)
 endif (GTEST_FOUND)
