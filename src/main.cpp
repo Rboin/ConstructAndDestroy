@@ -38,7 +38,6 @@
 #include "ui/eventhandler/mouse_handler.h"
 #include "ui/eventhandler/key_handler.h"
 
-
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
 SDL_Window *window;
@@ -96,7 +95,6 @@ bool init_everything() {
 }
 
 int main(int argc, char **argv) {
-    // Initialize our window.
     if (!init_everything()) {
         return -1;
     }
@@ -206,24 +204,24 @@ int main(int argc, char **argv) {
     SDL_Rect s_screen_rect = {0, 0, size_x, size_y};
 //    SDL_Rect s_info_rect = {600, 0, 200, 600};
     WorldPanel s_screen = WorldPanel(&world1, &s_screen_rect);
-    SimulationWindow s_window = SimulationWindow(window, renderer, &s_window_rect);
+//    SimulationWindow s_window = SimulationWindow(window, renderer, &s_window_rect);
 //    InformationPanel s_info_panel = InformationPanel(&s_info_rect, &static_information);
 
-    s_window.add_component("panel", &s_screen);
+//    s_window.add_component("panel", &s_screen);
 //    s_window.add_component("info", &s_info_panel);
-    Simulation simulation = Simulation(&s_window);
+//    Simulation simulation = Simulation(&s_window);
 
     MouseHandler mouse_handler = MouseHandler();
     KeyHandler key_handler = KeyHandler();
 
 //    s_info_panel.set_subject(&mouse_handler);
 
-    simulation.set_key_handler(&key_handler);
-    simulation.set_mouse_handler(&mouse_handler);
+//    simulation.set_key_handler(&key_handler);
+//    simulation.set_mouse_handler(&mouse_handler);
 
-    world1.set_texture(renderer);
-
-    simulation.loop();
+//    world1.set_texture(renderer);
+//
+//    simulation.loop();
 
     return 0;
 }
