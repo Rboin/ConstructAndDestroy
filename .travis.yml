@@ -1,3 +1,10 @@
+# OS Configuration
+os:
+  - linux
+
+dist:
+  - arch
+
 language:
    - cpp
 
