@@ -27,5 +27,5 @@ script:
     - cd _builds
     - cmake ..
     - make
-    - ctest
-    - cppcheck src
+    - ls -al && ./bin/tests
+    - cppcheck .
