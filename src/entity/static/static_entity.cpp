@@ -13,6 +13,7 @@ StaticEntity::StaticEntity(const mesh *base, vec2 position, float mass, TextureT
 
     //remove edges from graph
     GraphManager *gm = GraphManager::get_instance();
+    gm->setup({800, 600});
     gm->graph->remove_edge(position);
 
 };
