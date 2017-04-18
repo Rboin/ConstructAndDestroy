@@ -97,18 +97,11 @@ bool init_everything() {
     return true;
 }
 
-void Fuzzy(){
-
-}
-
 int main(int argc, char **argv) {
-    Fuzzy();
     // Initialize our window.
     if (!init_everything()) {
         return -1;
     }
-//    Graph *g = new Graph(world_size);
-//    world1.add_graph(g);
 
     TextureManager *tm = TextureManager::get_instance();
     tm->setup(renderer);
@@ -132,6 +125,7 @@ int main(int argc, char **argv) {
     mesh base = {4, default_shape};
     vec2 pos = {0, 0};
     vec2 velocity = {0, 0, 0};
+    /*
 
 #pragma region Obstacle, Arrive entity
     vec2 v = {400, 300};
@@ -240,6 +234,18 @@ int main(int argc, char **argv) {
     world1.add_entity(a_star_entity2);
 #pragma endregion A*
 
+#pragma region Enemy
+    ForceCalculator *skeleton_calculator = new BasicForceCalculator();
+    Behaviour *skeleton_behaviour = new Behaviour(skeleton_calculator);
+
+    vec2 skeleton_starting_pos = {520, 280};
+    MovingEntity *skeleton = new SkeletonEntity(&base, skeleton_starting_pos, 10, 0.2, 0.2);
+
+    skeleton->set_behaviour(skeleton_behaviour);
+    skeleton->add_weapons();
+    world1.add_entity(skeleton);
+#pragma endregion skeleton
+
 #pragma  region Controllable Character
     ForceCalculator *cc_calculator = new BasicForceCalculator();
     Behaviour *cc_behaviour = new Behaviour(cc_calculator);
@@ -253,41 +259,31 @@ int main(int argc, char **argv) {
 
     world1.add_controllable_character(cc_entity);
 #pragma endregion Controllable Character
-#pragma region Enemy
-    ForceCalculator *skeleton_calculator = new BasicForceCalculator();
-    Behaviour *skeleton_behaviour = new Behaviour(skeleton_calculator);
-
-    vec2 skeleton_starting_pos = {520, 280};
-    MovingEntity *skeleton = new SkeletonEntity(&base, skeleton_starting_pos, 10, 0.2, 0.2);
-
-    skeleton->set_behaviour(skeleton_behaviour);
-    skeleton->add_weapons();
-    world1.add_entity(skeleton);
-#pragma endregion skeleton
+*/
 
     SDL_Color f_color = {0, 0, 0, 255};
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 16);
-    information static_information = {
-            "Press <S> to show Graph\nClick on an entity to select it\nClick anywhere to deselect it",
-            &f_color,
-            f_font
-    };
+//    information static_information = {
+//            "Press <S> to show Graph\nClick on an entity to select it\nClick anywhere to deselect it",
+//            &f_color,
+//            f_font
+//    };
 
     SDL_Rect s_window_rect = {0, 0, size_x, size_y};
     SDL_Rect s_screen_rect = {0, 0, size_x, size_y};
-    SDL_Rect s_info_rect = {600, 0, 200, 600};
+//    SDL_Rect s_info_rect = {600, 0, 200, 600};
     WorldPanel s_screen = WorldPanel(&world1, &s_screen_rect);
     SimulationWindow s_window = SimulationWindow(window, renderer, &s_window_rect);
-    InformationPanel s_info_panel = InformationPanel(&s_info_rect, &static_information);
+//    InformationPanel s_info_panel = InformationPanel(&s_info_rect, &static_information);
 
     s_window.add_component("panel", &s_screen);
-    s_window.add_component("info", &s_info_panel);
-    Simulation simulation = Simulation(&s_window, cc_entity);
+//    s_window.add_component("info", &s_info_panel);
+    Simulation simulation = Simulation(&s_window);
 
     MouseHandler mouse_handler = MouseHandler();
     KeyHandler key_handler = KeyHandler();
 
-    s_info_panel.set_subject(&mouse_handler);
+//    s_info_panel.set_subject(&mouse_handler);
 
     simulation.set_key_handler(&key_handler);
     simulation.set_mouse_handler(&mouse_handler);

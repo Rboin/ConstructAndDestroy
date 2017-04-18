@@ -16,7 +16,6 @@ class MovingEntity;
 
 struct mouse_event_data : public event_data<SDL_MouseButtonEvent> {
     Graph *graph;
-    MovingEntity *cc;
 };
 
 class MouseHandler : public EventHandler<mouse_event_data>, public Observable<MovingEntity *> {

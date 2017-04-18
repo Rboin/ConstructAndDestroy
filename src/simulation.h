@@ -17,11 +17,10 @@ struct mouse_event_data;
 class Simulation {
 private:
     SimulationWindow *_window;
-    MovingEntity *_cc;
     EventHandler<key_event_data> *_key_handler;
     EventHandler<mouse_event_data> *_mouse_handler;
 public:
-    Simulation(SimulationWindow *, MovingEntity *);
+    Simulation(SimulationWindow *);
 
     ~Simulation();
 

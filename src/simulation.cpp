@@ -14,9 +14,8 @@
 #include "ui/eventhandler/key_handler.h"
 
 
-Simulation::Simulation(SimulationWindow *window, MovingEntity *m) {
+Simulation::Simulation(SimulationWindow *window) {
     _window = window;
-    _cc = m;
 }
 
 Simulation::~Simulation() {
@@ -33,13 +32,11 @@ void Simulation::loop() {
             else if (event.type == SDL_KEYDOWN) {
                 key_event_data d;
                 d.data = event.key.keysym.sym;
-                d.graph = GraphManager::get_instance()->graph;
                 _key_handler->handle(d);
             } else if (event.type == SDL_MOUSEBUTTONDOWN) {
                 mouse_event_data d;
                 d.data = event.button;
                 d.graph = GraphManager::get_instance()->graph;
-                d.cc = _cc;
                 _mouse_handler->handle(d);
             }
         }

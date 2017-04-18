@@ -70,28 +70,13 @@ void Graph::remove_edge(vec2 edge) {
 
 }
 
-void Graph::set_show_graph() {
-    if (show_graph) {
-        show_graph = false;
-    } else {
-        show_graph = true;
-    }
-}
-
 void Graph::render(SDL_Renderer *renderer) {
-    if (show_graph) {
-        for (int i = 0; i < nodes.size(); i++) {
-            SDL_Rect rectToDraw = {(int) nodes.at(i)->get_position()->x, (int) nodes.at(i)->get_position()->y, 40, 40};
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            SDL_RenderDrawRect(renderer, &rectToDraw);
-        }
-        if (draw_path.size() > 0) {
-            for (int i = 0; i < draw_path.size() - 1; i++) {
-                vec2 *pos = draw_path.at(i);
-                vec2 *pos2 = draw_path.at(i + 1);
-                SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-                SDL_RenderDrawLine(renderer, pos->x + 20, pos->y + 20, pos2->x + 20, pos2->y + 20);
-            }
+    if (draw_path.size() > 0) {
+        for (int i = 0; i < draw_path.size() - 1; i++) {
+            vec2 *pos = draw_path.at(i);
+            vec2 *pos2 = draw_path.at(i + 1);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+            SDL_RenderDrawLine(renderer, pos->x + 20, pos->y + 20, pos2->x + 20, pos2->y + 20);
         }
     }
 }
@@ -206,7 +191,7 @@ std::vector<vec2 *> Graph::build_path(AStarNode *node, std::vector<vec2 *> &vect
 
 int Graph::get_node_with_position(vec2 pos) {
     int n = 0;
-    for(int i = 0; i < nodes.size(); i++){
+    for (int i = 0; i < nodes.size(); i++) {
         int distance_x = std::abs((nodes.at(i)->get_position()->x - pos.x));
         int distance_y = std::abs((nodes.at(i)->get_position()->y - pos.y));
 

@@ -10,11 +10,5 @@
 
 
 bool KeyHandler::handle(key_event_data data) {
-    std::cout << data.data << std::endl;
-
-    //115 = 'S'
-    if(data.data == 115){
-        data.graph->set_show_graph();
-    }
     return false;
 }

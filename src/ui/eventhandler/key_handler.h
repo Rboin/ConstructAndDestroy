@@ -10,7 +10,6 @@
 class Graph;
 
 struct key_event_data : public event_data<SDL_Keycode> {
-    Graph *graph;
 };
 
 class KeyHandler : public EventHandler<key_event_data> {

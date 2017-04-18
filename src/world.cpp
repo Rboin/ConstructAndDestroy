@@ -22,7 +22,7 @@ void World::update(float d_t) {
     for (unsigned int i = 0; i < entities.size(); i++) {
         entities.at(i)->update(d_t);
     }
-    controllable_character->update(d_t);
+//    controllable_character->update(d_t);
 }
 
 void World::render(SDL_Renderer *renderer) {
@@ -34,7 +34,7 @@ void World::render(SDL_Renderer *renderer) {
 
     for (unsigned long i = 0; i < entities.size(); i++)
         entities.at(i)->render(renderer);
-    controllable_character->render(renderer);
+//    controllable_character->render(renderer);
     graph->render(renderer);
 }
 

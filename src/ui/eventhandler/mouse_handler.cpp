@@ -37,12 +37,12 @@ const bool MouseHandler::handle_left_button(const vec2 &v) {
 }
 
 const bool MouseHandler::handle_right_button(mouse_event_data &data, const vec2 &v) {
-    int goal = data.graph->get_node_with_position(v);
-    int start = data.graph->get_node_with_position(data.cc->get_position());
-
-    std::vector<vec2 *> path = data.graph->a_star_path(data.graph->nodes[start], data.graph->nodes[goal]);
-    data.graph->draw_path.clear();
-    data.graph->draw_path = path;
-    data.cc->path = path;
-    data.cc->get_brain()->set_goal_follow_path();
+//    int goal = data.graph->get_node_with_position(v);
+//    int start = data.graph->get_node_with_position(data.cc->get_position());
+//
+//    std::vector<vec2 *> path = data.graph->a_star_path(data.graph->nodes[start], data.graph->nodes[goal]);
+//    data.graph->draw_path.clear();
+//    data.graph->draw_path = path;
+//    data.cc->path = path;
+//    data.cc->get_brain()->set_goal_follow_path();
 }
