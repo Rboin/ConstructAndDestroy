@@ -2,18 +2,21 @@
 os:
   - linux
 
+dist:
+  - arch
+
 language:
    - cpp
 
 install:
    # gtest install workaround
-   - sudo apt-get install libgtest-dev libsdl2-2.0-0 libsdl2-ttf-2.0-0 libsdl2-image-2.0-0 cppcheck gtest
-#   - sudo apt-get install cppcheck
-#   - cd /usr/src/gtest
-#   - sudo cmake .
-#   - sudo make
-#   - sudo mv libgtest* /usr/lib/
-#   - cd "${TRAVIS_BUILD_DIR}"
+   - sudo apt-get install libgtest-dev
+   - sudo apt install cppcheck
+   - cd /usr/src/gtest
+   - sudo cmake .
+   - sudo make
+   - sudo mv libgtest* /usr/lib/
+   - cd "${TRAVIS_BUILD_DIR}"
    # -- workaround end
 
 script:
