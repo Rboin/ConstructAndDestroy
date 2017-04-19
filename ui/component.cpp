@@ -3,16 +3,18 @@
 //
 
 #include "component.h"
+#include "vector.h"
 
-Component::Component(const unsigned int width, const unsigned int height) :
-        _width(width),
-        _height(height),
-        _children(std::vector<Component *>()) {
 
-    this->resize(_width, _height);
+Component::Component(vec2 &si, vec2 &pos) :
+        size(si),
+        position(pos),
+        children(std::vector<Component *>()) {
+
+    this->resize((int) size.x, (int) size.y);
 }
 
 void Component::add_child(Component *c) {
+    children.push_back(c);
     c->setParent(this);
-    _children.push_back(c);
 }

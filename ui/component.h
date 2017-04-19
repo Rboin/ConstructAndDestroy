@@ -7,13 +7,15 @@
 
 #include <vector>
 #include <QtWidgets>
+#include "types.h"
 
 class Component : public QWidget {
-private:
-    std::vector<Component *> _children;
-    unsigned int _width, _height;
+protected:
+    std::vector<Component *> children;
+    vec2 &size, &position;
+
 public:
-    Component(const unsigned int, const unsigned int);
+    explicit Component(vec2 &, vec2 &);
     void add_child(Component *);
 
 };
