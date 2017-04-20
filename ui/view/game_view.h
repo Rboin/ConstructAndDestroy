@@ -8,17 +8,22 @@
 #include <QGraphicsView>
 #include "types.h"
 
-class World;
-
+class QGraphicsScene;
 class GameTimer;
+class World;
 
 class GameView : public QGraphicsView {
 Q_OBJECT
 private:
-    World *_current_world;
+    QGraphicsScene *_scene;
     GameTimer *_timer;
+    World *_current_world;
+
 public:
     GameView(vec2, vec2);
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
 
 public slots:
 

@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     vec2 window_size = {400, 400}, window_pos = {0, 0};
     Window window("Main Window", window_size, window_pos);
 
-    vec2 panel_size = {300, 300}, panel_pos = {50, 50};
+    vec2 panel_size = {400, 400}, panel_pos = {0, 0};
     WorldPanel panel(panel_size, panel_pos);
     window.add_child(&panel);
     window.show();

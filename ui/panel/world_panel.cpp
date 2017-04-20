@@ -10,4 +10,5 @@
 
 WorldPanel::WorldPanel(vec2 &size, vec2 &position) : Component(size, position) {
     _game_view = new GameView(size, position);
+    _game_view->setParent(this);
 }
