@@ -15,6 +15,7 @@ find_package(Qt5Widgets REQUIRED)
 set(LIB_FILES
         ../include/vector.h ../include/vector.cpp
         ../include/matrix.h ../include/matrix.cpp
+        ../include/world.h
         )
 
 set(HEADER_FILES
@@ -23,6 +24,7 @@ set(HEADER_FILES
         panel/panel.h
         panel/world_panel.h
         view/game_view.h
+        timer/game_timer.h
         )
 set(SOURCE_FILES
         component.cpp
@@ -30,9 +32,10 @@ set(SOURCE_FILES
         panel/panel.cpp
         panel/world_panel.cpp
         view/game_view.cpp
+        timer/game_timer.cpp
         )
 
-set(BIN_FILE main.cpp  )
+set(BIN_FILE main.cpp)
 
 qt5_wrap_cpp(ui_header_moc ${HEADER_FILES})
 
