@@ -8,16 +8,15 @@
 #include "base_entity.h"
 #include "mesh.h"
 #include "string"
+#include "player_manager.h"
 
 BaseEntity::BaseEntity(int type, const mesh *base, vec2 position, float mass, TextureTypes tt) {
     _type = type;
     _mass = mass;
     _base_representation = base;
     _position = position;
-
     vec2 *buf = new vec2[base->size]{{0, 0}};
     _buffer = new mesh{base->size, buf};
-
     gTexture = TextureManager::get_instance()->GetTexture(tt);
 }
 
@@ -80,5 +79,14 @@ const mesh *BaseEntity::get_bounds() {
 void BaseEntity::set_texture(TextureTypes textureTypes) {
     SDL_DestroyTexture(gTexture);
     gTexture = TextureManager::get_instance()->GetTexture(textureTypes);
+}
+
+Player *BaseEntity::get_player() {
+    return _player;
+}
+
+void BaseEntity::set_player(int p) {
+    PlayerManager *pm = PlayerManager::get_instance();
+    _player = pm->get_player(p);
 }
 

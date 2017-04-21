@@ -10,7 +10,7 @@ ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, Reso
                        position,
                        mass, resourcetype) {
     resource_type = rt;
-    units = 1000;
+    units = 250.f;
 
     //add resource to resource manager
     ResourceManager *rm = ResourceManager::get_instance();
@@ -24,3 +24,9 @@ ResourceType ResourceEntity::get_resource_type() {
 int ResourceEntity::get_units() {
     return units;
 }
+
+float ResourceEntity::gather() {
+    units -= 0.001;
+    return 0.001;
+}
+

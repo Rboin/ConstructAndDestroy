@@ -156,7 +156,11 @@ set(SOURCE_FILES
         src/fuzzy/fuzzy_set_singleton.h src/fuzzy/fuzzy_set_singleton.cpp
         src/fuzzy/fuzzy_set_left_shoulder.h src/fuzzy/fuzzy_set_left_shoulder.cpp
         src/fuzzy/fuzzy_set_right_shoulder.h src/fuzzy/fuzzy_set_right_shoulder.cpp
-        )
+        src/entity/player.h
+        src/entity/player.cpp
+        src/entity/player.h
+        src/entity/resources.cpp
+        src/entity/player_manager.cpp src/entity/player_manager.h)
 
 set(TEST_FILES
         test/main.cpp test/example_test.cpp test/bsp_test.cpp)

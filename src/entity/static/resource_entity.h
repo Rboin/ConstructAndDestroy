@@ -12,13 +12,15 @@
 class ResourceEntity : public StaticEntity {
 private:
     ResourceType resource_type;
-    int units;
+    float units;
 public:
     ResourceEntity(const mesh*,vec2,float, ResourceType, TextureTypes);
 
     ResourceType get_resource_type();
 
     int get_units();
+
+    float gather();
 };
 
 

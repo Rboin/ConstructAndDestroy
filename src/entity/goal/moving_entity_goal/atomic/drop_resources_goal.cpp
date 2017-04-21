@@ -3,11 +3,12 @@
 //
 
 #include <entity/goal/moving_entity_goal/atomic_goal_type.h>
+#include <entity/player_manager.h>
 #include "drop_resources_goal.h"
 #include "entity/moving/moving_entity.h"
 
-DropResourcesGoal::DropResourcesGoal(MovingEntity *e) : AtomicGoal<MovingEntity>(e, DROP) {
-
+DropResourcesGoal::DropResourcesGoal(MovingEntity *e, ResourceType r) : AtomicGoal<MovingEntity>(e, DROP) {
+    rt = r;
 }
 
 void DropResourcesGoal::activate() {
@@ -16,13 +17,9 @@ void DropResourcesGoal::activate() {
 
 const int DropResourcesGoal::process() {
     activate_if_inactive();
-    owner->carrying-= 0.25f;
-    owner->hunger+= 0.01f;
-    owner->tiredness+= 0.01f;
-    if(owner->carrying <= 0){
-        status = COMPLETED;
-    }
-
+    owner->get_player()->resources.add_resources(rt,owner->carrying);
+    owner->carrying = 0.0f;
+    status = COMPLETED;
     return status;
 }
 

@@ -30,6 +30,11 @@ public:
     vec2 get_closest_resource(vec2);
 
     ResourceType get_resource_type(JobType);
+
+    /*!
+     * @return returns the resource entity that matches the position
+     */
+    ResourceEntity* get_resource(vec2*);
 };
 
 

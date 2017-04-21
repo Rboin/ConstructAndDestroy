@@ -38,6 +38,9 @@ vec2 ResourceManager::get_closest_resource(vec2 pos, ResourceType rt) {
     float distance = -1;
     vec2 closest;
     for (int i = 0; i < resources.size(); i++) {
+        if(resources.at(i)->get_units() < 10){
+            continue;
+        }
         if (distance == -1 && rt == resources.at(i)->get_resource_type() ||
             pos.distance(resources.at(i)->get_position()) < distance && rt == resources.at(i)->get_resource_type()) {
             distance = pos.distance(resources.at(i)->get_position());
@@ -65,4 +68,14 @@ ResourceType ResourceManager::get_resource_type(JobType jt) {
     else if (jt == MINER) { rt = IRONMINE; }
     return rt;
 }
+
+ResourceEntity *ResourceManager::get_resource(vec2 *pos) {
+    for (int i = 0; i < resources.size(); i++) {
+        if (resources.at(i)->get_position() == *pos) {
+            return resources.at(i);
+        }
+    }
+}
+
+
 

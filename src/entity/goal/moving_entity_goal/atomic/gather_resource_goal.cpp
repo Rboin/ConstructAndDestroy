@@ -3,11 +3,14 @@
 //
 
 #include <entity/goal/moving_entity_goal/atomic_goal_type.h>
+#include <graph/node.h>
+#include <entity/static/resource_manager.h>
 #include "gather_resource_goal.h"
 #include "entity/moving/moving_entity.h"
 
-GatherResourceGoal::GatherResourceGoal(MovingEntity *e) : AtomicGoal<MovingEntity>(e, GATHER) {
-
+GatherResourceGoal::GatherResourceGoal(MovingEntity *e, vec2 *pos) : AtomicGoal<MovingEntity>(e, GATHER) {
+    ResourceManager *rm = ResourceManager::get_instance();
+    resource = rm->get_resource(pos);
 }
 
 void GatherResourceGoal::activate() {
@@ -16,13 +19,10 @@ void GatherResourceGoal::activate() {
 
 const int GatherResourceGoal::process() {
     activate_if_inactive();
-    owner->carrying+= 0.05f;
-    owner->hunger+= 0.02f;
-    owner->tiredness+= 0.015f;
-    if(owner->carrying >= 100){
+    owner->carrying+= resource->gather();
+    if(owner->carrying >= 5){
         status = COMPLETED;
     }
-
     return status;
 }
 

@@ -10,11 +10,17 @@
 class MovingEntity;
 
 class GatherResourceGoal : public AtomicGoal<MovingEntity> {
+    ResourceEntity *resource;
 public:
-    GatherResourceGoal(MovingEntity *);
+    GatherResourceGoal(MovingEntity *, vec2*);
 
     void activate() override;
 
+    /*!
+     * Extracts resources from a resource entity and adds them to the worker.
+     * This goal is completed when the worker is carrying 5 units.
+     * @return
+     */
     const int process() override;
 
     void terminate() override;

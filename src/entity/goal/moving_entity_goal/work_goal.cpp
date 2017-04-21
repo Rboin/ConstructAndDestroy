@@ -17,11 +17,14 @@
 
 WorkGoal::WorkGoal(MovingEntity *e) : GoalComposite(e, WORK) {
     set_goal_plan_path_to_resource();
-    set_goal_follow_path();
-    set_goal_gather_resource();
-    set_goal_plan_path_home();
-    set_goal_follow_path();
-    set_goal_drop_resources();
+    if (resource->get_index() != 0) {
+        remove_all_subgoals();
+        set_goal_follow_path();
+        set_goal_gather_resource();
+        set_goal_plan_path_home();
+        set_goal_follow_path();
+        set_goal_drop_resources();
+    }
 }
 
 void WorkGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
@@ -40,12 +43,10 @@ void WorkGoal::set_goal_plan_path_to_resource() {
 
     resource = find_resource_node();
     this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->nodes[start], resource));
-    resource = gm->graph->nodes[resource->get_index() - 1];
 }
 
 void WorkGoal::set_goal_plan_path_home() {
-
-    this->sub_goals.push_front(new PlanPathGoal(owner, find_closest_edge(), find_home_node()));
+    this->sub_goals.push_front(new PlanPathGoal(owner, find_closest_edge(), find_depot()));
 }
 
 void WorkGoal::set_goal_follow_path() {
@@ -69,14 +70,13 @@ void WorkGoal::terminate() {
 }
 
 Node *WorkGoal::find_resource_node() {
-    ResourceManager *rm = ResourceManager::get_instance();
-    ResourceType rt;
     if (owner->job_type == WOODCUTTER) {
         rt = TREE;
     }
     if (owner->job_type == MINER) {
         rt = IRONMINE;
     }
+    ResourceManager *rm = ResourceManager::get_instance();
     vec2 resource_position = rm->get_closest_resource(owner->get_position(), rt);
 
     GraphManager *gm = GraphManager::get_instance();
@@ -86,7 +86,7 @@ Node *WorkGoal::find_resource_node() {
     return goal;
 }
 
-Node *WorkGoal::find_home_node() {
+Node *WorkGoal::find_depot() {
     GraphManager *gm = GraphManager::get_instance();
     ResourceManager *rm = ResourceManager::get_instance();
 
@@ -98,11 +98,11 @@ Node *WorkGoal::find_home_node() {
 }
 
 void WorkGoal::set_goal_gather_resource() {
-    this->sub_goals.push_front(new GatherResourceGoal(owner));
+    this->sub_goals.push_front(new GatherResourceGoal(owner, resource->get_position()));
 }
 
 void WorkGoal::set_goal_drop_resources() {
-    this->sub_goals.push_front(new DropResourcesGoal(owner));
+    this->sub_goals.push_front(new DropResourcesGoal(owner, rt));
 }
 
 const char *WorkGoal::get_name() const {
@@ -112,9 +112,16 @@ const char *WorkGoal::get_name() const {
 Node *WorkGoal::find_closest_edge() {
     if (resource->get_neighbors().size() == 0) {
         GraphManager *gm = GraphManager::get_instance();
+        int j = 0;
         for (int i = resource->get_index(); i < 300; i++) {
+            //right of current node
             if (gm->graph->nodes[i]->get_neighbors().size() != 0) {
                 return gm->graph->nodes[i];
+            }
+            //left of current node
+            j++;
+            if (gm->graph->nodes[i - j]->get_neighbors().size() != 0) {
+                return gm->graph->nodes[i - j];
             }
         }
     } else {

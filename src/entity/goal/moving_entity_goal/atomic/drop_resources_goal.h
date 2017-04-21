@@ -6,13 +6,18 @@
 #define C_AND_D_PROJECT_DROP_RESOURCES_GOAL_H
 
 
+#include <entity/static/resource_type.h>
 #include "goal/atomic_goal.h"
 
 class MovingEntity;
 
 class DropResourcesGoal : public AtomicGoal<MovingEntity> {
+    ResourceType rt;
 public:
-    DropResourcesGoal(MovingEntity *);
+    /*!
+     * Extracts resources from the worker and adds it to the player.
+     */
+    DropResourcesGoal(MovingEntity *, ResourceType);
 
     void activate() override;
 

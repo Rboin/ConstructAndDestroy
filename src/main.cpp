@@ -30,6 +30,7 @@
 #include <entity/goal/evaluator/rest_evaluator.h>
 #include <entity/goal/evaluator/eat_evaluator.h>
 #include <entity/moving/skeleton_entity.h>
+#include <entity/player_manager.h>
 #include "mesh.h"
 #include "world.h"
 #include "behaviour/behaviour.h"
@@ -103,6 +104,9 @@ int main(int argc, char **argv) {
         return -1;
     }
 
+    PlayerManager *pm = PlayerManager::get_instance();
+    pm->setup(4);
+
     TextureManager *tm = TextureManager::get_instance();
     tm->setup(renderer);
 
@@ -125,8 +129,7 @@ int main(int argc, char **argv) {
     mesh base = {4, default_shape};
     vec2 pos = {0, 0};
     vec2 velocity = {0, 0, 0};
-    /*
-
+ /*
 #pragma region Obstacle, Arrive entity
     vec2 v = {400, 300};
     BehaviourStrategy *avoid = new ObstacleAvoidanceStrategy();
@@ -208,6 +211,7 @@ int main(int argc, char **argv) {
 
     vec2 a_star_starting_pos = {0, 80};
     MovingEntity *a_star_entity = new LumberJackEntity(&base, a_star_starting_pos, 10, 0.2, 0.2);
+    a_star_entity->set_player(1);
 
     ThinkGoal *a_star_think_goal = new ThinkGoal(a_star_entity);
     a_star_think_goal->add_evaluator(new WorkEvaluator());
@@ -223,6 +227,7 @@ int main(int argc, char **argv) {
 
     vec2 a_star_starting_pos2 = {760, 320};
     MovingEntity *a_star_entity2 = new MinerEntity(&base, a_star_starting_pos2, 10, 0.2, 0.2);
+    a_star_entity2->set_player(1);
 
     ThinkGoal *a_star_think_goal2 = new ThinkGoal(a_star_entity2);
     a_star_think_goal2->add_evaluator(new WorkEvaluator());
@@ -260,7 +265,6 @@ int main(int argc, char **argv) {
     world1.add_controllable_character(cc_entity);
 #pragma endregion Controllable Character
 */
-
     SDL_Color f_color = {0, 0, 0, 255};
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 16);
 //    information static_information = {

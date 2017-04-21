@@ -3,8 +3,9 @@
 
 #include <vector>
 #include "resources.h"
-#include "static/static_entity.h"
-#include "moving/moving_entity.h"
+
+class StaticEntity;
+class MovingEntity;
 
 class Player {
 public:

@@ -8,6 +8,7 @@
 #include <goal/composite_goal.h>
 #include <vector>
 #include "job_type.h"
+#include <entity/static/resource_type.h>
 
 class MovingEntity;
 
@@ -19,7 +20,13 @@ class WorkGoal : public GoalComposite<MovingEntity> {
 private:
     std::vector<GoalEvaluator<MovingEntity> *> _evaluators;
     Node *resource;
+    ResourceType rt;
 public:
+    /*!
+     * The constructor of the work goal.
+     * If the resource index == 0 there is no resource available with more then 10 units
+     * so all the sub goals will be removed and new goals won't be set because there is nothing to collect.
+     */
     WorkGoal(MovingEntity *);
 
     void add_evaluator(GoalEvaluator<MovingEntity> *);
@@ -39,10 +46,20 @@ public:
 
     void set_goal_drop_resources();
 
+    /*!
+     * @return the closest resource node the fits the entities job type.
+     */
     Node* find_resource_node();
 
-    Node* find_home_node();
+    /*!
+     * @return the closest depot node
+     */
+    Node* find_depot();
 
+    /*!
+     * This function prevents that entities will get stuck in resource entities.
+     * @return the closest node that has neighbors so a path can be planned.
+     */
     Node* find_closest_edge();
 
     void activate() override;

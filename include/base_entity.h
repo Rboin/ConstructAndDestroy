@@ -8,6 +8,7 @@
 #include <vector>
 #include <SDL_render.h>
 #include <textures/texture_types.h>
+#include <entity/player.h>
 #include "vector.h"
 #include "types.h"
 
@@ -19,6 +20,7 @@ protected:
     vec2 _position;
     mesh *_buffer;
     SDL_Texture* gTexture;
+    Player * _player;
 
 public:
 
@@ -39,6 +41,10 @@ public:
     virtual void update(float){};
 
     void set_texture(TextureTypes);
+
+    void set_player(int);
+
+    Player *get_player();
 };
 
 #endif //C_AND_D_PROJECT_BASE_GAME_ENTITY_H
