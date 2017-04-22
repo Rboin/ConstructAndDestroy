@@ -26,9 +26,6 @@ public:
 
     void generate_nodes();
 
-    /*!
-     * Generates edges for all nodes in the graph. A node can have a maximum of 8 edges.
-     */
     void generate_adjacency_edges();
 
     void remove_edge(vec2);
@@ -37,57 +34,22 @@ public:
 
     void set_show_graph();
 
-    /*!
-     * Calculates the a star path using manhattan heuristic.
-     */
     std::vector<vec2*> a_star_path(Node *, Node *);
 
-    /*!
-     * Checks if a node with the given index is in the current vector
-     * @return the node if found, other nothing is returned;
-     */
     template <class T>
     T *in_list(std::vector<T *>, int);
 
-    /*!
-     * Removes the given node from the given vector
-     */
     template <class T>
     void remove_from_list(std::vector<T *>&, T *);
 
-    /*!
-     * Calculates the cost from position A to position B using the manhattan heuristic
-     * Vertical and horizontal nodes cost 10 and diagonal nodes cost 14
-     */
-    int manhattan_heuristic(vec2 *, vec2 *);
+    int manhattan_heuristic2(vec2 *, vec2 *);
 
-    /*!
-     * @return the node with the lowest cost
-     */
     template <class T>
     T *get_best(std::vector<T *>);
 
-    /*!
-     * Recursive function that builds the path for a star
-     * @return a vector with position
-     */
     std::vector<vec2*> build_path(AStarNode*, std::vector<vec2*>&);
 
-    /*!
-     * This function returns a node that is close to the given position
-     */
     int get_node_with_position(vec2);
-
-    /*!
-     * This function return a node that matches the given position
-     */
-    int get_node_with_exact_position(vec2 pos);
-
-    /*!
-     * This function prevents that entities will get stuck in resource entities.
-     * @return the closest node that has active edges/neighbors so a path can be planned.
-     */
-    Node* find_closest_edge(Node * node);
 };
 
 
