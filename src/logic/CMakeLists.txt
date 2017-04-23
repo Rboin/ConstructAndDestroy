@@ -1,6 +1,8 @@
 project(construct_and_destroy)
 
 set(SOURCE_FILES
+        matrix.cpp
+        vector.cpp
         world/world.h
         entity/entity_types.h
         entity/moving/moving_entity.h

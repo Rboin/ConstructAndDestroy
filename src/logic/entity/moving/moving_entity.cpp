@@ -59,7 +59,7 @@ void MovingEntity::update(float d_t) {
         steering_force = {0, 0, 0};
 
     //todo:: for now setting velocity to 0 if the steering force = 0, otherwise the flee behaviour
-    //todo::keeps moving, even if there is nothing in panic range. This only happens after it start moving.
+    //todo::keeps moving, even if there is nothing in panic range. This only happens after it show moving.
     if (steering_force.x == 0) {
         _velocity.x = 0;
         _velocity.y = 0;

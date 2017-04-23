@@ -37,7 +37,7 @@ bool UIComponent::remove_component(const char *key) {
 }
 
 void UIComponent::update(float d_t) {
-    for (std::map<const char *, UIComponent *>::iterator it = components.begin(); it != components.end(); it++) {
+    for (std::map<const char *, UIComponent *>::iterator it = components.begin(); it != components.end(); ++it) {
         UIComponent *current = (*it).second;
         if (current)
             current->update(d_t);
@@ -54,7 +54,7 @@ void UIComponent::draw_components(SDL_Renderer *renderer) {
         this->texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
                                           this->size->w, this->size->h);
     }
-    for (std::map<const char *, UIComponent *>::iterator it = components.begin(); it != components.end(); it++) {
+    for (std::map<const char *, UIComponent *>::iterator it = components.begin(); it != components.end(); ++it) {
         UIComponent *current_component = (*it).second;
         if (!current_component->texture) {
             current_component->texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,

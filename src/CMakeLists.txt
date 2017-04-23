@@ -2,8 +2,6 @@ project(construct_and_destroy)
 
 set(SOURCE_FILES
         simulation.h
-        vector.cpp
-        matrix.cpp
         simulation.cpp)
 
 add_subdirectory(logic)

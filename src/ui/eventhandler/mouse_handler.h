@@ -7,6 +7,7 @@
 
 
 #include <SDL_events.h>
+#include "types.h"
 #include "observer/observable.h"
 #include "event_handler.h"
 

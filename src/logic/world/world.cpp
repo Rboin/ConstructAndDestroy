@@ -35,7 +35,7 @@ void World::render(SDL_Renderer *renderer) {
     for (unsigned long i = 0; i < entities.size(); i++)
         entities.at(i)->render(renderer);
 //    controllable_character->render(renderer);
-    graph->render(renderer);
+//    graph->render(renderer);
 }
 
 void World::loop(SDL_Renderer *renderer) {
