@@ -17,12 +17,11 @@ set(SOURCE_FILES
         event/event_dispatcher.h
         component/slot.h
         component/ui_component.h
-        component/window/window.h
         component/window/sdl_window.cpp
         component/window/sdl_window.h
         component/sdl/sdl_ui_component.h
         component/sdl/sdl_ui_component.h
-        component/sdl/sdl_ui_component.cpp)
+        component/sdl/sdl_ui_component.cpp component/panel/sdl_panel.cpp component/panel/sdl_panel.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

@@ -4,24 +4,26 @@
 
 #include "sdl_window.h"
 
-#include <SDL2/SDL.h>
-#include "vector.h"
+SDLWindow::SDLWindow(SDL_UI_RenderObject *r) :
+        SDLWindow(r, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r) : SDLWindow(r, nullptr) {}
+SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window) :
+        SDLWindow(r, sdl_window, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window) : SDLWindow(r, sdl_window, nullptr) {}
+SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer) :
+        SDLWindow(r, sdl_window, renderer, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, EventDispatcher<mouse_event_data> *mouse) :
-        SDLWindow(r, sdl_window, mouse, nullptr) {}
+SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
+                     EventDispatcher<mouse_event_data> *mouse) :
+        SDLWindow(r, sdl_window, renderer, mouse, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, EventDispatcher<mouse_event_data> *mouse,
-                     EventDispatcher<key_event_data> *key) : SDLWindow(r, sdl_window, mouse, key, nullptr) {}
-
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, EventDispatcher<mouse_event_data> *mouse,
-                     EventDispatcher<key_event_data> *key, Renderer<SDL_Renderer> *renderer) : SDL_UIComponent(r) {
+SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
+                     EventDispatcher<mouse_event_data> *mouse,
+                     EventDispatcher<key_event_data> *key) : SDL_UIComponent(r) {
     _mouse_event_dispatcher = mouse;
     _key_event_dispatcher = key;
     _renderer = renderer;
+    _sdl_window = sdl_window;
 }
 
 int SDLWindow::show() {
@@ -53,7 +55,9 @@ int SDLWindow::show() {
 }
 
 SDL_Texture *SDLWindow::render(Renderer<SDL_Renderer> *renderer, float delta) {
-
+    SDL_RenderClear(renderer->get_engine());
+    SDL_UIComponent::render(renderer, delta);
+    SDL_RenderPresent(renderer->get_engine());
 }
 
 

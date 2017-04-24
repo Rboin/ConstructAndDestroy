@@ -22,6 +22,9 @@ public:
     SDL_UI_RenderObject(const vec2 &position, const vec2 &size, const sdl_ui_data &data);
 
     SDL_Texture *render(Renderer<SDL_Renderer> *renderer) override;
+
+    void init_texture(Renderer<SDL_Renderer> *);
+    void clear_texture(Renderer<SDL_Renderer> *, SDL_Rect *);
 };
 
 

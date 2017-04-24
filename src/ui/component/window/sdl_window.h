@@ -21,14 +21,12 @@ public:
     explicit SDLWindow(SDL_UI_RenderObject *);
 
     explicit SDLWindow(SDL_UI_RenderObject *, SDL_Window *);
+    explicit SDLWindow(SDL_UI_RenderObject *, SDL_Window *, Renderer<SDL_Renderer> *);
 
-    explicit SDLWindow(SDL_UI_RenderObject *, SDL_Window *, EventDispatcher<mouse_event_data> *);
+    explicit SDLWindow(SDL_UI_RenderObject *, SDL_Window *, Renderer<SDL_Renderer> *, EventDispatcher<mouse_event_data> *);
 
-    explicit SDLWindow(SDL_UI_RenderObject *, SDL_Window *, EventDispatcher<mouse_event_data> *,
+    explicit SDLWindow(SDL_UI_RenderObject *, SDL_Window *, Renderer<SDL_Renderer> *, EventDispatcher<mouse_event_data> *,
                        EventDispatcher<key_event_data> *);
-
-    explicit SDLWindow(SDL_UI_RenderObject *, SDL_Window *, EventDispatcher<mouse_event_data> *,
-                       EventDispatcher<key_event_data> *, Renderer<SDL_Renderer> *);
 
     int show();
 

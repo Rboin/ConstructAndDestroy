@@ -5,6 +5,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <component/panel/sdl_panel.h>
 #include "component/window/sdl_window.h"
 #include "world/world.h"
 
@@ -72,12 +73,17 @@ int main(int argc, char **argv) {
     SDL_Color f_color = {0, 0, 0, 255};
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 16);
 
+    Renderer<SDL_Renderer> r = Renderer<SDL_Renderer>(renderer);
     vec2 main_window_position = {0, 0}, main_window_size = {800, 600};
-//    render_object main_window_object = {
-//            main_window_position,
-//            main_window_size,
-//            0, 0, 255
-//    };
-//    SDLWindow sdl_window(&main_window_object, window);
-//    return sdl_window.show();
+    sdl_ui_data main_window_data = {255, 255, 255};
+    SDL_UI_RenderObject window_o = SDL_UI_RenderObject(main_window_position, main_window_size, main_window_data);
+    SDLWindow sdl_window(&window_o, window, &r);
+
+    vec2 right_panel_pos = {600, 0}, right_panel_size = {200, 600};
+    sdl_ui_data right_panel_data = {0, 0, 255};
+    SDL_UI_RenderObject panel_o = SDL_UI_RenderObject(right_panel_pos, right_panel_size, right_panel_data);
+    SDLPanel right_panel(&panel_o);
+
+    sdl_window.add_component(&right_panel);
+    return sdl_window.show();
 }
