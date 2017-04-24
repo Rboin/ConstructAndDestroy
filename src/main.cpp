@@ -10,17 +10,28 @@
 #include <textures/texture_manager.h>
 #include <entity/moving/lumberjack_entity.h>
 #include <entity/player_manager.h>
+#include <entity/moving/miner_entity.h>
+#include <entity/goal/evaluator/work_evaluator.h>
+#include <entity/goal/evaluator/rest_evaluator.h>
+#include <entity/goal/evaluator/eat_evaluator.h>
+#include <entity/moving/skeleton_entity.h>
+#include <entity/static/resource_entity.h>
+#include <entity/static/restaurant_entity.h>
+#include <entity/static/warehouse_entity.h>
+#include <entity/static/tree_entity.h>
+#include <entity/static/iron_mine_entity.h>
+#include <entity/static/campfire_entity.h>
+#include <entity/goal/evaluator/wander_evaluator.h>
+#include <entity/goal/evaluator/obstacle_avoid_evaluator.h>
+#include <entity/goal/evaluator/explore_evaluator.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
-#include "mesh.h"
-#include "world/world.h"
 #include "behaviour/behaviour.h"
 #include "behaviour/calculator/basic_force_calculator.h"
 #include "behaviour/strategy/arrive_strategy.h"
 #include "behaviour/strategy/obstacle_avoidance_strategy.h"
 #include "tree/bsp_tree.h"
-#include "logic/neighbourhood/neighbourhood_manager.h"
 #include "simulation.h"
 #include "ui/window/simulation_window.h"
 #include "ui/panel/world_panel.h"
@@ -89,7 +100,7 @@ int main(int argc, char **argv) {
     if (!init_everything()) {
         return -1;
     }
-
+#pragma region Initialize Managers
     PlayerManager *pm = PlayerManager::get_instance();
     pm->setup(4);
 
@@ -113,35 +124,11 @@ int main(int argc, char **argv) {
             {-20, 20},
     };
     mesh base = {4, default_shape};
-    vec2 pos = {0, 0};
-    vec2 velocity = {0, 0, 0};
- /*
-#pragma region Obstacle, Arrive entity
-    vec2 v = {400, 300};
-    BehaviourStrategy *avoid = new ObstacleAvoidanceStrategy();
-    avoid->set_targets(&v);
-
-    vec2 v2 = {700, 500};
-    BehaviourStrategy *arrive = new ArriveStrategy();
-    arrive->set_targets(&v2);
-
-    ForceCalculator *calculator = new BasicForceCalculator();
-    Behaviour *behaviour = new Behaviour(calculator);
-
-    MovingEntity *entity = new MinerEntity(&base, pos, 100, 0.2, 0.2);
-    ThinkGoal *think_goal = new ThinkGoal(entity);
-
-    think_goal->add_evaluator(new WanderEvaluator());
-    think_goal->add_evaluator(new ObstacleAvoidEvaluator());
-
-    entity->set_behaviour(behaviour);
-    entity->set_goal(think_goal);
-    world1.add_entity(entity);
-#pragma endregion Obstacle, Arrive entity
+#pragma endregion Initialize Managers
 
 #pragma region Static entities
     vec2 s_position = {400, 280};
-    ResourceEntity *s_entity =new TreeEntity(&base, s_position, 50);
+    ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
     world1.add_entity(s_entity);
 
     vec2 s_position1 = {400, 240};
@@ -177,20 +164,6 @@ int main(int argc, char **argv) {
     world1.add_entity(s_entity9);
 #pragma endregion Static Object
 
-#pragma region Explore entity
-    ForceCalculator *explore_calculator = new BasicForceCalculator();
-    Behaviour *explore_behaviour = new Behaviour(explore_calculator);
-
-    vec2 explore_starting_pos = {600, 40};
-    MovingEntity *explore_entity = new LumberJackEntity(&base, explore_starting_pos, 10, 0.2, 0.2);
-    ThinkGoal *explore_think_goal = new ThinkGoal(explore_entity);
-
-    explore_think_goal->add_evaluator(new ExploreEvaluator());
-    explore_entity->set_behaviour(explore_behaviour);
-    explore_entity->set_goal(explore_think_goal);
-
-    world1.add_entity(explore_entity);
-#pragma endregion explore entity
 #pragma  region A*
     ForceCalculator *a_star_calculator = new BasicForceCalculator();
     Behaviour *a_star_behaviour = new Behaviour(a_star_calculator);
@@ -224,33 +197,6 @@ int main(int argc, char **argv) {
 
     world1.add_entity(a_star_entity2);
 #pragma endregion A*
-
-#pragma region Enemy
-    ForceCalculator *skeleton_calculator = new BasicForceCalculator();
-    Behaviour *skeleton_behaviour = new Behaviour(skeleton_calculator);
-
-    vec2 skeleton_starting_pos = {520, 280};
-    MovingEntity *skeleton = new SkeletonEntity(&base, skeleton_starting_pos, 10, 0.2, 0.2);
-
-    skeleton->set_behaviour(skeleton_behaviour);
-    skeleton->add_weapons();
-    world1.add_entity(skeleton);
-#pragma endregion skeleton
-
-#pragma  region Controllable Character
-    ForceCalculator *cc_calculator = new BasicForceCalculator();
-    Behaviour *cc_behaviour = new Behaviour(cc_calculator);
-
-    vec2 cc_start_pos = {0, 0};
-    MovingEntity *cc_entity = new MinerEntity(&base, cc_start_pos, 10, 0.2, 0.2);
-
-    ThinkGoal *cc_think_goal = new ThinkGoal(cc_entity);
-    cc_entity->set_behaviour(cc_behaviour);
-    cc_entity->set_goal(cc_think_goal);
-
-    world1.add_controllable_character(cc_entity);
-#pragma endregion Controllable Character
-*/
 
     SDL_Color f_color = {0, 0, 0, 255};
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 16);

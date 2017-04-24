@@ -18,7 +18,8 @@ public:
 
     /*!
      * Extracts resources from a resource entity and adds them to the worker.
-     * This goal is completed when the worker is carrying 5 units.
+     * This goal is completed when the worker is carrying 5 units or
+     * when the resource is depleted.
      * @return
      */
     const int process() override;

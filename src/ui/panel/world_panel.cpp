@@ -2,6 +2,7 @@
 // Created by robin on 3/19/17.
 //
 
+#include <entity/static/resource_manager.h>
 #include "world_panel.h"
 
 #include "world/world.h"
@@ -19,5 +20,7 @@ SDL_Texture *WorldPanel::draw(SDL_Renderer *renderer) {
 
 void WorldPanel::update(float d_t) {
     this->_world->update(d_t);
+    ResourceManager *rm = ResourceManager::get_instance();
+    rm->replenish_resources();
 }
 

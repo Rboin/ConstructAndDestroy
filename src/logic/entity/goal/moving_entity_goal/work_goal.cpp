@@ -18,7 +18,6 @@
 WorkGoal::WorkGoal(MovingEntity *e) : GoalComposite(e, WORK) {
     set_goal_plan_path_to_resource();
     if (resource->get_index() != 0) {
-        remove_all_subgoals();
         set_goal_follow_path();
         set_goal_gather_resource();
         set_goal_plan_path_home();
@@ -42,7 +41,9 @@ void WorkGoal::set_goal_plan_path_to_resource() {
     int start = gm->graph->get_node_with_position(owner->get_position());
 
     resource = find_resource_node();
-    this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->nodes[start], resource));
+    if(resource->get_index() != 0){
+        this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->nodes[start], resource));
+    }
 }
 
 void WorkGoal::set_goal_plan_path_home() {

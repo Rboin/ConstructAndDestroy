@@ -38,7 +38,7 @@ vec2 ResourceManager::get_closest_resource(vec2 pos, ResourceType rt) {
     float distance = -1;
     vec2 closest;
     for (int i = 0; i < resources.size(); i++) {
-        if(resources.at(i)->get_units() < 10){
+        if(resources.at(i)->is_depleted()){
             continue;
         }
         if (distance == -1 && rt == resources.at(i)->get_resource_type() ||
@@ -77,5 +77,8 @@ ResourceEntity *ResourceManager::get_resource(vec2 *pos) {
     }
 }
 
-
-
+void ResourceManager::replenish_resources() {
+    for(int i = 0; i < resources.size(); i++){
+        resources.at(i)->replenish_resource();
+    }
+}

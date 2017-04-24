@@ -25,16 +25,27 @@ public:
 
     std::vector<ResourceEntity *> get_resources();
 
+    /*!
+     * @return the closest resource that isn't depleted and matches the given resource type
+     */
     vec2 get_closest_resource(vec2, ResourceType);
 
+    /*!
+     * @return the closest resource
+     */
     vec2 get_closest_resource(vec2);
-
+    
     ResourceType get_resource_type(JobType);
 
     /*!
      * @return returns the resource entity that matches the position
      */
     ResourceEntity* get_resource(vec2*);
+
+    /*!
+     * This function calls the replenish_resource of all the resource entities
+     */
+    void replenish_resources();
 };
 
 

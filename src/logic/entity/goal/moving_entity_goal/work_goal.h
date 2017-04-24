@@ -24,8 +24,8 @@ private:
 public:
     /*!
      * The constructor of the work goal.
-     * If the resource index == 0 there is no resource available with more then 10 units
-     * so all the sub goals will be removed and new goals won't be set because there is nothing to collect.
+     * If the resource index == 0 there is no resource available with more then 100 units
+     * so new goals won't be set because there is nothing to collect.
      */
     WorkGoal(MovingEntity *);
 

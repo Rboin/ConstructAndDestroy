@@ -63,6 +63,8 @@ SDL_Texture *TextureManager::GetTexture(TextureTypes tt) {
     else if (tt == CAMPFIRETEXTURE) { texture = "campfire.png"; }
     else if (tt == BOWTEXTURE ) {texture = "bow.png";}
     else if (tt == AXETEXTURE ) {texture = "axe.png";}
+    else if (tt == IRONMINEDEPLETEDTEXTURE) { texture = "depletedironmine.png";}
+    else if (tt == TREEDEPLETEDTEXTURE) { texture = "trunk.png";}
 
     return loadTexture("res/textures/"+texture);
 }
