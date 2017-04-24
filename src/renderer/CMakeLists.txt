@@ -10,7 +10,7 @@ set(SOURCE_FILES
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_library(cd_renderer SHARED
+add_library(cd_renderer STATIC
             ${SOURCE_FILES})
 
 target_link_libraries(cd_renderer)
