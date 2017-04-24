@@ -6,7 +6,7 @@
 #define C_AND_D_PROJECT_INFORMATION_PANEL_H
 
 #include "observer/observer.h"
-#include "ui/ui_component.h"
+#include "ui_component.h"
 
 typedef struct _TTF_Font TTF_Font;
 struct SDL_Color;

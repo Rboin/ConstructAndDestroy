@@ -4,7 +4,7 @@
 
 #include "world_panel.h"
 
-#include "world.h"
+#include "world/world.h"
 
 WorldPanel::WorldPanel(World *world, SDL_Rect *size) : UIComponent(size) {
     this->_world = world;

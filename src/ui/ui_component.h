@@ -7,8 +7,6 @@
 
 #include <map>
 
-//#include <SDL2/SDL.h>
-
 struct SDL_Rect;
 struct SDL_Texture;
 class SDL_Renderer;

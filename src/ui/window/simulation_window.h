@@ -6,7 +6,7 @@
 #define C_AND_D_PROJECT_SIMULATION_WINDOW_H
 
 
-#include "ui/ui_component.h"
+#include "ui_component.h"
 
 struct SDL_Window;
 

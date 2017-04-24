@@ -4,10 +4,10 @@
 
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_events.h>
-#include <graph/graph_manager.h>
-#include <ui/eventhandler/mouse_handler.h>
-#include <entity/moving/moving_entity.h>
-#include <ui/panel/information_panel.h>
+#include "logic/graph/graph_manager.h"
+#include "ui/eventhandler/mouse_handler.h"
+#include "logic/entity/moving/moving_entity.h"
+#include "ui/panel/information_panel.h"
 
 #include "simulation.h"
 #include "ui/window/simulation_window.h"

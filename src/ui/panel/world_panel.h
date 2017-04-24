@@ -5,8 +5,7 @@
 #ifndef C_AND_D_PROJECT_SIMULATION_SCREEN_H
 #define C_AND_D_PROJECT_SIMULATION_SCREEN_H
 
-#include "ui/ui_component.h"
-//#include "ui/ui_part.h"
+#include "ui_component.h"
 
 class World;
 

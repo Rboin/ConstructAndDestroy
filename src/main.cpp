@@ -1,45 +1,31 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <../include/types.h>
-#include <../include/vector.h>
+#include <types.h>
+#include <vector.h>
 #include <behaviour/strategy/explore_strategy.h>
-#include <entity/goal/moving_entity_goal/atomic/wander_goal.h>
 #include <entity/goal/moving_entity_goal/think_goal.h>
-#include <entity/goal/evaluator/wander_evaluator.h>
-#include <entity/goal/evaluator/obstacle_avoid_evaluator.h>
 #include <graph/graph_manager.h>
-#include <entity/goal/evaluator/explore_evaluator.h>
-#include <entity/static/resource_manager.h>
 #include <entity/goal/moving_entity_goal/work_goal.h>
-#include <entity/goal/evaluator/work_evaluator.h>
-#include <entity/goal/evaluator/follow_path_evaluator.h>
-#include <ui/panel/world_panel.h>
-#include <ui/window/simulation_window.h>
-#include <ui/panel/information_panel.h>
 #include <SDL2/SDL_ttf.h>
-#include <ui/eventhandler/mouse_handler.h>
-#include <ui/eventhandler/key_handler.h>
 #include <textures/texture_manager.h>
 #include <entity/moving/lumberjack_entity.h>
-#include <entity/moving/miner_entity.h>
-#include <entity/static/tree_entity.h>
-#include <entity/static/iron_mine_entity.h>
-#include <entity/static/warehouse_entity.h>
-#include <entity/static/restaurant_entity.h>
-#include <entity/static/campfire_entity.h>
-#include <entity/goal/evaluator/rest_evaluator.h>
-#include <entity/goal/evaluator/eat_evaluator.h>
-#include <entity/moving/skeleton_entity.h>
 #include <entity/player_manager.h>
+#include "logic/neighbourhood/neighbourhood_manager.h"
+#include "renderer/mesh.h"
+#include "logic/world/world.h"
 #include "mesh.h"
-#include "world.h"
+#include "world/world.h"
 #include "behaviour/behaviour.h"
 #include "behaviour/calculator/basic_force_calculator.h"
 #include "behaviour/strategy/arrive_strategy.h"
 #include "behaviour/strategy/obstacle_avoidance_strategy.h"
 #include "tree/bsp_tree.h"
-#include "neighbourhood_manager.h"
+#include "logic/neighbourhood/neighbourhood_manager.h"
 #include "simulation.h"
+#include "ui/window/simulation_window.h"
+#include "ui/panel/world_panel.h"
+#include "ui/eventhandler/mouse_handler.h"
+#include "ui/eventhandler/key_handler.h"
 
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
@@ -265,6 +251,7 @@ int main(int argc, char **argv) {
     world1.add_controllable_character(cc_entity);
 #pragma endregion Controllable Character
 */
+
     SDL_Color f_color = {0, 0, 0, 255};
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 16);
 //    information static_information = {
