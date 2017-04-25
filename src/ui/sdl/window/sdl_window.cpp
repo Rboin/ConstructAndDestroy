@@ -14,12 +14,12 @@ SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SD
         SDLWindow(r, sdl_window, renderer, nullptr) {}
 
 SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
-                     EventDispatcher<mouse_event_data> *mouse) :
+                     EventDispatcher<SDL_UIComponent, mouse_event_data> *mouse) :
         SDLWindow(r, sdl_window, renderer, mouse, nullptr) {}
 
 SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
-                     EventDispatcher<mouse_event_data> *mouse,
-                     EventDispatcher<key_event_data> *key) : SDL_UIComponent(r) {
+                     EventDispatcher<SDL_UIComponent, mouse_event_data> *mouse,
+                     EventDispatcher<SDL_UIComponent, key_event_data> *key) : SDL_UIComponent(r) {
     _mouse_event_dispatcher = mouse;
     _key_event_dispatcher = key;
     _renderer = renderer;
@@ -59,9 +59,3 @@ SDL_Texture *SDLWindow::render(Renderer<SDL_Renderer> *renderer, float delta) {
     SDL_UIComponent::render(renderer, delta);
     SDL_RenderPresent(renderer->get_engine());
 }
-
-
-
-
-
-

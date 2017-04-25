@@ -8,7 +8,7 @@
 #include "sdl/sdl_ui_render_object.h"
 #include "component/ui_component.h"
 
-class SDL_UIComponent : public UIComponent<SDL_Renderer, sdl_ui_data, SDL_Texture> {
+class SDL_UIComponent : public UIComponent<SDL_Renderer, sdl_ui_data, SDL_Texture, mouse_event_data> {
 public:
     explicit SDL_UIComponent(SDL_UI_RenderObject *);
 

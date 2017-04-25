@@ -90,6 +90,10 @@ vec2 s_vec2::normalize() const {
     return *this / l;
 }
 
+float s_vec2::dot(const vec2 &v) const {
+    return (x * v.x) + (y * v.y);
+}
+
 void wrap_around(vec2 &pos) {
     float world_max_x = 800;
     float world_max_y = 600;

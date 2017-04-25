@@ -9,39 +9,22 @@
 #include <cstdint>
 #include "render_object.h"
 #include "renderer.h"
-#include "slot.h"
+#include "event/slot.h"
 
-struct event_data {
-    uint32_t type, timestamp;
-
-    event_data(uint32_t ty, uint32_t time) {
-        type = ty;
-        timestamp = time;
-    }
-};
-
-struct mouse_event_data : public event_data {
-    const vec2 &position;
-
-    mouse_event_data(uint32_t ty, uint32_t time, vec2 &pos) :
-            event_data(ty, time),
-            position(pos) {}
-};
-
-struct key_event_data : public event_data {
-    char key;
-
-    key_event_data(uint32_t ty, uint32_t time, char k) : event_data(ty, time), key(k) {}
-};
-
-template<typename T, typename D, typename R>
+/**
+ * @tparam T = Type of renderer, i.e SDL_Renderer.
+ * @tparam D = Type of data for RenderObject to draw.
+ * @tparam R = The result of the RenderObject::render method.
+ * @tparam S = Type of data for the Slot object.
+ */
+template<typename T, typename D, typename R, typename S>
 class UIComponent {
 protected:
     RenderObject<T, D, R> *representation;
-    std::vector<UIComponent<T, D, R> *> children;
-    Slot<mouse_event_data> *mouse_callback;
+    std::vector<UIComponent<T, D, R, S> *> children;
+    Slot<S> *mouse_callback;
 public:
-    explicit UIComponent(RenderObject<T, D, R> *r) : children(std::vector<UIComponent<T, D, R> *>()) {
+    explicit UIComponent(RenderObject<T, D, R> *r) : children(std::vector<UIComponent<T, D, R, S> *>()) {
         representation = r;
         mouse_callback = nullptr;
     }
@@ -54,15 +37,15 @@ public:
         return representation->get_size();
     }
 
-    const RenderObject<T, D, R> *get_representation() {
+    RenderObject<T, D, R> *get_representation() {
         return representation;
     };
 
-    const Slot<mouse_event_data> *get_mouse_callback() {
+    const Slot<S> *get_mouse_callback() {
         return mouse_callback;
     }
 
-    void set_mouse_callback(Slot<mouse_event_data> *s) {
+    void set_mouse_callback(Slot<S> *s) {
         if(mouse_callback) {
             delete mouse_callback;
         }
@@ -80,11 +63,16 @@ public:
         children.push_back(child);
     }
 
+    bool contains_point(vec2 v) {
+        return representation->contains(v);
+    }
+
     virtual R *render(Renderer<T> *renderer, float delta) {
         representation->render(renderer);
         for(int i = -1; i < children.size(); ++i) {
             children[i]->render(renderer, delta);
         }
+        return nullptr;
     }
 
 };

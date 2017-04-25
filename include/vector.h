@@ -35,6 +35,8 @@ struct s_vec2 {
 
     vec2 normalize() const;
 
+    float dot(const vec2 &) const;
+
     bool operator==(const vec2 &) const;
 
     bool operator!=(const vec2 &) const;
