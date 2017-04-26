@@ -48,6 +48,7 @@ int SDLWindow::show() {
 
         long current_tick = SDL_GetTicks();
         float delta = current_tick - last_tick;
+        last_tick = current_tick;
         if (_renderer) {
             render(_renderer, delta);
         }
