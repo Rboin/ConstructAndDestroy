@@ -5,7 +5,7 @@
 #include "sdl_ui_render_object.h"
 #include "renderer.h"
 
-SDL_UI_RenderObject::SDL_UI_RenderObject(const vec2 &position, const vec2 &size, sdl_ui_data *data)
+SDL_UI_RenderObject::SDL_UI_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data)
         : RenderObject(position, size, data) {
 }
 

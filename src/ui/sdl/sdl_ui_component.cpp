@@ -4,7 +4,7 @@
 
 #include "sdl_ui_component.h"
 
-SDL_UIComponent::SDL_UIComponent(SDL_UI_RenderObject *r) : UIComponent(r) {
+SDL_UIComponent::SDL_UIComponent(SDL_RenderObject *r) : UIComponent(r) {
 
 }
 

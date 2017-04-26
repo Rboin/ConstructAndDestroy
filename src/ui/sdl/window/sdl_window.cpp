@@ -4,20 +4,20 @@
 
 #include "sdl_window.h"
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r) :
+SDLWindow::SDLWindow(SDL_RenderObject *r) :
         SDLWindow(r, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window) :
+SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window) :
         SDLWindow(r, sdl_window, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer) :
+SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer) :
         SDLWindow(r, sdl_window, renderer, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
+SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
                      EventDispatcher<SDL_UIComponent, mouse_event_data> *mouse) :
         SDLWindow(r, sdl_window, renderer, mouse, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_UI_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
+SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
                      EventDispatcher<SDL_UIComponent, mouse_event_data> *mouse,
                      EventDispatcher<SDL_UIComponent, key_event_data> *key) : SDL_UIComponent(r) {
     _mouse_event_dispatcher = mouse;

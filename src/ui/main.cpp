@@ -82,18 +82,18 @@ int main(int argc, char **argv) {
     Renderer<SDL_Renderer> r = Renderer<SDL_Renderer>(renderer);
 
     vec2 main_window_position = {0, 0}, main_window_size = {800, 600};
-    sdl_ui_data main_window_data = {255, 255, 255};
-    SDL_UI_RenderObject window_o = SDL_UI_RenderObject(main_window_position, main_window_size, &main_window_data);
+    sdl_data main_window_data = {255, 255, 255};
+    SDL_RenderObject window_o = SDL_RenderObject(main_window_position, main_window_size, &main_window_data);
     SDLWindow sdl_window(&window_o, window, &r, mouse_dispatcher);
 
     vec2 right_panel_pos = {600, 0}, right_panel_size = {200, 600};
-    sdl_ui_data right_panel_data = {0, 0, 255};
-    SDL_UI_RenderObject panel_o = SDL_UI_RenderObject(right_panel_pos, right_panel_size, &right_panel_data);
+    sdl_data right_panel_data = {0, 0, 255};
+    SDL_RenderObject panel_o = SDL_RenderObject(right_panel_pos, right_panel_size, &right_panel_data);
     SDLPanel right_panel(&panel_o);
 
     vec2 right_panel_top_pos = {601, 1}, right_panel_top_size = {200, 200};
-    sdl_ui_data right_panel_top_data = {1, 255, 0};
-    SDL_UI_RenderObject panel_top_o = SDL_UI_RenderObject(right_panel_top_pos, right_panel_top_size, &right_panel_top_data);
+    sdl_data right_panel_top_data = {1, 255, 0};
+    SDL_RenderObject panel_top_o = SDL_RenderObject(right_panel_top_pos, right_panel_top_size, &right_panel_top_data);
     SDLPanel right_panel_top(&panel_top_o);
 
     vec2 button_pos = {601, 250}, button_size = {100, 50};

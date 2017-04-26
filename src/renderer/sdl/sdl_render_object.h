@@ -12,13 +12,13 @@
 
 struct SDL_Renderer;
 
-struct sdl_ui_data {
+struct sdl_data {
     uint8_t red, green, blue;
 };
 
-class SDL_UI_RenderObject : public RenderObject<SDL_Renderer, sdl_ui_data, SDL_Texture> {
+class SDL_UI_RenderObject : public RenderObject<SDL_Renderer, sdl_data, SDL_Texture> {
 public:
-    SDL_UI_RenderObject(const vec2 &position, const vec2 &size, sdl_ui_data *data);
+    SDL_UI_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data);
 
     SDL_Texture *render(Renderer<SDL_Renderer> *renderer) override;
 

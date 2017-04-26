@@ -10,7 +10,7 @@
 
 class SDLPanel : public SDL_UIComponent {
 public:
-    explicit SDLPanel(SDL_UI_RenderObject *);
+    explicit SDLPanel(SDL_RenderObject *);
 };
 
 
