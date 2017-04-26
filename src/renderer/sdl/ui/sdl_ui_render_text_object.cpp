@@ -6,7 +6,7 @@
 #include "renderer.h"
 
 SDL_UI_RenderTextObject::SDL_UI_RenderTextObject(const vec2 &position, const vec2 &size, sdl_ui_text_data *data) :
-        SDL_UI_RenderObject(position, size, data) {}
+        SDL_RenderObject(position, size, data) {}
 
 SDL_Texture *SDL_UI_RenderTextObject::render(Renderer<SDL_Renderer> *renderer) {
     if (!_result) {

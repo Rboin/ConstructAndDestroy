@@ -5,7 +5,7 @@ set(SOURCE_FILES
         textures/texture_types.h
         textures/texture_manager.h
         textures/texture_manager.cpp
-        renderer.h render_object.h sdl/ui/sdl_ui_render_object.cpp sdl/ui/sdl_ui_render_object.h sdl/ui/sdl_ui_render_text_object.h sdl/ui/sdl_ui_render_text_object.cpp)
+        renderer.h render_object.h sdl/sdl_render_object.cpp sdl/sdl_render_object.h sdl/ui/sdl_ui_render_text_object.h sdl/ui/sdl_ui_render_text_object.cpp sdl/image/sdl_image_render_object.cpp sdl/image/sdl_image_render_object.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

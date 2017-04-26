@@ -6,9 +6,9 @@
 #define CONSTRUCT_AND_DESTROY_SDL_UI_RENDER_TEXT_OBJECT_H
 
 #include <SDL2/SDL_ttf.h>
-#include "sdl_ui_render_object.h"
+#include "sdl/sdl_render_object.h"
 
-struct sdl_ui_text_data : public sdl_ui_data {
+struct sdl_ui_text_data : public sdl_data {
     const char *text;
     TTF_Font *font;
 
@@ -21,7 +21,7 @@ struct sdl_ui_text_data : public sdl_ui_data {
     }
 };
 
-class SDL_UI_RenderTextObject : public SDL_UI_RenderObject {
+class SDL_UI_RenderTextObject : public SDL_RenderObject {
 public:
     SDL_UI_RenderTextObject(const vec2 &position, const vec2 &size, sdl_ui_text_data *data);
 

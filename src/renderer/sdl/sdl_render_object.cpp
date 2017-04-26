@@ -2,14 +2,14 @@
 // Created by robin on 4/23/17.
 //
 
-#include "sdl_ui_render_object.h"
+#include "sdl_render_object.h"
 #include "renderer.h"
 
-SDL_UI_RenderObject::SDL_UI_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data)
+SDL_RenderObject::SDL_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data)
         : RenderObject(position, size, data) {
 }
 
-SDL_Texture *SDL_UI_RenderObject::render(Renderer<SDL_Renderer> *renderer) {
+SDL_Texture *SDL_RenderObject::render(Renderer<SDL_Renderer> *renderer) {
     if (!_result) {
         init_texture(renderer);
     }
@@ -32,7 +32,7 @@ SDL_Texture *SDL_UI_RenderObject::render(Renderer<SDL_Renderer> *renderer) {
     return _result;
 }
 
-void SDL_UI_RenderObject::init_texture(Renderer<SDL_Renderer> *renderer) {
+void SDL_RenderObject::init_texture(Renderer<SDL_Renderer> *renderer) {
     _result = SDL_CreateTexture(renderer->get_engine(),
                                 SDL_PIXELFORMAT_RGBA8888,
                                 SDL_TEXTUREACCESS_STREAMING,
@@ -41,7 +41,7 @@ void SDL_UI_RenderObject::init_texture(Renderer<SDL_Renderer> *renderer) {
     SDL_SetTextureBlendMode(_result, SDL_BLENDMODE_BLEND);
 }
 
-void SDL_UI_RenderObject::clear_texture(Renderer<SDL_Renderer> *renderer, SDL_Rect *rect) {
+void SDL_RenderObject::clear_texture(Renderer<SDL_Renderer> *renderer, SDL_Rect *rect) {
     SDL_SetRenderDrawColor(renderer->get_engine(), 0, 0, 0, 255);
     SDL_RenderFillRect(renderer->get_engine(), rect);
 }
