@@ -29,6 +29,8 @@ public:
         mouse_callback = nullptr;
     }
 
+    virtual ~UIComponent() {}
+
     const vec2 *get_position() {
         return representation->get_position();
     }
@@ -46,14 +48,14 @@ public:
     }
 
     void set_mouse_callback(Slot<S> *s) {
-        if(mouse_callback) {
+        if (mouse_callback) {
             delete mouse_callback;
         }
         mouse_callback = s;
     }
 
-    void set_representation(RenderObject<T, D, R> * ro) {
-        if(representation) {
+    void set_representation(RenderObject<T, D, R> *ro) {
+        if (representation) {
             delete representation;
         }
         representation = ro;
@@ -69,7 +71,7 @@ public:
 
     virtual R *render(Renderer<T> *renderer, float delta) {
         representation->render(renderer);
-        for(int i = -1; i < children.size(); ++i) {
+        for (int i = -1; i < children.size(); ++i) {
             children[i]->render(renderer, delta);
         }
         return nullptr;

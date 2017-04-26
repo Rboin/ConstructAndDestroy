@@ -25,16 +25,18 @@ template<typename T, typename D, typename R>
 class RenderObject {
 protected:
     vec2 _position, _size;
-    D _data;
+    D *_data;
     R *_result;
 public:
 
-    explicit RenderObject(vec2 position, vec2 size, D data) {
+    explicit RenderObject(vec2 position, vec2 size, D *data) {
         _position = position;
         _size = size;
         _data = data;
         _result = nullptr;
     }
+
+    virtual ~RenderObject() {}
 
     const vec2 *get_position() {
         return &_position;
@@ -45,7 +47,7 @@ public:
     }
 
     D *get_data() {
-        return &_data;
+        return _data;
     }
 
     /**

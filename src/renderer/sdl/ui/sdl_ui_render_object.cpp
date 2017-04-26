@@ -5,7 +5,7 @@
 #include "sdl_ui_render_object.h"
 #include "renderer.h"
 
-SDL_UI_RenderObject::SDL_UI_RenderObject(const vec2 &position, const vec2 &size, const sdl_ui_data &data)
+SDL_UI_RenderObject::SDL_UI_RenderObject(const vec2 &position, const vec2 &size, sdl_ui_data *data)
         : RenderObject(position, size, data) {
 }
 
@@ -20,7 +20,7 @@ SDL_Texture *SDL_UI_RenderObject::render(Renderer<SDL_Renderer> *renderer) {
     };
     clear_texture(renderer, &rect);
 
-    SDL_SetRenderDrawColor(renderer->get_engine(), _data.red, _data.green, _data.blue, 255);
+    SDL_SetRenderDrawColor(renderer->get_engine(), _data->red, _data->green, _data->blue, 255);
 
     SDL_RenderFillRect(renderer->get_engine(), &rect);
     SDL_SetRenderDrawColor(renderer->get_engine(), 0, 0, 0, 255);

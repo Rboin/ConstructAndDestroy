@@ -22,3 +22,4 @@ SDL_Texture *SDL_UIComponent::render(Renderer<SDL_Renderer> *renderer, float del
     }
     return texture;
 }
+

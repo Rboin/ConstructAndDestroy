@@ -7,7 +7,7 @@
 
 #include "event/event_dispatcher.h"
 #include "sdl/sdl_ui_component.h"
-#include "sdl/sdl_ui_render_object.h"
+#include "sdl/ui/sdl_ui_render_object.h"
 
 struct SDL_Window;
 

@@ -6,6 +6,7 @@
 #define CONSTRUCT_AND_DESTROY_SDL_MOUSE_EVENT_SLOT_H
 
 #include "event/slot.h"
+#include "event/event_types.h"
 
 class SDL_MouseEventSlot : public Slot<mouse_event_data> {
 public:
