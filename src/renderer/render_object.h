@@ -50,6 +50,11 @@ public:
         return _data;
     }
 
+    void set_data(D *d) {
+        delete _data;
+        _data = d;
+    }
+
     /**
      * Check whether the given point is within our bounds.
      * @param v
