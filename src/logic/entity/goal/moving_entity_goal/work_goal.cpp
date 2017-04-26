@@ -3,6 +3,7 @@
 //
 
 #include <goal/composite_goal.h>
+#include <iostream>
 #include "entity/static/resource_manager.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
 #include "graph/graph_manager.h"
@@ -41,13 +42,13 @@ void WorkGoal::set_goal_plan_path_to_resource() {
     int start = gm->graph->get_node_with_position(owner->get_position());
 
     resource = find_resource_node();
-    if(resource->get_index() != 0){
-        this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->nodes[start], resource));
+    if (resource->get_index() != 0) {
+        this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->find_closest_edge(resource)));
     }
 }
 
 void WorkGoal::set_goal_plan_path_home() {
-    this->sub_goals.push_front(new PlanPathGoal(owner, find_closest_edge(), find_depot()));
+    this->sub_goals.push_front(new PlanPathGoal(owner, find_depot()));
 }
 
 void WorkGoal::set_goal_follow_path() {
@@ -81,7 +82,7 @@ Node *WorkGoal::find_resource_node() {
     vec2 resource_position = rm->get_closest_resource(owner->get_position(), rt);
 
     GraphManager *gm = GraphManager::get_instance();
-    int index = gm->graph->get_node_with_position(resource_position);
+    int index = gm->graph->get_node_with_exact_position(resource_position);
     Node *goal = gm->graph->nodes.at(index);
 
     return goal;
@@ -92,9 +93,9 @@ Node *WorkGoal::find_depot() {
     ResourceManager *rm = ResourceManager::get_instance();
 
     vec2 warehouse_position = rm->get_closest_resource(owner->get_position(), WAREHOUSE);
-    int index = gm->graph->get_node_with_position(warehouse_position);
+    int index = gm->graph->get_node_with_exact_position(warehouse_position);
     Node *goal = gm->graph->nodes.at(index);
-
+    goal = gm->graph->find_closest_edge(goal);
     return goal;
 }
 
@@ -108,25 +109,5 @@ void WorkGoal::set_goal_drop_resources() {
 
 const char *WorkGoal::get_name() const {
     return "Work";
-}
-
-Node *WorkGoal::find_closest_edge() {
-    if (resource->get_neighbors().size() == 0) {
-        GraphManager *gm = GraphManager::get_instance();
-        int j = 0;
-        for (int i = resource->get_index(); i < 300; i++) {
-            //right of current node
-            if (gm->graph->nodes[i]->get_neighbors().size() != 0) {
-                return gm->graph->nodes[i];
-            }
-            //left of current node
-            j++;
-            if (gm->graph->nodes[i - j]->get_neighbors().size() != 0) {
-                return gm->graph->nodes[i - j];
-            }
-        }
-    } else {
-        return resource;
-    }
 }
 

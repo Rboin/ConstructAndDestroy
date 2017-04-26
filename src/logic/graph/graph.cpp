@@ -6,6 +6,7 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <limits>
 #include "graph.h"
 #include "a_star_node.h"
 
@@ -32,15 +33,35 @@ void Graph::generate_adjacency_edges() {
     int index = 0;
     for (int row = 0; row < world_size.y; row += 40) {
         for (int column = 0; column < world_size.x; column += 40) {
-            //don't add edges  top when this is the first node of a row
+            //don't add edges top when this is a node of the top row
             if (row != 0) {
                 Edge *e1 = new Edge(index, index - 20);
                 nodes.at(index)->add_neighbors(e1);
+                //add edge to top left
+                if (column != 0) {
+                    Edge *v1 = new Edge(index, index - 21);
+                    nodes.at(index)->add_neighbors(v1);
+                }
+                //add edge to top right
+                if (column != 760) {
+                    Edge *v2 = new Edge(index, index - 19);
+                    nodes.at(index)->add_neighbors(v2);
+                }
             }
             //don't add edges below when this is the last node of a row
             if (row != 560) {
                 Edge *e2 = new Edge(index, index + 20);
                 nodes.at(index)->add_neighbors(e2);
+                //add edge to bottom left
+                if (column != 0) {
+                    Edge *v3 = new Edge(index, index + 19);
+                    nodes.at(index)->add_neighbors(v3);
+                }
+                //add edge to bottom right
+                if (column != 760) {
+                    Edge *v4 = new Edge(index, index + 21);
+                    nodes.at(index)->add_neighbors(v4);
+                }
             }
             //don't add edges left when this is the first node of a column
             if (column != 0) {
@@ -90,7 +111,7 @@ std::vector<vec2 *> Graph::a_star_path(Node *start, Node *end) {
     //add start point to openlist
     AStarNode *current = new AStarNode(start->get_index(), start->get_position()->clone(), start->get_neighbors(),
                                        step_cost,
-                                       manhattan_heuristic2(start->get_position(), end->get_position()));
+                                       manhattan_heuristic(start->get_position(), end->get_position()));
     open_list.emplace_back(current);
 
     while (open_list.size() != 0) {
@@ -101,7 +122,7 @@ std::vector<vec2 *> Graph::a_star_path(Node *start, Node *end) {
             std::vector<vec2 *> p;
             p = build_path(current, p);
 
-            for (int i = p.size() - 1; i > 0; i--) {
+            for (int i = p.size() - 1; i >= 0; i--) {
                 path.emplace_back(p[i]);
             }
 
@@ -114,8 +135,11 @@ std::vector<vec2 *> Graph::a_star_path(Node *start, Node *end) {
 
         //check all the neighbors
         for (int i = 0; i < current->get_neighbors().size(); i++) {
+            //check whether the current edge/neighbor is active, otherwise we can skip this iteration.
+            if (!current->get_neighbors()[i]->is_active())
+                continue;
             //get current step and distance from current to neighbor
-            step_cost = current->g + manhattan_heuristic2(current->get_position(),
+            step_cost = current->g + manhattan_heuristic(current->get_position(),
                                                           nodes[current->get_neighbors()[i]->get_to()]->get_position());
 
             // Check for the neighbor in the closed set
@@ -129,9 +153,10 @@ std::vector<vec2 *> Graph::a_star_path(Node *start, Node *end) {
             if (!neighbor || step_cost < neighbor->g) {
                 if (!neighbor) {
                     Node *temp = nodes[current->get_neighbors()[i]->get_to()];
-                    neighbor = new AStarNode(temp->get_index(), temp->get_position()->clone(), temp->get_neighbors(),
+                    neighbor = new AStarNode(temp->get_index(), temp->get_position()->clone(),
+                                             temp->get_neighbors(),
                                              step_cost,
-                                             manhattan_heuristic2(temp->get_position(), end->get_position()));
+                                             manhattan_heuristic(temp->get_position(), end->get_position()));
                     neighbor->parent = current;
                     open_list.emplace_back(neighbor);
                 } else {
@@ -156,10 +181,14 @@ T *Graph::get_best(std::vector<T *> list) {
     return list[best];
 }
 
-int Graph::manhattan_heuristic2(vec2 *current, vec2 *end) {
+int Graph::manhattan_heuristic(vec2 *current, vec2 *end) {
     int cost_x = std::abs((current->x / 40) - (end->x / 40));
     int cost_y = std::abs((current->y / 40) - (end->y / 40));
-    return cost_x + cost_y;
+
+    if (cost_x > cost_y) {
+        return 14 * cost_y + 10 * (cost_x - cost_y);
+    }
+    return 14 * cost_x + 10 * (cost_y - cost_x);
 };
 
 template<class T>
@@ -202,3 +231,29 @@ int Graph::get_node_with_position(vec2 pos) {
     }
     return n;
 }
+
+int Graph::get_node_with_exact_position(vec2 pos) {
+    for (int i = 0; i < nodes.size(); i++) {
+        if (nodes.at(i)->get_position()->x == pos.x && nodes.at(i)->get_position()->y == pos.y) {
+            return nodes.at(i)->get_index();
+        }
+    }
+}
+
+Node *Graph::find_closest_edge(Node * node) {
+    int j = 0;
+    for (int i = node->get_index(); i < 300; i++) {
+        j++;
+        //right of current node
+        for (int k = 0; k < nodes[i]->get_neighbors().size(); k++) {
+            if (nodes[i]->get_neighbors().at(k)->is_active()) {
+                return nodes[i];
+            }
+            //left of current node
+            if (nodes[i - j]->get_neighbors().at(k)->is_active()) {
+                return nodes[i - j];
+            }
+        }
+    }
+}
+

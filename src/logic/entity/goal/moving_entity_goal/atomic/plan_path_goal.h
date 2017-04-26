@@ -15,10 +15,9 @@ class MovingEntity;
 class Node;
 
 class PlanPathGoal : public AtomicGoal<MovingEntity> {
-    Node *start;
     Node *goal;
 public:
-    PlanPathGoal(MovingEntity *, Node *, Node *);
+    PlanPathGoal(MovingEntity *, Node *);
 
     void activate() override;
 

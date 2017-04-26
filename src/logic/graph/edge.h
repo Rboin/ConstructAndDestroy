@@ -10,6 +10,7 @@ protected:
     int from;
     int to;
     float cost;
+    bool active;
 public:
     Edge(int, int, float);
 
@@ -18,6 +19,8 @@ public:
     int get_from();
     int get_to();
     int get_cost();
+    bool is_active();
+    void set_active(bool);
 };
 
 #endif //C_AND_D_PROJECT_EDGE_H

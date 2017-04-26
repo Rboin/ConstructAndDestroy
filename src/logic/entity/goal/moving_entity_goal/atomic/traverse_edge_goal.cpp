@@ -9,12 +9,12 @@
 #include "behaviour/behaviour.h"
 
 TraverseEdgeGoal::TraverseEdgeGoal(MovingEntity *e, vec2 *g) : AtomicGoal<MovingEntity>(e, TRAVERSEEDGE) {
-    owner->get_behaviour()->add(TRAVERSEEDGE, new SeekStrategy());
     goal = g;
 }
 
 void TraverseEdgeGoal::activate() {
     status = ACTIVE;
+    owner->get_behaviour()->add(TRAVERSEEDGE, new SeekStrategy());
 }
 
 const int TraverseEdgeGoal::process() {
@@ -33,6 +33,7 @@ const int TraverseEdgeGoal::process() {
 
 void TraverseEdgeGoal::terminate() {
     status = COMPLETED;
+    owner->get_behaviour()->remove(TRAVERSEEDGE);
 }
 
 const char *TraverseEdgeGoal::get_name() const {

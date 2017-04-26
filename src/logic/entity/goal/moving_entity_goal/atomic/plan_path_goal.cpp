@@ -10,12 +10,9 @@
 #include "entity/moving/moving_entity.h"
 #include "graph/graph.h"
 
-PlanPathGoal::PlanPathGoal(MovingEntity *t, Node *s, Node *g) : AtomicGoal(t, PLANPATH) {
+PlanPathGoal::PlanPathGoal(MovingEntity *t, Node *g) : AtomicGoal(t, PLANPATH) {
     status = ACTIVE;
-    start = s;
     goal = g;
-    GraphManager *gm = GraphManager::get_instance();
-    owner->path = gm->graph->a_star_path(start,goal);
 }
 
 void PlanPathGoal::activate() {
@@ -23,6 +20,10 @@ void PlanPathGoal::activate() {
 }
 
 const int PlanPathGoal::process() {
+    GraphManager *gm = GraphManager::get_instance();
+    Node *n = gm->graph->nodes[gm->graph->get_node_with_position(owner->get_position().clone())];
+    owner->path = gm->graph->a_star_path(n,goal);
+
     terminate();
     return status;
 }

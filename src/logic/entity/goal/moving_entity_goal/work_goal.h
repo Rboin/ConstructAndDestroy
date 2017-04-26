@@ -56,12 +56,6 @@ public:
      */
     Node* find_depot();
 
-    /*!
-     * This function prevents that entities will get stuck in resource entities.
-     * @return the closest node that has neighbors so a path can be planned.
-     */
-    Node* find_closest_edge();
-
     void activate() override;
 
     const int process() override;

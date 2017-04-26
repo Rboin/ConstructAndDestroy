@@ -2,6 +2,7 @@
 // Created by Sander on 14-3-2017.
 //
 
+#include <iostream>
 #include "follow_path_goal.h"
 #include "behaviour/strategy/explore_strategy.h"
 #include "entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h"
@@ -15,11 +16,7 @@
 #include "behaviour/behaviour.h"
 
 FollowPathGoal::FollowPathGoal(MovingEntity *e) : GoalComposite(e, FOLLOWPATH) {
-    status = ACTIVE;
-    for(int i = 0; i < e->path.size(); i++){
-        set_goal_traverse_edge(e->path.at(i));
-    }
-    e->path.erase (e->path.begin(),e->path.begin()+ e->path.size());
+    _owner = e;
 }
 
 void FollowPathGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
@@ -42,6 +39,12 @@ void FollowPathGoal::activate() {
 
 const int FollowPathGoal::process() {
     activate_if_inactive();
+    if(owner->path.size()!=0){
+        for(int i = 0; i < owner->path.size(); i++){
+            set_goal_traverse_edge(owner->path.at(i));
+        }
+        owner->path.erase (owner->path.begin(),owner->path.begin()+ owner->path.size());
+    }
     determine_next_goal();
     return process_subgoals();
 }

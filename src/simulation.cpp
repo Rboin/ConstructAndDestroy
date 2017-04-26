@@ -4,6 +4,7 @@
 
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_events.h>
+#include <iostream>
 #include "logic/graph/graph_manager.h"
 #include "ui/eventhandler/mouse_handler.h"
 #include "logic/entity/moving/moving_entity.h"
@@ -22,9 +23,13 @@ Simulation::~Simulation() {
 //    delete _window;
 }
 
+const float fps = 60;
+const float minimumTimeFrame = 1000 / fps;
+bool isRunning = true;
+
 void Simulation::loop() {
     long last = SDL_GetTicks();
-    while (1) {
+    while (isRunning) {
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT)
@@ -43,10 +48,16 @@ void Simulation::loop() {
 
         long current_time = SDL_GetTicks();
         float delta = current_time - last;
-        _window->update(delta);
-        _window->draw();
-
         last = current_time;
+
+        _window->update(delta);
+
+        //Wait a bit, so we don't update million of times per second
+        if((SDL_GetTicks() - current_time) < minimumTimeFrame){
+            SDL_Delay(minimumTimeFrame - (SDL_GetTicks() - current_time));
+        }
+
+        _window->draw();
     }
 }
 

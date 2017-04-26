@@ -174,8 +174,6 @@ int main(int argc, char **argv) {
 
     ThinkGoal *a_star_think_goal = new ThinkGoal(a_star_entity);
     a_star_think_goal->add_evaluator(new WorkEvaluator());
-    a_star_think_goal->add_evaluator(new RestEvaluator);
-    a_star_think_goal->add_evaluator(new EatEvaluator());
     a_star_entity->set_behaviour(a_star_behaviour);
     a_star_entity->set_goal(a_star_think_goal);
 
@@ -190,8 +188,6 @@ int main(int argc, char **argv) {
 
     ThinkGoal *a_star_think_goal2 = new ThinkGoal(a_star_entity2);
     a_star_think_goal2->add_evaluator(new WorkEvaluator());
-    a_star_think_goal2->add_evaluator(new RestEvaluator());
-    a_star_think_goal2->add_evaluator(new EatEvaluator());
     a_star_entity2->set_behaviour(a_star_behaviour2);
     a_star_entity2->set_goal(a_star_think_goal2);
 

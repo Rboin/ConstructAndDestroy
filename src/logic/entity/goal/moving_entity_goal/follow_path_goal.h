@@ -18,6 +18,7 @@ class GoalEvaluator;
 class FollowPathGoal : public GoalComposite<MovingEntity> {
 private:
     std::vector<GoalEvaluator<MovingEntity> *> _evaluators;
+    MovingEntity *_owner;
 public:
     FollowPathGoal(MovingEntity *);
 

@@ -28,6 +28,8 @@ public:
     virtual void add_neighbors(Edge *);
 
     void remove_edges();
+
+    void remove_edge(int,int);
 };
 
 #endif //C_AND_D_PROJECT_GRAPH_NODE_H

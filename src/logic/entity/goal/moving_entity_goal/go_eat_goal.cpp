@@ -27,7 +27,7 @@ void GoEatGoal::determine_next_goal() {
 void GoEatGoal::set_goal_plan_path_to_restaurant() {
     GraphManager *gm = GraphManager::get_instance();
     int start = gm->graph->get_node_with_position(owner->get_position());
-    this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->nodes[start], find_restaurant_node()));
+    this->sub_goals.push_front(new PlanPathGoal(owner, find_restaurant_node()));
 }
 
 void GoEatGoal::set_goal_follow_path() {
