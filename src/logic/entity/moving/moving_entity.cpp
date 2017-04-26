@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <cfloat>
+#include <sdl/image/sdl_image_render_object.h>
 #include "weapon.h"
 #include "entity/weapon/axe_weapon.h"
 #include "entity/weapon/bow_weapon.h"
@@ -18,10 +19,10 @@
 #include "entity/goal/moving_entity_goal/job_type.h"
 
 
-MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass, TextureTypes texturetype,
+MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass,
                            const float max_force, const float max_speed, JobType jt) :
         MAX_FORCE(max_force), MAX_SPEED(max_speed),
-        BaseEntity(MOVING, base, position, mass, texturetype) {
+        BaseEntity(MOVING, base, position, mass) {
 
     _velocity = {0, 0, 0};
     _behaviour = NULL;
@@ -141,11 +142,13 @@ void MovingEntity::select_weapon() {
                     BestSoFar = score;
 
                     //Change the texture of the bos
-                    this->set_texture(_weapons.at(i)->get_texture());
+                    sdl_image_data *newdata = new sdl_image_data(_weapons.at(i)->get_texture());
+                    representation->set_data(newdata);
                 }
             }
         } else {
-            this->set_texture(BOWTEXTURE);
+            sdl_image_data *newdata = new sdl_image_data(BOWTEXTURE);
+            representation->set_data(newdata);
         }
 
     }

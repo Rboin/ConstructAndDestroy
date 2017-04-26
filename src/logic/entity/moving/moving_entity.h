@@ -27,7 +27,7 @@ private:
     ThinkGoal *_brain;
     std::vector<Weapon *> _weapons;
 public:
-    MovingEntity(const mesh *, vec2, float, TextureTypes, const float, const float, JobType);
+    MovingEntity(const mesh *, vec2, float, const float, const float, JobType);
 
     virtual Behaviour *get_behaviour();
 

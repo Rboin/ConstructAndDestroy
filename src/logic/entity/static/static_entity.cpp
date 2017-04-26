@@ -8,7 +8,7 @@
 #include "matrix.h"
 #include "entity/entity_types.h"
 
-StaticEntity::StaticEntity(const mesh *base, vec2 position, float mass, TextureTypes texturetype) : BaseEntity(STATIC, base, position, mass, texturetype) {
+StaticEntity::StaticEntity(const mesh *base, vec2 position, float mass) : BaseEntity(STATIC, base, position, mass) {
     update_render_mesh(mat2::translate(_position));
 
     //remove edges from graph

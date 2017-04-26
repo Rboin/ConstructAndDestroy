@@ -5,10 +5,10 @@
 #include "resource_entity.h"
 #include "resource_manager.h"
 
-ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, ResourceType rt, TextureTypes resourcetype)
+ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, ResourceType rt)
         : StaticEntity(base,
                        position,
-                       mass, resourcetype) {
+                       mass) {
     resource_type = rt;
     units = 250.f;
 

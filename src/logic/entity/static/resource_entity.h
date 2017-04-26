@@ -14,7 +14,7 @@ private:
     ResourceType resource_type;
     float units;
 public:
-    ResourceEntity(const mesh*,vec2,float, ResourceType, TextureTypes);
+    ResourceEntity(const mesh*,vec2,float, ResourceType);
 
     ResourceType get_resource_type();
 

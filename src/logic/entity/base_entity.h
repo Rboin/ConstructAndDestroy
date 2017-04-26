@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <SDL_render.h>
+#include <sdl/sdl_render_object.h>
 #include "textures/texture_types.h"
 #include "entity/player.h"
 #include "vector.h"
@@ -19,12 +20,14 @@ protected:
     const mesh *_base_representation;
     vec2 _position;
     mesh *_buffer;
-    SDL_Texture* gTexture;
+    SDL_RenderObject *representation;
     Player * _player;
 
 public:
 
-    BaseEntity(int,const mesh *, vec2, float, TextureTypes);
+    BaseEntity(int,const mesh *, vec2, float);
+
+    void set_representation(SDL_RenderObject *);
 
     vec2 &get_position();
 
@@ -36,13 +39,13 @@ public:
 
     virtual void update_render_mesh(const mat2 &);
 
-    virtual void render(SDL_Renderer *);
+    virtual SDL_Texture *render(Renderer<SDL_Renderer> *);
 
     virtual void update(float){};
 
-    void set_texture(TextureTypes);
-
     void set_player(int);
+
+    SDL_RenderObject *get_representation();
 
     Player *get_player();
 };

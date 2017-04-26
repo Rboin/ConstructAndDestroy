@@ -5,5 +5,5 @@
 #include "warehouse_entity.h"
 
 WarehouseEntity::WarehouseEntity(const mesh *base, vec2 position, float mass) : ResourceEntity(
-        base, position, mass, WAREHOUSE, WAREHOUSETEXTURE) {
+        base, position, mass, WAREHOUSE) {
 }

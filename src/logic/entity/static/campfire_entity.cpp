@@ -5,5 +5,5 @@
 #include "campfire_entity.h"
 
 CampfireEntity::CampfireEntity(const mesh *base, vec2 position, float mass) : ResourceEntity(
-        base, position, mass, CAMPFIRE, CAMPFIRETEXTURE) {
+        base, position, mass, CAMPFIRE) {
 }

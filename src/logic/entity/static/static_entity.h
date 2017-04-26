@@ -10,7 +10,7 @@
 
 class StaticEntity : public BaseEntity {
 public:
-    StaticEntity(const mesh *, vec2, float, TextureTypes);
+    StaticEntity(const mesh *, vec2, float);
 };
 
 

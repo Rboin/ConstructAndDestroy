@@ -6,5 +6,5 @@
 #include "resource_entity.h"
 
 TreeEntity::TreeEntity(const mesh *base, vec2 position, float mass) : ResourceEntity(
-        base, position, mass, TREE, TREETEXTURE, TREEDEPLETEDTEXTURE) {
+        base, position, mass, TREE) {
 }

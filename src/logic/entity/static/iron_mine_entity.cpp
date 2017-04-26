@@ -5,5 +5,5 @@
 #include "iron_mine_entity.h"
 
 IronMineEntity::IronMineEntity(const mesh *base, vec2 position, float mass) : ResourceEntity(
-        base, position, mass, IRONMINE, IRONMINETEXTURE, IRONMINEDEPLETEDTEXTURE) {
+        base, position, mass, IRONMINE) {
 }

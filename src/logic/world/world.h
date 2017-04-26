@@ -7,9 +7,10 @@
 
 #include <vector>
 #include <SDL2/SDL.h>
-#include <graph/graph.h>
 #include "types.h"
+#include "graph/graph.h"
 #include "entity/base_entity.h"
+#include "sdl/sdl_render_object.h"
 
 class BSPTree;
 class MovingEntity;
@@ -19,14 +20,18 @@ private:
     std::vector<BaseEntity *> entities;
     MovingEntity *controllable_character;
     Graph *graph;
-    SDL_Texture* gTexture;
+    SDL_RenderObject *_representation;
 
 public:
+
     ~World();
+
+    void set_render_object(SDL_RenderObject *);
+
     /**
      * The render loop.
      */
-    void render(SDL_Renderer *);
+    SDL_Texture *render(Renderer<SDL_Renderer> *);
 
     /**
      * The update loop, where we update our entities.
@@ -41,8 +46,6 @@ public:
 
 //    void add_partition_tree(BSPTree*);
     void loop(SDL_Renderer *);
-
-    void set_texture(SDL_Renderer *);
 };
 
 #endif //C_AND_D_PROJECT_WORLD_H

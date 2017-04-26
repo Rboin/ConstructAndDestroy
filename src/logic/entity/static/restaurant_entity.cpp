@@ -6,5 +6,5 @@
 
 
 RestaurantEntity::RestaurantEntity(const mesh *base, vec2 position, float mass) : ResourceEntity(
-        base, position, mass, RESTAURANT, RESTAURANTTEXTURE) {
+        base, position, mass, RESTAURANT) {
 }
