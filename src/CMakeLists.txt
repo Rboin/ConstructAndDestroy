@@ -1,8 +1,6 @@
 project(construct_and_destroy)
 
-set(SOURCE_FILES
-        simulation.h
-        simulation.cpp)
+set(SOURCE_FILES)
 
 add_subdirectory(logic)
 add_subdirectory(renderer)

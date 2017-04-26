@@ -10,33 +10,19 @@
 #include <textures/texture_manager.h>
 #include <entity/moving/lumberjack_entity.h>
 #include <entity/player_manager.h>
-#include <entity/moving/miner_entity.h>
-#include <entity/goal/evaluator/work_evaluator.h>
-#include <entity/goal/evaluator/rest_evaluator.h>
-#include <entity/goal/evaluator/eat_evaluator.h>
-#include <entity/moving/skeleton_entity.h>
-#include <entity/static/resource_entity.h>
-#include <entity/static/restaurant_entity.h>
-#include <entity/static/warehouse_entity.h>
+#include <sdl/panel/sdl_panel.h>
+#include <sdl/panel/sdl_world_panel.h>
+#include <sdl/image/sdl_image_render_object.h>
+#include <sdl/window/sdl_window.h>
 #include <entity/static/tree_entity.h>
-#include <entity/static/iron_mine_entity.h>
-#include <entity/static/campfire_entity.h>
-#include <entity/goal/evaluator/wander_evaluator.h>
 #include <entity/goal/evaluator/obstacle_avoid_evaluator.h>
-#include <entity/goal/evaluator/explore_evaluator.h>
+#include <entity/goal/evaluator/wander_evaluator.h>
+#include <entity/moving/miner_entity.h>
+#include <behaviour/calculator/basic_force_calculator.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
-#include "behaviour/calculator/basic_force_calculator.h"
-#include "behaviour/strategy/arrive_strategy.h"
-#include "behaviour/strategy/obstacle_avoidance_strategy.h"
-#include "tree/bsp_tree.h"
-#include "simulation.h"
-#include "ui/window/simulation_window.h"
-#include "ui/panel/world_panel.h"
-#include "ui/eventhandler/mouse_handler.h"
-#include "ui/eventhandler/key_handler.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
@@ -98,7 +84,7 @@ int main(int argc, char **argv) {
     if (!init_everything()) {
         return -1;
     }
-#pragma region Initialize Managers
+
     PlayerManager *pm = PlayerManager::get_instance();
     pm->setup(4);
 
@@ -122,106 +108,175 @@ int main(int argc, char **argv) {
             {-20, 20},
     };
     mesh base = {4, default_shape};
-#pragma endregion Initialize Managers
+    vec2 pos = {0, 0};
+    vec2 velocity = {0, 0, 0};
+    /*
+   #pragma region Obstacle, Arrive entity
+       vec2 v = {400, 300};
+       BehaviourStrategy *avoid = new ObstacleAvoidanceStrategy();
+       avoid->set_targets(&v);
 
-#pragma region Static entities
-    vec2 s_position = {400, 280};
+       vec2 v2 = {700, 500};
+       BehaviourStrategy *arrive = new ArriveStrategy();
+       arrive->set_targets(&v2);
+
+*/
+    ForceCalculator *calculator = new BasicForceCalculator();
+    Behaviour *behaviour = new Behaviour(calculator);
+    MovingEntity *entity = new MinerEntity(&base, pos, 100, 0.2, 0.2);
+    ThinkGoal *think_goal = new ThinkGoal(entity);
+
+    think_goal->add_evaluator(new WanderEvaluator());
+    think_goal->add_evaluator(new ObstacleAvoidEvaluator());
+
+    entity->set_behaviour(behaviour);
+    entity->set_goal(think_goal);
+
+    vec2 entity_size = {50, 50};
+    sdl_image_data entity_data = {TextureTypes::MINERTEXTURE};
+    SDL_ImageRenderObject entity_render_object = SDL_ImageRenderObject(pos, entity_size, &entity_data);
+    entity->set_representation(&entity_render_object);
+
+    world1.add_entity(entity);
+    /*
+   #pragma endregion Obstacle, Arrive entity
+
+   #pragma region Static entities
+     */
+    vec2 s_position = {400, 280}, s_size = {40, 40};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
+    sdl_image_data tree_data = {TextureTypes::TREETEXTURE};
+    SDL_ImageRenderObject tree_object = SDL_ImageRenderObject(s_position, s_size, &tree_data);
+    s_entity->set_representation(&tree_object);
     world1.add_entity(s_entity);
+/*
+       vec2 s_position1 = {400, 240};
+       ResourceEntity *s_entity1 = new TreeEntity(&base, s_position1, 50);
+       world1.add_entity(s_entity1);
 
-    vec2 s_position1 = {400, 240};
-    ResourceEntity *s_entity1 = new TreeEntity(&base, s_position1, 50);
-    world1.add_entity(s_entity1);
+       vec2 s_position2 = {400, 200};
+       ResourceEntity *s_entity2 = new TreeEntity(&base, s_position2, 50);
+       world1.add_entity(s_entity2);
 
-    vec2 s_position2 = {400, 200};
-    ResourceEntity *s_entity2 = new TreeEntity(&base, s_position2, 50);
-    world1.add_entity(s_entity2);
+       vec2 s_position4 = {360, 280};
+       ResourceEntity *s_entity4 = new TreeEntity(&base, s_position4, 50);
+       world1.add_entity(s_entity4);
 
-    vec2 s_position4 = {360, 280};
-    ResourceEntity *s_entity4 = new TreeEntity(&base, s_position4, 50);
-    world1.add_entity(s_entity4);
+       vec2 s_position5 = {360, 240};
+       ResourceEntity *s_entity5 = new IronMineEntity(&base, s_position5, 50);
+       world1.add_entity(s_entity5);
 
-    vec2 s_position5 = {360, 240};
-    ResourceEntity *s_entity5 = new IronMineEntity(&base, s_position5, 50);
-    world1.add_entity(s_entity5);
+       vec2 s_position6 = {360, 200};
+       ResourceEntity *s_entity6 = new TreeEntity(&base, s_position6, 50);
+       world1.add_entity(s_entity6);
 
-    vec2 s_position6 = {360, 200};
-    ResourceEntity *s_entity6 = new TreeEntity(&base, s_position6, 50);
-    world1.add_entity(s_entity6);
+       vec2 s_position7 = {600, 400};
+       ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
+       world1.add_entity(s_entity7);
 
-    vec2 s_position7 = {600, 400};
-    ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
-    world1.add_entity(s_entity7);
+       vec2 s_position8 = {40, 160};
+       ResourceEntity *s_entity8 = new RestaurantEntity(&base, s_position8, 50);
+       world1.add_entity(s_entity8);
 
-    vec2 s_position8 = {40, 160};
-    ResourceEntity *s_entity8 = new RestaurantEntity(&base, s_position8, 50);
-    world1.add_entity(s_entity8);
+       vec2 s_position9 = {400, 480};
+       ResourceEntity *s_entity9 = new CampfireEntity(&base, s_position9, 50);
+       world1.add_entity(s_entity9);
+   #pragma endregion Static Object
 
-    vec2 s_position9 = {400, 480};
-    ResourceEntity *s_entity9 = new CampfireEntity(&base, s_position9, 50);
-    world1.add_entity(s_entity9);
-#pragma endregion Static Object
+   #pragma region Explore entity
+       ForceCalculator *explore_calculator = new BasicForceCalculator();
+       Behaviour *explore_behaviour = new Behaviour(explore_calculator);
 
-#pragma  region A*
-    ForceCalculator *a_star_calculator = new BasicForceCalculator();
-    Behaviour *a_star_behaviour = new Behaviour(a_star_calculator);
+       vec2 explore_starting_pos = {600, 40};
+       MovingEntity *explore_entity = new LumberJackEntity(&base, explore_starting_pos, 10, 0.2, 0.2);
+       ThinkGoal *explore_think_goal = new ThinkGoal(explore_entity);
 
-    vec2 a_star_starting_pos = {0, 80};
-    MovingEntity *a_star_entity = new LumberJackEntity(&base, a_star_starting_pos, 10, 0.2, 0.2);
-    a_star_entity->set_player(1);
+       explore_think_goal->add_evaluator(new ExploreEvaluator());
+       explore_entity->set_behaviour(explore_behaviour);
+       explore_entity->set_goal(explore_think_goal);
 
-    ThinkGoal *a_star_think_goal = new ThinkGoal(a_star_entity);
-    a_star_think_goal->add_evaluator(new WorkEvaluator());
-    a_star_entity->set_behaviour(a_star_behaviour);
-    a_star_entity->set_goal(a_star_think_goal);
+       world1.add_entity(explore_entity);
+   #pragma endregion explore entity
+   #pragma  region A*
+       ForceCalculator *a_star_calculator = new BasicForceCalculator();
+       Behaviour *a_star_behaviour = new Behaviour(a_star_calculator);
 
-    world1.add_entity(a_star_entity);
+       vec2 a_star_starting_pos = {0, 80};
+       MovingEntity *a_star_entity = new LumberJackEntity(&base, a_star_starting_pos, 10, 0.2, 0.2);
+       a_star_entity->set_player(1);
 
-    ForceCalculator *a_star_calculator2 = new BasicForceCalculator();
-    Behaviour *a_star_behaviour2 = new Behaviour(a_star_calculator2);
+       ThinkGoal *a_star_think_goal = new ThinkGoal(a_star_entity);
+       a_star_think_goal->add_evaluator(new WorkEvaluator());
+       a_star_think_goal->add_evaluator(new RestEvaluator);
+       a_star_think_goal->add_evaluator(new EatEvaluator());
+       a_star_entity->set_behaviour(a_star_behaviour);
+       a_star_entity->set_goal(a_star_think_goal);
 
-    vec2 a_star_starting_pos2 = {760, 320};
-    MovingEntity *a_star_entity2 = new MinerEntity(&base, a_star_starting_pos2, 10, 0.2, 0.2);
-    a_star_entity2->set_player(1);
+       world1.add_entity(a_star_entity);
 
-    ThinkGoal *a_star_think_goal2 = new ThinkGoal(a_star_entity2);
-    a_star_think_goal2->add_evaluator(new WorkEvaluator());
-    a_star_entity2->set_behaviour(a_star_behaviour2);
-    a_star_entity2->set_goal(a_star_think_goal2);
+       ForceCalculator *a_star_calculator2 = new BasicForceCalculator();
+       Behaviour *a_star_behaviour2 = new Behaviour(a_star_calculator2);
 
-    world1.add_entity(a_star_entity2);
-#pragma endregion A*
+       vec2 a_star_starting_pos2 = {760, 320};
+       MovingEntity *a_star_entity2 = new MinerEntity(&base, a_star_starting_pos2, 10, 0.2, 0.2);
+       a_star_entity2->set_player(1);
 
-    SDL_Color f_color = {0, 0, 0, 255};
-    TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 16);
-//    information static_information = {
-//            "Press <S> to show Graph\nClick on an entity to select it\nClick anywhere to deselect it",
-//            &f_color,
-//            f_font
-//    };
+       ThinkGoal *a_star_think_goal2 = new ThinkGoal(a_star_entity2);
+       a_star_think_goal2->add_evaluator(new WorkEvaluator());
+       a_star_think_goal2->add_evaluator(new RestEvaluator());
+       a_star_think_goal2->add_evaluator(new EatEvaluator());
+       a_star_entity2->set_behaviour(a_star_behaviour2);
+       a_star_entity2->set_goal(a_star_think_goal2);
 
-    SDL_Rect s_window_rect = {0, 0, size_x, size_y};
-    SDL_Rect s_screen_rect = {0, 0, size_x, size_y};
-//    SDL_Rect s_info_rect = {600, 0, 200, 600};
-    WorldPanel s_screen = WorldPanel(&world1, &s_screen_rect);
-//    SimulationWindow s_window = SimulationWindow(window, renderer, &s_window_rect);
-//    InformationPanel s_info_panel = InformationPanel(&s_info_rect, &static_information);
+       world1.add_entity(a_star_entity2);
+   #pragma endregion A*
 
-//    s_window.add_component("panel", &s_screen);
-//    s_window.add_component("info", &s_info_panel);
-//    Simulation simulation = Simulation(&s_window);
+   #pragma region Enemy
+       ForceCalculator *skeleton_calculator = new BasicForceCalculator();
+       Behaviour *skeleton_behaviour = new Behaviour(skeleton_calculator);
 
-    MouseHandler mouse_handler = MouseHandler();
-    KeyHandler key_handler = KeyHandler();
+       vec2 skeleton_starting_pos = {520, 280};
+       MovingEntity *skeleton = new SkeletonEntity(&base, skeleton_starting_pos, 10, 0.2, 0.2);
 
-//    s_info_panel.set_subject(&mouse_handler);
+       skeleton->set_behaviour(skeleton_behaviour);
+       skeleton->add_weapons();
+       world1.add_entity(skeleton);
+   #pragma endregion skeleton
 
-//    simulation.set_key_handler(&key_handler);
-//    simulation.set_mouse_handler(&mouse_handler);
+   #pragma  region Controllable Character
+       ForceCalculator *cc_calculator = new BasicForceCalculator();
+       Behaviour *cc_behaviour = new Behaviour(cc_calculator);
 
-//    world1.set_texture(renderer);
-//
-//    simulation.loop();
+       vec2 cc_start_pos = {0, 0};
+       MovingEntity *cc_entity = new MinerEntity(&base, cc_start_pos, 10, 0.2, 0.2);
+
+       ThinkGoal *cc_think_goal = new ThinkGoal(cc_entity);
+       cc_entity->set_behaviour(cc_behaviour);
+       cc_entity->set_goal(cc_think_goal);
+
+       world1.add_controllable_character(cc_entity);
+   #pragma endregion Controllable Character
+   */
+
+    Renderer<SDL_Renderer> render_engine = Renderer<SDL_Renderer>(renderer);
+
+    sdl_image_data world_data = {TextureTypes::WORLDTEXTURE};
+    SDL_ImageRenderObject world_representation = SDL_ImageRenderObject({0, 0}, {800, 600}, &world_data);
+
+    world1.set_render_object(&world_representation);
+
+    vec2 main_panel_position = {0, 0}, main_panel_size = {800, 600};
+    sdl_data panel_data = {255, 255, 255};
+
+    SDL_RenderObject main_panel_representation = SDL_RenderObject(main_panel_position, main_panel_size, &panel_data);
+    SDLWorldPanel main_panel = SDLWorldPanel(&main_panel_representation);
+    main_panel.set_world(&world1);
+
+    SDLWindow main_window(&main_panel_representation, window, &render_engine);
+
+    main_window.add_component(&main_panel);
+
+    main_window.show();
 
     return 0;
 }
