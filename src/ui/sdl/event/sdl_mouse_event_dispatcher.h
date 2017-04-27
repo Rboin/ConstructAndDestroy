@@ -7,7 +7,7 @@
 
 #include "sdl_event_dispatcher.h"
 
-class SDL_MouseEventDispatcher : public SDL_EventDispatcher<mouse_event_data> {
+class SDL_MouseEventDispatcher : public SDL_EventDispatcher<sdl_mouse_event_data> {
 private:
     static SDL_MouseEventDispatcher *INSTANCE;
     SDL_MouseEventDispatcher();
@@ -15,7 +15,7 @@ public:
 
     static SDL_MouseEventDispatcher *get_instance();
 
-    void dispatch(mouse_event_data d) override;
+    void dispatch(sdl_mouse_event_data d) override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_MOUSE_EVENT_DISPATCHER_H

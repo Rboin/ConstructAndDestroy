@@ -17,12 +17,16 @@ struct event_data {
     }
 };
 
+template<typename T>
 struct mouse_event_data : public event_data {
     const vec2 &position;
+    T *component;
 
     mouse_event_data(uint32_t ty, uint32_t time, vec2 &pos) :
             event_data(ty, time),
-            position(pos) {}
+            position(pos) {
+        component = nullptr;
+    }
 };
 
 struct key_event_data : public event_data {
