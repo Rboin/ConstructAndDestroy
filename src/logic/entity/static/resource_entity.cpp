@@ -11,7 +11,7 @@ ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, Reso
                        position,
                        mass) {
     resource_type = rt;
-    _units = 12.f;
+    _units = 50.f;
     _depleted = false;
     _max_units = 250.f;
     _replenish_rate = 0.0001f;

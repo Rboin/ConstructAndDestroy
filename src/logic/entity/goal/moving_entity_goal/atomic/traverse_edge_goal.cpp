@@ -24,7 +24,7 @@ const int TraverseEdgeGoal::process() {
         owner->get_behaviour()->set_target_for(TRAVERSEEDGE, goal, 1);
 
         float distance = owner->get_position().distance(*goal);
-        if (distance < 5) {
+        if (distance < 6) {
             status = COMPLETED;
         }
     }

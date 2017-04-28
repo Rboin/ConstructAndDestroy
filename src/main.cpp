@@ -128,12 +128,11 @@ int main(int argc, char **argv) {
     MovingEntity *entity = new LumberJackEntity(&base, pos, 100, 0.2, 0.2);
     ThinkGoal *think_goal = new ThinkGoal(entity);
 
-    think_goal->add_evaluator(new WanderEvaluator());
-    think_goal->add_evaluator(new ObstacleAvoidEvaluator());
     think_goal->add_evaluator(new WorkEvaluator());
 
     entity->set_behaviour(behaviour);
     entity->set_goal(think_goal);
+    entity->set_player(1);
 
     vec2 entity_size = {50, 50};
     sdl_image_data entity_data = {TextureTypes::LUMBERJACKTEXTURE};
