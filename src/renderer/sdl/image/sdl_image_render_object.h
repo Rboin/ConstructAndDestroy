@@ -22,6 +22,8 @@ public:
     SDL_Texture *render(Renderer<SDL_Renderer> *) override;
 
     void init_texture(Renderer<SDL_Renderer> *) override;
+
+    void clear_data() override;
 };
 
 

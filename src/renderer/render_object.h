@@ -38,6 +38,8 @@ public:
 
     virtual ~RenderObject() {}
 
+    virtual void clear_data() = 0;
+
     const vec2 *get_position() {
         return &_position;
     }

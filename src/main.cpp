@@ -19,6 +19,8 @@
 #include <entity/goal/evaluator/wander_evaluator.h>
 #include <entity/moving/miner_entity.h>
 #include <behaviour/calculator/basic_force_calculator.h>
+#include <entity/goal/evaluator/work_evaluator.h>
+#include <entity/static/warehouse_entity.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
@@ -123,17 +125,18 @@ int main(int argc, char **argv) {
 */
     ForceCalculator *calculator = new BasicForceCalculator();
     Behaviour *behaviour = new Behaviour(calculator);
-    MovingEntity *entity = new MinerEntity(&base, pos, 100, 0.2, 0.2);
+    MovingEntity *entity = new LumberJackEntity(&base, pos, 100, 0.2, 0.2);
     ThinkGoal *think_goal = new ThinkGoal(entity);
 
     think_goal->add_evaluator(new WanderEvaluator());
     think_goal->add_evaluator(new ObstacleAvoidEvaluator());
+    think_goal->add_evaluator(new WorkEvaluator());
 
     entity->set_behaviour(behaviour);
     entity->set_goal(think_goal);
 
     vec2 entity_size = {50, 50};
-    sdl_image_data entity_data = {TextureTypes::MINERTEXTURE};
+    sdl_image_data entity_data = {TextureTypes::LUMBERJACKTEXTURE};
     SDL_ImageRenderObject entity_render_object = SDL_ImageRenderObject(pos, entity_size, &entity_data);
     entity->set_representation(&entity_render_object);
 
@@ -143,11 +146,20 @@ int main(int argc, char **argv) {
 
    #pragma region Static entities
      */
-    vec2 s_position = {400, 280}, s_size = {40, 40};
+    vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
+    s_entity->set_textures(TextureTypes::TREETEXTURE, TextureTypes::TREEDEPLETEDTEXTURE);
     sdl_image_data tree_data = {TextureTypes::TREETEXTURE};
     SDL_ImageRenderObject tree_object = SDL_ImageRenderObject(s_position, s_size, &tree_data);
     s_entity->set_representation(&tree_object);
+
+    vec2 s_position7 = {600, 400};
+    ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
+    sdl_image_data entity7_data = {TextureTypes::WAREHOUSETEXTURE};
+    SDL_ImageRenderObject e7_object = SDL_ImageRenderObject(s_position7, {50,50}, &entity7_data);
+    s_entity7->set_representation(&e7_object);
+
+    world1.add_entity(s_entity7);
     world1.add_entity(s_entity);
 /*
        vec2 s_position1 = {400, 240};

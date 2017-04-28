@@ -25,6 +25,8 @@ public:
     virtual void init_texture(Renderer<SDL_Renderer> *);
 
     void clear_texture(Renderer<SDL_Renderer> *, SDL_Rect *);
+
+    void clear_data() override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_UI_RENDER_OBJECT_H

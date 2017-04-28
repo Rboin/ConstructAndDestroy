@@ -108,7 +108,7 @@ std::vector<vec2 *> Graph::a_star_path(Node *start, Node *end) {
     std::vector<AStarNode *> open_list;
     std::vector<AStarNode *> closed_list;
     int step_cost = 0;
-    //add show point to openlist
+    //add start point to openlist
     AStarNode *current = new AStarNode(start->get_index(), start->get_position()->clone(), start->get_neighbors(),
                                        step_cost,
                                        manhattan_heuristic(start->get_position(), end->get_position()));

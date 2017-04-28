@@ -45,3 +45,7 @@ void SDL_RenderObject::clear_texture(Renderer<SDL_Renderer> *renderer, SDL_Rect 
     SDL_SetRenderDrawColor(renderer->get_engine(), 0, 0, 0, 255);
     SDL_RenderFillRect(renderer->get_engine(), rect);
 }
+
+void SDL_RenderObject::clear_data() {
+    SDL_DestroyTexture(_result);
+}
