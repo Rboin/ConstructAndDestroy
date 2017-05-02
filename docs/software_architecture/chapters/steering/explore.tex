@@ -1,0 +1,15 @@
+\subsection{Explore}
+\label{sec:explore}
+The explore strategy checks if the entity has already explored the map, 
+if it did, it already knows the positions of desired objects and can plan a 
+path towards one of them. \\
+If it did not already explore the map, it generates a path around the map 
+which the entity needs to traverse. \\
+The path consists of edges of a graph. The way this path gets calculated is 
+by creating the longest path through the graph. This way we know that the 
+entity will explore the whole map. \\
+Lastly, the ExploreBehaviour uses the same calculation as the SeekBehaviour 
+(\cref{sec:seek-behaviour}) for the produced force. It basically just moves to 
+the next node in it's path.
+
+

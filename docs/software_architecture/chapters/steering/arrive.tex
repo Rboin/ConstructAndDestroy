@@ -1,0 +1,23 @@
+\subsection{Arrive}
+The arrive strategy looks a lot like the seek strategy, except that the 
+closer we get to our target position the more we get slowed down
+\cite[pg. 93]{buckland}. It uses the relation between speed and distance to 
+scale our desired velocity. The ArriveStrategy class, like the SeekStrategy 
+class, only uses the ArriveStrategy::calculate\_force() method.
+
+The calculation can be represented as:
+\large
+$$ force = h \cdot (\frac{speed}{distance}) - v $$
+\normalsize
+
+Where $ h $ is our heading, $ v $ is our velocity and speed is:
+\large
+$$ speed = \min (\frac{distance}{deceleration}, max\_speed) $$
+\normalsize
+
+The deceleration variable is a constant which can be tweaked to make entities 
+slow down more if needed.
+
+If the distance variable is equal to zero, the vector returned by this method 
+will just equal $ \{0, 0, 0\} $.
+

@@ -1,0 +1,20 @@
+\section{Steering}
+Firstly, we're going to give some information about the base steering behaviour
+ class. This class is an abstract class of which the other behaviours 
+ inherit from. It has two methods, one for setting the targets and another for 
+ calculating the produced force.
+ \\
+ Furthermore, we've applied the Strategy Pattern. We've done this because the 
+ different steering behaviours don't differ much from eachother, except for 
+ the actual force calculation. \cite{strategy-pattern}
+
+~ \\
+The base BehaviourStrategy class with the different implementations can be 
+seen in the appendix at \cref{fig:behaviourstrategy}.
+
+\input{chapters/steering/seek.tex}
+\input{chapters/steering/flee.tex}
+\input{chapters/steering/arrive.tex}
+\input{chapters/steering/wander.tex}
+\input{chapters/steering/obstacle-avoidance.tex}
+\input{chapters/steering/explore.tex}

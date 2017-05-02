@@ -1,0 +1,16 @@
+\subsection{Obstacle Avoidance}
+With the ObstacleAvoidanceBehaviour class, we try to steer away from the 
+first target that enters our avoidance range.\cite[pg. 99]{buckland} 
+\\
+If there are no targets, the resulting force equals $ \{0, 0, 0\} $.
+
+If there is a target, the resulting force is a normalized heading vector:
+\large
+$$ force = \uvec{h} $$
+\normalsize
+
+Where: 
+\large
+$$ h = (position + v) - target $$
+\normalsize
+

@@ -1,0 +1,19 @@
+\subsection{Seek}
+\label{sec:seek-behaviour}
+The actual implementation for the seek strategy is actually quite short. The 
+SeekStrategy class only uses the SeekStrategy::calculate\_force() method 
+provided by the base BehaviourStrategy class.
+
+The SeekStrategy generates an attractive force towards the target. It then 
+scales the produces vector by an entity's max speed and subtracts the current 
+velocity. \cite[pg. 91]{buckland}
+
+The whole calculation can be represented by: \\
+\large 
+$$ force = \uvec{h} m - v $$
+\normalsize
+
+Where the unit vector $ \uvec{h} $ is the normalized heading (target position - 
+our position), $ m $ is our maximum speed and v is our velocity.
+
+

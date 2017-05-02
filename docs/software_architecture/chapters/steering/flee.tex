@@ -1,0 +1,18 @@
+\subsection{Flee}
+In contrast to the previous behaviours, the FleeBehaviour creates a repulsive 
+force which sends the entity away from the target. It looks a lot like the 
+seek behaviour except that we check if the distance between us and the target 
+exceeds a certain 'panic distance'. If it does, the resulting force equals 
+$ \{0, 0, 0\} $. 
+
+The actual force gets calculated by the following equation:
+\large
+$$ force = \uvec{h} m - v $$
+\normalsize
+
+Where $ \uvec{h} $ is our normalized heading vector which points away from 
+our target (our position - target position).
+
+As you can see, the FleeBehaviour is actually the opposite of our 
+SeekBehaviour. \cite[pg. 92]{buckland}
+
