@@ -1,0 +1,8 @@
+- [ ] Code review
+- [ ] Comments
+- [ ] Functional tests written
+- [ ] Functional tests checked by someone other than the author(s)
+- [ ] No linting errors
+- [ ] Unit tests passes
+- [ ] Technical documentation written
+- [ ] Technical documentation reviewed
