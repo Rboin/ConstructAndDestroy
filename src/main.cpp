@@ -25,12 +25,14 @@
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
+#include "sdl/event/sdl_mouse_event_dispatcher.h"
+#include "sdl/event/mouse_handler_world.h"
+
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-World world1;
 
 bool init_sdl() {
     if (SDL_Init(0) == -1) {
@@ -98,7 +100,7 @@ int main(int argc, char **argv) {
 
     std::vector<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
 
-    world1.add_graph(gm->graph);
+    World::get_instance()->add_graph(gm->graph);
 
     NeighbourhoodManager *n = NeighbourhoodManager::get_instance();
     n->setup({(float) size_x, (float) size_y}, {200.0f, 200.0f});
@@ -135,11 +137,11 @@ int main(int argc, char **argv) {
     entity->set_player(1);
 
     vec2 entity_size = {50, 50};
-    sdl_image_data entity_data = {TextureTypes::LUMBERJACKTEXTURE};
+    sdl_image_data entity_data = {"lumberjack.png"};
     SDL_ImageRenderObject entity_render_object = SDL_ImageRenderObject(pos, entity_size, &entity_data);
     entity->set_representation(&entity_render_object);
 
-    world1.add_entity(entity);
+    World::get_instance()->add_entity(entity);
     /*
    #pragma endregion Obstacle, Arrive entity
 
@@ -148,18 +150,18 @@ int main(int argc, char **argv) {
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
     s_entity->set_textures(TextureTypes::TREETEXTURE, TextureTypes::TREEDEPLETEDTEXTURE);
-    sdl_image_data tree_data = {TextureTypes::TREETEXTURE};
+    sdl_image_data tree_data = {"tree.png"};
     SDL_ImageRenderObject tree_object = SDL_ImageRenderObject(s_position, s_size, &tree_data);
     s_entity->set_representation(&tree_object);
 
     vec2 s_position7 = {600, 400};
     ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
-    sdl_image_data entity7_data = {TextureTypes::WAREHOUSETEXTURE};
+    sdl_image_data entity7_data = {"warehouse.png"};
     SDL_ImageRenderObject e7_object = SDL_ImageRenderObject(s_position7, {50,50}, &entity7_data);
     s_entity7->set_representation(&e7_object);
 
-    world1.add_entity(s_entity7);
-    world1.add_entity(s_entity);
+    World::get_instance()->add_entity(s_entity7);
+    World::get_instance()->add_entity(s_entity);
 /*
        vec2 s_position1 = {400, 240};
        ResourceEntity *s_entity1 = new TreeEntity(&base, s_position1, 50);
@@ -270,20 +272,30 @@ int main(int argc, char **argv) {
    */
 
     Renderer<SDL_Renderer> render_engine = Renderer<SDL_Renderer>(renderer);
+    SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
 
-    sdl_image_data world_data = {TextureTypes::WORLDTEXTURE};
+    sdl_image_data world_data = {"world.png"};
     SDL_ImageRenderObject world_representation = SDL_ImageRenderObject({0, 0}, {800, 600}, &world_data);
 
-    world1.set_render_object(&world_representation);
+    World::get_instance()->set_render_object(&world_representation);
 
     vec2 main_panel_position = {0, 0}, main_panel_size = {800, 600};
     sdl_data panel_data = {255, 255, 255};
 
     SDL_RenderObject main_panel_representation = SDL_RenderObject(main_panel_position, main_panel_size, &panel_data);
     SDLWorldPanel main_panel = SDLWorldPanel(&main_panel_representation);
-    main_panel.set_world(&world1);
+    main_panel.set_world(World::get_instance());
 
-    SDLWindow main_window(&main_panel_representation, window, &render_engine);
+    SDLWindow main_window(&main_panel_representation, window, &render_engine, mouse_dispatcher);
+
+    MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
+
+    main_panel.set_mouse_callback(world_panel_slot);
+    main_window.set_mouse_callback(world_panel_slot);
+
+
+    mouse_dispatcher->register_callback(&main_panel, world_panel_slot);
+    mouse_dispatcher->register_callback(&main_window, world_panel_slot);
 
     main_window.add_component(&main_panel);
 

@@ -7,10 +7,11 @@
 
 #include "textures/texture_types.h"
 #include "sdl/sdl_render_object.h"
+#include <string>
 
 struct sdl_image_data : public sdl_data {
-    TextureTypes type;
-    sdl_image_data(TextureTypes t) {
+    std::string type;
+    sdl_image_data(const std::string t) {
         type = t;
     }
 };

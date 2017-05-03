@@ -22,7 +22,7 @@ public:
 
     SDL_Texture* GetTexture(TextureTypes);
 
-    SDL_Texture *loadTexture(std::string);
+    SDL_Texture* loadTexture(std::string);
 };
 
 

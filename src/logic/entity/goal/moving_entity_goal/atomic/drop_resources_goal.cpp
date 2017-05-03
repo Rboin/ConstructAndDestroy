@@ -6,6 +6,7 @@
 #include "entity/player_manager.h"
 #include "entity/moving/moving_entity.h"
 #include "drop_resources_goal.h"
+#include "entity/player.h"
 
 DropResourcesGoal::DropResourcesGoal(MovingEntity *e, ResourceType r) : AtomicGoal<MovingEntity>(e, DROP) {
     rt = r;

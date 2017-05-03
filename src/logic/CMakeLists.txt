@@ -53,6 +53,10 @@ set(SOURCE_FILES
         behaviour/strategy/obstacle_avoidance_strategy.h
         behaviour/strategy/wander_strategy.h
         behaviour/strategy/explore_strategy.h
+        behaviour/move_order.h
+        behaviour/orderstrategies/ground_order_strategy.h
+        behaviour/orderstrategies/lumber_order_strategy.h
+        behaviour/orderstrategies/order_strategy.h
         graph/graph_manager.h
         graph/node.h
         graph/a_star_node.h
@@ -125,6 +129,10 @@ set(SOURCE_FILES
         behaviour/strategy/obstacle_avoidance_strategy.cpp
         behaviour/strategy/wander_strategy.cpp
         behaviour/strategy/explore_strategy.cpp
+        behaviour/move_order.cpp
+        behaviour/orderstrategies/ground_order_strategy.cpp
+        behaviour/orderstrategies/lumber_order_strategy.cpp
+        behaviour/orderstrategies/order_strategy.cpp
         graph/graph_manager.cpp
         graph/node.cpp
         graph/a_star_node.cpp

@@ -13,8 +13,20 @@
 #include <entity/moving/moving_entity.h>
 #include <textures/texture_manager.h>
 #include "entity/goal/moving_entity_goal/think_goal.h"
+#include <typeinfo>
+#include <iostream>
+#include "../globals.cpp"
+#include "entity/player.h"
 #include "renderer.h"
 
+//declaration of global variable.
+extern const std::string path_to_texture;
+World *World::_instance = nullptr;
+
+World::World() {
+    player = new Player();
+    texture_path = path_to_texture + "world.png";
+}
 
 World::~World() {
     // Clear world.
@@ -24,6 +36,8 @@ void World::update(float d_t) {
     for (unsigned int i = 0; i < entities.size(); i++) {
         entities.at(i)->update(d_t);
     }
+
+
 //    controllable_character->update(d_t);
 }
 
@@ -82,9 +96,26 @@ void World::loop(SDL_Renderer *renderer) {
 }
 
 World &World::add_entity(BaseEntity *e) {
+
+    // Check if variable e is of type MovingEntity by casting it dynamicly.
+    // if cast fails, a nullpointer will be returned and the if-statement will be false.
+    if(MovingEntity* moving_entity = dynamic_cast<MovingEntity*>(e))
+    {
+        //TODO: specify which player/AI player the entity should be added to.
+        if(moving_entity == nullptr){
+            delete moving_entity;
+        } else {
+            player->units.push_back(moving_entity);
+        }
+    }
+
     entities.push_back(e);
     NeighbourhoodManager::get_instance()->insert(e);
     return *this;
+}
+
+Player* World::getPlayer() {
+    return this->player;
 }
 
 void World::add_graph(Graph *g) {
@@ -95,6 +126,12 @@ void World::add_controllable_character(MovingEntity *me) {
     controllable_character = me;
     entities.push_back((BaseEntity *) me);
     NeighbourhoodManager::get_instance()->insert(me);
+}
+
+World *World::get_instance() {
+    if (_instance == nullptr)
+        _instance = new World();
+    return _instance;
 }
 
 void World::set_render_object(SDL_RenderObject *r) {

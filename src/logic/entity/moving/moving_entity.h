@@ -23,6 +23,7 @@ class MovingEntity : public BaseEntity {
 private:
     const float MAX_FORCE, MAX_SPEED;
     vec2 _velocity;
+    bool _possessed;
     Behaviour *_behaviour;
     ThinkGoal *_brain;
     std::vector<Weapon *> _weapons;
@@ -47,6 +48,10 @@ public:
 
     virtual void update(float);
 
+    virtual void select();
+
+    virtual void deselect();
+
     void add_weapons();
 
     void select_weapon();
@@ -61,6 +66,11 @@ public:
 
     JobType job_type;
 
+    void exorcise();
+
+    bool is_possessed();
+
+    void take_possession();
 };
 
 #endif //C_AND_D_PROJECT_MOVINGENTITY_H

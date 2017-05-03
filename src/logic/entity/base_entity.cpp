@@ -2,6 +2,7 @@
 // Created by robin on 3/1/17.
 //
 
+#include <vector>
 #include <matrix.h>
 #include <SDL_image.h>
 #include "textures/texture_manager.h"
@@ -9,6 +10,10 @@
 #include "mesh.h"
 #include "string"
 #include "player_manager.h"
+#include "../globals.cpp"
+#include <iostream>
+
+extern const std::string path_to_texture;
 
 BaseEntity::BaseEntity(int type, const mesh *base, vec2 position, float mass) {
     _type = type;
@@ -72,6 +77,9 @@ void BaseEntity::set_player(int p) {
     PlayerManager *pm = PlayerManager::get_instance();
     _player = pm->get_player(p);
 }
+
+void BaseEntity::select() {std::cout << "Can't select base entity" << std::endl;}
+void BaseEntity::deselect() {std::cout << "Can't deselect base entity" << std::endl;}
 
 SDL_RenderObject *BaseEntity::get_representation() {
     return representation;

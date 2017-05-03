@@ -17,7 +17,6 @@ int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-World world1;
 
 bool init_sdl() {
     if (SDL_Init(0) == -1) {

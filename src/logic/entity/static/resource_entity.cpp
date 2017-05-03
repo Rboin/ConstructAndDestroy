@@ -5,6 +5,7 @@
 #include <sdl/image/sdl_image_render_object.h>
 #include "resource_entity.h"
 #include "resource_manager.h"
+#include <string>
 
 ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, ResourceType rt)
         : StaticEntity(base,
@@ -25,7 +26,7 @@ ResourceType ResourceEntity::get_resource_type() {
 }
 
 int ResourceEntity::get_units() {
-    return _units;
+    return (int)_units;
 }
 
 float ResourceEntity::gather() {

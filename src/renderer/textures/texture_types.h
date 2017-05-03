@@ -5,8 +5,13 @@
 #ifndef C_AND_D_PROJECT_TEXTURETYPES_H
 #define C_AND_D_PROJECT_TEXTURETYPES_H
 enum TextureTypes {
-    LUMBERJACKTEXTURE,
-    MINERTEXTURE,
+    //Selectable units:
+    //Not selected:              selected:
+    LUMBERJACKTEXTURE,          SEL_LUMBERJACKTEXTURE,
+    MINERTEXTURE,               SEL_MINERTEXTURE,
+    BOWTEXTURE,                 SEL_BOWTEXTURE,
+    AXETEXTURE,                 SEL_AXETEXTURE,
+
     TREETEXTURE,
     TREEDEPLETEDTEXTURE,
     IRONMINETEXTURE,
@@ -15,7 +20,5 @@ enum TextureTypes {
     WORLDTEXTURE,
     RESTAURANTTEXTURE,
     CAMPFIRETEXTURE,
-    BOWTEXTURE,
-    AXETEXTURE
 };
 #endif //C_AND_D_PROJECT_TEXTURETYPES_H

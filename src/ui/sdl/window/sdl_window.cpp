@@ -3,6 +3,8 @@
 //
 
 #include "sdl_window.h"
+#include "world/world.h"
+#include "entity/player.h"
 
 SDLWindow::SDLWindow(SDL_RenderObject *r) :
         SDLWindow(r, nullptr) {}
@@ -31,6 +33,7 @@ const float minimumTimeFrame = 1000 / fps;
 
 int SDLWindow::show() {
     long last_tick = SDL_GetTicks();
+
     while (1) {
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
@@ -44,7 +47,7 @@ int SDLWindow::show() {
                        event.type == SDL_MOUSEBUTTONUP) {
                 vec2 mouse_position = {(float) event.button.x, (float) event.button.y};
                 if (_mouse_event_dispatcher) {
-                    _mouse_event_dispatcher->dispatch({event.type, event.button.timestamp, mouse_position});
+                    _mouse_event_dispatcher->dispatch({event.type, event.button.button, event.button.timestamp, mouse_position});
                 }
             }
         }

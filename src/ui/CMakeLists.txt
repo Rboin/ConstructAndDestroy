@@ -14,7 +14,7 @@ set(SOURCE_FILES
         sdl/event/sdl_event_dispatcher.h
         sdl/event/sdl_mouse_event_dispatcher.h
         sdl/event/sdl_mouse_event_dispatcher.cpp
-        sdl/event/slot/sdl_mouse_event_slot.h sdl/event/slot/sdl_mouse_event_slot.cpp sdl/button/sdl_button.h sdl/button/sdl_button.cpp event/event_types.h sdl/panel/sdl_world_panel.cpp sdl/panel/sdl_world_panel.h sdl/event/sdl_event_types.h)
+        sdl/event/slot/sdl_mouse_event_slot.h sdl/event/slot/sdl_mouse_event_slot.cpp sdl/button/sdl_button.h sdl/button/sdl_button.cpp event/event_types.h sdl/panel/sdl_world_panel.cpp sdl/panel/sdl_world_panel.h sdl/event/sdl_event_types.h sdl/event/mouse_handler_world.h sdl/event/mouse_handler_world.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

@@ -6,6 +6,7 @@
 #include "behaviour/strategy/seek_strategy.h"
 #include "graph/graph_manager.h"
 #include <cmath>
+#include <iostream>
 #include "plan_path_goal.h"
 #include "entity/moving/moving_entity.h"
 #include "graph/graph.h"

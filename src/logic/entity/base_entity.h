@@ -9,9 +9,10 @@
 #include <SDL_render.h>
 #include <sdl/sdl_render_object.h>
 #include "textures/texture_types.h"
-#include "entity/player.h"
 #include "vector.h"
 #include "types.h"
+#include <string>
+#include "player_manager.h"
 
 class BaseEntity {
 protected:
@@ -25,7 +26,8 @@ protected:
 
 public:
 
-    BaseEntity(int,const mesh *, vec2, float);
+    BaseEntity(int,const mesh *, vec2, float, TextureTypes);
+    BaseEntity(int, const mesh*, vec2,float);
 
     void set_representation(SDL_RenderObject *);
 
@@ -48,6 +50,14 @@ public:
     SDL_RenderObject *get_representation();
 
     Player *get_player();
+
+    void set_selected_texture(TextureTypes);
+
+    void set_deselected_texture(TextureTypes);
+
+    virtual void select();
+    virtual void deselect();
+
 };
 
 #endif //C_AND_D_PROJECT_BASE_GAME_ENTITY_H

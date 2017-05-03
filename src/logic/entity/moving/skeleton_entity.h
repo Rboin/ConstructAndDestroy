@@ -12,6 +12,8 @@ class MovingEntity;
 class SkeletonEntity : public MovingEntity {
 public:
     SkeletonEntity(const mesh *, vec2, float, const float, const float);
+    void select();
+    void deselect();
 };
 
 

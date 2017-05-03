@@ -14,6 +14,6 @@ public:
     Resources(float gold, float wood, float stone, float iron);
     void add_resources(ResourceType ,float);
     virtual ~Resources();
-    
+
 };
 #endif //CONSTRUCT_AND_DESTROY_RESOURCES_H

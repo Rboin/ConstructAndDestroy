@@ -2,16 +2,18 @@
 // Created by robin on 3/11/17.
 //
 
-#include "behaviour/strategy/explore_strategy.h"
-#include "entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h"
-#include "entity/goal/moving_entity_goal/atomic/explore_goal.h"
-#include "entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h"
+#include <behaviour/strategy/explore_strategy.h>
+#include <entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h>
+#include <entity/goal/moving_entity_goal/atomic/explore_goal.h>
+#include <entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h>
+#include <iostream>
 #include "think_goal.h"
 #include "strategy_goal_type.h"
 #include "goal/goal_evaluator.h"
 #include "vector.h"
 #include "follow_path_goal.h"
 #include "entity/goal/moving_entity_goal/atomic/wander_goal.h"
+#include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
 #include "graph/node.h"
 #include "work_goal.h"
@@ -114,7 +116,11 @@ void ThinkGoal::activate() {
 
 const int ThinkGoal::process() {
     activate_if_inactive();
-    determine_next_goal();
+
+    if (!owner->is_possessed()) {
+        determine_next_goal();
+    }
+
     return process_subgoals();
 }
 

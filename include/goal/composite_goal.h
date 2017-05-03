@@ -27,6 +27,19 @@ public:
         return sub_goals;
     }
 
+    void add_priority_subgoal(Goal<T> *goal) {
+        bool found = false;
+        for(typename std::deque<Goal<T> *>::iterator it = sub_goals.begin(); it != sub_goals.end(); it++) {
+            Goal<T> * current_goal = (*it);
+            if(goal->get_type() == current_goal->get_type()) {
+                found = true;
+                break;
+            }
+        }
+        if(!found)
+            sub_goals.push_front(goal);
+    };
+
     void add_subgoal(Goal<T> *goal) {
         bool found = false;
         for(typename std::deque<Goal<T> *>::iterator it = sub_goals.begin(); it != sub_goals.end(); it++) {

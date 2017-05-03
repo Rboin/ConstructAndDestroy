@@ -9,13 +9,19 @@ class MovingEntity;
 
 class Player {
 public:
-    Player();
-    virtual ~Player();
 
     Resources resources;
     std::vector<StaticEntity *> buildings;
     std::vector<MovingEntity *> units;
     std::vector<MovingEntity *> selected_units;
+
+    Player();
+    virtual ~Player();
+
+    void select_units_in_rectangle(float start_x, float start_y, float end_x, float end_y);
+
+    void clear_selected_units();
+
 };
 
 

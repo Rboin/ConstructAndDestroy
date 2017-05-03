@@ -12,6 +12,8 @@ class MovingEntity;
 class MinerEntity : public MovingEntity {
 public:
     MinerEntity(const mesh *, vec2, float, const float, const float);
+    void select();
+    void deselect();
 };
 
 

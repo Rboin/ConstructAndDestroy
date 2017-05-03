@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <cfloat>
+#include <iostream>
 #include <sdl/image/sdl_image_render_object.h>
 #include "weapon.h"
 #include "entity/weapon/axe_weapon.h"
@@ -28,6 +29,7 @@ MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass,
     _behaviour = NULL;
     _brain = NULL;
     job_type = jt;
+    _possessed = false;
 }
 
 Behaviour *MovingEntity::get_behaviour() {
@@ -100,6 +102,18 @@ vec2 MovingEntity::get_velocity() {
     return _velocity;
 }
 
+void MovingEntity::exorcise() {
+    _possessed = false;
+}
+
+bool MovingEntity::is_possessed() {
+    return _possessed;
+}
+
+void MovingEntity::take_possession() {
+    _possessed = true;
+}
+
 void MovingEntity::update_render_mesh() {
     float angle = std::atan2(_velocity.y, _velocity.x);
     update_render_mesh(mat2::translate(_position) * mat2::rotate(angle));
@@ -142,12 +156,12 @@ void MovingEntity::select_weapon() {
                     BestSoFar = score;
 
                     //Change the texture of the bos
-                    sdl_image_data *newdata = new sdl_image_data(_weapons.at(i)->get_texture());
+                    sdl_image_data *newdata = new sdl_image_data("axe.png");
                     representation->set_data(newdata);
                 }
             }
         } else {
-            sdl_image_data *newdata = new sdl_image_data(BOWTEXTURE);
+            sdl_image_data *newdata = new sdl_image_data("bow.png");
             representation->set_data(newdata);
         }
 
@@ -159,4 +173,13 @@ void MovingEntity::add_weapons() {
     _weapons.push_back((Weapon *) axe);
     Bow *bow = new Bow();
     _weapons.push_back((Weapon *) bow);
+}
+
+void MovingEntity::select() {
+    std::cout << "Selecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
+}
+
+void MovingEntity::deselect() {
+    std::cout << "Deselecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
+
 }
