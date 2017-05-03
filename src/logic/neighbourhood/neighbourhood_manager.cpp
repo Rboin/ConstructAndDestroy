@@ -53,7 +53,7 @@ BaseEntity *NeighbourhoodManager::get_closest_to(vec2 v) {
     if(closest.size() > 0) {
         for(int i = 0; i < closest.size(); i++) {
             BaseEntity *closest_to_v = closest.at(i);
-            if (closest_to_v->get_bounds()->contains(v))
+            if (closest_to_v->get_representation()->contains(v))
                 return closest_to_v;
         }
     }

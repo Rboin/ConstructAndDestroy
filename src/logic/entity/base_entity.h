@@ -35,8 +35,6 @@ public:
 
     const bool is(int);
 
-    const mesh *get_bounds();
-
     virtual ~BaseEntity();
 
     virtual void update_render_mesh(const mat2 &);

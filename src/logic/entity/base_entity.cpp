@@ -65,10 +65,6 @@ SDL_Texture *BaseEntity::render(Renderer<SDL_Renderer> *renderer) {
     return representation->render(renderer);
 }
 
-const mesh *BaseEntity::get_bounds() {
-    return _buffer;
-}
-
 Player *BaseEntity::get_player() {
     return _player;
 }
