@@ -27,7 +27,7 @@ public:
         return sub_goals;
     }
 
-    void add_priority_subgoal(Goal<T> *goal) {
+    void add_subgoal(Goal<T> *goal, bool front) {
         bool found = false;
         for(typename std::deque<Goal<T> *>::iterator it = sub_goals.begin(); it != sub_goals.end(); it++) {
             Goal<T> * current_goal = (*it);
@@ -37,20 +37,15 @@ public:
             }
         }
         if(!found)
-            sub_goals.push_front(goal);
+            front ? sub_goals.push_front(goal) : sub_goals.push_back(goal);
+    }
+
+    void add_priority_subgoal(Goal<T> *goal) {
+        add_subgoal(goal, true);
     };
 
     void add_subgoal(Goal<T> *goal) {
-        bool found = false;
-        for(typename std::deque<Goal<T> *>::iterator it = sub_goals.begin(); it != sub_goals.end(); it++) {
-            Goal<T> * current_goal = (*it);
-            if(goal->get_type() == current_goal->get_type()) {
-                found = true;
-                break;
-            }
-        }
-        if(!found)
-            sub_goals.push_back(goal);
+        add_subgoal(goal, false);
     };
 
     int process_subgoals() {
