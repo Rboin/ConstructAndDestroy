@@ -1,0 +1,30 @@
+\section{Path Planning}
+\label{sec:pathplanning}
+For path planning we’ve chosen to use Dijkstra algorithm with the A* optimization. We've decided to go with the A* optimization because it is way more efficient than the standard Dijkstra algorithm\cite{rbgames}. In the following chapter we dive further into details how we use A*.
+
+We’ve chosen to use the Manhattan heuristic. This heuristic is easy to implement and works pretty well for our game. The Manhattan heuristic in combination with the A* optimization guarantees for a shortest path solution and that is what we want. We are using the following weights for determining the step cost:
+\begin{itemize}
+\item Horizontal movement 1.0
+\item Vertical movement 1.0
+\item Diagonal movement 1.4
+\end{itemize}
+
+To calculate the optimal path there are 3 variables. \\
+\textbf{\textit{g}} = Step cost \\
+\textbf{\textit{h}} = Heuristic estimate \\ 
+\textbf{\textit{f}} = Calculated total  \textbf{\textit{(h + g)}}
+
+We start off with measuring \textbf{\textit{h}}. We do this by calculating the distance from the starting node to the end node. We then calculate \textbf{\textit{f}} for all neighbors, a neighbor is a node to which there is an edge from the current node. \textbf{\textit{f}} is calculated by adding the step cost\textbf{\textit{(g)}} from the starting node to the neighbor and the heuristic estimate\textbf{\textit{(h)}} of that neighbor. Once that process has been done for all neighbors we pick the neighbor with the lowest \textbf{\textit{f}}. The following process is then repeated, however the starting node is now the neighbor with the lowest \textbf{\textit{f}}. This process is completed when the end node is reached.
+
+While calculating the path we also set parent nodes, this is used to build the path when we’ve reached the final node. The path is built by using a recursive method, which can be seen in the figure below. 
+
+\begin{lstlisting}
+vector<vec2 *> Graph::build_path(AStarNode *node, vector<vec2*> &vector) {
+    vector.emplace_back(node->get_position());
+    if (node->parent) {
+        return build_path(node->parent, vector);
+    } else {
+        return vector;
+    }
+}
+\end{lstlisting}

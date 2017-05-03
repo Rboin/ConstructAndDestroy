@@ -1,0 +1,11 @@
+\section{Behaviour}
+\label{sec:behaviour}
+We've chosen to use the goal driven behavior approach, because entities need to complete different actions to complete a goal. E.g., for a lumberjack to collect wood it needs to plan a path to the resource, then it needs to follow the path, once arrived it should start gathering, etc. Goal driven behavior provides a solid solution for these types of actions. Goals can be very large with loads off sub goals or actions, or they can be very small, this makes goal driven behavior easier extendable compared to state driven behavior for example. Since a goal can consist of multiple smaller goals, the Composite Pattern is a good solution to this problem. You can have small goals such as 'TraverseEdge' and also bigger goals like 'Work' and still treat them the same way. \cite{composite-pattern}
+
+We created a single base class called Goal, which is a template class so that we can reuse it for different entity types. This class, together with the AtomicGoal and CompositeGoal classes, are shown in \cref{fig:goal}. Besides the Goal<T> class, we created two classes that inherit from it, the AtomicGoal and GoalComposite classes. The GoalComposite class contains a deque data structure that contains its subgoals. As you can see in \cref{fig:goal}, the GoalComposite<T> class also contains a couple of extra methods to add, remove, process and remove subgoals.
+
+\input{chapters/composite.tex}
+
+\input{chapters/atomic.tex}
+\newpage
+
