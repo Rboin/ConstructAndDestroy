@@ -7,10 +7,19 @@
 #include <entity/static/resource_manager.h>
 #include <entity/goal/moving_entity_goal/atomic/gather_resource_goal.h>
 #include <entity/goal/moving_entity_goal/follow_path_goal.h>
+#include <entity/static/tree_entity.h>
 #include "entity/goal/moving_entity_goal/think_goal.h"
 
 bool LumberOrderStrategy::applies(std::vector<MovingEntity *> *units, vec2 &targetVector, BaseEntity *target) {
-    return target && target->is(ResourceType::TREE);
+    if (target == nullptr) {
+        return false;
+    }
+
+    if (TreeEntity *tree_entity = dynamic_cast<TreeEntity *>(target)) {
+        return true;
+    }
+
+    return false;
 }
 
 void LumberOrderStrategy::execute(std::vector<MovingEntity *> *units, vec2 &targetVector, BaseEntity *target) {
