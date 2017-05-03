@@ -3,6 +3,7 @@
 //
 
 #include <mesh.h>
+#include <world/world.h>
 #include "neighbourhood_manager.h"
 #include "vector.h"
 #include "tree/bsp_tree.h"
@@ -41,8 +42,14 @@ std::vector<BaseEntity *> NeighbourhoodManager::get_neighbours(BaseEntity *b) co
 }
 
 BaseEntity *NeighbourhoodManager::get_closest_to(vec2 v) {
-    bsp_node *node = tree->find(v);
-    std::vector<BaseEntity *> closest = sorter->sort(v, node->entities);
+    // TODO: enable BSP tree optimalization again
+    // currently entities can be within multiple partitions
+    // but the BSP does not support this scenario yet
+    // a workaround is to iterate over all entities to find the entity that
+    // a player has clicked on
+    // bsp_node *node = tree->find(v);
+    // std::vector<BaseEntity *> closest = sorter->sort(v, node->entities);
+    std::vector<BaseEntity *> closest = World::get_instance()->getEntities();
     if(closest.size() > 0) {
         for(int i = 0; i < closest.size(); i++) {
             BaseEntity *closest_to_v = closest.at(i);

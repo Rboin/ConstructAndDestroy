@@ -118,6 +118,10 @@ Player* World::getPlayer() {
     return this->player;
 }
 
+std::vector<BaseEntity *> World::getEntities() {
+    return this->entities;
+}
+
 void World::add_graph(Graph *g) {
     graph = g;
 }

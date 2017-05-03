@@ -47,6 +47,8 @@ public:
 
     World &add_entity(BaseEntity *);
 
+    std::vector<BaseEntity *> getEntities();
+
     void add_graph(Graph *);
 
     void add_controllable_character(MovingEntity*);
