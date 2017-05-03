@@ -70,7 +70,10 @@ public:
             Goal<T> *current = sub_goals.back();
             sub_goals.pop_back();
 
-            current->terminate();
+            if (current->is_active()) {
+                current->terminate();
+            }
+
             delete current;
         }
     };
