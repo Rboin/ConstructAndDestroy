@@ -29,7 +29,7 @@ void MouseHandlerWorld::handle_down(sdl_mouse_event_data data) {
 
 void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
     //check if event is a click or a drag.
-    if(std::abs(data.component->start_drag.x - data.position.x) < 10 &&  std::abs(data.component->start_drag.y - data.position.y) < 10){
+    if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
         //it is a click
         vec2 pos = {(float) data.position.x, (float) data.position.y};
         handle_left_button(pos);
