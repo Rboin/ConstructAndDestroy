@@ -1,0 +1,27 @@
+\subsection{Composite goals}
+We created a couple of Composite goals for moving entities which we describe below. There is a class diagram \cref{fig:goalcomposite-inherit} in the appendix that illustrates the structure. This diagram doesn't show all composite goals, however it should give an impressions how we implemented this. 
+
+\subsubsection{Think}
+The Think goal is a goal that never gets removed. This goal is needed 
+to determine an entity's next goal and activates that goal. It does so by 
+calling the goals evaluator class, which returns a desirability value. The 
+goal with the highest desirability gets chosen as the next goal. Desirability’s can be influenced by a variant of factors. E.g., how far away is the entity from an hostile entity. When there is an hostile enemy close it might not want to gather resources. Evaluators are a great way to create AI. Instead of using these evaluators we might use fuzzy logic. With fuzzy logic the actions of the entity should even feel more natural. 
+
+\subsubsection{Follow Path}
+\label{sec:followpath}
+This goal traverses a path by adding the TraverseEdgeGoal class to its 
+subgoals. This way a path consists of multiple instances of TraverseEdgeGoals
+(\cref{sec:traverseedge}) which can be paused if the entity needs to do 
+something else first, i.e. fleeing or resting. Once there are no more edges 
+to traverse, this goal will be completed and removed from the entity's 
+subgoals.
+
+\subsubsection{Work}
+This goal makes the entity go to the nearest resource to work. It first plans 
+a path (\cref{sec:planpath}) to the nearest resource and then it follows that 
+path (\cref{sec:followpath}). Once it arrives on the resource's location it 
+starts to gather the resource (\cref{sec:gatherresource}). Once it's done 
+gathering it plans another path, this time to the closest warehouse/depot. It follows 
+this path and after it arrives it drops its resources 
+(\cref{sec:dropresources}). Once all these goals are completed the work goal is completed as well.
+
