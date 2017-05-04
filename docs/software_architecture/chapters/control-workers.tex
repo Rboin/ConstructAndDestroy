@@ -1,0 +1,17 @@
+\section{Controlling workers}
+
+One of the things the player can do is order workers to do a specific task. This is done by selecting one or more workers followed by right clicking somewhere. For example, the player can right click on the ground, which will cause the selected workers to move there. The player can also order workers to gather resources such as wood.
+
+Since the player can select any kind of worker and order it to do many different things, a design pattern was needed to ensure that the code remained readable and extensible. The strategy pattern was chosen because of the fact that it is very extensible. 
+
+A class diagram of relevant classes can be found in \cref{fig:orderstrategies}. The basic idea is that there is one singleton class named MoveOrder with a orderMove function. This function can be used throughout the game to order one or more entities to do something at a certain vector. Based on what the player right clicked on an OrderStrategy is selected. This OrderStrategy takes care of the right click event, for example by ordering the selected entities to go to a certain location.
+
+Down below, in \cref{fig:orderstrategy}, you can find the implementation of the strategy that handles the event where a user orders one or more entities to move to a piece of ground.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[angle=0,origin=c,scale=0.66]
+    {images/order-strategy.PNG}
+    \caption{Order strategy}\label{fig:orderstrategy}
+\end{figure}
+
