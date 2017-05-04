@@ -118,7 +118,7 @@ Player* World::getPlayer() {
     return this->player;
 }
 
-std::vector<BaseEntity *> World::getEntities() {
+std::vector<BaseEntity *> World::get_entities() {
     return this->entities;
 }
 

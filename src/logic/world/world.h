@@ -47,7 +47,7 @@ public:
 
     World &add_entity(BaseEntity *);
 
-    std::vector<BaseEntity *> getEntities();
+    std::vector<BaseEntity *> get_entities();
 
     void add_graph(Graph *);
 

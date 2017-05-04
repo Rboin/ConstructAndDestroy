@@ -49,7 +49,7 @@ BaseEntity *NeighbourhoodManager::get_closest_to(vec2 v) {
     // a player has clicked on
     // bsp_node *node = tree->find(v);
     // std::vector<BaseEntity *> closest = sorter->sort(v, node->entities);
-    std::vector<BaseEntity *> closest = World::get_instance()->getEntities();
+    std::vector<BaseEntity *> closest = World::get_instance()->get_entities();
     if(closest.size() > 0) {
         for(int i = 0; i < closest.size(); i++) {
             BaseEntity *closest_to_v = closest.at(i);
