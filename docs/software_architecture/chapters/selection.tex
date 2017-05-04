@@ -1,33 +1,34 @@
-\begin{abstract}
+
 \section{selection}
 In this chapter we will explain how our selection system works. We will show which classes are involved and how the methods are chained using UML-diagrams. 
 
 \subsection{User interface}
-First off, how does the selecting feature works. You can select a unit by clicking on it using the left mouse button. You can select multiple by holding the left mouse button and dragging, while dragging a rectangle is drawn. This rectangle represents the selecting area. When you release the left mouse button every unit in the selecting area, the red rectangle, will be selected. Selected units are recognizable by the red line surrounding them.
+First off, how does the selecting feature works. You can select a unit by clicking on it using the left mouse button. You can select multiple by holding the left mouse button and dragging, while dragging a rectangle is drawn. This rectangle represents the selecting area. When you release the left mouse button every unit in the selecting area, the red rectangle, will be selected. A selected unit is recognizable by the red line around it.
 
-\subsection{Detecting events}
-To handle an event, we first need to detect it. We have a window a SDL window that represent the world. We want to detect the mouse events that are used on this window. This is done using two while-loops. First we have a while-loop that runs as long as the game is running. In this while-loop we want to detect the events. So we have a while-loop that uses the SDL\_PollEvent method to poll for events. A code snippet of this while-loop can be found below.
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.75]{images/PollingEvents.PNG}
-    \caption{Detecting events in the world window.}\label{fig:fuzzy-distance}
-\end{figure}
-\newpage
-
-We first determine what kind off event is executed using if-statements. When the event type is either a motion of the mouse, a button up or a button down we call the mouse event dispatcher and set the parameters of the executed event. This mouse event dispatcher calls the handler of the mouse events which is explained in the next sub chapter.
-
-
-\subsection{Handling events}
+\subsection{Selection process}
 First we made a handler that handles mouse input from a panel that represents the world in the user interface. This is the MouseHandler class, it derives from the SDL\_MouseEventSlot class which derives from the Slot class. SDL is a library that helps making a user interface in C++. The SDL library provides us with low level access to the mouse input on the panel. The header file of the MouseHandler can be seen below.
 
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=1.0]{images/MouseHandler.png}
-    \caption{The MouseHandler class.}\label{fig:fuzzy-distance}
-\end{figure}
+\begin{lstlisting}
+class MouseHandlerWorld : public SDL_MouseEventSlot {
+private:
+    void handle_up(sdl_mouse_event_data data);
+    void handle_down(sdl_mouse_event_data data);
+    void handle(sdl_mouse_event_data);
+    void handle_motion(sdl_mouse_event_data);
 
-\newpage
+    void handle_left_button(const vec2 &);
+    void handle_right_button(sdl_mouse_event_data &, const vec2 &);
+
+    int start_drag_x;
+    int start_drag_y;
+
+public:
+    MouseHandlerWorld();
+    ~MouseHandlerWorld();
+    void  on(sdl_mouse_event_data d) override;
+};
+\end{lstlisting}
+
 The class has a lot of private methods that handle the user input separately. It has one method that has been overridden from the base class, which is the on-method. The on-method is where user inputs comes in. In this method the input is separated into two groups and will be handled further by other methods. To make clear how this works an explanatory activity diagram can be found below to illustrate the process. Below the image we will globally explain what the methods do individually. 
 
 \begin{figure}[!htb]
@@ -36,7 +37,7 @@ The class has a lot of private methods that handle the user input separately. It
     \caption{Handling user input activity diagram.}\label{fig:fuzzy-distance}
 \end{figure}
 
-If the text in the image is unreadable, we recommend taking a look at the PNG file in the images folder.
+If the text in the image is unreadable, we recommend taking a look at the image in the Appendix of this document.
 
 After the on-method has determined whether the incoming data is a motion event or button it will be handled further by other methods. We will start with a motion input.
 
@@ -48,14 +49,12 @@ If however the event does come from the left button it is to select units. When 
 
 Inevitably after a button down event from the left button a button up event will be fired from the button. This event means a few things. First off all the user has stopped dragging, cause we stated earlier that the user is dragging when is holding down the left button. So, we reset the dragging variable to false. Also we reset the positions to be ready for a next drag event. After resetting the variables, we call the handle\_up method. This determines whether the event was a drag or a click of the left mouse button. A click is when you press and release the mouse in the same position or at maximum 10 pixels away from the original position. We have implemented it this way so it is easier to click moving targets. The handle\_left\_button\_click is called and it selects the target on the clicking position, unless there is no target in range.
 
-When you release the left mouse button more than 10 pixels away from the origin point you are dragging the mouse. The position of the release of the button and the position of the press will passed to the select\_units\_in\_rectangle method. The method first calculates the right, left, upper, bottom offset of the rectangle. After this all units inside will be selected. Below you can find a picture of a few units that are selected by the select\_units\_in\_rectangle function and you can also see the red rectangle that has been used to select them. 
+When you release the left mouse button more than 10 pixels away from the origin point you are dragging the mouse. The position of the release of the button and the position of the press will passed to the select\_units\_in\_rectangle method. The method first calculates the right, left, upper, bottom offset of the rectangle. After this all units inside will be selected by checking which of the units that belong to the player are positioned inside the offsets of the rectangle. Below you can find a picture of a few units that are selected by the select\_units\_in\_rectangle function and you can also see the red rectangle that has been used to select them. 
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[scale=1.0]{images/SelectionRectangle.PNG}
     \caption{Selection by dragging the mouse.}\label{fig:fuzzy-distance}
 \end{figure}
+\newpage
 
-
-
-\end{abstract}
