@@ -150,7 +150,8 @@ set(SOURCE_FILES
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp
-)
+        behaviour/orderstrategies/default_order_strategy.cpp
+        behaviour/orderstrategies/default_order_strategy.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

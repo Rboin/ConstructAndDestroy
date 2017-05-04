@@ -1,4 +1,5 @@
 #include <neighbourhood/neighbourhood_manager.h>
+#include <behaviour/orderstrategies/default_order_strategy.h>
 #include "move_order.h"
 #include "orderstrategies/ground_order_strategy.h"
 #include "orderstrategies/lumber_order_strategy.h"
@@ -18,7 +19,8 @@ void MoveOrder::orderMove(std::vector<MovingEntity *> *units, vec2 targetVector)
 MoveOrder::MoveOrder() {
     strategies = {
             new GroundOrderStrategy(),
-            new LumberOrderStrategy()
+            new LumberOrderStrategy(),
+            new DefaultOrderStrategy(),
     };
 }
 
