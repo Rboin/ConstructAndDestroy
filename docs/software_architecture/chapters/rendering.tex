@@ -1,3 +1,20 @@
 \section{Rendering}
 \label{sec:rendering}
-\blindtext
+
+In conjuction with creating our own GUI library, we've also created objects 
+that handle the rendering of entities and UIComponents. This class is called 
+the RenderObject, which is also a templated class so that we can reuse it 
+if and when we decide to switch over to OpenGL rendering.
+
+The Rendering class and its derived classes can be seen in 
+\cref{fig:renderobject-inherit}.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.75]{res/renderobject-inherit.png}
+\caption{RenderObject and derived classes}\label{fig:renderobject-inherit}
+\end{figure}
+
+\newpage
+\input{chapters/rendering/rendering-proxy.tex}
+\input{chapters/rendering/ui-rendering.tex}

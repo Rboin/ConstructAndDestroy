@@ -1,0 +1,26 @@
+\subsection{UIComponent Rendering}
+\label{sec:rendering-ui}
+
+The uicomponents need a way of rendering their child components after 
+rendering themselves. You can think of the relation between child components 
+and their parent as a tree which we traverse in an NC (first the node, then 
+the children) way. The code for rendering a component and its children can be 
+seen in \cref{lst:uicomponent-rendering}.
+\\
+\begin{lstlisting}[caption={UIComponent rendering.},
+label={lst:uicomponent-rendering}]
+SDL_Texture *SDL_UIComponent::render(Renderer<SDL_Renderer> *renderer, float delta) {
+    SDL_Texture *texture = representation->render(renderer);
+    SDL_SetRenderTarget(renderer->get_engine(), NULL);
+    SDL_Rect texture_rect = {
+            (int) representation->get_position()->x, (int) representation->get_position()->y,
+            (int) representation->get_size()->x, (int) representation->get_size()->y
+    };
+    SDL_RenderCopy(renderer->get_engine(), texture, NULL, &texture_rect);
+
+    for (int i = 0; i < this->children.size(); i++) {
+        children[i]->render(renderer, delta);
+    }
+    return texture;
+}
+\end{lstlisting}
