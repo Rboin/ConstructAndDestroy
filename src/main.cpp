@@ -26,7 +26,7 @@
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
-#include "sdl/event/mouse_handler_world.h"
+#include "sdl/event/slot/mouse_handler_world.h"
 
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
