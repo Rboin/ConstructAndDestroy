@@ -301,11 +301,8 @@ int main(int argc, char **argv) {
     MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
 
     main_panel.set_mouse_callback(world_panel_slot);
-    main_window.set_mouse_callback(world_panel_slot);
-
 
     mouse_dispatcher->register_callback(&main_panel, world_panel_slot);
-    mouse_dispatcher->register_callback(&main_window, world_panel_slot);
 
     main_window.add_component(&main_panel);
 
