@@ -14,7 +14,8 @@ void SDLWorldPanel::set_world(World *world) {
 }
 
 SDL_Texture *SDLWorldPanel::render(Renderer<SDL_Renderer> *renderer, float d) {
-    SDLPanel::render(renderer, d);
+//    SDLPanel::render(renderer, d);
     _current_world->update(d);
-    return _current_world->render(renderer);
+    SDL_Texture *world_texture = _current_world->render(renderer);
+    return world_texture;
 }

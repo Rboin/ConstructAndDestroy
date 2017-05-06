@@ -29,7 +29,29 @@ TextureManager *TextureManager::get_instance() {
 
 SDL_Texture *TextureManager::loadTexture(std::string path) {
     path = "res/textures/" + path;
-    return IMG_LoadTexture(_renderer, path.c_str());
+    int width, height;
+
+    // Load the image into a texture
+    SDL_Texture *image_texture = IMG_LoadTexture(_renderer, path.c_str());
+
+    // Get width and height
+    SDL_QueryTexture(image_texture, NULL, NULL, &width, &height);
+
+    // Create new texture with correct access and format.
+    // We need this to draw textures on top of one another.
+    SDL_Texture *result_texture = SDL_CreateTexture(_renderer,
+                                                    SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
+                                                    width, height);
+    SDL_SetTextureBlendMode(result_texture, SDL_BLENDMODE_BLEND);
+
+    // Copy image onto resulting texture
+    SDL_SetRenderTarget(_renderer, result_texture);
+    SDL_RenderCopy(_renderer, image_texture, NULL, NULL);
+    SDL_SetRenderTarget(_renderer, NULL);
+
+    // Destroy loaded image texture
+    SDL_DestroyTexture(image_texture);
+    return result_texture;
 }
 
 
@@ -45,12 +67,12 @@ SDL_Texture *TextureManager::GetTexture(TextureTypes tt) {
     else if (tt == WORLDTEXTURE) { texture = "world.png"; }
     else if (tt == RESTAURANTTEXTURE) { texture = "restaurant.png"; }
     else if (tt == CAMPFIRETEXTURE) { texture = "campfire.png"; }
-    else if (tt == BOWTEXTURE ) {texture = "bow.png";}
-    else if (tt == AXETEXTURE ) {texture = "axe.png";}
-    else if (tt == SEL_AXETEXTURE){texture = "sel_axe.png";}
-    else if (tt == SEL_BOWTEXTURE){texture = "sel_bow.png";}
-    else if (tt == SEL_LUMBERJACKTEXTURE){texture = "sel_lumberjack.png";}
-    else if (tt == SEL_MINERTEXTURE){texture = "sel_miner.png";}
+    else if (tt == BOWTEXTURE) { texture = "bow.png"; }
+    else if (tt == AXETEXTURE) { texture = "axe.png"; }
+    else if (tt == SEL_AXETEXTURE) { texture = "sel_axe.png"; }
+    else if (tt == SEL_BOWTEXTURE) { texture = "sel_bow.png"; }
+    else if (tt == SEL_LUMBERJACKTEXTURE) { texture = "sel_lumberjack.png"; }
+    else if (tt == SEL_MINERTEXTURE) { texture = "sel_miner.png"; }
 
     return loadTexture(texture);
 }

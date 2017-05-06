@@ -21,6 +21,7 @@
 #include <behaviour/calculator/basic_force_calculator.h>
 #include <entity/goal/evaluator/work_evaluator.h>
 #include <entity/static/warehouse_entity.h>
+#include <SDL_image.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
@@ -70,7 +71,16 @@ void setup_renderer() {
 
 bool init_font() {
     if (TTF_Init() == -1) {
-        std::cout << "Failed to initialize font: " << SDL_GetError() << std::endl;
+        std::cout << "Failed to initialize SDL2_TTF: " << SDL_GetError() << std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool init_img() {
+    int flags = IMG_INIT_JPG | IMG_INIT_PNG;
+    if (IMG_Init(flags) == -1) {
+        std::cout << "Failed to initialize SDL2_IMG: " << SDL_GetError() << std::endl;
         return false;
     }
     return true;
@@ -78,7 +88,7 @@ bool init_font() {
 
 // Initializes our window, renderer and sdl itself.
 bool init_everything() {
-    if (!init_sdl() || !create_window() || !create_renderer() || !init_font())
+    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img())
         return false;
     setup_renderer();
     return true;
@@ -157,7 +167,7 @@ int main(int argc, char **argv) {
     vec2 s_position7 = {600, 400};
     ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
     sdl_image_data entity7_data = {"warehouse.png"};
-    SDL_ImageRenderObject e7_object = SDL_ImageRenderObject(s_position7, {50,50}, &entity7_data);
+    SDL_ImageRenderObject e7_object = SDL_ImageRenderObject(s_position7, {50, 50}, &entity7_data);
     s_entity7->set_representation(&e7_object);
 
     World::get_instance()->add_entity(s_entity7);

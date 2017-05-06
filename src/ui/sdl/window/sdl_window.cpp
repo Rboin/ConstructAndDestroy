@@ -47,7 +47,8 @@ int SDLWindow::show() {
                        event.type == SDL_MOUSEBUTTONUP) {
                 vec2 mouse_position = {(float) event.button.x, (float) event.button.y};
                 if (_mouse_event_dispatcher) {
-                    _mouse_event_dispatcher->dispatch({event.type, event.button.button, event.button.timestamp, mouse_position});
+                    _mouse_event_dispatcher->dispatch(
+                            {event.type, event.button.button, event.button.timestamp, mouse_position});
                 }
             }
         }
@@ -69,6 +70,8 @@ int SDLWindow::show() {
 
 SDL_Texture *SDLWindow::render(Renderer<SDL_Renderer> *renderer, float delta) {
     SDL_RenderClear(renderer->get_engine());
-    SDL_UIComponent::render(renderer, delta);
+    SDL_Texture *resulting_texture = SDL_UIComponent::render(renderer, delta);
+    SDL_RenderCopy(renderer->get_engine(), resulting_texture, NULL, NULL);
     SDL_RenderPresent(renderer->get_engine());
+    return resulting_texture;
 }
