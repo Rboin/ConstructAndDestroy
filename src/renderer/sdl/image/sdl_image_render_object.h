@@ -11,7 +11,8 @@
 
 struct sdl_image_data : public sdl_data {
     std::string type;
-    sdl_image_data(const std::string t) {
+
+    sdl_image_data(const std::string t) : sdl_data(0, 0, 0) {
         type = t;
     }
 };

@@ -12,10 +12,7 @@ struct sdl_ui_text_data : public sdl_data {
     const char *text;
     TTF_Font *font;
 
-    sdl_ui_text_data(uint8_t r, uint8_t g, uint8_t b, const char *c, TTF_Font *f) {
-        red = r;
-        green = g;
-        blue = b;
+    sdl_ui_text_data(uint8_t r, uint8_t g, uint8_t b, const char *c, TTF_Font *f) : sdl_data(r, g, b) {
         text = c;
         font = f;
     }

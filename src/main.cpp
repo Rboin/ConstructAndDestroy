@@ -147,9 +147,9 @@ int main(int argc, char **argv) {
     entity->set_player(1);
 
     vec2 entity_size = {50, 50};
-    sdl_image_data entity_data = {"lumberjack.png"};
-    SDL_ImageRenderObject entity_render_object = SDL_ImageRenderObject(pos, entity_size, &entity_data);
-    entity->set_representation(&entity_render_object);
+    sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
+    SDL_ImageRenderObject *entity_render_object = new SDL_ImageRenderObject(pos, entity_size, entity_data);
+    entity->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(entity);
     /*
@@ -160,143 +160,36 @@ int main(int argc, char **argv) {
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
     s_entity->set_textures(TextureTypes::TREETEXTURE, TextureTypes::TREEDEPLETEDTEXTURE);
-    sdl_image_data tree_data = {"tree.png"};
-    SDL_ImageRenderObject tree_object = SDL_ImageRenderObject(s_position, s_size, &tree_data);
-    s_entity->set_representation(&tree_object);
+    sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
+    SDL_ImageRenderObject *tree_object = new SDL_ImageRenderObject(s_position, s_size, tree_data);
+    s_entity->set_representation(tree_object);
 
     vec2 s_position7 = {600, 400};
     ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
-    sdl_image_data entity7_data = {"warehouse.png"};
-    SDL_ImageRenderObject e7_object = SDL_ImageRenderObject(s_position7, {50, 50}, &entity7_data);
-    s_entity7->set_representation(&e7_object);
+    sdl_image_data *entity7_data = new sdl_image_data{"warehouse.png"};
+    SDL_ImageRenderObject *e7_object = new SDL_ImageRenderObject(s_position7, {50, 50}, entity7_data);
+    s_entity7->set_representation(e7_object);
 
     World::get_instance()->add_entity(s_entity7);
     World::get_instance()->add_entity(s_entity);
-/*
-       vec2 s_position1 = {400, 240};
-       ResourceEntity *s_entity1 = new TreeEntity(&base, s_position1, 50);
-       world1.add_entity(s_entity1);
-
-       vec2 s_position2 = {400, 200};
-       ResourceEntity *s_entity2 = new TreeEntity(&base, s_position2, 50);
-       world1.add_entity(s_entity2);
-
-       vec2 s_position4 = {360, 280};
-       ResourceEntity *s_entity4 = new TreeEntity(&base, s_position4, 50);
-       world1.add_entity(s_entity4);
-
-       vec2 s_position5 = {360, 240};
-       ResourceEntity *s_entity5 = new IronMineEntity(&base, s_position5, 50);
-       world1.add_entity(s_entity5);
-
-       vec2 s_position6 = {360, 200};
-       ResourceEntity *s_entity6 = new TreeEntity(&base, s_position6, 50);
-       world1.add_entity(s_entity6);
-
-       vec2 s_position7 = {600, 400};
-       ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
-       world1.add_entity(s_entity7);
-
-       vec2 s_position8 = {40, 160};
-       ResourceEntity *s_entity8 = new RestaurantEntity(&base, s_position8, 50);
-       world1.add_entity(s_entity8);
-
-       vec2 s_position9 = {400, 480};
-       ResourceEntity *s_entity9 = new CampfireEntity(&base, s_position9, 50);
-       world1.add_entity(s_entity9);
-   #pragma endregion Static Object
-
-   #pragma region Explore entity
-       ForceCalculator *explore_calculator = new BasicForceCalculator();
-       Behaviour *explore_behaviour = new Behaviour(explore_calculator);
-
-       vec2 explore_starting_pos = {600, 40};
-       MovingEntity *explore_entity = new LumberJackEntity(&base, explore_starting_pos, 10, 0.2, 0.2);
-       ThinkGoal *explore_think_goal = new ThinkGoal(explore_entity);
-
-       explore_think_goal->add_evaluator(new ExploreEvaluator());
-       explore_entity->set_behaviour(explore_behaviour);
-       explore_entity->set_goal(explore_think_goal);
-
-       world1.add_entity(explore_entity);
-   #pragma endregion explore entity
-   #pragma  region A*
-       ForceCalculator *a_star_calculator = new BasicForceCalculator();
-       Behaviour *a_star_behaviour = new Behaviour(a_star_calculator);
-
-       vec2 a_star_starting_pos = {0, 80};
-       MovingEntity *a_star_entity = new LumberJackEntity(&base, a_star_starting_pos, 10, 0.2, 0.2);
-       a_star_entity->set_player(1);
-
-       ThinkGoal *a_star_think_goal = new ThinkGoal(a_star_entity);
-       a_star_think_goal->add_evaluator(new WorkEvaluator());
-       a_star_think_goal->add_evaluator(new RestEvaluator);
-       a_star_think_goal->add_evaluator(new EatEvaluator());
-       a_star_entity->set_behaviour(a_star_behaviour);
-       a_star_entity->set_goal(a_star_think_goal);
-
-       world1.add_entity(a_star_entity);
-
-       ForceCalculator *a_star_calculator2 = new BasicForceCalculator();
-       Behaviour *a_star_behaviour2 = new Behaviour(a_star_calculator2);
-
-       vec2 a_star_starting_pos2 = {760, 320};
-       MovingEntity *a_star_entity2 = new MinerEntity(&base, a_star_starting_pos2, 10, 0.2, 0.2);
-       a_star_entity2->set_player(1);
-
-       ThinkGoal *a_star_think_goal2 = new ThinkGoal(a_star_entity2);
-       a_star_think_goal2->add_evaluator(new WorkEvaluator());
-       a_star_think_goal2->add_evaluator(new RestEvaluator());
-       a_star_think_goal2->add_evaluator(new EatEvaluator());
-       a_star_entity2->set_behaviour(a_star_behaviour2);
-       a_star_entity2->set_goal(a_star_think_goal2);
-
-       world1.add_entity(a_star_entity2);
-   #pragma endregion A*
-
-   #pragma region Enemy
-       ForceCalculator *skeleton_calculator = new BasicForceCalculator();
-       Behaviour *skeleton_behaviour = new Behaviour(skeleton_calculator);
-
-       vec2 skeleton_starting_pos = {520, 280};
-       MovingEntity *skeleton = new SkeletonEntity(&base, skeleton_starting_pos, 10, 0.2, 0.2);
-
-       skeleton->set_behaviour(skeleton_behaviour);
-       skeleton->add_weapons();
-       world1.add_entity(skeleton);
-   #pragma endregion skeleton
-
-   #pragma  region Controllable Character
-       ForceCalculator *cc_calculator = new BasicForceCalculator();
-       Behaviour *cc_behaviour = new Behaviour(cc_calculator);
-
-       vec2 cc_start_pos = {0, 0};
-       MovingEntity *cc_entity = new MinerEntity(&base, cc_start_pos, 10, 0.2, 0.2);
-
-       ThinkGoal *cc_think_goal = new ThinkGoal(cc_entity);
-       cc_entity->set_behaviour(cc_behaviour);
-       cc_entity->set_goal(cc_think_goal);
-
-       world1.add_controllable_character(cc_entity);
-   #pragma endregion Controllable Character
-   */
 
     Renderer<SDL_Renderer> render_engine = Renderer<SDL_Renderer>(renderer);
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
 
-    sdl_image_data world_data = {"world.png"};
-    SDL_ImageRenderObject world_representation = SDL_ImageRenderObject({0, 0}, {800, 600}, &world_data);
+    sdl_image_data *world_data = new sdl_image_data{"world.png"};
+    SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, {800, 600}, world_data);
 
-    World::get_instance()->set_render_object(&world_representation);
+    World::get_instance()->set_render_object(world_representation);
 
     vec2 main_panel_position = {0, 0}, main_panel_size = {800, 600};
-    sdl_data panel_data = {255, 255, 255};
+    sdl_data *panel_data = new sdl_data{255, 255, 255};
 
-    SDL_RenderObject main_panel_representation = SDL_RenderObject(main_panel_position, main_panel_size, &panel_data);
-    SDLWorldPanel main_panel = SDLWorldPanel(&main_panel_representation);
+    SDL_RenderObject *main_panel_representation = new SDL_RenderObject(main_panel_position, main_panel_size,
+                                                                       panel_data);
+    SDLWorldPanel main_panel = SDLWorldPanel(main_panel_representation);
     main_panel.set_world(World::get_instance());
 
-    SDLWindow main_window(&main_panel_representation, window, &render_engine, mouse_dispatcher);
+    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, &render_engine, mouse_dispatcher);
 
     MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
 
@@ -304,9 +197,10 @@ int main(int argc, char **argv) {
 
     mouse_dispatcher->register_callback(&main_panel, world_panel_slot);
 
-    main_window.add_component(&main_panel);
+    main_window->add_component(&main_panel);
 
-    main_window.show();
+    main_window->show();
 
+    delete main_window;
     return 0;
 }

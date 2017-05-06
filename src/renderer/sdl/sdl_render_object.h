@@ -14,6 +14,11 @@ struct SDL_Renderer;
 
 struct sdl_data {
     uint8_t red, green, blue;
+    sdl_data(uint8_t r, uint8_t g, uint8_t b) {
+        red = r;
+        green = g;
+        blue = b;
+    }
 };
 
 class SDL_RenderObject : public RenderObject<SDL_Renderer, sdl_data, SDL_Texture> {
