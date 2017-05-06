@@ -11,6 +11,7 @@
 #include "entity/moving/moving_entity.h"
 #include "entity/entity_types.h"
 #include <iostream>
+#include "sdl/panel/sdl_world_panel.h"
 
 MouseHandlerWorld::MouseHandlerWorld() {
     start_drag_x = -1;
@@ -20,11 +21,11 @@ MouseHandlerWorld::MouseHandlerWorld() {
 MouseHandlerWorld::~MouseHandlerWorld() {}
 
 
-void MouseHandlerWorld::handle_down(sdl_mouse_event_data data) {
+void MouseHandlerWorld::handle_down(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
     start_drag_x = data.position.x;
     start_drag_y = data.position.y;
-    data.component->start_drag.x =  data.position.x;
-    data.component->start_drag.y =  data.position.y;
+    world_panel->start_drag.x =  data.position.x;
+    world_panel->start_drag.y =  data.position.y;
 }
 
 void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
@@ -41,36 +42,36 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
 
 
 void MouseHandlerWorld::on(sdl_mouse_event_data data) {
-
+    SDLWorldPanel *world_panel = (SDLWorldPanel *) data.component;
     if (data.type == SDL_MOUSEMOTION) {
-        handle_motion(data);
+        handle_motion(data, world_panel);
     }
     else if( data.type == SDL_MOUSEBUTTONDOWN || data.type == SDL_MOUSEBUTTONUP){
-        handle(data);
+        handle(data, world_panel);
     }
 }
 
-void MouseHandlerWorld::handle_motion(sdl_mouse_event_data data) {
+void MouseHandlerWorld::handle_motion(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
     if(data.button == SDL_BUTTON_LEFT){
-        data.component->dragging = true;
-        data.component->end_drag.x = data.position.x;
-        data.component->end_drag.y =  data.position.y;
+        world_panel->dragging = true;
+        world_panel->end_drag.x = data.position.x;
+        world_panel->end_drag.y =  data.position.y;
     }
 
 }
 
-void MouseHandlerWorld::handle(sdl_mouse_event_data data){
+void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
     vec2 pos = data.position;
 
     switch(data.button) {
         case SDL_BUTTON_LEFT:
             if (data.type == SDL_MOUSEBUTTONDOWN) {
-                return handle_down(data);
+                return handle_down(data, world_panel);
             } else if (data.type == SDL_MOUSEBUTTONUP) {
                 //reset drag variables before handling event
-                data.component->dragging = false;
-                data.component->start_drag.x = -1;
-                data.component->start_drag.y = -1;
+                world_panel->dragging = false;
+                world_panel->start_drag.x = -1;
+                world_panel->start_drag.y = -1;
                 return handle_up(data);
 
             }
