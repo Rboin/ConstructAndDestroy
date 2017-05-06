@@ -48,4 +48,5 @@ void SDL_RenderObject::clear_texture(Renderer<SDL_Renderer> *renderer, SDL_Rect 
 
 void SDL_RenderObject::clear_data() {
     SDL_DestroyTexture(_result);
+    _result = nullptr;
 }
