@@ -33,6 +33,9 @@ SDL_Texture *TextureManager::loadTexture(std::string path) {
 
     // Load the image into a texture
     SDL_Texture *image_texture = IMG_LoadTexture(_renderer, path.c_str());
+    // Don't blend the image together, if you do so,
+    // it will try to combine with what is already on the texture's position.
+    SDL_SetTextureBlendMode(image_texture, SDL_BLENDMODE_NONE);
 
     // Get width and height
     SDL_QueryTexture(image_texture, NULL, NULL, &width, &height);
