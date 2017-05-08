@@ -1,3 +1,5 @@
+*.vpp.bak*
+
 cmake-build-debug/
 .idea/
 ## Doxygen generated files
