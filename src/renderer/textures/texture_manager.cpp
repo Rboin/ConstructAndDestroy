@@ -7,7 +7,6 @@
 #include "texture_manager.h"
 #include "texture_types.h"
 
-
 TextureManager *TextureManager::_instance = nullptr;
 
 TextureManager::TextureManager() {

@@ -11,6 +11,8 @@
 class StaticEntity : public BaseEntity {
 public:
     StaticEntity(const mesh *, vec2, float);
+    StaticEntity(const mesh *,float);
+    void set_position(float, float, bool);
 };
 
 

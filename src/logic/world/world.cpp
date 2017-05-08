@@ -5,13 +5,12 @@
 #include <ctime>
 #include <SDL_events.h>
 #include <neighbourhood/neighbourhood_manager.h>
-#include <SDL_video.h>
 #include "world.h"
 #include "tree/bsp_tree.h"
 #include "tree/bsp_node.h"
-#include <cmath>
 #include <entity/moving/moving_entity.h>
-#include <textures/texture_manager.h>
+#include <entity/player_manager.h>
+#include <iostream>
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include <typeinfo>
 #include <iostream>
@@ -32,13 +31,23 @@ World::~World() {
     // Clear world.
 }
 
+World *World::instance = nullptr;
+
+World *World::get_instance() {
+    if (!instance)
+        instance = new World();
+    return instance;
+}
+
 void World::update(float d_t) {
     for (unsigned int i = 0; i < entities.size(); i++) {
         entities.at(i)->update(d_t);
     }
 
-
-//    controllable_character->update(d_t);
+    std::vector<int> player_ids = PlayerManager::get_instance()->get_player_ids();
+    for (int i = 0; i < player_ids.size(); i++) {
+        PlayerManager::get_instance()->get_player(player_ids.at(i))->update();
+    }
 }
 
 SDL_Texture *World::render(Renderer<SDL_Renderer> *renderer) {
@@ -112,6 +121,16 @@ World &World::add_entity(BaseEntity *e) {
     return *this;
 }
 
+World &World::remove_entity(BaseEntity *e) {
+    for (std::vector<BaseEntity *>::iterator iter = entities.begin(); iter != entities.end(); ++iter) {
+        if (*iter == e) {
+            entities.erase(iter);
+            break;
+        }
+    }
+    return *this;
+}
+
 Player* World::getPlayer() {
     return this->player;
 }
@@ -128,12 +147,6 @@ void World::add_controllable_character(MovingEntity *me) {
     controllable_character = me;
     entities.push_back((BaseEntity *) me);
     NeighbourhoodManager::get_instance()->insert(me);
-}
-
-World *World::get_instance() {
-    if (_instance == nullptr)
-        _instance = new World();
-    return _instance;
 }
 
 void World::set_render_object(SDL_RenderObject *r) {

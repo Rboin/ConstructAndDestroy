@@ -25,7 +25,6 @@ link_libraries(
         ${SDL2_TTF_LIBRARIES}
         ${SDL2_IMAGE_LIBRARIES}
 )
-
 enable_testing()
 add_subdirectory(src)
 add_subdirectory(test)

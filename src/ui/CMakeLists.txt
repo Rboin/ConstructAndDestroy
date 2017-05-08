@@ -3,27 +3,34 @@ project(construct_and_destroy)
 set(SOURCE_FILES
         component/ui_component.h
         event/slot.h
-        sdl/window/sdl_window.cpp
+
         sdl/window/sdl_window.h
         sdl/sdl_ui_component.h
         sdl/sdl_ui_component.h
+        sdl/panel/sdl_panel.h
+        sdl/panel/sdl_world_panel.h
+        sdl/event/sdl_event_types.h
+        sdl/button/sdl_button.h
+        event/event_dispatcher.h
+        event/event_types.h
+        sdl/event/sdl_event_dispatcher.h
+        sdl/event/slot/sdl_mouse_event_slot.h
+        sdl/event/sdl_mouse_event_dispatcher.h
+        sdl/event/sdl_key_event_dispatcher.h
+        sdl/event/slot/mouse_handler_world.h
+
+
+        sdl/event/sdl_mouse_event_dispatcher.cpp
+        sdl/event/slot/sdl_mouse_event_slot.cpp
+        sdl/event/slot/mouse_handler_world.cpp
+        sdl/button/sdl_button.cpp
         sdl/sdl_ui_component.cpp
         sdl/panel/sdl_panel.cpp
-        sdl/panel/sdl_panel.h
-        event/event_dispatcher.h
-        sdl/event/sdl_event_dispatcher.h
-        sdl/event/sdl_mouse_event_dispatcher.h
-        sdl/event/sdl_mouse_event_dispatcher.cpp
-        sdl/event/slot/sdl_mouse_event_slot.h
-        sdl/event/slot/sdl_mouse_event_slot.cpp
-        sdl/button/sdl_button.h
-        sdl/button/sdl_button.cpp
-        event/event_types.h
-        sdl/event/sdl_event_types.h
-        sdl/panel/sdl_world_panel.h
         sdl/panel/sdl_world_panel.cpp
-        sdl/event/slot/mouse_handler_world.h
-        sdl/event/slot/mouse_handler_world.cpp)
+        sdl/window/sdl_window.cpp
+        sdl/event/sdl_key_event_dispatcher.cpp
+        )
+
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -32,7 +39,11 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(../renderer ../logic)
 
 add_library(cd_ui STATIC
-            ${SOURCE_FILES} )
+            ${SOURCE_FILES}
+        sdl/event/slot/sdl_key_event_slot.h
+        sdl/event/sdl_key_event_dispatcher.h
+        sdl/event/sdl_key_event_dispatcher.cpp
+        sdl/event/slot/sdl_key_event_slot.cpp )
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

@@ -15,4 +15,9 @@ struct sdl_mouse_event_data : public mouse_event_data<SDL_UIComponent> {
     }
 };
 
+struct sdl_key_event_data : public key_event_data {
+    sdl_key_event_data(uint32_t ty, uint32_t time, char k) : key_event_data(ty, time, k) {
+    }
+};
+
 #endif //CONSTRUCT_AND_DESTROY_SDL_EVENT_TYPE_H

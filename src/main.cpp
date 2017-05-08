@@ -21,12 +21,14 @@
 #include <behaviour/calculator/basic_force_calculator.h>
 #include <entity/goal/evaluator/work_evaluator.h>
 #include <entity/static/warehouse_entity.h>
+#include <sdl/event/sdl_key_event_dispatcher.h>
+#include <sdl/event/sdl_mouse_event_dispatcher.h>
+#include <sdl/event/slot/sdl_key_event_slot.h>
 #include <SDL_image.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
-#include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl/event/slot/mouse_handler_world.h"
 
 
@@ -99,8 +101,11 @@ int main(int argc, char **argv) {
         return -1;
     }
 
+    SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
+    SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
+
     PlayerManager *pm = PlayerManager::get_instance();
-    pm->setup(4);
+    pm->setup(1);
 
     TextureManager *tm = TextureManager::get_instance();
     tm->setup(renderer);
@@ -129,11 +134,9 @@ int main(int argc, char **argv) {
        vec2 v = {400, 300};
        BehaviourStrategy *avoid = new ObstacleAvoidanceStrategy();
        avoid->set_targets(&v);
-
        vec2 v2 = {700, 500};
        BehaviourStrategy *arrive = new ArriveStrategy();
        arrive->set_targets(&v2);
-
 */
     ForceCalculator *calculator = new BasicForceCalculator();
     Behaviour *behaviour = new Behaviour(calculator);
@@ -154,7 +157,6 @@ int main(int argc, char **argv) {
     World::get_instance()->add_entity(entity);
     /*
    #pragma endregion Obstacle, Arrive entity
-
    #pragma region Static entities
      */
     vec2 s_position = {400, 280}, s_size = {50, 50};
@@ -174,7 +176,6 @@ int main(int argc, char **argv) {
     World::get_instance()->add_entity(s_entity);
 
     Renderer<SDL_Renderer> render_engine = Renderer<SDL_Renderer>(renderer);
-    SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
 
     sdl_image_data *world_data = new sdl_image_data{"world.png"};
     SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, {800, 600}, world_data);
@@ -186,14 +187,22 @@ int main(int argc, char **argv) {
 
     SDL_RenderObject *main_panel_representation = new SDL_RenderObject(main_panel_position, main_panel_size,
                                                                        panel_data);
+
     SDLWorldPanel main_panel = SDLWorldPanel(main_panel_representation);
+
     main_panel.set_world(World::get_instance());
 
-    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, &render_engine, mouse_dispatcher);
+    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, &render_engine, mouse_dispatcher, key_dispatcher);
 
     MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
 
     main_panel.set_mouse_callback(world_panel_slot);
+
+    SDL_KeyEventSlot * key_slot = new SDL_KeyEventSlot();
+
+    main_window->set_key_callback(key_slot);
+
+    key_dispatcher->register_callback(main_window, key_slot);
 
     mouse_dispatcher->register_callback(&main_panel, world_panel_slot);
 

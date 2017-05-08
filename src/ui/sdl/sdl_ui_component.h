@@ -9,7 +9,8 @@
 #include "sdl/sdl_render_object.h"
 #include "sdl/event/sdl_event_types.h"
 
-class SDL_UIComponent : public UIComponent<SDL_Renderer, sdl_data, SDL_Texture, sdl_mouse_event_data> {
+class SDL_UIComponent : public UIComponent<SDL_Renderer, sdl_data, SDL_Texture, sdl_mouse_event_data, sdl_key_event_data> {
+
 public:
     explicit SDL_UIComponent(SDL_RenderObject *);
 

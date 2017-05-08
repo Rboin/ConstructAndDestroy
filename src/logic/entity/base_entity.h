@@ -14,6 +14,8 @@
 #include <string>
 #include "player_manager.h"
 
+class Player;
+
 class BaseEntity {
 protected:
     int _type;
@@ -32,6 +34,8 @@ public:
     void set_representation(SDL_RenderObject *);
 
     vec2 &get_position();
+
+    virtual void set_position(int x, int y);
 
     const bool is(int);
 

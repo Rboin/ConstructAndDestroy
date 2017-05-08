@@ -6,6 +6,7 @@
 #define CONSTRUCT_AND_DESTROY_PLAYER_MANAGER_H
 
 #include <map>
+#include <vector>
 
 class Player;
 
@@ -26,6 +27,8 @@ public:
      * @return a certain player
      */
     Player* get_player(int player);
+
+    std::vector<int> get_player_ids();
 };
 
 

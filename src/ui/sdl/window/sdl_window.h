@@ -15,7 +15,7 @@ class SDLWindow : public SDL_UIComponent {
 private:
     Renderer<SDL_Renderer> *_renderer;
     EventDispatcher<SDL_UIComponent, sdl_mouse_event_data> *_mouse_event_dispatcher;
-    EventDispatcher<SDL_UIComponent, key_event_data> *_key_event_dispatcher;
+    EventDispatcher<SDL_UIComponent, sdl_key_event_data> *_key_event_dispatcher;
     SDL_Window *_sdl_window;
 public:
     explicit SDLWindow(SDL_RenderObject *);
@@ -29,7 +29,7 @@ public:
 
     explicit SDLWindow(SDL_RenderObject *, SDL_Window *, Renderer<SDL_Renderer> *,
                        EventDispatcher<SDL_UIComponent, sdl_mouse_event_data> *,
-                       EventDispatcher<SDL_UIComponent, key_event_data> *);
+                       EventDispatcher<SDL_UIComponent, sdl_key_event_data> *);
 
     int show();
 

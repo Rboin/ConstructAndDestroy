@@ -28,7 +28,6 @@ SDL_Texture *SDL_RenderObject::render(Renderer<SDL_Renderer> *renderer) {
                        (int) (_position.y + _size.y));
     SDL_RenderDrawLine(renderer->get_engine(), (int) (_position.x + _size.x), (int) _position.y, (int) _position.x,
                        (int) (_position.y + _size.y));
-
     return _result;
 }
 

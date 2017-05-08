@@ -68,3 +68,7 @@ void NeighbourhoodManager::update(BaseEntity *b) {
 void NeighbourhoodManager::insert(BaseEntity *b) {
     tree->insert(b);
 }
+
+void NeighbourhoodManager::remove(BaseEntity *b){
+    tree->remove(b);
+}

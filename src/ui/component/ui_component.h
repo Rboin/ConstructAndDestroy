@@ -17,14 +17,15 @@
  * @tparam R = The result of the RenderObject::render method.
  * @tparam S = Type of data for the Slot object.
  */
-template<typename T, typename D, typename R, typename S>
+template<typename T, typename D, typename R, typename S, typename K>
 class UIComponent {
 protected:
     RenderObject<T, D, R> *representation;
-    std::vector<UIComponent<T, D, R, S> *> children;
+    std::vector<UIComponent<T, D, R, S, K> *> children;
     Slot<S> *mouse_callback;
+    Slot<K> *key_callback;
 public:
-    explicit UIComponent(RenderObject<T, D, R> *r) : children(std::vector<UIComponent<T, D, R, S> *>()) {
+    explicit UIComponent(RenderObject<T, D, R> *r) : children(std::vector<UIComponent<T, D, R, S, K> *>()) {
         representation = r;
         mouse_callback = nullptr;
     }
@@ -52,6 +53,13 @@ public:
             delete mouse_callback;
         }
         mouse_callback = s;
+    }
+
+    void set_key_callback(Slot<K> *s) {
+        if (key_callback) {
+            delete key_callback;
+        }
+        key_callback = s;
     }
 
     void set_representation(RenderObject<T, D, R> *ro) {

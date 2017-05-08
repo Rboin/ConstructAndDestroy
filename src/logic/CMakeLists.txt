@@ -20,6 +20,16 @@ set(SOURCE_FILES
         entity/static/warehouse_entity.h
         entity/static/restaurant_entity.h
         entity/static/campfire_entity.h
+        entity/static/building/building_factory.h
+        entity/static/building/building_manager.h
+        entity/static/building/castle_entity.h
+        entity/static/building/building_entity.h
+        entity/static/building/building_type.h
+        entity/static/building/building_state/choosing_building_position.h
+        entity/static/building/building_state/placing_building.h
+        entity/static/building/building_state/abort_placing_building.h
+        entity/state/state.h
+        entity/state/state_machine.h
         entity/goal/evaluator/obstacle_avoid_evaluator.h
         entity/goal/evaluator/wander_evaluator.h
         entity/goal/evaluator/explore_evaluator.h
@@ -53,6 +63,7 @@ set(SOURCE_FILES
         behaviour/strategy/obstacle_avoidance_strategy.h
         behaviour/strategy/wander_strategy.h
         behaviour/strategy/explore_strategy.h
+        behaviour/orderstrategies/default_order_strategy.h
         behaviour/move_order.h
         behaviour/orderstrategies/ground_order_strategy.h
         behaviour/orderstrategies/lumber_order_strategy.h
@@ -79,7 +90,6 @@ set(SOURCE_FILES
         fuzzy/fuzzy_set_left_shoulder.h
         fuzzy/fuzzy_set_right_shoulder.h
         entity/player.h
-        entity/player.h
         entity/player_manager.h
         world/world.cpp
         tree/bsp_tree.cpp
@@ -98,6 +108,13 @@ set(SOURCE_FILES
         entity/static/warehouse_entity.cpp
         entity/static/restaurant_entity.cpp
         entity/static/campfire_entity.cpp
+        entity/static/building/building_factory.cpp
+        entity/static/building/building_manager.cpp
+        entity/static/building/castle_entity.cpp
+        entity/static/building/building_entity.cpp
+        entity/static/building/building_state/choosing_building_position.cpp
+        entity/static/building/building_state/placing_building.cpp
+        entity/static/building/building_state/abort_placing_building.cpp
         entity/goal/evaluator/obstacle_avoid_evaluator.cpp
         entity/goal/evaluator/wander_evaluator.cpp
         entity/goal/evaluator/explore_evaluator.cpp
@@ -129,6 +146,7 @@ set(SOURCE_FILES
         behaviour/strategy/obstacle_avoidance_strategy.cpp
         behaviour/strategy/wander_strategy.cpp
         behaviour/strategy/explore_strategy.cpp
+        behaviour/orderstrategies/default_order_strategy.cpp
         behaviour/move_order.cpp
         behaviour/orderstrategies/ground_order_strategy.cpp
         behaviour/orderstrategies/lumber_order_strategy.cpp
@@ -150,8 +168,8 @@ set(SOURCE_FILES
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp
-        behaviour/orderstrategies/default_order_strategy.cpp
-        behaviour/orderstrategies/default_order_strategy.h)
+        )
+
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

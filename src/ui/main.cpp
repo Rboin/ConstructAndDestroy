@@ -8,6 +8,8 @@
 #include <sdl/event/slot/sdl_mouse_event_slot.h>
 #include <sdl/ui/sdl_ui_render_text_object.h>
 #include <sdl/button/sdl_button.h>
+#include <sdl/event/sdl_key_event_dispatcher.h>
+#include <sdl/event/slot/sdl_key_event_slot.h>
 #include "sdl/window/sdl_window.h"
 #include "sdl/panel/sdl_panel.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
@@ -77,13 +79,14 @@ int main(int argc, char **argv) {
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 26);
 
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
+    SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
 
     Renderer<SDL_Renderer> r = Renderer<SDL_Renderer>(renderer);
 
     vec2 main_window_position = {0, 0}, main_window_size = {800, 600};
     sdl_data main_window_data = {255, 255, 255};
     SDL_RenderObject window_o = SDL_RenderObject(main_window_position, main_window_size, &main_window_data);
-    SDLWindow sdl_window(&window_o, window, &r, mouse_dispatcher);
+    SDLWindow sdl_window(&window_o, window, &r, mouse_dispatcher, key_dispatcher);
 
     vec2 right_panel_pos = {600, 0}, right_panel_size = {200, 600};
     sdl_data right_panel_data = {0, 0, 255};
@@ -102,6 +105,8 @@ int main(int argc, char **argv) {
 
     SDL_MouseEventSlot *right_panel_slot = new SDL_MouseEventSlot();
 
+    SDL_KeyEventSlot * key_slot = new SDL_KeyEventSlot();
+
     right_panel_top.set_mouse_callback(right_panel_slot);
 
     right_panel.set_mouse_callback(right_panel_slot);
@@ -119,6 +124,9 @@ int main(int argc, char **argv) {
     right_panel.add_component(&right_panel_top);
     sdl_window.add_component(&right_panel);
 
+    sdl_window.set_key_callback(key_slot);
+
+    key_dispatcher->register_callback(&sdl_window, key_slot);
 
     return sdl_window.show();
 }

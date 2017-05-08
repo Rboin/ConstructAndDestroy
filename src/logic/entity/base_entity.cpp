@@ -43,6 +43,11 @@ vec2 &BaseEntity::get_position() {
     return _position;
 }
 
+void BaseEntity::set_position(int x, int y) {
+    _position.x = x;
+    _position.y = y;
+}
+
 const bool BaseEntity::is(int type) {
     return _type == type;
 }

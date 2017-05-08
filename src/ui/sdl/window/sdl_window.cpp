@@ -21,7 +21,7 @@ SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_R
 
 SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
                      EventDispatcher<SDL_UIComponent, sdl_mouse_event_data> *mouse,
-                     EventDispatcher<SDL_UIComponent, key_event_data> *key) : SDL_UIComponent(r) {
+                     EventDispatcher<SDL_UIComponent, sdl_key_event_data> *key) : SDL_UIComponent(r) {
     _mouse_event_dispatcher = mouse;
     _key_event_dispatcher = key;
     _renderer = renderer;

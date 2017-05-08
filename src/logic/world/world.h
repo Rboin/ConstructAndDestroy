@@ -14,6 +14,7 @@
 #include "sdl/sdl_render_object.h"
 
 class BSPTree;
+
 class MovingEntity;
 class Player;
 class BaseEntity;
@@ -22,6 +23,7 @@ class World {
 private:
     std::vector<BaseEntity *> entities;
     MovingEntity *controllable_character;
+    static World *instance;
     Graph *graph;
     std::string texture_path;
     World();
@@ -31,9 +33,12 @@ public:
     Player* player;
     SDL_RenderObject *_representation;
 
+public:
     ~World();
 
     void set_render_object(SDL_RenderObject *);
+
+    static World *get_instance();
 
     /**
      * The render loop.
@@ -47,18 +52,18 @@ public:
 
     World &add_entity(BaseEntity *);
 
+    World &remove_entity(BaseEntity *);
+
     std::vector<BaseEntity *> get_entities();
 
     void add_graph(Graph *);
 
-    void add_controllable_character(MovingEntity*);
+    void add_controllable_character(MovingEntity *);
 
-//    void add_partition_tree(BSPTree*);
+    // void add_partition_tree(BSPTree*);
     void loop(SDL_Renderer *);
     Player* getPlayer();
 
-
-    static World *get_instance();
 };
 
 #endif //C_AND_D_PROJECT_WORLD_H

@@ -1,8 +1,13 @@
+#include <entity/state/state_machine.h>
 #include "player.h"
 #include "entity/moving/moving_entity.h"
 
 Player::Player() {
-    this->resources = Resources();
+    state_machine = new StateMachine<Player>(this);
+}
+
+void Player::update() {
+    state_machine->update();
 }
 
 Player::~Player() {
@@ -25,25 +30,24 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
     float botOffset = end_y;
 
     //Case: Reversed selection. from Right to left
-    if(start_x > end_x){
+    if (start_x > end_x) {
         leftOffset = end_x;
         rightOffset = start_x;
     }
 
     //Case: Upwards selection. From bot to top.
-    if(start_y > end_y){
+    if (start_y > end_y) {
         topOffset = end_y;
         botOffset = start_y;
     }
 
 
-
-    for(int i = 0; i < this->units.size();i++){
+    for (int i = 0; i < this->units.size(); i++) {
 
         float x = this->units[i]->get_position().x;
         float y = this->units[i]->get_position().y;
 
-        if(x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset){
+        if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
             this->units[i]->select();
             this->units[i]->take_possession();
             this->selected_units.push_back(this->units[i]);
@@ -53,7 +57,7 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
 
 
 void Player::clear_selected_units() {
-    for(int i = 0; i < this->selected_units.size(); i++){
+    for (int i = 0; i < this->selected_units.size(); i++) {
         this->selected_units[i]->deselect();
         this->selected_units[i]->exorcise();
     }

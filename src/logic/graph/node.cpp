@@ -53,3 +53,11 @@ void Node::remove_edge(int f, int to) {
         }
     }
 }
+
+bool Node::is_walkable() {
+    return walkable;
+}
+
+bool Node::set_walkability(bool b) {
+    walkable = b;
+}

@@ -44,6 +44,8 @@ public:
 
     void insert(BaseEntity *);
 
+    void remove(BaseEntity *);
+
     static NeighbourhoodManager *get_instance();
 };
 
