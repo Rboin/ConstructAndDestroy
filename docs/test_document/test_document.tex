@@ -40,6 +40,8 @@
 
 \documentclass[12pt,a4paper,titlepage,parskip=full]{\doctype}
 
+\PassOptionsToPackage{table,xcdraw}{xcolor}
+
 \usepackage[english]{babel}
 \usepackage{caption}
 \usepackage{float}
@@ -51,6 +53,7 @@
 \usetikzlibrary{decorations.pathreplacing}
 \usepackage{pdfpages}
 \usepackage{apacite}
+\usepackage{tabularx}
 \bibliographystyle{apacite}
 
 % set Listing settings -------------------------------------
@@ -160,7 +163,8 @@
 \newpage
 
 %----------------------------------
-
+\input{chapters/user-stories.tex}
+\newpage
 %----------------------------------
 
 \bibliography{bib/sources}
