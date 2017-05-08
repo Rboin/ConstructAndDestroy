@@ -45,7 +45,7 @@ public:
     /*!
      * This function calls the replenish_resource of all the resource entities
      */
-    void replenish_resources();
+    void replenish_resources(float d_t);
 };
 
 

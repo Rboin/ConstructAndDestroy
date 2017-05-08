@@ -15,7 +15,7 @@ ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, Reso
     _units = 50.f;
     _depleted = false;
     _max_units = 250.f;
-    _replenish_rate = 0.0001f;
+    _replenish_rate = 0.000001f;
     //add resource to resource manager
     ResourceManager *rm = ResourceManager::get_instance();
     rm->add_resource(this);
@@ -26,21 +26,22 @@ ResourceType ResourceEntity::get_resource_type() {
 }
 
 int ResourceEntity::get_units() {
-    return (int)_units;
+    return (int) _units;
 }
 
-float ResourceEntity::gather() {
-    _units -= 0.001;
+float ResourceEntity::gather(float d_t) {
+    float units_to_extract = 0.001 * d_t;
+    _units -= units_to_extract;
     if (_units < 10) {
         _depleted = true;
         update_texture();
     }
-    return 0.001;
+    return units_to_extract;
 }
 
-void ResourceEntity::replenish_resource() {
+void ResourceEntity::replenish_resource(float d_t) {
     if (_units <= _max_units) {
-        _units += _replenish_rate;
+        _units += _replenish_rate * d_t;
     }
     if (_units >= 100) {
         _depleted = false;
@@ -61,10 +62,9 @@ void ResourceEntity::update_texture() {
     }
     data->type = _current_texture;
     this->get_representation()->clear_data();
-    // TODO reset texture
 }
 
-void ResourceEntity::set_textures(TextureTypes normal, TextureTypes depleted) {
+void ResourceEntity::set_textures(std::string normal, std::string depleted) {
     _texture = normal;
     _depleted_texture = depleted;
 }

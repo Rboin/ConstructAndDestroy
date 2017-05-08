@@ -9,7 +9,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <textures/texture_manager.h>
 #include <entity/moving/lumberjack_entity.h>
-#include <entity/player_manager.h>
 #include <sdl/panel/sdl_panel.h>
 #include <sdl/panel/sdl_world_panel.h>
 #include <sdl/image/sdl_image_render_object.h>
@@ -25,11 +24,18 @@
 #include <sdl/event/sdl_mouse_event_dispatcher.h>
 #include <sdl/event/slot/sdl_key_event_slot.h>
 #include <SDL_image.h>
+#include <sdl/panel/sdl_resource_panel.h>
+#include <sdl/ui/sdl_ui_render_text_object.h>
+#include <sdl/button/sdl_button.h>
+#include <entity/player.h>
+#include <sdl/label/sdl_render_label.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
 #include "sdl/event/slot/mouse_handler_world.h"
+#include "sdl/event/slot/sdl_key_event_slot.h"
+#include "sdl/panel/sdl_resource_panel.h"
 
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
@@ -105,7 +111,7 @@ int main(int argc, char **argv) {
     SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
 
     PlayerManager *pm = PlayerManager::get_instance();
-    pm->setup(1);
+    pm->setup(4);
 
     TextureManager *tm = TextureManager::get_instance();
     tm->setup(renderer);
@@ -128,16 +134,7 @@ int main(int argc, char **argv) {
     };
     mesh base = {4, default_shape};
     vec2 pos = {0, 0};
-    vec2 velocity = {0, 0, 0};
-    /*
-   #pragma region Obstacle, Arrive entity
-       vec2 v = {400, 300};
-       BehaviourStrategy *avoid = new ObstacleAvoidanceStrategy();
-       avoid->set_targets(&v);
-       vec2 v2 = {700, 500};
-       BehaviourStrategy *arrive = new ArriveStrategy();
-       arrive->set_targets(&v2);
-*/
+
     ForceCalculator *calculator = new BasicForceCalculator();
     Behaviour *behaviour = new Behaviour(calculator);
     MovingEntity *entity = new LumberJackEntity(&base, pos, 100, 0.2, 0.2);
@@ -149,19 +146,17 @@ int main(int argc, char **argv) {
     entity->set_goal(think_goal);
     entity->set_player(1);
 
+    TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
+
     vec2 entity_size = {50, 50};
     sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
     SDL_ImageRenderObject *entity_render_object = new SDL_ImageRenderObject(pos, entity_size, entity_data);
     entity->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(entity);
-    /*
-   #pragma endregion Obstacle, Arrive entity
-   #pragma region Static entities
-     */
+
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
-    s_entity->set_textures(TextureTypes::TREETEXTURE, TextureTypes::TREEDEPLETEDTEXTURE);
     sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
     SDL_ImageRenderObject *tree_object = new SDL_ImageRenderObject(s_position, s_size, tree_data);
     s_entity->set_representation(tree_object);
@@ -192,13 +187,14 @@ int main(int argc, char **argv) {
 
     main_panel.set_world(World::get_instance());
 
-    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, &render_engine, mouse_dispatcher, key_dispatcher);
+    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, &render_engine, mouse_dispatcher,
+                                           key_dispatcher);
 
     MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
 
     main_panel.set_mouse_callback(world_panel_slot);
 
-    SDL_KeyEventSlot * key_slot = new SDL_KeyEventSlot();
+    SDL_KeyEventSlot *key_slot = new SDL_KeyEventSlot();
 
     main_window->set_key_callback(key_slot);
 
@@ -207,6 +203,18 @@ int main(int argc, char **argv) {
     mouse_dispatcher->register_callback(&main_panel, world_panel_slot);
 
     main_window->add_component(&main_panel);
+
+    vec2 resource_panel_pos = {600, 0}, resource_panel_size = {200, 30};
+    sdl_data resource_panel_data = {100, 100, 100, 100};
+    SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos, resource_panel_size, &resource_panel_data);
+    SDLResourcePanel right_panel(&panel_o);
+
+    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos, {60, 30}, &resource_panel_data, "log.png",
+                                                    ResourceType::WOOD, f_font);
+    SDLPanel *wood_panel = new SDLPanel(wood_label);
+
+    right_panel.add_component(wood_panel);
+    main_window->add_component(&right_panel);
 
     main_window->show();
 

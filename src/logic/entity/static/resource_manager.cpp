@@ -77,8 +77,8 @@ ResourceEntity *ResourceManager::get_resource(vec2 *pos) {
     }
 }
 
-void ResourceManager::replenish_resources() {
+void ResourceManager::replenish_resources(float d_t) {
     for(int i = 0; i < resources.size(); i++){
-        resources.at(i)->replenish_resource();
+        resources.at(i)->replenish_resource(d_t);
     }
 }

@@ -20,18 +20,17 @@ SDL_Texture *SDL_RenderObject::render(Renderer<SDL_Renderer> *renderer) {
     };
     clear_texture(renderer, &rect);
 
-    SDL_SetRenderDrawColor(renderer->get_engine(), _data->red, _data->green, _data->blue, 255);
-
+    SDL_SetRenderDrawColor(renderer->get_engine(), _data->red, _data->green, _data->blue, _data->alpha);
     SDL_RenderFillRect(renderer->get_engine(), &rect);
-    SDL_SetRenderDrawColor(renderer->get_engine(), 0, 0, 0, 255);
-    SDL_RenderDrawLine(renderer->get_engine(), (int) _position.x, (int) _position.y, (int) (_position.x + _size.x),
-                       (int) (_position.y + _size.y));
-    SDL_RenderDrawLine(renderer->get_engine(), (int) (_position.x + _size.x), (int) _position.y, (int) _position.x,
-                       (int) (_position.y + _size.y));
+
     return _result;
 }
 
 void SDL_RenderObject::init_texture(Renderer<SDL_Renderer> *renderer) {
+    if(_result){
+        SDL_DestroyTexture(_result);
+        _result = nullptr;
+    }
     _result = SDL_CreateTexture(renderer->get_engine(),
                                 SDL_PIXELFORMAT_RGBA8888,
                                 SDL_TEXTUREACCESS_STREAMING,

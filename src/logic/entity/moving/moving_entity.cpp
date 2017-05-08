@@ -49,7 +49,7 @@ void MovingEntity::set_goal(ThinkGoal *g) {
 }
 
 void MovingEntity::update(float d_t) {
-
+    delta_time = d_t;
     if (_brain)
         _brain->process();
 

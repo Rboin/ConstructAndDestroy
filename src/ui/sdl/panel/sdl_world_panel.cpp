@@ -2,6 +2,7 @@
 // Created by robin on 4/26/17.
 //
 
+#include <cmath>
 #include "sdl_world_panel.h"
 #include "world/world.h"
 

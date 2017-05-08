@@ -14,6 +14,7 @@
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include <typeinfo>
 #include <iostream>
+#include <entity/static/resource_manager.h>
 #include "../globals.cpp"
 #include "entity/player.h"
 #include "renderer.h"
@@ -43,6 +44,9 @@ void World::update(float d_t) {
     for (unsigned int i = 0; i < entities.size(); i++) {
         entities.at(i)->update(d_t);
     }
+    ResourceManager *rm = ResourceManager::get_instance();
+    rm->replenish_resources(d_t);
+//    controllable_character->update(d_t);
 
     std::vector<int> player_ids = PlayerManager::get_instance()->get_player_ids();
     for (int i = 0; i < player_ids.size(); i++) {

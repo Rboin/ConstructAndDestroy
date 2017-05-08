@@ -13,11 +13,12 @@
 struct SDL_Renderer;
 
 struct sdl_data {
-    uint8_t red, green, blue;
-    sdl_data(uint8_t r, uint8_t g, uint8_t b) {
+    uint8_t red, green, blue, alpha;
+    sdl_data(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) {
         red = r;
         green = g;
         blue = b;
+        alpha = a;
     }
 };
 

@@ -3,7 +3,7 @@ project(construct_and_destroy)
 set(SOURCE_FILES
         component/ui_component.h
         event/slot.h
-
+        sdl/window/sdl_window.cpp
         sdl/window/sdl_window.h
         sdl/sdl_ui_component.h
         sdl/sdl_ui_component.h
@@ -18,8 +18,6 @@ set(SOURCE_FILES
         sdl/event/sdl_mouse_event_dispatcher.h
         sdl/event/sdl_key_event_dispatcher.h
         sdl/event/slot/mouse_handler_world.h
-
-
         sdl/event/sdl_mouse_event_dispatcher.cpp
         sdl/event/slot/sdl_mouse_event_slot.cpp
         sdl/event/slot/mouse_handler_world.cpp
@@ -29,6 +27,10 @@ set(SOURCE_FILES
         sdl/panel/sdl_world_panel.cpp
         sdl/window/sdl_window.cpp
         sdl/event/sdl_key_event_dispatcher.cpp
+        sdl/event/slot/sdl_key_event_slot.h
+        sdl/event/slot/sdl_key_event_slot.cpp
+        sdl/panel/sdl_resource_panel.h
+        sdl/panel/sdl_resource_panel.cpp
         )
 
 
@@ -39,11 +41,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(../renderer ../logic)
 
 add_library(cd_ui STATIC
-            ${SOURCE_FILES}
-        sdl/event/slot/sdl_key_event_slot.h
-        sdl/event/sdl_key_event_dispatcher.h
-        sdl/event/sdl_key_event_dispatcher.cpp
-        sdl/event/slot/sdl_key_event_slot.cpp )
+            ${SOURCE_FILES} )
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

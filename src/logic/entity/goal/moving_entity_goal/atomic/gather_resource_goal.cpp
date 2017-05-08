@@ -19,7 +19,7 @@ void GatherResourceGoal::activate() {
 
 const int GatherResourceGoal::process() {
     activate_if_inactive();
-    owner->carrying+= resource->gather();
+    owner->carrying+= resource->gather(owner->delta_time);
     if(owner->carrying >= 5 || resource->is_depleted()){
         status = COMPLETED;
     }

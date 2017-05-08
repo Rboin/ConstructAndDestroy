@@ -25,6 +25,8 @@ public:
     SDL_Texture *render(Renderer<SDL_Renderer> *) override;
 
     void init_texture(Renderer<SDL_Renderer> *);
+
+    void clear_result();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_UI_RENDER_TEXT_OBJECT_H

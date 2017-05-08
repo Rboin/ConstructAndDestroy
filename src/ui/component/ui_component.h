@@ -40,7 +40,7 @@ public:
         return representation->get_size();
     }
 
-    RenderObject<T, D, R> *get_representation() {
+    virtual RenderObject<T, D, R> *get_representation() {
         return representation;
     };
 
@@ -62,7 +62,7 @@ public:
         key_callback = s;
     }
 
-    void set_representation(RenderObject<T, D, R> *ro) {
+    virtual void set_representation(RenderObject<T, D, R> *ro) {
         if (representation) {
             delete representation;
         }

@@ -20,14 +20,13 @@ private:
     //The rate at which the units replenish, this could be influenced by upgrades
     float _replenish_rate;
     bool _depleted;
-    TextureTypes _texture;
-    TextureTypes _depleted_texture;
-
-    TextureTypes _current_texture;
+    std::string _texture;
+    std::string _depleted_texture;
+    std::string _current_texture;
 public:
     ResourceEntity(const mesh*,vec2,float, ResourceType);
 
-    void set_textures(TextureTypes, TextureTypes);
+    void set_textures(std::string, std::string);
     /*!
      * @return resource type
      */
@@ -42,12 +41,12 @@ public:
      * Extracts from units and returns that same number.
      * @return
      */
-    float gather();
+    float gather(float d_t);
 
     /*!
      * Adds a very small amount to the units
      */
-    void replenish_resource();
+    void replenish_resource(float d_t);
 
     /*!
      * @return true if the resource depleted

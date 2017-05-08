@@ -64,6 +64,8 @@ public:
 
     float hunger;
 
+    float delta_time;
+
     JobType job_type;
 
     void exorcise();

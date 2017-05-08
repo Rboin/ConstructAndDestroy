@@ -28,9 +28,6 @@ SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_R
     _sdl_window = sdl_window;
 }
 
-const float fps = 60;
-const float minimumTimeFrame = 1000 / fps;
-
 int SDLWindow::show() {
     long last_tick = SDL_GetTicks();
 
@@ -59,12 +56,6 @@ int SDLWindow::show() {
         if (_renderer) {
             render(_renderer, delta);
         }
-
-        //Wait a bit, so we don't update million of times per second
-        if ((SDL_GetTicks() - current_tick) < minimumTimeFrame) {
-            SDL_Delay(minimumTimeFrame - (SDL_GetTicks() - current_tick));
-        }
-
     }
 }
 

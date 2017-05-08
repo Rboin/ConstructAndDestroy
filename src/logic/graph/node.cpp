@@ -29,13 +29,6 @@ std::vector<Edge *> Node::get_neighbors() {
     return neighbors;
 }
 
-//void Node::remove_edges() {
-//    for(int i = 0; i < neighbors.size(); i++){
-//        delete neighbors[i];
-//    }
-//    neighbors.clear();
-//}
-
 void Node::remove_edges() {
     for(int i = 0 ;  i < neighbors.size(); i++){
         remove_edge(neighbors[i]->get_to(),this->index);

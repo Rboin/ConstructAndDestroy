@@ -40,6 +40,7 @@ void FollowPathGoal::activate() {
 const int FollowPathGoal::process() {
     activate_if_inactive();
     if(owner->path.size()!=0){
+        owner->path.erase (owner->path.begin(),owner->path.begin()+ 1);
         for(int i = 0; i < owner->path.size(); i++){
             set_goal_traverse_edge(owner->path.at(i));
         }
