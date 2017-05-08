@@ -1,0 +1,15 @@
+\subsection{Objects as a proxy}
+\label{sec:rendering-proxy}
+
+Objects that need to be rendered to the screen act as a proxy for the 
+RenderObject. The only thing those objects need to do to be rendered can be 
+seen in \cref{lst:rendering}. As you can see, the objects only need to return 
+the result of its own RenderObject. Objects that need custom rendering logic 
+can have a rendering object that derives from the SDL\_RenderObject class seen 
+in \cref{fig:renderobject-inherit}.
+\\
+\begin{lstlisting}[caption={Rendering proxy.},label={lst:rendering}]
+SDL_Texture *BaseEntity::render(Renderer<SDL_Renderer> *renderer) {
+    return representation->render(renderer);
+}
+\end{lstlisting}

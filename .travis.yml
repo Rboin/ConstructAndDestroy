@@ -1,0 +1,17 @@
+# OS Configuration
+os:
+    -   linux
+
+dist:
+    -   trusty
+
+sudo:
+    -   required
+
+install:
+    -   sudo apt-get -qq update && sudo apt-get install -y texlive-full
+script:
+    -   cd docs/project_plan
+    -   latexmk -pdflatex=lualatex -pdf -halt-on-error project-plan.tex
+    -   cd ../software_architecture
+    -   latexmk -pdflatex=lualatex -pdf -halt-on-error software_architecture.tex
