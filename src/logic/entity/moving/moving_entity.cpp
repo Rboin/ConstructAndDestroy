@@ -174,10 +174,10 @@ void MovingEntity::add_weapons() {
 }
 
 void MovingEntity::select() {
-    std::cout << "Selecting an _instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
+    std::cout << "Selecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
 }
 
 void MovingEntity::deselect() {
-    std::cout << "Deselecting an _instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
+    std::cout << "Deselecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
 
 }

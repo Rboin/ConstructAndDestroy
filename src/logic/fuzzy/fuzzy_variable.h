@@ -41,9 +41,9 @@ private:
     //new set is added to adjust the upper and lower range values accordingly
     void adjust_range_to_fit(double min, double max);
 
-    //a client retrieves a reference to a fuzzy variable when an _instance is
+    //a client retrieves a reference to a fuzzy variable when an instance is
     //created via FuzzyModule::create_flv(). To prevent the client from deleting
-    //the _instance the FuzzyVariable destructor is made private and the
+    //the instance the FuzzyVariable destructor is made private and the
     //FuzzyModule class made a friend.
     ~FuzzyVariable();
 
@@ -57,7 +57,7 @@ public:
     //the following methods create instances of the sets named in the method
     //name and add them to the member set map. Each time a set of any type is
     //added the _min_range and _max_range are adjusted accordingly. All of the
-    //methods return a proxy class representing the newly created _instance. This
+    //methods return a proxy class representing the newly created instance. This
     //proxy set can be used as an operand when creating the rule base.
     FzSet add_left_shoulder_set(std::string name, double minBound, double peak, double maxBound);
 
