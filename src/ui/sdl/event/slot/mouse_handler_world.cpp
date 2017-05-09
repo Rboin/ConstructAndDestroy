@@ -33,7 +33,8 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
     if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
         //it is a click
         vec2 pos = {(float) data.position.x, (float) data.position.y};
-        handle_left_button(pos);
+        World::get_instance()->getPlayer()->select_one_unit(pos);
+
     } else {
         //it is a drag.
         World::get_instance()->getPlayer()->select_units_in_rectangle(start_drag_x, start_drag_y, data.position.x, data.position.y);
@@ -88,22 +89,6 @@ void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_p
     }
 }
 
-
-void MouseHandlerWorld::handle_left_button(const vec2 &v) {
-    World::get_instance()->getPlayer()->clear_selected_units();
-
-    BaseEntity *selected = NeighbourhoodManager::get_instance()->get_closest_to(v);
-    if(selected && selected->is(EntityType::MOVING)) {
-
-        MovingEntity* selected_entity = dynamic_cast<MovingEntity*>(selected);
-        selected_entity->select();
-        selected_entity->take_possession();
-
-        World::get_instance()->getPlayer()->selected_units.push_back(selected_entity);
-
-    }
-
-}
 
 void MouseHandlerWorld::handle_right_button(sdl_mouse_event_data &data, const vec2 &v) {
     MoveOrder::get_instance()->orderMove(&World::get_instance()->getPlayer()->selected_units, v);
