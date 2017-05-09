@@ -30,7 +30,6 @@ private:
     static World *_instance;
 
 public:
-    Player* player;
     SDL_RenderObject *_representation;
 
 public:

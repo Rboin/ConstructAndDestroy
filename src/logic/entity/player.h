@@ -11,8 +11,9 @@ class MovingEntity;
 template<class T> class StateMachine;
 
 class Player {
+private: int _id;
 public:
-    Player();
+    Player(int);
     Resources resources;
     std::vector<BuildingEntity *> buildings;
     std::vector<MovingEntity *> units;
@@ -26,6 +27,7 @@ public:
     void select_units_in_rectangle(float start_x, float start_y, float end_x, float end_y);
 
     void clear_selected_units();
+    int get_id();
 };
 
 

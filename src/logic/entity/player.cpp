@@ -2,7 +2,8 @@
 #include "player.h"
 #include "entity/moving/moving_entity.h"
 
-Player::Player() {
+Player::Player(int id) {
+    _id = id;
     state_machine = new StateMachine<Player>(this);
 }
 
@@ -48,9 +49,11 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
         float y = this->units[i]->get_position().y;
 
         if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
-            this->units[i]->select();
-            this->units[i]->take_possession();
-            this->selected_units.push_back(this->units[i]);
+            if(units[i]->get_player()->get_id() == 1 ) {
+                this->units[i]->select();
+                this->units[i]->take_possession();
+                this->selected_units.push_back(this->units[i]);
+            }
         }
     }
 }
@@ -62,4 +65,8 @@ void Player::clear_selected_units() {
         this->selected_units[i]->exorcise();
     }
     this->selected_units.clear();
+}
+
+int Player::get_id() {
+    return _id;
 }

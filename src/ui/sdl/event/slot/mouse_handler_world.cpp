@@ -36,7 +36,7 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
         handle_left_button(pos);
     } else {
         //it is a drag.
-        World::get_instance()->getPlayer()->select_units_in_rectangle(start_drag_x, start_drag_y, data.position.x, data.position.y);
+        PlayerManager::get_instance()->get_player(1)->select_units_in_rectangle(start_drag_x, start_drag_y, data.position.x, data.position.y);
     }
 }
 
@@ -90,7 +90,7 @@ void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_p
 
 
 void MouseHandlerWorld::handle_left_button(const vec2 &v) {
-    World::get_instance()->getPlayer()->clear_selected_units();
+    PlayerManager::get_instance()->get_player(1)->clear_selected_units();
 
     BaseEntity *selected = NeighbourhoodManager::get_instance()->get_closest_to(v);
     if(selected && selected->is(EntityType::MOVING)) {
@@ -99,13 +99,13 @@ void MouseHandlerWorld::handle_left_button(const vec2 &v) {
         selected_entity->select();
         selected_entity->take_possession();
 
-        World::get_instance()->getPlayer()->selected_units.push_back(selected_entity);
+        PlayerManager::get_instance()->get_player(1)->selected_units.push_back(selected_entity);
 
     }
 
 }
 
 void MouseHandlerWorld::handle_right_button(sdl_mouse_event_data &data, const vec2 &v) {
-    MoveOrder::get_instance()->orderMove(&World::get_instance()->getPlayer()->selected_units, v);
+    MoveOrder::get_instance()->orderMove(&PlayerManager::get_instance()->get_player(1)->selected_units, v);
 }
 

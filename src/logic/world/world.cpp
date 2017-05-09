@@ -24,7 +24,6 @@ extern const std::string path_to_texture;
 World *World::_instance = nullptr;
 
 World::World() {
-    player = new Player();
     texture_path = path_to_texture + "world.png";
 }
 
@@ -116,7 +115,7 @@ World &World::add_entity(BaseEntity *e) {
         if(moving_entity == nullptr){
             delete moving_entity;
         } else {
-            player->units.push_back(moving_entity);
+            e->get_player()->units.push_back(moving_entity);
         }
     }
 
@@ -133,10 +132,6 @@ World &World::remove_entity(BaseEntity *e) {
         }
     }
     return *this;
-}
-
-Player* World::getPlayer() {
-    return this->player;
 }
 
 std::vector<BaseEntity *> World::get_entities() {
