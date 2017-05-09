@@ -5,6 +5,7 @@ set(SOURCE_FILES
         vector.cpp
         world/world.h
         entity/entity_types.h
+        entity/moving/knight_entity.h
         entity/moving/moving_entity.h
         entity/moving/lumberjack_entity.h
         entity/moving/miner_entity.h
@@ -168,7 +169,7 @@ set(SOURCE_FILES
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp
-        )
+         entity/moving/knight_entity.cpp)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
