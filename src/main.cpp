@@ -158,6 +158,7 @@ int main(int argc, char **argv) {
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
     sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
+    s_entity->set_textures("tree.png", "trunk.png");
     SDL_ImageRenderObject *tree_object = new SDL_ImageRenderObject(s_position, s_size, tree_data);
     s_entity->set_representation(tree_object);
 
