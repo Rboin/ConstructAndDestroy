@@ -26,6 +26,11 @@ ThinkGoal::ThinkGoal(MovingEntity *e) : GoalComposite(e, THINK) {
     _evaluators = std::vector<GoalEvaluator<MovingEntity> *>();
 }
 
+Goal<MovingEntity>* ThinkGoal::initiate_goal(Goal<MovingEntity>* goal, int initiator) {
+    goal->set_initiator(initiator);
+    return goal;
+}
+
 void ThinkGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
     _evaluators.push_back(e);
 }

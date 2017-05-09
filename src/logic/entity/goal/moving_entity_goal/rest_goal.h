@@ -18,7 +18,7 @@ class Node;
 
 class RestGoal : public GoalComposite<MovingEntity> {
 public:
-    RestGoal(MovingEntity *);
+    RestGoal(MovingEntity *, int initiator = Initiator::AI);
 
     void determine_next_goal();
 

@@ -14,7 +14,7 @@ class ResourceManager;
 class ExploreGoal : public AtomicGoal<MovingEntity> {
     ResourceManager *rm;
 public:
-    ExploreGoal(MovingEntity *);
+    ExploreGoal(MovingEntity *, int initiator = Initiator::AI);
 
     ~ExploreGoal();
 

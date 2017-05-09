@@ -15,7 +15,7 @@ private:
     vec2 *_avoid_target;
     float _max_range;
 public:
-    ObstacleAvoidanceGoal(MovingEntity *t, vec2 *);
+    ObstacleAvoidanceGoal(MovingEntity *t, vec2 *, int initiator = Initiator::AI);
 
     void activate() override;
 

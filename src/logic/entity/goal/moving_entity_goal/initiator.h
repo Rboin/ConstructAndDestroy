@@ -1,0 +1,12 @@
+//
+// Created by Jeroen on 5/9/2017.
+//
+
+#ifndef CONSTRUCT_AND_DESTROY_INITIATOR_H
+#define CONSTRUCT_AND_DESTROY_INITIATOR_H
+
+enum Initiator {
+    PLAYER, AI
+};
+
+#endif //CONSTRUCT_AND_DESTROY_INITIATOR_H

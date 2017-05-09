@@ -3,15 +3,15 @@
 //
 
 #include "vector.h"
-#include <behaviour/strategy/explore_strategy.h>
-#include <entity/static/resource_manager.h>
-#include <behaviour/strategy/seek_strategy.h>
+#include "behaviour/strategy/explore_strategy.h"
+#include "entity/static/resource_manager.h"
+#include "behaviour/strategy/seek_strategy.h"
 #include "entity/goal/moving_entity_goal/atomic_goal_type.h"
 #include "entity/moving/moving_entity.h"
 #include "behaviour/behaviour.h"
 #include "explore_goal.h"
 
-ExploreGoal::ExploreGoal(MovingEntity *e) : AtomicGoal<MovingEntity>(e, EXPLORE) {
+ExploreGoal::ExploreGoal(MovingEntity *e, int initiator) : AtomicGoal<MovingEntity>(e, EXPLORE, initiator) {
     rm = ResourceManager::get_instance();
 }
 

@@ -7,6 +7,7 @@
 
 #include <goal/composite_goal.h>
 #include <vector>
+#include "types.h"
 #include "job_type.h"
 #include "entity/static/resource_type.h"
 
@@ -21,13 +22,14 @@ private:
     std::vector<GoalEvaluator<MovingEntity> *> _evaluators;
     Node *resource;
     ResourceType rt;
+    vec2* _target_resource;
 public:
     /*!
      * The constructor of the work goal.
      * If the resource index == 0 there is no resource available with more then 100 units
      * so new goals won't be set because there is nothing to collect.
      */
-    WorkGoal(MovingEntity *);
+    WorkGoal(MovingEntity *, vec2* target_resource = nullptr, int initiator = Initiator::AI);
 
     void add_evaluator(GoalEvaluator<MovingEntity> *);
 

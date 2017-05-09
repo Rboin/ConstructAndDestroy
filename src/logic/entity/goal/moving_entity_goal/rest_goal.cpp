@@ -12,7 +12,7 @@
 #include "strategy_goal_type.h"
 #include "follow_path_goal.h"
 
-RestGoal::RestGoal(MovingEntity *e) : GoalComposite(e, REST) {
+RestGoal::RestGoal(MovingEntity *e, int initiator) : GoalComposite(e, REST, initiator) {
     set_goal_plan_path_to_campfire();
     set_goal_follow_path();
     set_goal_sleep();

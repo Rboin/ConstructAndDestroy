@@ -11,7 +11,7 @@ class MovingEntity;
 
 class WanderGoal : public AtomicGoal<MovingEntity> {
 public:
-    WanderGoal(MovingEntity *);
+    WanderGoal(MovingEntity *, int initiator = Initiator::AI);
 
     ~WanderGoal();
 

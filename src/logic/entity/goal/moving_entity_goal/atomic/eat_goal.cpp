@@ -7,7 +7,7 @@
 #include "eat_goal.h"
 
 
-EatGoal::EatGoal(MovingEntity *e) : AtomicGoal<MovingEntity>(e, EAT) {
+EatGoal::EatGoal(MovingEntity *e, int initiator) : AtomicGoal<MovingEntity>(e, EAT, initiator) {
 }
 
 void EatGoal::activate() {

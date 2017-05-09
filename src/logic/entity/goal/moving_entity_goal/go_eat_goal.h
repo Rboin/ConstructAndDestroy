@@ -18,7 +18,9 @@ class Node;
 
 class GoEatGoal : public GoalComposite<MovingEntity> {
 public:
-    GoEatGoal(MovingEntity *);
+    GoEatGoal(MovingEntity *, int initiator = Initiator::AI);
+
+//    GoEatGoal::GoEatGoal(MovingEntity *e, int initiator);
 
     void determine_next_goal();
 

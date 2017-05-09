@@ -8,7 +8,7 @@
 #include "traverse_edge_goal.h"
 #include "behaviour/behaviour.h"
 
-TraverseEdgeGoal::TraverseEdgeGoal(MovingEntity *e, vec2 *g) : AtomicGoal<MovingEntity>(e, TRAVERSEEDGE) {
+TraverseEdgeGoal::TraverseEdgeGoal(MovingEntity *e, vec2 *g, int initiator) : AtomicGoal<MovingEntity>(e, TRAVERSEEDGE, initiator) {
     goal = g;
 }
 

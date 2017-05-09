@@ -15,7 +15,7 @@
 #include "goal/goal_evaluator.h"
 #include "behaviour/behaviour.h"
 
-FollowPathGoal::FollowPathGoal(MovingEntity *e) : GoalComposite(e, FOLLOWPATH) {
+FollowPathGoal::FollowPathGoal(MovingEntity *e, int initiator) : GoalComposite(e, FOLLOWPATH, initiator) {
     _owner = e;
 }
 

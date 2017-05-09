@@ -14,7 +14,7 @@ class SleepGoal : public AtomicGoal<MovingEntity> {
 private:
     float tiredness_start;
 public:
-    SleepGoal(MovingEntity *);
+    SleepGoal(MovingEntity *, int initiator = Initiator::AI);
 
     void activate() override;
 
