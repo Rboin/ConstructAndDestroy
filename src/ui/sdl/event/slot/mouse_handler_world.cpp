@@ -7,9 +7,6 @@
 #include "cmath"
 #include "entity/player.h"
 #include "behaviour/move_order.h"
-#include "neighbourhood/neighbourhood_manager.h"
-#include "entity/moving/moving_entity.h"
-#include "entity/entity_types.h"
 #include <iostream>
 #include "sdl/panel/sdl_world_panel.h"
 
