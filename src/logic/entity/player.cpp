@@ -1,4 +1,4 @@
-#include <entity/state/state_machine.h>
+#include "entity/state/state_machine.h"
 #include "player.h"
 #include "entity/moving/moving_entity.h"
 
@@ -56,6 +56,39 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
 }
 
 
+void Player::select_one_unit(vec2 pos) {
+
+
+    //first up deselect all currently selected units
+    clear_selected_units();
+
+    //Create offsets of a rectangle. This is done because the image of a unit is also a rectangle but its position
+    // is the top left corner of the rectangle. So we create a rectangle and look for the first unit found in the
+    // created rectangle. Values where determined by testing alot.
+    float leftOffset = pos.x - 45;
+    float rightOffset = pos.x;
+    float topOffset = pos.y -45;
+    float botOffset = pos.y;
+
+
+    for (int i = 0; i < this->units.size(); i++) {
+
+        float x = this->units[i]->get_position().x;
+        float y = this->units[i]->get_position().y;
+
+        if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
+            this->units[i]->select();
+            this->units[i]->take_possession();
+            this->selected_units.push_back(this->units[i]);
+
+            // exit for loop after selecting one unit.
+            break;
+        }
+    }
+
+
+}
+
 void Player::clear_selected_units() {
     for (int i = 0; i < this->selected_units.size(); i++) {
         this->selected_units[i]->deselect();
@@ -63,3 +96,5 @@ void Player::clear_selected_units() {
     }
     this->selected_units.clear();
 }
+
+
