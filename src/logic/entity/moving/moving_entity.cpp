@@ -17,8 +17,6 @@
 #include "behaviour/behaviour_strategy.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/entity_types.h"
-#include "entity/goal/moving_entity_goal/job_type.h"
-
 
 MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass,
                            const float max_force, const float max_speed, JobType jt) :
@@ -132,37 +130,37 @@ void MovingEntity::select_weapon() {
         std::vector<BaseEntity *> entities = n->get_neighbours(this);
 
         if (entities.size()) {
-            double DistToTarget = DBL_MAX;
+            double distance_to_target = DBL_MAX;
             //calculate the distance to the closest target
             for (int i = 0; i < entities.size(); i++) {
                 if (entities.at(i)->is(MOVING)) {
                     double dist = entities.at(i)->get_position().distance(this->get_position());
-                    if (dist < DistToTarget) {
-                        DistToTarget = dist;
+                    if (dist < distance_to_target) {
+                        distance_to_target = dist;
                     }
                 }
             }
             //for each weapon in the inventory calculate its desirability given the
             //current situation. The most desirable weapon is selected
-            double BestSoFar = DBL_MIN;
+            double best_so_far = DBL_MIN;
 
             for (int i = 0; i < _weapons.size(); i++) {
                 //grab the desirability of this weapon (desirability is based upon
                 //distance to target and ammo remaining)
-                double score = _weapons.at(i)->get_desirability(DistToTarget);
+                double score = _weapons.at(i)->get_desirability(distance_to_target);
 
                 //if it is the most desirable so far select it
-                if (score > BestSoFar) {
-                    BestSoFar = score;
+                if (score > best_so_far) {
+                    best_so_far = score;
 
                     //Change the texture of the bos
-                    sdl_image_data *newdata = new sdl_image_data("axe.png");
-                    representation->set_data(newdata);
+                    sdl_image_data *new_data = new sdl_image_data("axe.png");
+                    representation->set_data(new_data);
                 }
             }
         } else {
-            sdl_image_data *newdata = new sdl_image_data("bow.png");
-            representation->set_data(newdata);
+            sdl_image_data *new_data = new sdl_image_data("bow.png");
+            representation->set_data(new_data);
         }
 
     }
@@ -176,10 +174,10 @@ void MovingEntity::add_weapons() {
 }
 
 void MovingEntity::select() {
-    std::cout << "Selecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
+    std::cout << "Selecting an _instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
 }
 
 void MovingEntity::deselect() {
-    std::cout << "Deselecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
+    std::cout << "Deselecting an _instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
 
 }

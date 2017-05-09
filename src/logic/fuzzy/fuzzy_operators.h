@@ -18,7 +18,7 @@ class FzAND : public FuzzyTerm
 {
 private:
 
-    //an instance of this class may AND together up to 4 terms
+    //an _instance of this class may AND together up to 4 terms
     std::vector<FuzzyTerm*> _terms;
 
     //disallow assignment
@@ -54,7 +54,7 @@ class FzOR : public FuzzyTerm
 {
 private:
 
-    //an instance of this class may AND together up to 4 terms
+    //an _instance of this class may AND together up to 4 terms
     std::vector<FuzzyTerm*> _terms;
 
     //no assignment op necessary

@@ -4,7 +4,6 @@
 
 #include "skeleton_entity.h"
 #include <iostream>
-#include "../globals.cpp"
 #include <sdl/image/sdl_image_render_object.h>
 
 extern const std::string path_to_texture;
