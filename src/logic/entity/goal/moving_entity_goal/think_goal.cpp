@@ -117,9 +117,7 @@ void ThinkGoal::activate() {
 const int ThinkGoal::process() {
     activate_if_inactive();
 
-    if (!owner->is_possessed()) {
-        determine_next_goal();
-    }
+    determine_next_goal();
 
     return process_subgoals();
 }

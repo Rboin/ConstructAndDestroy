@@ -67,12 +67,6 @@ public:
     float delta_time;
 
     JobType job_type;
-
-    void exorcise();
-
-    bool is_possessed();
-
-    void take_possession();
 };
 
 #endif //C_AND_D_PROJECT_MOVINGENTITY_H

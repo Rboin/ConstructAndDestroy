@@ -19,10 +19,6 @@ FollowPathGoal::FollowPathGoal(MovingEntity *e) : GoalComposite(e, FOLLOWPATH) {
     _owner = e;
 }
 
-void FollowPathGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
-    _evaluators.push_back(e);
-}
-
 void FollowPathGoal::determine_next_goal() {
     if(this->sub_goals.size() == 0){
         status = COMPLETED;

@@ -102,18 +102,6 @@ vec2 MovingEntity::get_velocity() {
     return _velocity;
 }
 
-void MovingEntity::exorcise() {
-    _possessed = false;
-}
-
-bool MovingEntity::is_possessed() {
-    return _possessed;
-}
-
-void MovingEntity::take_possession() {
-    _possessed = true;
-}
-
 void MovingEntity::update_render_mesh() {
     float angle = std::atan2(_velocity.y, _velocity.x);
     update_render_mesh(mat2::translate(_position) * mat2::rotate(angle));

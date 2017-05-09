@@ -29,6 +29,7 @@
 #include <sdl/button/sdl_button.h>
 #include <entity/player.h>
 #include <sdl/label/sdl_render_label.h>
+#include <entity/goal/evaluator/follow_path_evaluator.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
@@ -141,6 +142,7 @@ int main(int argc, char **argv) {
     ThinkGoal *think_goal = new ThinkGoal(entity);
 
     think_goal->add_evaluator(new WorkEvaluator());
+    think_goal->add_evaluator(new FollowPathEvaluator());
 
     entity->set_behaviour(behaviour);
     entity->set_goal(think_goal);
