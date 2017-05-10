@@ -39,7 +39,7 @@ bool create_window() {
 }
 
 bool create_renderer() {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
     if (!renderer) {
         std::cout << " Failed to create renderer: " << SDL_GetError() << std::endl;
         return false;
@@ -81,52 +81,52 @@ int main(int argc, char **argv) {
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
     SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
 
-    Renderer<SDL_Renderer> r = Renderer<SDL_Renderer>(renderer);
+    SDLRenderer *r = new SDLRenderer(renderer);
 
     vec2 main_window_position = {0, 0}, main_window_size = {800, 600};
-    sdl_data main_window_data = {255, 255, 255};
+    sdl_data main_window_data = {255, 0, 0};
     SDL_RenderObject window_o = SDL_RenderObject(main_window_position, main_window_size, &main_window_data);
-    SDLWindow sdl_window(&window_o, window, &r, mouse_dispatcher, key_dispatcher);
+    SDLWindow sdl_window(&window_o, window, r, mouse_dispatcher, key_dispatcher);
 
     vec2 right_panel_pos = {600, 0}, right_panel_size = {200, 600};
-    sdl_data right_panel_data = {0, 0, 255};
-    SDL_RenderObject panel_o = SDL_RenderObject(right_panel_pos, right_panel_size, &right_panel_data);
-    SDLPanel right_panel(&panel_o);
+    sdl_data *right_panel_data = new sdl_data{0, 0, 255};
+    SDL_RenderObject *panel_o = new SDL_RenderObject(right_panel_pos, right_panel_size, right_panel_data);
+    SDLPanel right_panel(panel_o);
 
     vec2 right_panel_top_pos = {601, 1}, right_panel_top_size = {200, 200};
-    sdl_data right_panel_top_data = {1, 255, 0};
-    SDL_RenderObject panel_top_o = SDL_RenderObject(right_panel_top_pos, right_panel_top_size, &right_panel_top_data);
-    SDLPanel right_panel_top(&panel_top_o);
-
+    sdl_data *right_panel_top_data = new sdl_data{1, 255, 0, 255};
+    SDL_RenderObject *panel_top_o = new SDL_RenderObject(right_panel_top_pos, right_panel_top_size, right_panel_top_data);
+    SDLPanel right_panel_top(panel_top_o);
+//
     vec2 button_pos = {601, 250}, button_size = {100, 50};
-    sdl_ui_text_data button_data = {255, 255, 50, "hallo", f_font};
-    SDL_UI_RenderTextObject button_o = SDL_UI_RenderTextObject(button_pos, button_size, &button_data);
-    SDLButton button(&button_o);
-
-    SDL_MouseEventSlot *right_panel_slot = new SDL_MouseEventSlot();
-
-    SDL_KeyEventSlot * key_slot = new SDL_KeyEventSlot();
-
-    right_panel_top.set_mouse_callback(right_panel_slot);
-
-    right_panel.set_mouse_callback(right_panel_slot);
-
-    sdl_window.set_mouse_callback(right_panel_slot);
-
-    button.set_mouse_callback(right_panel_slot);
-
-    mouse_dispatcher->register_callback(&right_panel_top, right_panel_slot);
-    mouse_dispatcher->register_callback(&right_panel, right_panel_slot);
-    mouse_dispatcher->register_callback(&sdl_window, right_panel_slot);
-    mouse_dispatcher->register_callback(&button, right_panel_slot);
-
+    sdl_ui_text_data *button_data = new sdl_ui_text_data{255, 255, 50, "hallo", f_font};
+    SDL_UI_RenderTextObject *button_o = new SDL_UI_RenderTextObject(button_pos, button_size, button_data);
+    SDLButton button(button_o);
+//
+//    SDL_MouseEventSlot *right_panel_slot = new SDL_MouseEventSlot();
+//
+//    SDL_KeyEventSlot * key_slot = new SDL_KeyEventSlot();
+//
+//    right_panel_top.set_mouse_callback(right_panel_slot);
+//
+//    right_panel.set_mouse_callback(right_panel_slot);
+//
+//    sdl_window.set_mouse_callback(right_panel_slot);
+//
+//    button.set_mouse_callback(right_panel_slot);
+//
+//    mouse_dispatcher->register_callback(&right_panel_top, right_panel_slot);
+//    mouse_dispatcher->register_callback(&right_panel, right_panel_slot);
+//    mouse_dispatcher->register_callback(&sdl_window, right_panel_slot);
+//    mouse_dispatcher->register_callback(&button, right_panel_slot);
+//
     right_panel.add_component(&button);
     right_panel.add_component(&right_panel_top);
     sdl_window.add_component(&right_panel);
-
-    sdl_window.set_key_callback(key_slot);
-
-    key_dispatcher->register_callback(&sdl_window, key_slot);
+//
+//    sdl_window.set_key_callback(key_slot);
+//
+//    key_dispatcher->register_callback(&sdl_window, key_slot);
 
     return sdl_window.show();
 }

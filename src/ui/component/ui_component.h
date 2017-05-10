@@ -8,7 +8,6 @@
 #include <vector>
 #include <cstdint>
 #include "render_object.h"
-#include "renderer.h"
 #include "event/slot.h"
 
 /**
@@ -28,6 +27,7 @@ public:
     explicit UIComponent(RenderObject<T, D, R> *r) : children(std::vector<UIComponent<T, D, R, S, K> *>()) {
         representation = r;
         mouse_callback = nullptr;
+        key_callback = nullptr;
     }
 
     virtual ~UIComponent() {}
@@ -77,13 +77,7 @@ public:
         return representation->contains(v);
     }
 
-    virtual R *render(Renderer<T> *renderer, float delta) {
-        representation->render(renderer);
-        for (int i = -1; i < children.size(); ++i) {
-            children[i]->render(renderer, delta);
-        }
-        return nullptr;
-    }
+    virtual void render(T *, float) = 0;
 
 };
 

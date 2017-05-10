@@ -15,19 +15,18 @@ void SDLWorldPanel::set_world(World *world) {
     _current_world = world;
 }
 
-SDL_Texture *SDLWorldPanel::render(Renderer<SDL_Renderer> *renderer, float d) {
+void SDLWorldPanel::render(SDLRenderer *renderer, float d) {
 //    SDLPanel::render(renderer, d);
     _current_world->update(d);
-    SDL_Texture *world_texture = _current_world->render(renderer);
+    _current_world->render(renderer);
 
     // Draw rectangle if dragging
     if (dragging) {
-        SDL_SetRenderTarget(renderer->get_engine(), world_texture);
-        this->draw_selection_rect((int) start_drag.x, (int) start_drag.y, (int) end_drag.x, (int) end_drag.y,
-                                  renderer->get_engine());
-        SDL_SetRenderTarget(renderer->get_engine(), NULL);
+//        SDL_SetRenderTarget(renderer->get_engine(), representation);
+//        this->draw_selection_rect((int) start_drag.x, (int) start_drag.y, (int) end_drag.x, (int) end_drag.y,
+//                                  renderer->get_engine());
+//        SDL_SetRenderTarget(renderer->get_engine(), NULL);
     }
-    return world_texture;
 }
 
 void SDLWorldPanel::draw_selection_rect(int start_x, int start_y, int end_x, int end_y, SDL_Renderer *_renderer) {
