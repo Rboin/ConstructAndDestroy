@@ -8,8 +8,6 @@
 
 #include "resource_entity.h"
 
-class ResourceEntity;
-
 class RestaurantEntity : public ResourceEntity {
 public:
     RestaurantEntity(const mesh *, vec2, float);

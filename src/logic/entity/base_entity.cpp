@@ -8,9 +8,6 @@
 #include "textures/texture_manager.h"
 #include "base_entity.h"
 #include "mesh.h"
-#include "string"
-#include "player_manager.h"
-#include "../globals.cpp"
 #include <iostream>
 
 extern const std::string path_to_texture;

@@ -8,8 +8,6 @@
 
 #include "resource_entity.h"
 
-class ResourceEntity;
-
 class TreeEntity : public ResourceEntity {
 
 public:

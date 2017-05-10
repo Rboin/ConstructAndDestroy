@@ -7,8 +7,6 @@
 
 #include "resource_entity.h"
 
-class ResourceEntity;
-
 class WarehouseEntity : public ResourceEntity {
 public:
     WarehouseEntity(const mesh *, vec2, float);

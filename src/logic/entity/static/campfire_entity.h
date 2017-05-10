@@ -8,8 +8,6 @@
 
 #include "resource_entity.h"
 
-class ResourceEntity;
-
 class CampfireEntity : public ResourceEntity {
 public:
     CampfireEntity(const mesh *, vec2, float);
