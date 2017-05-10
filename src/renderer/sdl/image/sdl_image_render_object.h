@@ -21,9 +21,9 @@ class SDL_ImageRenderObject : public SDL_RenderObject {
 public:
     SDL_ImageRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data);
 
-    SDL_Texture *render(Renderer<SDL_Renderer> *) override;
+    void render(SDLRenderer *) override;
 
-    void init_texture(Renderer<SDL_Renderer> *) override;
+    void init_texture(SDLRenderer *) override;
 
     void clear_data() override;
 };

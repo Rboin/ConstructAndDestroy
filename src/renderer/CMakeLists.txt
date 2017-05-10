@@ -13,7 +13,7 @@ set(SOURCE_FILES
         sdl/image/sdl_image_render_object.cpp
         sdl/image/sdl_image_render_object.h
         sdl/label/sdl_render_label.cpp
-        sdl/label/sdl_render_label.h)
+        sdl/label/sdl_render_label.h sdl/sdl_renderer.cpp sdl/sdl_renderer.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

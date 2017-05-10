@@ -22,7 +22,7 @@ private:
 public:
     SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *);
 
-    SDL_Texture *render(Renderer<SDL_Renderer> *renderer) override;
+    void render(SDLRenderer *renderer) override;
 
 };
 

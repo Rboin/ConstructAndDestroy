@@ -7,16 +7,20 @@
 
 template<typename T>
 class Renderer {
-private:
-    T *_engine;
+protected:
+    T *engine;
 public:
-    explicit Renderer(T *engine) {
-        _engine = engine;
+    explicit Renderer(T *e) {
+        engine = e;
     }
 
     T *get_engine() {
-        return _engine;
+        return engine;
     }
+
+    virtual void clear() = 0;
+
+    virtual void show() = 0;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_RENDERER_H

@@ -12,9 +12,6 @@
 //    uint8_t red, green, blue;
 //};
 
-template<typename T>
-class Renderer;
-
 /**
  *
  * @tparam T = Type of renderer.
@@ -42,6 +39,11 @@ public:
 
     const vec2 *get_position() {
         return &_position;
+    }
+
+    void set_position(float x, float y) {
+        _position.x = x;
+        _position.y = y;
     }
 
     const vec2 *get_size() {
@@ -74,7 +76,7 @@ public:
         return within_horizontal_bounds && within_vertical_bounds;
     }
 
-    virtual R *render(Renderer<T> *) = 0;
+    virtual void render(T *) = 0;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_RENDERING_OBJECT_H

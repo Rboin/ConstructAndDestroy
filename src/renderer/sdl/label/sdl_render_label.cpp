@@ -3,7 +3,7 @@
 //
 
 #include "sdl_render_label.h"
-#include "renderer.h"
+#include "sdl/sdl_renderer.h"
 #include "entity/player_manager.h"
 #include "entity/player.h"
 
@@ -24,22 +24,13 @@ SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data 
     _image = new SDL_ImageRenderObject(image_pos,image_size,image_data);
 }
 
-SDL_Texture *SDLRenderLabel::render(Renderer<SDL_Renderer> *renderer) {
+void SDLRenderLabel::render(SDLRenderer *renderer) {
     sdl_ui_text_data *temp = (sdl_ui_text_data*)_text->get_data();
     temp->text = std::to_string((int)_resource->get_resources(_rt)).c_str();
 
-    SDL_Texture *image_texture = _image->render(renderer);
-    SDL_Texture *text_texture = _text->render(renderer);
+    _image->render(renderer);
+    _text->render(renderer);
     init_texture(renderer);
-    SDL_Rect image_rect = {(int)_image->get_position()->x, (int)_image->get_position()->y, (int)_image->get_size()->x,
-                           (int)_image->get_size()->y};
-    SDL_Rect text_rect = {(int)_text->get_position()->x, (int)_text->get_position()->y, (int)_text->get_size()->x,
-                          (int)_text->get_size()->y};
-    SDL_SetRenderTarget(renderer->get_engine(), _result);
-    SDL_RenderCopy(renderer->get_engine(), image_texture, NULL, &image_rect);
-    SDL_RenderCopy(renderer->get_engine(), text_texture, NULL, &text_rect);
-    SDL_SetRenderTarget(renderer->get_engine(), NULL);
-
-    return _result;
+    //todo: use SDLRenderer and draw ourselves first.
 }
 
