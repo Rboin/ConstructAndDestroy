@@ -6,7 +6,7 @@
 
 Player::Player(int id) {
     _id = id;
-
+    selected_building = nullptr;
     state_machine = new StateMachine<Player>(this);
 }
 
@@ -15,6 +15,7 @@ void Player::update() {
 }
 
 Player::~Player() {
+    delete selected_building;
 }
 
 
@@ -120,6 +121,12 @@ void Player::clear_all_selections() {
         this->selected_units[i]->deselect();
         this->selected_units[i]->exorcise();
     }
+
+    if(selected_building != nullptr){
+        selected_building->deselect();
+        selected_building = nullptr;
+    }
+
     this->selected_units.clear();
 }
 

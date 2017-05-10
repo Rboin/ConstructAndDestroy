@@ -33,9 +33,13 @@ void CastleEntity::set_to_transparent(bool transparent, bool placeable) {
 }
 
 void CastleEntity::select(){
-    std::cout << "pogchamp" << std::endl;
+    sdl_image_data* entity_data =  new sdl_image_data{"sel_castle.png"};
+    this->representation->set_data(entity_data);
+    this->representation->clear_data();
 }
 
 void CastleEntity::deselect(){
-    std::cout << "pogchamp" << std::endl;
+    sdl_image_data* entity_data =  new sdl_image_data{"castle.png"};
+    this->representation->set_data(entity_data);
+    this->representation->clear_data();
 }

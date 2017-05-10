@@ -35,8 +35,8 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
         PlayerManager::get_instance()->get_player(player_id)->select_one_unit(pos);
 
 
-        if(World::get_instance()->getPlayer()->selected_units.empty()){
-            World::get_instance()->getPlayer()->select_building(pos);
+        if(PlayerManager::get_instance()->get_player(player_id)->selected_units.empty()){
+            PlayerManager::get_instance()->get_player(player_id)->select_building(pos);
         }
 
     } else {
