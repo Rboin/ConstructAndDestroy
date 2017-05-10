@@ -6,7 +6,6 @@
 #define C_AND_D_PROJECT_BASE_GAME_ENTITY_H
 
 #include <vector>
-#include <SDL_render.h>
 #include <sdl/sdl_render_object.h>
 #include "textures/texture_types.h"
 #include "vector.h"
@@ -43,7 +42,7 @@ public:
 
     virtual void update_render_mesh(const mat2 &);
 
-    virtual SDL_Texture *render(Renderer<SDL_Renderer> *);
+    virtual void render(SDLRenderer *);
 
     virtual void update(float){};
 

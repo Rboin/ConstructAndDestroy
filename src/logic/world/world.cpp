@@ -54,22 +54,13 @@ void World::update(float d_t) {
     }
 }
 
-SDL_Texture *World::render(Renderer<SDL_Renderer> *renderer) {
+void World::render(SDLRenderer *renderer) {
     _representation->clear_data();
-    SDL_Texture *texture = _representation->render(renderer);
+    _representation->render(renderer);
 
     for (unsigned long i = 0; i < entities.size(); i++) {
-        SDL_Texture *entity_texture = entities.at(i)->render(renderer);
-        SDL_Rect entity_rect = {(int) entities[i]->get_position().x,
-                                (int) entities[i]->get_position().y,
-                                (int) entities[i]->get_representation()->get_size()->x,
-                                (int) entities[i]->get_representation()->get_size()->y};
-
-        SDL_SetRenderTarget(renderer->get_engine(), texture);
-        SDL_RenderCopy(renderer->get_engine(), entity_texture, NULL, &entity_rect);
-        SDL_SetRenderTarget(renderer->get_engine(), NULL);
+        entities.at(i)->render(renderer);
     }
-    return texture;
 }
 
 void World::loop(SDL_Renderer *renderer) {

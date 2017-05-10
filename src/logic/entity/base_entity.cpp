@@ -46,6 +46,7 @@ vec2 &BaseEntity::get_position() {
 void BaseEntity::set_position(int x, int y) {
     _position.x = x;
     _position.y = y;
+    representation->set_position(x, y);
 }
 
 const bool BaseEntity::is(int type) {
@@ -66,8 +67,8 @@ static SDL_Point *to_points(mesh m) {
     return points;
 }
 
-SDL_Texture *BaseEntity::render(Renderer<SDL_Renderer> *renderer) {
-    return representation->render(renderer);
+void BaseEntity::render(SDLRenderer *renderer) {
+    representation->render(renderer);
 }
 
 Player *BaseEntity::get_player() {

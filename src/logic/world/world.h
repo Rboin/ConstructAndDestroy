@@ -43,7 +43,7 @@ public:
     /**
      * The render loop.
      */
-    SDL_Texture *render(Renderer<SDL_Renderer> *);
+    void render(SDLRenderer *);
 
     /**
      * The update loop, where we update our entities.
