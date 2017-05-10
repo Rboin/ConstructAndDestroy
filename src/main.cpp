@@ -62,7 +62,7 @@ bool create_window() {
 }
 
 bool create_renderer() {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
     if (!renderer) {
         std::cout << " Failed to create renderer: " << SDL_GetError() << std::endl;
         return false;
@@ -171,7 +171,7 @@ int main(int argc, char **argv) {
     World::get_instance()->add_entity(s_entity7);
     World::get_instance()->add_entity(s_entity);
 
-    Renderer<SDL_Renderer> render_engine = Renderer<SDL_Renderer>(renderer);
+    SDLRenderer *render_engine = new SDLRenderer(renderer);
 
     sdl_image_data *world_data = new sdl_image_data{"world.png"};
     SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, {800, 600}, world_data);
@@ -188,7 +188,7 @@ int main(int argc, char **argv) {
 
     main_panel.set_world(World::get_instance());
 
-    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, &render_engine, mouse_dispatcher,
+    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, render_engine, mouse_dispatcher,
                                            key_dispatcher);
 
     MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
@@ -206,7 +206,7 @@ int main(int argc, char **argv) {
     main_window->add_component(&main_panel);
 
     vec2 resource_panel_pos = {600, 0}, resource_panel_size = {200, 30};
-    sdl_data resource_panel_data = {100, 100, 100, 100};
+    sdl_data resource_panel_data = {100, 100, 100, 0};
     SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos, resource_panel_size, &resource_panel_data);
     SDLResourcePanel right_panel(&panel_o);
 
