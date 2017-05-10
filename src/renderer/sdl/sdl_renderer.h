@@ -16,11 +16,14 @@ public:
 
     void draw_to_back_buffer(SDL_Texture *, SDL_Rect *);
 
+    SDL_Texture *get_back_buffer();
+
     SDL_Texture *create_texture(int, int, SDL_TextureAccess access = SDL_TEXTUREACCESS_STREAMING);
 
     void clear() override;
 
     void show() override;
+
 };
 
 

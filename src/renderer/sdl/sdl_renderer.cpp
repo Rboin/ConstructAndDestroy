@@ -14,11 +14,17 @@ SDLRenderer::SDLRenderer(SDL_Renderer *engine) : Renderer<SDL_Renderer>(engine) 
 
 void SDLRenderer::draw_to_back_buffer(SDL_Texture *t, SDL_Rect *r) {
     SDL_SetRenderTarget(engine, _back_buffer);
+    // Blend the textures
     SDL_SetTextureBlendMode(_back_buffer, SDL_BLENDMODE_BLEND);
+    SDL_SetTextureBlendMode(t, SDL_BLENDMODE_BLEND);
     if (SDL_RenderCopy(engine, t, NULL, r) < 0) {
         std::cerr << SDL_GetError() << std::endl;
     }
     SDL_SetRenderTarget(engine, NULL);
+}
+
+SDL_Texture *SDLRenderer::get_back_buffer() {
+    return _back_buffer;
 }
 
 SDL_Texture *SDLRenderer::create_texture(int width, int height, SDL_TextureAccess access) {
