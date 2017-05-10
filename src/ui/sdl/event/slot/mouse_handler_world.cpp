@@ -19,8 +19,8 @@ MouseHandlerWorld::~MouseHandlerWorld() {}
 
 
 void MouseHandlerWorld::handle_down(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
-    start_drag_x = data.position.x;
-    start_drag_y = data.position.y;
+    start_drag_x = (int)data.position.x;
+    start_drag_y = (int)data.position.y;
     world_panel->start_drag.x =  data.position.x;
     world_panel->start_drag.y =  data.position.y;
 }
@@ -29,7 +29,7 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
     //check if event is a click or a drag.
     if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
         //it is a click
-        vec2 pos = {(float) data.position.x, (float) data.position.y};
+        vec2 pos = {data.position.x, data.position.y};
         World::get_instance()->getPlayer()->select_one_unit(pos);
 
 
