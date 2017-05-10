@@ -4,17 +4,15 @@
 
 #include <ctime>
 #include <SDL_events.h>
-#include <neighbourhood/neighbourhood_manager.h>
+#include "neighbourhood/neighbourhood_manager.h"
 #include "world.h"
 #include "tree/bsp_tree.h"
 #include "tree/bsp_node.h"
-#include <entity/moving/moving_entity.h>
-#include <entity/player_manager.h>
+#include "entity/moving/moving_entity.h"
 #include <iostream>
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include <typeinfo>
-#include <iostream>
-#include <entity/static/resource_manager.h>
+#include "entity/static/resource_manager.h"
 #include "../globals.cpp"
 #include "entity/player.h"
 #include "renderer.h"
@@ -24,7 +22,6 @@ extern const std::string path_to_texture;
 World *World::_instance = nullptr;
 
 World::World() {
-    player = new Player();
     texture_path = path_to_texture + "world.png";
 }
 
@@ -116,7 +113,7 @@ World &World::add_entity(BaseEntity *e) {
         if(moving_entity == nullptr){
             delete moving_entity;
         } else {
-            player->units.push_back(moving_entity);
+            e->get_player()->units.push_back(moving_entity);
         }
     }
 
@@ -133,10 +130,6 @@ World &World::remove_entity(BaseEntity *e) {
         }
     }
     return *this;
-}
-
-Player* World::getPlayer() {
-    return this->player;
 }
 
 std::vector<BaseEntity *> World::get_entities() {

@@ -7,8 +7,6 @@
 
 #include "resource_entity.h"
 
-class ResourceEntity;
-
 class IronMineEntity : public ResourceEntity {
 public:
     IronMineEntity(const mesh *, vec2, float);

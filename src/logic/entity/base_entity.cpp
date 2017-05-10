@@ -8,9 +8,6 @@
 #include "textures/texture_manager.h"
 #include "base_entity.h"
 #include "mesh.h"
-#include "string"
-#include "player_manager.h"
-#include "../globals.cpp"
 #include <iostream>
 
 extern const std::string path_to_texture;
@@ -22,6 +19,10 @@ BaseEntity::BaseEntity(int type, const mesh *base, vec2 position, float mass) {
     _position = position;
     vec2 *buf = new vec2[base->size]{{0, 0}};
     _buffer = new mesh{base->size, buf};
+
+    health = 10;
+    attack_damage = 2;
+    attack_speed = 1;
 }
 
 void BaseEntity::set_representation(SDL_RenderObject *r) {

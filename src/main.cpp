@@ -25,17 +25,14 @@
 #include <sdl/event/slot/sdl_key_event_slot.h>
 #include <SDL_image.h>
 #include <sdl/panel/sdl_resource_panel.h>
-#include <sdl/ui/sdl_ui_render_text_object.h>
-#include <sdl/button/sdl_button.h>
 #include <entity/player.h>
 #include <sdl/label/sdl_render_label.h>
+#include <entity/moving/knight_entity.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
 #include "sdl/event/slot/mouse_handler_world.h"
-#include "sdl/event/slot/sdl_key_event_slot.h"
-#include "sdl/panel/sdl_resource_panel.h"
 
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
@@ -111,7 +108,7 @@ int main(int argc, char **argv) {
     SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
 
     PlayerManager *pm = PlayerManager::get_instance();
-    pm->setup(4);
+    pm->setup(2);
 
     TextureManager *tm = TextureManager::get_instance();
     tm->setup(renderer);
@@ -154,6 +151,16 @@ int main(int argc, char **argv) {
     entity->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(entity);
+
+    MovingEntity *knight_entity = new KnightEntity(&base, {100,100}, 100, 0.2, 0.2);
+    knight_entity->set_player(2);
+
+    vec2 knight_entity_size = {50, 50};
+    sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};
+    SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageRenderObject(pos, knight_entity_size, knight_entity_data);
+    knight_entity->set_representation(knight_entity_render_object);
+
+    World::get_instance()->add_entity(knight_entity);
 
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);

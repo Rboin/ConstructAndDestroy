@@ -5,7 +5,6 @@
 #include "miner_entity.h"
 #include <iostream>
 #include <sdl/image/sdl_image_render_object.h>
-#include "../globals.cpp"
 
 extern const std::string path_to_texture;
 extern const std::string path_to_selected_texture;

@@ -9,6 +9,7 @@
 #include "behaviour/move_order.h"
 #include <iostream>
 #include "sdl/panel/sdl_world_panel.h"
+#include "../globals.cpp"
 
 MouseHandlerWorld::MouseHandlerWorld() {
     start_drag_x = -1;
@@ -29,8 +30,9 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
     //check if event is a click or a drag.
     if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
         //it is a click
+
         vec2 pos = {data.position.x, data.position.y};
-        World::get_instance()->getPlayer()->select_one_unit(pos);
+        PlayerManager::get_instance()->get_player(player_id)->select_one_unit(pos);
 
 
         if(World::get_instance()->getPlayer()->selected_units.empty()){
@@ -39,7 +41,7 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
 
     } else {
         //it is a drag.
-        World::get_instance()->getPlayer()->select_units_in_rectangle(start_drag_x, start_drag_y, data.position.x, data.position.y);
+        PlayerManager::get_instance()->get_player(player_id)->select_units_in_rectangle(start_drag_x, start_drag_y, data.position.x, data.position.y);
     }
 }
 
@@ -90,8 +92,7 @@ void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_p
     }
 }
 
-
 void MouseHandlerWorld::handle_right_button(sdl_mouse_event_data &data, const vec2 &v) {
-    MoveOrder::get_instance()->orderMove(&World::get_instance()->getPlayer()->selected_units, v);
+    MoveOrder::get_instance()->orderMove(&PlayerManager::get_instance()->get_player(player_id)->selected_units, v);
 }
 

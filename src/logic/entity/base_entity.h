@@ -26,6 +26,10 @@ protected:
     SDL_RenderObject *representation;
     Player * _player;
 
+    float health;
+    float attack_damage;
+    float attack_speed;
+
 public:
 
     BaseEntity(int,const mesh *, vec2, float, TextureTypes);
@@ -59,6 +63,10 @@ public:
 
     virtual void select();
     virtual void deselect();
+
+    float get_health();
+    float get_attack_damage();
+    float get_attack_speed();
 
 };
 
