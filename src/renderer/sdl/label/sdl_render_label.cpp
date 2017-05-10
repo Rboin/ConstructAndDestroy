@@ -30,7 +30,5 @@ void SDLRenderLabel::render(SDLRenderer *renderer) {
 
     _image->render(renderer);
     _text->render(renderer);
-    init_texture(renderer);
-    //todo: use SDLRenderer and draw ourselves first.
 }
 

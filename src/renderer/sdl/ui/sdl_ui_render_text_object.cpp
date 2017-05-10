@@ -12,6 +12,7 @@ SDL_UI_RenderTextObject::SDL_UI_RenderTextObject(const vec2 &position, const vec
 void SDL_UI_RenderTextObject::render(SDLRenderer *renderer) {
     clear_result();
     init_texture(renderer);
+    renderer->draw_to_back_buffer(_result, rectangle);
 }
 
 void SDL_UI_RenderTextObject::init_texture(SDLRenderer *renderer) {
@@ -21,9 +22,10 @@ void SDL_UI_RenderTextObject::init_texture(SDLRenderer *renderer) {
                                                        {data->red, data->green, data->blue, data->alpha});
     _result = SDL_CreateTextureFromSurface(renderer->get_engine(), text_surface);
     SDL_FreeSurface(text_surface);
-    renderer->draw_to_back_buffer(_result, rectangle);
+
 }
 
 void SDL_UI_RenderTextObject::clear_result() {
     SDL_DestroyTexture(_result);
+    _result = nullptr;
 }
