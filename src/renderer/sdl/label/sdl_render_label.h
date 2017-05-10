@@ -18,7 +18,7 @@ private:
     SDL_UI_RenderTextObject *_text;
     SDL_ImageRenderObject *_image;
     Resources *_resource;
-    ResourceType &_rt;
+    ResourceType _rt;
 public:
     SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *);
 

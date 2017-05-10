@@ -26,6 +26,7 @@ SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data 
 
 void SDLRenderLabel::render(SDLRenderer *renderer) {
     sdl_ui_text_data *temp = (sdl_ui_text_data*)_text->get_data();
+    int a = (int)_resource->get_resources(_rt);
     temp->text = std::to_string((int)_resource->get_resources(_rt)).c_str();
 
     _image->render(renderer);
