@@ -78,7 +78,6 @@ void MovingEntity::update(float d_t) {
 
     //Update vehicle's position
     add_to_position(_velocity * d_t);
-//    representation->set_position(_position.x, _position.y);
     // Update the render mesh
     update_render_mesh();
 
