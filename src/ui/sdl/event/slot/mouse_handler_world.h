@@ -5,7 +5,7 @@
 #ifndef CONSTRUCT_AND_DESTROY_MOUSE_HANDLER_WORLD_H
 #define CONSTRUCT_AND_DESTROY_MOUSE_HANDLER_WORLD_H
 
-#include <sdl/event/slot/sdl_mouse_event_slot.h>
+#include "sdl/event/slot/sdl_mouse_event_slot.h"
 
 class SDLWorldPanel;
 
@@ -16,7 +16,6 @@ private:
     void handle(sdl_mouse_event_data, SDLWorldPanel *);
     void handle_motion(sdl_mouse_event_data, SDLWorldPanel *);
 
-    void handle_left_button(const vec2 &);
     void handle_right_button(sdl_mouse_event_data &, const vec2 &);
 
     int start_drag_x;

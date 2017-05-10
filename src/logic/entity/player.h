@@ -25,6 +25,7 @@ public:
     virtual ~Player();
 
     void select_units_in_rectangle(float start_x, float start_y, float end_x, float end_y);
+    void select_one_unit(vec2 pos);
 
     void clear_selected_units();
     int get_id();
