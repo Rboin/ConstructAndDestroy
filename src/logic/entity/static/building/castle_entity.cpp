@@ -4,6 +4,7 @@
 
 #include <sdl/image/sdl_image_render_object.h>
 #include "castle_entity.h"
+#include <iostream>
 
 CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : BuildingEntity(
         base, position, mass, CASTLE, WAREHOUSETEXTURE) {
@@ -29,4 +30,12 @@ void CastleEntity::set_to_transparent(bool transparent, bool placeable) {
 
     representation->set_data(image);
     representation->clear_data();
+}
+
+void CastleEntity::select(){
+    std::cout << "pogchamp" << std::endl;
+}
+
+void CastleEntity::deselect(){
+    std::cout << "pogchamp" << std::endl;
 }

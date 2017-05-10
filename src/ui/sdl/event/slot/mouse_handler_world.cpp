@@ -32,6 +32,11 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
         vec2 pos = {(float) data.position.x, (float) data.position.y};
         World::get_instance()->getPlayer()->select_one_unit(pos);
 
+
+        if(World::get_instance()->getPlayer()->selected_units.empty()){
+            World::get_instance()->getPlayer()->select_building(pos);
+        }
+
     } else {
         //it is a drag.
         World::get_instance()->getPlayer()->select_units_in_rectangle(start_drag_x, start_drag_y, data.position.x, data.position.y);
@@ -71,7 +76,6 @@ void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_p
                 world_panel->start_drag.x = -1;
                 world_panel->start_drag.y = -1;
                 return handle_up(data);
-
             }
 
             return;

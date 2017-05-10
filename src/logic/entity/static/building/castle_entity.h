@@ -14,6 +14,9 @@ public:
     CastleEntity(const mesh *, vec2, float);
     CastleEntity(const mesh *, float);
     void set_to_transparent(bool, bool = true);
+
+    void select();
+    void deselect();
 };
 
 #endif //C_AND_D_PROJECT_CASTLE_ENTITY_H
