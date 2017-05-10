@@ -49,6 +49,11 @@ void BaseEntity::set_position(int x, int y) {
     representation->set_position(x, y);
 }
 
+void BaseEntity::add_to_position(vec2 v) {
+    _position += v;
+    representation->set_position(_position.x, _position.y);
+}
+
 const bool BaseEntity::is(int type) {
     return _type == type;
 }
@@ -86,3 +91,4 @@ void BaseEntity::deselect() {std::cout << "Can't deselect base entity" << std::e
 SDL_RenderObject *BaseEntity::get_representation() {
     return representation;
 }
+

@@ -36,6 +36,8 @@ public:
 
     virtual void set_position(int x, int y);
 
+    virtual void add_to_position(vec2);
+
     const bool is(int);
 
     virtual ~BaseEntity();
