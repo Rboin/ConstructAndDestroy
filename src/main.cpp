@@ -59,7 +59,7 @@ bool create_window() {
 }
 
 bool create_renderer() {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     if (!renderer) {
         std::cout << " Failed to create renderer: " << SDL_GetError() << std::endl;
         return false;

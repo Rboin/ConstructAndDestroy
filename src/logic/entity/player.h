@@ -5,6 +5,7 @@
 #include "resources.h"
 #include "entity/static/building/building_entity.h"
 
+class MovingEntityFactory;
 class BuildingEntity;
 class StaticEntity;
 class MovingEntity;

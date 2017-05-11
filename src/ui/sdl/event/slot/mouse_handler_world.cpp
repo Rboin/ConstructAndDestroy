@@ -10,6 +10,7 @@
 #include <iostream>
 #include "sdl/panel/sdl_world_panel.h"
 #include "../globals.cpp"
+#include "../../../../logic/entity/moving/moving_entity_factory.h"
 
 MouseHandlerWorld::MouseHandlerWorld() {
     start_drag_x = -1;
@@ -37,6 +38,11 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
 
         if(PlayerManager::get_instance()->get_player(player_id)->selected_units.empty()){
             PlayerManager::get_instance()->get_player(player_id)->select_building(pos);
+
+            //for test purposes only:
+            if(PlayerManager::get_instance()->get_player(player_id)->selected_building == nullptr){
+                //PlayerManager::get_instance()->get_player(player_id)->mef->create(pos, MovingEntityType::LUMBERJACK);
+            }
         }
 
     } else {

@@ -169,7 +169,7 @@ set(SOURCE_FILES
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp
-         entity/moving/knight_entity.cpp)
+         entity/moving/knight_entity.cpp entity/moving/moving_entity_factory.h entity/moving/moving_entity_types.h entity/moving/moving_entity_factory.cpp entity/moving/moving_entity_manager.h entity/moving/moving_entity_manager.cpp)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
