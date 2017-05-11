@@ -5,12 +5,13 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_RENDER_LABEL_H
 #define CONSTRUCT_AND_DESTROY_SDL_RENDER_LABEL_H
 
-
-#include <sdl/sdl_render_object.h>
-#include <sdl/image/sdl_image_render_object.h>
-#include <sdl/ui/sdl_ui_render_text_object.h>
+#include <string>
+#include <SDL2/SDL_ttf.h>
+#include "sdl/sdl_render_object.h"
 #include "entity/static/resource_type.h"
 
+class SDL_UI_RenderTextObject;
+class SDL_ImageRenderObject;
 class Resources;
 
 class SDLRenderLabel : public SDL_RenderObject {

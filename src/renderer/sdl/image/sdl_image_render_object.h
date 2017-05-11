@@ -5,9 +5,9 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_IMAGE_RENDER_OBJECT_H
 #define CONSTRUCT_AND_DESTROY_SDL_IMAGE_RENDER_OBJECT_H
 
+#include <string>
 #include "textures/texture_types.h"
 #include "sdl/sdl_render_object.h"
-#include <string>
 
 struct sdl_image_data : public sdl_data {
     std::string type;

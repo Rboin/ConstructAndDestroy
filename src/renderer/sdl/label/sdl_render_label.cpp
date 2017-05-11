@@ -3,6 +3,8 @@
 //
 
 #include "sdl_render_label.h"
+#include "sdl/image/sdl_image_render_object.h"
+#include "sdl/ui/sdl_ui_render_text_object.h"
 #include "sdl/sdl_renderer.h"
 #include "entity/player_manager.h"
 #include "entity/player.h"

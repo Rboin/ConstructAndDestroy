@@ -2,8 +2,8 @@
 // Created by robin on 4/26/17.
 //
 
-#include <textures/texture_manager.h>
 #include "sdl_image_render_object.h"
+#include "textures/texture_manager.h"
 #include "sdl/sdl_renderer.h"
 
 SDL_ImageRenderObject::SDL_ImageRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data)
