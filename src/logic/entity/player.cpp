@@ -48,16 +48,14 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
 
 
     for (int i = 0; i < this->units.size(); i++) {
-        if (units[i]->get_player()->get_id() == player_id) {
-            float x = this->units[i]->get_position().x;
-            float y = this->units[i]->get_position().y;
+        float x = this->units[i]->get_position().x;
+        float y = this->units[i]->get_position().y;
 
-            if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
+        if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
 
-                this->units[i]->select();
-                this->units[i]->take_possession();
-                this->selected_units.push_back(this->units[i]);
-            }
+            this->units[i]->select();
+            this->units[i]->take_possession();
+            this->selected_units.push_back(this->units[i]);
         }
     }
 }
@@ -74,7 +72,7 @@ void Player::select_one_unit(vec2 pos) {
     // created rectangle. Values where determined by testing alot.
     float leftOffset = pos.x - 45;
     float rightOffset = pos.x;
-    float topOffset = pos.y -45;
+    float topOffset = pos.y - 45;
     float botOffset = pos.y;
 
 
