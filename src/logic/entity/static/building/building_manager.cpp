@@ -54,8 +54,27 @@ void BuildingManager::add_building(Player* p, BuildingEntity *be) {
     p->buildings.push_back(p->positioning_object);
 }
 
+void BuildingManager::add_building(int player_id, BuildingEntity *be)
+{
+    Player * p= PlayerManager::get_instance()->get_player(player_id);
+    add_building(p, be);
+}
+
 std::vector<BuildingEntity *> BuildingManager::get_buildings() {
     return buildings;
+}
+
+vec2 BuildingManager::get_closest_building(vec2 pos, BuildingType bt) {
+    float distance = -1;
+    vec2 closest;
+    for (int i = 0; i < buildings.size(); i++) {
+        if (distance == -1 && bt == buildings.at(i)->get_building_type() ||
+            pos.distance(buildings.at(i)->get_position()) < distance && bt == buildings.at(i)->get_building_type()) {
+            distance = pos.distance(buildings.at(i)->get_position());
+            closest = buildings.at(i)->get_position();
+        }
+    }
+    return closest;
 }
 
 void BuildingManager::remove_building(Player * p, BuildingEntity *be) {

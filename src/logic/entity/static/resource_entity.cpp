@@ -2,10 +2,9 @@
 // Created by Sander on 20-3-2017.
 //
 
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 #include "resource_entity.h"
 #include "resource_manager.h"
-#include <string>
 
 ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, ResourceType rt)
         : StaticEntity(base,

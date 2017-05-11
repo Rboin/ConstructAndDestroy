@@ -4,8 +4,6 @@
 
 #include "entity/moving/moving_entity.h"
 #include "resource_manager.h"
-#include "entity/entity_types.h"
-#include "entity/goal/moving_entity_goal/job_type.h"
 
 ResourceManager *ResourceManager::instance = nullptr;
 

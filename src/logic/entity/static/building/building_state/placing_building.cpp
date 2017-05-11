@@ -2,8 +2,8 @@
 // Created by Stephan Schrijver on 20-4-2017.
 //
 
-#include <entity/static/building/building_manager.h>
-#include <graph/graph_manager.h>
+#include "entity/static/building/building_manager.h"
+#include "graph/graph_manager.h"
 #include "placing_building.h"
 #include "entity/static/building/building_entity.h"
 #include "entity/state/state_machine.h"
@@ -24,7 +24,7 @@ void PlacingBuilding::enter(Player * p) {
     }
 
     else {
-        p->positioning_object->set_to_transparent(false);
+        p->positioning_object->set_transparent_or_border(false);
         // Set final position so it will affect the A*
         p->positioning_object->set_position(p->positioning_object->get_position().x,p->positioning_object->get_position().y, true);
         // Add building to building manager

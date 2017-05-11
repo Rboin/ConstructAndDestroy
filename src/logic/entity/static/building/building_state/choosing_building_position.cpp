@@ -2,11 +2,11 @@
 // Created by Stephan Schrijver on 19-4-2017.
 //
 
-#include <SDL_mouse.h>
-#include <neighbourhood/neighbourhood_manager.h>
-#include <graph/graph_manager.h>
-#include <graph/graph.h>
-#include <world/world.h>
+#include "SDL_mouse.h"
+#include "neighbourhood/neighbourhood_manager.h"
+#include "graph/graph_manager.h"
+#include "graph/graph.h"
+#include "world/world.h"
 #include "choosing_building_position.h"
 #include "entity/static/building/building_entity.h"
 #include "entity/player.h"
@@ -15,7 +15,7 @@ void ChoosingBuildingPosition::enter(Player *p) {
 
 
     // Set to transparent object
-    p->positioning_object->set_to_transparent(true);
+    p->positioning_object->set_transparent_or_border(true);
 }
 
 void ChoosingBuildingPosition::execute(Player *p) {
@@ -57,9 +57,9 @@ void ChoosingBuildingPosition::execute(Player *p) {
 
         if (!curr_node->is_walkable()) {
             // This node is not walkable, so set to other texture!
-            p->positioning_object->set_to_transparent(true, false);
+            p->positioning_object->set_transparent_or_border(true, false);
         } else {
-            p->positioning_object->set_to_transparent(true);
+            p->positioning_object->set_transparent_or_border(true);
         }
     }
 }

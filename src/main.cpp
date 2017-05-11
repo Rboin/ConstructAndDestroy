@@ -1,8 +1,7 @@
-#include <iostream>
+#include "iostream"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
-#include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "types.h"
 #include "vector.h"
 #include "behaviour/strategy/explore_strategy.h"
@@ -21,20 +20,21 @@
 #include "entity/moving/miner_entity.h"
 #include "behaviour/calculator/basic_force_calculator.h"
 #include "entity/goal/evaluator/work_evaluator.h"
-#include "entity/static/warehouse_entity.h"
+#include "entity/static/building/warehouse_entity.h"
 #include "sdl/event/sdl_key_event_dispatcher.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl/event/slot/sdl_key_event_slot.h"
 #include "sdl/panel/sdl_resource_panel.h"
 #include "entity/player.h"
 #include "sdl/label/sdl_render_label.h"
-#include "entity/player_manager.h"
+#include "entity/static/building/building_manager.h"
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
 #include "sdl/event/slot/mouse_handler_world.h"
-
+#include "entity/player_manager.h"
+#include "entity/goal/evaluator/follow_path_evaluator.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
@@ -162,13 +162,16 @@ int main(int argc, char **argv) {
     s_entity->set_representation(tree_object);
 
     vec2 s_position7 = {600, 400};
-    ResourceEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
+    BuildingEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
     sdl_image_data *entity7_data = new sdl_image_data{"warehouse.png"};
     SDL_ImageRenderObject *e7_object = new SDL_ImageRenderObject(s_position7, {50, 50}, entity7_data);
     s_entity7->set_representation(e7_object);
 
     World::get_instance()->add_entity(s_entity7);
     World::get_instance()->add_entity(s_entity);
+
+    // TODO: when merged enemy_player, change 1 to player_id
+    BuildingManager::get_instance()->add_building(1, s_entity7);
 
     SDLRenderer *render_engine = new SDLRenderer(renderer);
 

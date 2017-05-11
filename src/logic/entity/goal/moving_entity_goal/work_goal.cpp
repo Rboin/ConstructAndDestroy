@@ -2,8 +2,7 @@
 // Created by Sander on 19-3-2017.
 //
 
-#include "goal/composite_goal.h"
-#include <iostream>
+#include <goal/composite_goal.h>
 #include "entity/static/resource_manager.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
 #include "graph/graph_manager.h"
@@ -12,10 +11,9 @@
 #include "entity/goal/moving_entity_goal/atomic/drop_resources_goal.h"
 #include "entity/moving/moving_entity.h"
 #include "work_goal.h"
-#include "types.h"
 #include "strategy_goal_type.h"
 #include "follow_path_goal.h"
-#include "job_type.h"
+#include "entity/static/building/building_manager.h"
 
 WorkGoal::WorkGoal(MovingEntity *e, vec2* target_resource, int initiator) : GoalComposite(e, WORK, initiator) {
     _target_resource = target_resource;
@@ -93,9 +91,9 @@ Node *WorkGoal::find_resource_node() {
 
 Node *WorkGoal::find_depot() {
     GraphManager *gm = GraphManager::get_instance();
-    ResourceManager *rm = ResourceManager::get_instance();
+    BuildingManager *bm = BuildingManager::get_instance();
 
-    vec2 warehouse_position = rm->get_closest_resource(owner->get_position(), WAREHOUSE);
+    vec2 warehouse_position = bm->get_closest_building(owner->get_position(), WAREHOUSE);
     int index = gm->graph->get_node_with_exact_position(warehouse_position);
     Node *goal = gm->graph->nodes.at(index);
     goal = gm->graph->find_closest_edge(goal);

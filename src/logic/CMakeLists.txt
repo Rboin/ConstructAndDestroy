@@ -17,7 +17,7 @@ set(SOURCE_FILES
         entity/static/resource_manager.h
         entity/static/tree_entity.h
         entity/static/iron_mine_entity.h
-        entity/static/warehouse_entity.h
+        entity/static/building/warehouse_entity.h
         entity/static/restaurant_entity.h
         entity/static/campfire_entity.h
         entity/static/building/building_factory.h
@@ -106,7 +106,7 @@ set(SOURCE_FILES
         entity/static/resource_manager.cpp
         entity/static/tree_entity.cpp
         entity/static/iron_mine_entity.cpp
-        entity/static/warehouse_entity.cpp
+        entity/static/building/warehouse_entity.cpp
         entity/static/restaurant_entity.cpp
         entity/static/campfire_entity.cpp
         entity/static/building/building_factory.cpp

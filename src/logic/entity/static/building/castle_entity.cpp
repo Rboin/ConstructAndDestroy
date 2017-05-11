@@ -2,21 +2,21 @@
 // Created by Sander on 18-4-2017.
 //
 
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 #include "castle_entity.h"
 
 CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : BuildingEntity(
-        base, position, mass, CASTLE, WAREHOUSETEXTURE) {
+        base, position, mass, CASTLE, CASTLETEXTURE) {
 }
 
 CastleEntity::CastleEntity(const mesh *base, float mass) : BuildingEntity(
-        base, mass, CASTLE, WAREHOUSETEXTURE) {
+        base, mass, CASTLE, CASTLETEXTURE) {
 }
 
-void CastleEntity::set_to_transparent(bool transparent, bool placeable) {
+void CastleEntity::set_transparent_or_border(bool transparent, bool border) {
     sdl_image_data *image;
     if (transparent) {
-        if(placeable) {
+        if(!border) {
             image = new sdl_image_data{"transp_castle.png"};
         }
         else

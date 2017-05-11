@@ -7,6 +7,8 @@
 
 #include <vector>
 #include <string>
+#include "types.h"
+#include "building_type.h"
 
 class BuildingEntity;
 class Player;
@@ -28,6 +30,10 @@ public:
     std::vector<BuildingEntity *> get_buildings();
 
     void add_building(Player*, BuildingEntity*);
+
+    void add_building(int, BuildingEntity*);
+
+    vec2 get_closest_building(vec2, BuildingType);
 
     void remove_building(Player*, BuildingEntity*);
 

@@ -10,7 +10,7 @@ enum ResourceType {
     IRON = 2,
     GOLD = 3,
     IRONMINE = 4,
-    WAREHOUSE = 5,
+//    WAREHOUSE = 5,
     TREE = 6,
     RESTAURANT = 7,
     CAMPFIRE = 8,

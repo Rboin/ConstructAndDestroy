@@ -2,7 +2,7 @@
 // Created by Stephan Schrijver on 3-5-2017.
 //
 #include "building_factory.h"
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 #include "building_entity.h"
 #include "castle_entity.h"
 #include "mesh.h"

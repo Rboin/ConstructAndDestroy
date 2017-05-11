@@ -21,7 +21,7 @@ void SDL_ImageRenderObject::render(SDLRenderer *renderer) {
 
 void SDL_ImageRenderObject::init_texture(SDLRenderer *renderer) {
     sdl_image_data *data = (sdl_image_data *) _data;
-    _result = TextureManager::get_instance()->loadTexture(data->type);
+    _result = TextureManager::get_instance()->load_texture(data->type);
 }
 
 void SDL_ImageRenderObject::clear_data() {

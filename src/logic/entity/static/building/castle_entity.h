@@ -7,13 +7,11 @@
 
 #include "building_entity.h"
 
-class BuildingEntity;
-
 class CastleEntity : public BuildingEntity {
 public:
     CastleEntity(const mesh *, vec2, float);
     CastleEntity(const mesh *, float);
-    void set_to_transparent(bool, bool = true);
+    void set_transparent_or_border(bool, bool = false);
 };
 
 #endif //C_AND_D_PROJECT_CASTLE_ENTITY_H

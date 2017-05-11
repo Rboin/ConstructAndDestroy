@@ -7,7 +7,7 @@
 
 
 #include <SDL_render.h>
-#include "string"
+#include <string>
 #include "texture_types.h"
 
 class TextureManager {
@@ -20,9 +20,9 @@ public:
 
     void setup(SDL_Renderer *);
 
-    SDL_Texture* GetTexture(TextureTypes);
+    SDL_Texture* get_texture(TextureTypes);
 
-    SDL_Texture* loadTexture(std::string);
+    SDL_Texture* load_texture(std::string);
 };
 
 

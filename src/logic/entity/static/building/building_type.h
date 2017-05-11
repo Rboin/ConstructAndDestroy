@@ -6,6 +6,7 @@
 #define C_AND_D_PROJECT_BUILDING_TYPE_H
 
 enum BuildingType {
-    CASTLE
+    CASTLE,
+    WAREHOUSE
 };
 #endif //C_AND_D_PROJECT_BUILDING_TYPE_H

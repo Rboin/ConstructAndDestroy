@@ -5,7 +5,6 @@
 #include <SDL_image.h>
 #include <cstdio>
 #include "texture_manager.h"
-#include "texture_types.h"
 
 TextureManager *TextureManager::_instance = nullptr;
 
@@ -26,7 +25,7 @@ TextureManager *TextureManager::get_instance() {
 }
 
 
-SDL_Texture *TextureManager::loadTexture(std::string path) {
+SDL_Texture *TextureManager::load_texture(std::string path) {
     path = "res/textures/" + path;
     int width, height;
 
@@ -58,7 +57,7 @@ SDL_Texture *TextureManager::loadTexture(std::string path) {
 
 
 //TODO: remove this and replace by above method
-SDL_Texture *TextureManager::GetTexture(TextureTypes tt) {
+SDL_Texture *TextureManager::get_texture(TextureTypes tt) {
     std::string texture;
 
     if (tt == IRONMINETEXTURE) { texture = "ironmine.png"; } //to make selected
@@ -66,6 +65,7 @@ SDL_Texture *TextureManager::GetTexture(TextureTypes tt) {
     else if (tt == TREETEXTURE) { texture = "tree.png"; }
     else if (tt == LUMBERJACKTEXTURE) { texture = "lumberjack.png"; } //to make selected
     else if (tt == WAREHOUSETEXTURE) { texture = "warehouse.png"; }
+    else if (tt == CASTLETEXTURE) { texture = "castle.png"; }
     else if (tt == WORLDTEXTURE) { texture = "world.png"; }
     else if (tt == RESTAURANTTEXTURE) { texture = "restaurant.png"; }
     else if (tt == CAMPFIRETEXTURE) { texture = "campfire.png"; }
@@ -76,6 +76,6 @@ SDL_Texture *TextureManager::GetTexture(TextureTypes tt) {
     else if (tt == SEL_LUMBERJACKTEXTURE) { texture = "sel_lumberjack.png"; }
     else if (tt == SEL_MINERTEXTURE) { texture = "sel_miner.png"; }
 
-    return loadTexture(texture);
+    return load_texture(texture);
 }
 
