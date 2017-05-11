@@ -5,7 +5,7 @@
 #ifndef C_AND_D_PROJECT_RESOURCE_ENTITY_H
 #define C_AND_D_PROJECT_RESOURCE_ENTITY_H
 
-
+#include <string>
 #include "static_entity.h"
 #include "resource_type.h"
 

@@ -5,15 +5,13 @@
 #ifndef C_AND_D_PROJECT_BASE_GAME_ENTITY_H
 #define C_AND_D_PROJECT_BASE_GAME_ENTITY_H
 
-#include <vector>
-#include <sdl/sdl_render_object.h>
-#include "textures/texture_types.h"
-#include "vector.h"
 #include "types.h"
-#include <string>
-#include "player_manager.h"
+#include "vector.h"
+#include "textures/texture_types.h"
 
 class Player;
+class SDL_RenderObject;
+class SDLRenderer;
 
 class BaseEntity {
 protected:

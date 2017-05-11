@@ -2,16 +2,13 @@
 // Created by robin on 3/1/17.
 //
 
-#include <vector>
-#include <matrix.h>
-#include <SDL_image.h>
-#include "textures/texture_manager.h"
-#include "base_entity.h"
-#include "mesh.h"
-#include "string"
-#include "player_manager.h"
-#include "../globals.cpp"
+#include <string>
 #include <iostream>
+#include "base_entity.h"
+#include "matrix.h"
+#include "mesh.h"
+#include "sdl/sdl_render_object.h"
+#include "player_manager.h"
 
 extern const std::string path_to_texture;
 
