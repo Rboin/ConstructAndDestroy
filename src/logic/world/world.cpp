@@ -3,21 +3,19 @@
 //
 
 #include <ctime>
+#include <iostream>
 #include <SDL_events.h>
-#include <neighbourhood/neighbourhood_manager.h>
+
 #include "world.h"
 #include "tree/bsp_tree.h"
 #include "tree/bsp_node.h"
-#include <entity/moving/moving_entity.h>
-#include <entity/player_manager.h>
-#include <iostream>
+#include "neighbourhood/neighbourhood_manager.h"
+#include "entity/moving/moving_entity.h"
+#include "entity/player_manager.h"
+#include "entity/static/resource_manager.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
-#include <typeinfo>
-#include <iostream>
-#include <entity/static/resource_manager.h>
 #include "../globals.cpp"
 #include "entity/player.h"
-#include "renderer.h"
 
 //declaration of global variable.
 extern const std::string path_to_texture;
@@ -54,56 +52,13 @@ void World::update(float d_t) {
     }
 }
 
-SDL_Texture *World::render(Renderer<SDL_Renderer> *renderer) {
+void World::render(SDLRenderer *renderer) {
     _representation->clear_data();
-    SDL_Texture *texture = _representation->render(renderer);
+    _representation->render(renderer);
 
     for (unsigned long i = 0; i < entities.size(); i++) {
-        SDL_Texture *entity_texture = entities.at(i)->render(renderer);
-        SDL_Rect entity_rect = {(int) entities[i]->get_position().x,
-                                (int) entities[i]->get_position().y,
-                                (int) entities[i]->get_representation()->get_size()->x,
-                                (int) entities[i]->get_representation()->get_size()->y};
-
-        SDL_SetRenderTarget(renderer->get_engine(), texture);
-        SDL_RenderCopy(renderer->get_engine(), entity_texture, NULL, &entity_rect);
-        SDL_SetRenderTarget(renderer->get_engine(), NULL);
+        entities.at(i)->render(renderer);
     }
-    return texture;
-}
-
-void World::loop(SDL_Renderer *renderer) {
-//    long last = SDL_GetTicks();
-//    while (1) {
-//        SDL_Event event;
-//        while (SDL_PollEvent(&event)) {
-//            if (event.type == SDL_QUIT)
-//                return;
-//                //For testing purpose
-//            else if (event.type == SDL_MOUSEBUTTONDOWN) {
-//                vec2 pos = {(float) event.button.x, (float) event.button.y};
-//
-//                int goal = graph->get_node_with_position(pos);
-//                int start = graph->get_node_with_position(controllable_character->get_position());
-//
-//                std::vector<vec2 *> path = graph->a_star_path(graph->nodes[start], graph->nodes[goal]);
-//                graph->draw_path.clear();
-//                graph->draw_path = path;
-//                controllable_character->path = path;
-//                controllable_character->get_brain()->set_goal_follow_path();
-//            }
-//        }
-//
-//        SDL_RenderClear(renderer);
-//        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-//
-//        long current_time = SDL_GetTicks();
-//        float delta = current_time - last;
-//        update(delta);
-//        render(renderer);
-//
-//        last = current_time;
-//    }
 }
 
 World &World::add_entity(BaseEntity *e) {

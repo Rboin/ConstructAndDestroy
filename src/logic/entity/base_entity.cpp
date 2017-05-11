@@ -2,16 +2,13 @@
 // Created by robin on 3/1/17.
 //
 
-#include <vector>
-#include <matrix.h>
-#include <SDL_image.h>
-#include "textures/texture_manager.h"
-#include "base_entity.h"
-#include "mesh.h"
-#include "string"
-#include "player_manager.h"
-#include "../globals.cpp"
+#include <string>
 #include <iostream>
+#include "base_entity.h"
+#include "matrix.h"
+#include "mesh.h"
+#include "sdl/sdl_render_object.h"
+#include "player_manager.h"
 
 extern const std::string path_to_texture;
 
@@ -46,6 +43,12 @@ vec2 &BaseEntity::get_position() {
 void BaseEntity::set_position(int x, int y) {
     _position.x = x;
     _position.y = y;
+    representation->set_position(x, y);
+}
+
+void BaseEntity::add_to_position(vec2 v) {
+    _position += v;
+    representation->set_position(_position.x, _position.y);
 }
 
 const bool BaseEntity::is(int type) {
@@ -66,8 +69,8 @@ static SDL_Point *to_points(mesh m) {
     return points;
 }
 
-SDL_Texture *BaseEntity::render(Renderer<SDL_Renderer> *renderer) {
-    return representation->render(renderer);
+void BaseEntity::render(SDLRenderer *renderer) {
+    representation->render(renderer);
 }
 
 Player *BaseEntity::get_player() {
@@ -85,3 +88,4 @@ void BaseEntity::deselect() {std::cout << "Can't deselect base entity" << std::e
 SDL_RenderObject *BaseEntity::get_representation() {
     return representation;
 }
+

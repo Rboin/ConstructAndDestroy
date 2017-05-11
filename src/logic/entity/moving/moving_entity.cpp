@@ -5,7 +5,7 @@
 #include <cmath>
 #include <cfloat>
 #include <iostream>
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 #include "weapon.h"
 #include "entity/weapon/axe_weapon.h"
 #include "entity/weapon/bow_weapon.h"
@@ -17,8 +17,6 @@
 #include "behaviour/behaviour_strategy.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/entity_types.h"
-#include "entity/goal/moving_entity_goal/job_type.h"
-
 
 MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass,
                            const float max_force, const float max_speed, JobType jt) :
@@ -77,8 +75,7 @@ void MovingEntity::update(float d_t) {
     _velocity = _velocity.truncate(MAX_SPEED);
 
     //Update vehicle's position
-    _position += _velocity * d_t;
-
+    add_to_position(_velocity * d_t);
     // Update the render mesh
     update_render_mesh();
 

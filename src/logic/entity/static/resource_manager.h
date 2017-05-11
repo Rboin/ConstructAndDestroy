@@ -5,7 +5,7 @@
 #ifndef C_AND_D_PROJECT_RESOURCE_MANAGER_H
 #define C_AND_D_PROJECT_RESOURCE_MANAGER_H
 
-
+#include <vector>
 #include "resource_entity.h"
 #include "entity/goal/moving_entity_goal/job_type.h"
 

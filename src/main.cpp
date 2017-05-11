@@ -1,42 +1,39 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <types.h>
-#include <vector.h>
-#include <behaviour/strategy/explore_strategy.h>
-#include <entity/goal/moving_entity_goal/think_goal.h>
-#include <graph/graph_manager.h>
-#include <entity/goal/moving_entity_goal/work_goal.h>
 #include <SDL2/SDL_ttf.h>
-#include <textures/texture_manager.h>
-#include <entity/moving/lumberjack_entity.h>
-#include <sdl/panel/sdl_panel.h>
-#include <sdl/panel/sdl_world_panel.h>
-#include <sdl/image/sdl_image_render_object.h>
-#include <sdl/window/sdl_window.h>
-#include <entity/static/tree_entity.h>
-#include <entity/goal/evaluator/obstacle_avoid_evaluator.h>
-#include <entity/goal/evaluator/wander_evaluator.h>
-#include <entity/moving/miner_entity.h>
-#include <behaviour/calculator/basic_force_calculator.h>
-#include <entity/goal/evaluator/work_evaluator.h>
-#include <entity/static/warehouse_entity.h>
-#include <sdl/event/sdl_key_event_dispatcher.h>
-#include <sdl/event/sdl_mouse_event_dispatcher.h>
-#include <sdl/event/slot/sdl_key_event_slot.h>
 #include <SDL_image.h>
-#include <sdl/panel/sdl_resource_panel.h>
-#include <sdl/ui/sdl_ui_render_text_object.h>
-#include <sdl/button/sdl_button.h>
-#include <entity/player.h>
-#include <sdl/label/sdl_render_label.h>
 #include "entity/goal/evaluator/follow_path_evaluator.h"
+#include "types.h"
+#include "vector.h"
+#include "behaviour/strategy/explore_strategy.h"
+#include "entity/goal/moving_entity_goal/think_goal.h"
+#include "graph/graph_manager.h"
+#include "entity/goal/moving_entity_goal/work_goal.h"
+#include "textures/texture_manager.h"
+#include "entity/moving/lumberjack_entity.h"
+#include "sdl/panel/sdl_panel.h"
+#include "sdl/panel/sdl_world_panel.h"
+#include "sdl/image/sdl_image_render_object.h"
+#include "sdl/window/sdl_window.h"
+#include "entity/static/tree_entity.h"
+#include "entity/goal/evaluator/obstacle_avoid_evaluator.h"
+#include "entity/goal/evaluator/wander_evaluator.h"
+#include "entity/moving/miner_entity.h"
+#include "behaviour/calculator/basic_force_calculator.h"
+#include "entity/goal/evaluator/work_evaluator.h"
+#include "entity/static/warehouse_entity.h"
+#include "sdl/event/sdl_key_event_dispatcher.h"
+#include "sdl/event/sdl_mouse_event_dispatcher.h"
+#include "sdl/event/slot/sdl_key_event_slot.h"
+#include "sdl/panel/sdl_resource_panel.h"
+#include "entity/player.h"
+#include "sdl/label/sdl_render_label.h"
+#include "entity/player_manager.h"
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
 #include "sdl/event/slot/mouse_handler_world.h"
-#include "sdl/event/slot/sdl_key_event_slot.h"
-#include "sdl/panel/sdl_resource_panel.h"
 
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
@@ -63,7 +60,7 @@ bool create_window() {
 }
 
 bool create_renderer() {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
     if (!renderer) {
         std::cout << " Failed to create renderer: " << SDL_GetError() << std::endl;
         return false;
@@ -173,7 +170,7 @@ int main(int argc, char **argv) {
     World::get_instance()->add_entity(s_entity7);
     World::get_instance()->add_entity(s_entity);
 
-    Renderer<SDL_Renderer> render_engine = Renderer<SDL_Renderer>(renderer);
+    SDLRenderer *render_engine = new SDLRenderer(renderer);
 
     sdl_image_data *world_data = new sdl_image_data{"world.png"};
     SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, {800, 600}, world_data);
@@ -190,7 +187,7 @@ int main(int argc, char **argv) {
 
     main_panel.set_world(World::get_instance());
 
-    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, &render_engine, mouse_dispatcher,
+    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, render_engine, mouse_dispatcher,
                                            key_dispatcher);
 
     MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
@@ -208,7 +205,7 @@ int main(int argc, char **argv) {
     main_window->add_component(&main_panel);
 
     vec2 resource_panel_pos = {600, 0}, resource_panel_size = {200, 30};
-    sdl_data resource_panel_data = {100, 100, 100, 100};
+    sdl_data resource_panel_data = {100, 100, 100, 0};
     SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos, resource_panel_size, &resource_panel_data);
     SDLResourcePanel right_panel(&panel_o);
 

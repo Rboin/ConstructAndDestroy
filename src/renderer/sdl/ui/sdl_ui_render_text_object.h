@@ -22,9 +22,9 @@ class SDL_UI_RenderTextObject : public SDL_RenderObject {
 public:
     SDL_UI_RenderTextObject(const vec2 &position, const vec2 &size, sdl_ui_text_data *data);
 
-    SDL_Texture *render(Renderer<SDL_Renderer> *) override;
+    void render(SDLRenderer *) override;
 
-    void init_texture(Renderer<SDL_Renderer> *);
+    void init_texture(SDLRenderer *renderer) override;
 
     void clear_result();
 };
