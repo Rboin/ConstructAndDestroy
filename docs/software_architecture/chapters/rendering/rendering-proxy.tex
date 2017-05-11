@@ -9,7 +9,28 @@ can have a rendering object that derives from the SDL\_RenderObject class seen
 in \cref{fig:renderobject-inherit}.
 \\
 \begin{lstlisting}[caption={Rendering proxy.},label={lst:rendering}]
-SDL_Texture *BaseEntity::render(Renderer<SDL_Renderer> *renderer) {
+void BaseEntity::render(SDLRenderer *renderer) {
     return representation->render(renderer);
+}
+\end{lstlisting}
+
+When a RenderObject renders itself, it sends the texture it created to the 
+SDLRenderer class to draw it on a back buffer. After the rendering loop is 
+completed, the back buffer is drawn to the screen using the 
+\lstinline{renderer->draw_to_back_buffer(SDL_Texture *, SDL_Rect *)} 
+method shown in \cref{lst:drawtobackbuffer}.
+\\
+
+\begin{lstlisting}[caption={Drawing to the back buffer.},
+label={lst:drawtobackbuffer}]
+void SDLRenderer::draw_to_back_buffer(SDL_Texture *t, SDL_Rect *r) {
+    SDL_SetRenderTarget(engine, _back_buffer);
+    // Blend the textures
+    SDL_SetTextureBlendMode(_back_buffer, SDL_BLENDMODE_BLEND);
+    SDL_SetTextureBlendMode(t, SDL_BLENDMODE_BLEND);
+    if (SDL_RenderCopy(engine, t, NULL, r) < 0) {
+        std::cerr << SDL_GetError() << std::endl;
+    }
+    SDL_SetRenderTarget(engine, NULL);
 }
 \end{lstlisting}
