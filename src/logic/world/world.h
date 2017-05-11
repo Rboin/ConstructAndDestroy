@@ -6,9 +6,8 @@
 #define C_AND_D_PROJECT_WORLD_H
 
 #include <vector>
-#include <SDL2/SDL.h>
-#include "types.h"
 #include <string>
+#include "types.h"
 #include "graph/graph.h"
 #include "entity/base_entity.h"
 #include "sdl/sdl_render_object.h"
@@ -41,7 +40,7 @@ public:
     static World *get_instance();
 
     /**
-     * The render loop.
+     * The render method.
      */
     void render(SDLRenderer *);
 
@@ -60,10 +59,7 @@ public:
 
     void add_controllable_character(MovingEntity *);
 
-    // void add_partition_tree(BSPTree*);
-    void loop(SDL_Renderer *);
     Player* getPlayer();
-
 };
 
 #endif //C_AND_D_PROJECT_WORLD_H
