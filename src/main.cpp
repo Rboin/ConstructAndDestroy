@@ -28,6 +28,7 @@
 #include <entity/player.h>
 #include <sdl/label/sdl_render_label.h>
 #include <entity/moving/knight_entity.h>
+#include <entity/static/iron_mine_entity.h>
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"

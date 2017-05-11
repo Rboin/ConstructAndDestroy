@@ -14,6 +14,9 @@ public:
     SkeletonEntity(const mesh *, vec2, float, const float, const float);
     void select();
     void deselect();
+
+    std::string get_texture() override ;
+    void set_texture(std::string src) override ;
 };
 
 

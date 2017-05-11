@@ -8,6 +8,7 @@
 #include "entity/player.h"
 #include "behaviour/move_order.h"
 #include <iostream>
+#include <entity/moving/moving_entity_manager.h>
 #include "sdl/panel/sdl_world_panel.h"
 #include "../globals.cpp"
 #include "../../../../logic/entity/moving/moving_entity_factory.h"
@@ -31,17 +32,17 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
     //check if event is a click or a drag.
     if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
         //it is a click
-
+        Player* player = PlayerManager::get_instance()->get_player(player_id);
         vec2 pos = {data.position.x, data.position.y};
-        PlayerManager::get_instance()->get_player(player_id)->select_one_unit(pos);
+        player->select_one_unit(pos);
 
 
-        if(PlayerManager::get_instance()->get_player(player_id)->selected_units.empty()){
-            PlayerManager::get_instance()->get_player(player_id)->select_building(pos);
+        if(player->selected_units.empty()){
+            player->select_building(pos);
 
             //for test purposes only:
-            if(PlayerManager::get_instance()->get_player(player_id)->selected_building == nullptr){
-                //PlayerManager::get_instance()->get_player(player_id)->mef->create(pos, MovingEntityType::LUMBERJACK);
+            if(player->selected_building == nullptr){
+                MovingEntityManager::get_instance()->add_unit(player, pos, MovingEntityType::IRONMINER);
             }
         }
 

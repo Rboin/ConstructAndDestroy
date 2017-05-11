@@ -2,6 +2,7 @@
 // Created by Stephan Schrijver on 9-5-2017.
 //
 #include <sdl/image/sdl_image_render_object.h>
+#include <iostream>
 #include "knight_entity.h"
 
 KnightEntity::KnightEntity(const mesh *base, vec2 position, float mass,
@@ -10,16 +11,26 @@ KnightEntity::KnightEntity(const mesh *base, vec2 position, float mass,
     carrying = 0;
     tiredness = 0;
     hunger = 0;
+    texture = "knight.png";
 }
 
 void KnightEntity::select() {
-    sdl_image_data* entity_data =  new sdl_image_data{"sel_knight.png"};
+    sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
     representation->set_data(entity_data);
     representation->clear_data();
 }
 
 void KnightEntity::deselect() {
-    sdl_image_data *entity_data = new sdl_image_data{"knight.png"};
+    sdl_image_data *entity_data = new sdl_image_data{texture};
     representation->set_data(entity_data);
     representation->clear_data();
+}
+
+std::string KnightEntity::get_texture() {
+    std::cout << texture << std::endl;
+    return texture;
+}
+
+void KnightEntity::set_texture(std::string src) {
+    this->texture = src;
 }

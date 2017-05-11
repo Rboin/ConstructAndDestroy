@@ -15,16 +15,26 @@ MinerEntity::MinerEntity(const mesh *base, vec2 position, float mass,
     carrying = 0;
     tiredness = 0;
     hunger = 0;
+    texture = "miner.png";
+
 }
 
 void MinerEntity::select() {
-    sdl_image_data* entity_data =  new sdl_image_data{"sel_miner.png"};
+    sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
     this->representation->set_data(entity_data);
     this->representation->clear_data();
 }
 
 void MinerEntity::deselect() {
-    sdl_image_data* entity_data =  new sdl_image_data{"miner.png"};
+    sdl_image_data* entity_data =  new sdl_image_data{texture};
     this->representation->set_data(entity_data);
     this->representation->clear_data();
+}
+
+std::string MinerEntity::get_texture() {
+    return texture;
+}
+
+void MinerEntity::set_texture(std::string src) {
+    texture = src;
 }

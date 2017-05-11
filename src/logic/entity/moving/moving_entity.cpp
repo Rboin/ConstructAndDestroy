@@ -181,3 +181,12 @@ void MovingEntity::deselect() {
     std::cout << "Deselecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
 
 }
+
+std::string MovingEntity::get_texture() {
+    std::cout << "you cannot get the texture of a moving entity class itself." << std::endl;
+}
+
+void MovingEntity::set_texture(std::string src) {
+    std::cout << "you cannot set the texture of a moving entity class itself." << std::endl;
+}
+
