@@ -1,8 +1,10 @@
 #include "entity/state/state_machine.h"
 #include "player.h"
 #include "entity/moving/moving_entity.h"
+#include "../globals.cpp"
 
-Player::Player() {
+Player::Player(int id) {
+    _id = id;
     state_machine = new StateMachine<Player>(this);
 }
 
@@ -43,15 +45,16 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
 
 
     for (int i = 0; i < this->units.size(); i++) {
-
-        float x = this->units[i]->get_position().x;
-        float y = this->units[i]->get_position().y;
+        if (units[i]->get_player()->get_id() == player_id) {
+            float x = this->units[i]->get_position().x;
+            float y = this->units[i]->get_position().y;
 
         if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
             this->units[i]->select();
             this->selected_units.push_back(this->units[i]);
         }
     }
+}
 }
 
 
@@ -94,4 +97,6 @@ void Player::clear_selected_units() {
     this->selected_units.clear();
 }
 
-
+int Player::get_id() {
+    return _id;
+}

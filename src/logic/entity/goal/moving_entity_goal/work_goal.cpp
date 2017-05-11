@@ -2,7 +2,8 @@
 // Created by Sander on 19-3-2017.
 //
 
-#include <goal/composite_goal.h>
+#include "goal/composite_goal.h"
+#include <iostream>
 #include "entity/static/resource_manager.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
 #include "graph/graph_manager.h"
@@ -27,10 +28,6 @@ WorkGoal::WorkGoal(MovingEntity *e, vec2* target_resource, int initiator) : Goal
     }
 }
 
-void WorkGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
-    _evaluators.push_back(e);
-}
-
 void WorkGoal::determine_next_goal() {
     if (this->sub_goals.size() == 0) {
         status = COMPLETED;
@@ -39,8 +36,6 @@ void WorkGoal::determine_next_goal() {
 
 void WorkGoal::set_goal_plan_path_to_resource() {
     GraphManager *gm = GraphManager::get_instance();
-    int start = gm->graph->get_node_with_position(owner->get_position());
-
     resource = find_resource_node();
     if (resource->get_index() != 0) {
         this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->find_closest_edge(resource)));

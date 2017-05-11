@@ -3,8 +3,7 @@
 //
 
 #include "lumberjack_entity.h"
-#include <iostream>
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 
 LumberJackEntity::LumberJackEntity(const mesh *base, vec2 position, float mass,
                                    const float max_force, const float max_speed) :

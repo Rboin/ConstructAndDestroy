@@ -18,7 +18,7 @@ void GroundOrderStrategy::execute(std::vector<MovingEntity *> *units, vec2 &targ
 
         if (selectedUnit->job_type != JobType::ENEMY) {
             int start = graph->get_node_with_position(selectedUnit->get_position());
-            std::vector<vec2 *> path = graph->a_star_path(graph->nodes[start], graph->nodes[goal]);
+            std::stack<vec2 *> path = graph->a_star_path(graph->nodes[start], graph->nodes[goal]);
 
             selectedUnit->get_brain()->remove_all_subgoals();
             selectedUnit->path = path;

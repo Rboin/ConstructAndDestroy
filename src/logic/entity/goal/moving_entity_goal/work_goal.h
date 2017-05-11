@@ -5,7 +5,7 @@
 #ifndef C_AND_D_PROJECT_WORK_GOAL_H
 #define C_AND_D_PROJECT_WORK_GOAL_H
 
-#include <goal/composite_goal.h>
+#include "goal/composite_goal.h"
 #include <vector>
 #include "types.h"
 #include "job_type.h"
@@ -30,8 +30,6 @@ public:
      * so new goals won't be set because there is nothing to collect.
      */
     WorkGoal(MovingEntity *, vec2* target_resource = nullptr, int initiator = Initiator::AI);
-
-    void add_evaluator(GoalEvaluator<MovingEntity> *);
 
     /**
      * calculate the most desirable goal, based on given evaluators.

@@ -14,7 +14,7 @@ PlayerManager::PlayerManager() {
 void PlayerManager::setup(int p) {
     if (_players.size() == 0) {
         for (int i = 1; i <= p; i++) {
-            _players.insert(std::make_pair(i, new Player));
+            _players.insert(std::make_pair(i, new Player(i)));
         }
     }
 }

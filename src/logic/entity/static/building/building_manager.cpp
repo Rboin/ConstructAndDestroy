@@ -6,11 +6,11 @@
 #include "entity/static/building/building_state/choosing_building_position.h"
 #include "entity/static/building/building_state/placing_building.h"
 #include "world/world.h"
-#include "entity/player_manager.h"
 #include "castle_entity.h"
 #include "building_factory.h"
 #include "entity/player.h"
 #include "entity/state/state_machine.h"
+#include "entity/player_manager.h"
 
 BuildingManager *BuildingManager::instance = nullptr;
 

@@ -7,11 +7,11 @@
 #include <cmath>
 #include <stack>
 #include <limits>
+#include <cfloat>
 #include "graph.h"
 #include "a_star_node.h"
 
 Graph::Graph(vec2 world_s) {
-    show_graph = false;
     world_size = world_s;
     generate_nodes();
     generate_adjacency_edges();
@@ -102,8 +102,8 @@ void Graph::render(SDL_Renderer *renderer) {
     }
 }
 
-std::vector<vec2 *> Graph::a_star_path(Node *start, Node *end) {
-    std::vector<vec2 *> path;
+std::stack<vec2 *> Graph::a_star_path(Node *start, Node *end) {
+    std::stack<vec2 *> path;
     AStarNode *neighbor;
     std::vector<AStarNode *> open_list;
     std::vector<AStarNode *> closed_list;
@@ -119,13 +119,7 @@ std::vector<vec2 *> Graph::a_star_path(Node *start, Node *end) {
 
         //check if end is reached
         if (current->get_index() == end->get_index()) {
-            std::vector<vec2 *> p;
-            p = build_path(current, p);
-
-            for (int i = p.size() - 1; i >= 0; i--) {
-                path.emplace_back(p[i]);
-            }
-
+            path = build_path(current, path);
             return path;
         }
 
@@ -209,27 +203,28 @@ void Graph::remove_from_list(std::vector<T *> &list, T *node) {
     }
 }
 
-std::vector<vec2 *> Graph::build_path(AStarNode *node, std::vector<vec2 *> &vector) {
-    vector.emplace_back(node->get_position());
+std::stack<vec2 *> Graph::build_path(AStarNode *node, std::stack<vec2 *> &path) {
+    path.push(node->get_position());
     if (node->parent) {
-        return build_path(node->parent, vector);
+        return build_path(node->parent, path);
     } else {
-        return vector;
+        return path;
     }
 }
 
 int Graph::get_node_with_position(vec2 pos) {
-    int n = 0;
+    float closest_cost = DBL_MAX;
+    int closest_node = 0;
     for (int i = 0; i < nodes.size(); i++) {
-        int distance_x = std::abs((nodes.at(i)->get_position()->x - pos.x));
-        int distance_y = std::abs((nodes.at(i)->get_position()->y - pos.y));
+        float distance = pos.distance_squared(nodes.at(i)->get_position()->clone());
 
-        if (distance_x < 40 && distance_y < 40) {
-            n = i;
-            return n;
+        if(distance < closest_cost){
+            closest_cost = distance;
+            closest_node = nodes.at(i)->get_index();
         }
+
     }
-    return n;
+    return closest_node;
 }
 
 int Graph::get_node_with_exact_position(vec2 pos) {

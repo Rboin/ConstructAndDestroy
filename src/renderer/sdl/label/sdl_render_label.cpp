@@ -8,6 +8,7 @@
 #include "sdl/sdl_renderer.h"
 #include "entity/player_manager.h"
 #include "entity/player.h"
+#include "../globals.cpp"
 
 
 SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string image_path, ResourceType rt, TTF_Font *font) : SDL_RenderObject(position,
@@ -17,7 +18,7 @@ SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data 
     sdl_image_data *image_data = new sdl_image_data{image_path};
 
     PlayerManager *pm = PlayerManager::get_instance();
-    Player *p = pm->get_player(1);
+    Player *p = pm->get_player(player_id);
     _resource = &p->resources;
 
     sdl_ui_text_data *text_data = new sdl_ui_text_data{_data->red, _data->green, _data->blue, std::to_string((int)_resource->get_resources(_rt)).c_str(), font};

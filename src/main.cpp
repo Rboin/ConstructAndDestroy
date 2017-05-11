@@ -1,10 +1,9 @@
-#include "iostream"
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
-#include "types.h"
-#include "vector.h"
-#include "behaviour/strategy/explore_strategy.h"
+#include "entity/moving/knight_entity.h"
+#include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "graph/graph_manager.h"
 #include "entity/goal/moving_entity_goal/work_goal.h"
@@ -34,7 +33,7 @@
 #include "behaviour/behaviour.h"
 #include "sdl/event/slot/mouse_handler_world.h"
 #include "entity/player_manager.h"
-#include "entity/goal/evaluator/follow_path_evaluator.h"
+#include "entity/goal/evaluator/combat_evaluator.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
@@ -104,12 +103,13 @@ int main(int argc, char **argv) {
     if (!init_everything()) {
         return -1;
     }
+    TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
 
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
     SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
 
     PlayerManager *pm = PlayerManager::get_instance();
-    pm->setup(4);
+    pm->setup(2);
 
     TextureManager *tm = TextureManager::get_instance();
     tm->setup(renderer);
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
     GraphManager *gm = GraphManager::get_instance();
     gm->setup({(float) size_x, (float) size_y});
 
-    std::vector<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
+    std::stack<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
 
     World::get_instance()->add_graph(gm->graph);
 
@@ -145,14 +145,29 @@ int main(int argc, char **argv) {
     entity->set_goal(think_goal);
     entity->set_player(1);
 
-    TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
-
     vec2 entity_size = {50, 50};
     sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
     SDL_ImageRenderObject *entity_render_object = new SDL_ImageRenderObject(pos, entity_size, entity_data);
     entity->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(entity);
+
+    ForceCalculator *knight_calculator = new BasicForceCalculator();
+    Behaviour *knight_behaviour = new Behaviour(knight_calculator);
+    MovingEntity *knight_entity = new KnightEntity(&base, {100,100}, 100, 0.2, 0.2);
+    ThinkGoal *knight_think_goal = new ThinkGoal(knight_entity);
+    knight_think_goal->add_evaluator(new CombatEvaluator());
+
+    knight_entity->set_behaviour(knight_behaviour);
+    knight_entity->set_goal(knight_think_goal);
+    knight_entity->set_player(2);
+
+    vec2 knight_entity_size = {50, 50};
+    sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};
+    SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageRenderObject(pos, knight_entity_size, knight_entity_data);
+    knight_entity->set_representation(knight_entity_render_object);
+
+    World::get_instance()->add_entity(knight_entity);
 
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);

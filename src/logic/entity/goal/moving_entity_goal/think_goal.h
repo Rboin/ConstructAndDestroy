@@ -33,15 +33,9 @@ public:
 
     void set_goal_wander();
 
-    void set_goal_explore();
-
     void set_goal_obstacle_avoidance(vec2 *);
 
     void set_goal_follow_path();
-
-    void set_goal_rest();
-
-    void set_goal_go_eat();
 
     bool has_sub_goal(StrategyGoalType);
 
@@ -50,6 +44,8 @@ public:
     void set_goal_work();
 
     void set_goal_gather_resource();
+
+    void set_goal_combat();
 
     void activate() override;
 

@@ -6,7 +6,6 @@
 #define C_AND_D_PROJECT_WORK_EVALUATOR_H
 
 
-#include "entity/goal/moving_entity_goal/job_type.h"
 #include "goal/goal_evaluator.h"
 
 class MovingEntity;

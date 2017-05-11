@@ -16,7 +16,6 @@
 class AStarNode;
 class Graph {
 private:
-    bool show_graph;
     vec2 world_size;
 public:
     std::vector<vec2 *> draw_path;
@@ -35,12 +34,10 @@ public:
 
     void render(SDL_Renderer *);
 
-    void set_show_graph();
-
     /*!
      * Calculates the a star path using manhattan heuristic.
      */
-    std::vector<vec2*> a_star_path(Node *, Node *);
+    std::stack<vec2*> a_star_path(Node *, Node *);
 
     /*!
      * Checks if a node with the given index is in the current vector
@@ -69,9 +66,9 @@ public:
 
     /*!
      * Recursive function that builds the path for a star
-     * @return a vector with position
+     * @return a stack with positions
      */
-    std::vector<vec2*> build_path(AStarNode*, std::vector<vec2*>&);
+    std::stack<vec2*> build_path(AStarNode*, std::stack<vec2*>&);
 
     /*!
      * This function returns a node that is close to the given position

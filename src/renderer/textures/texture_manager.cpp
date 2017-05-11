@@ -67,8 +67,6 @@ SDL_Texture *TextureManager::get_texture(TextureTypes tt) {
     else if (tt == WAREHOUSETEXTURE) { texture = "warehouse.png"; }
     else if (tt == CASTLETEXTURE) { texture = "castle.png"; }
     else if (tt == WORLDTEXTURE) { texture = "world.png"; }
-    else if (tt == RESTAURANTTEXTURE) { texture = "restaurant.png"; }
-    else if (tt == CAMPFIRETEXTURE) { texture = "campfire.png"; }
     else if (tt == BOWTEXTURE) { texture = "bow.png"; }
     else if (tt == AXETEXTURE) { texture = "axe.png"; }
     else if (tt == SEL_AXETEXTURE) { texture = "sel_axe.png"; }
