@@ -15,12 +15,8 @@
 #include "goal/goal_evaluator.h"
 #include "behaviour/behaviour.h"
 
-FollowPathGoal::FollowPathGoal(MovingEntity *e) : GoalComposite(e, FOLLOWPATH) {
+FollowPathGoal::FollowPathGoal(MovingEntity *e, int initiator) : GoalComposite(e, FOLLOWPATH, initiator) {
     _owner = e;
-}
-
-void FollowPathGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
-    _evaluators.push_back(e);
 }
 
 void FollowPathGoal::determine_next_goal() {

@@ -11,7 +11,7 @@ class MovingEntity;
 
 class EatGoal : public AtomicGoal<MovingEntity> {
 public:
-    EatGoal(MovingEntity *);
+    EatGoal(MovingEntity *, int initiator = Initiator::AI);
 
     void activate() override;
 

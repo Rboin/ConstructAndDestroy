@@ -17,7 +17,7 @@ class Node;
 class PlanPathGoal : public AtomicGoal<MovingEntity> {
     Node *goal;
 public:
-    PlanPathGoal(MovingEntity *, Node *);
+    PlanPathGoal(MovingEntity *, Node *, int initiator = Initiator::AI);
 
     void activate() override;
 

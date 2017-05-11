@@ -10,8 +10,8 @@
 #include "vector.h"
 #include "behaviour/behaviour.h"
 
-ObstacleAvoidanceGoal::ObstacleAvoidanceGoal(MovingEntity *t, vec2 *avoid_target) :
-        AtomicGoal(t, OBSTACLE_AVOIDANCE) {
+ObstacleAvoidanceGoal::ObstacleAvoidanceGoal(MovingEntity *t, vec2 *avoid_target, int initiator) :
+        AtomicGoal(t, OBSTACLE_AVOIDANCE, initiator) {
     _avoid_target = avoid_target;
     _max_range = 100;
 }

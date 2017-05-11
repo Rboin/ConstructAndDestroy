@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "types.h"
 #include "vector.h"
 #include "behaviour/strategy/explore_strategy.h"
@@ -138,6 +139,7 @@ int main(int argc, char **argv) {
     ThinkGoal *think_goal = new ThinkGoal(entity);
 
     think_goal->add_evaluator(new WorkEvaluator());
+    think_goal->add_evaluator(new FollowPathEvaluator());
 
     entity->set_behaviour(behaviour);
     entity->set_goal(think_goal);

@@ -33,6 +33,7 @@ set(SOURCE_FILES
         entity/goal/evaluator/obstacle_avoid_evaluator.h
         entity/goal/evaluator/wander_evaluator.h
         entity/goal/evaluator/explore_evaluator.h
+        entity/goal/moving_entity_goal/initiator.h
         entity/goal/moving_entity_goal/atomic_goal_type.h
         entity/goal/moving_entity_goal/strategy_goal_type.h
         entity/goal/moving_entity_goal/job_type.h
@@ -167,8 +168,7 @@ set(SOURCE_FILES
         fuzzy/fuzzy_set_right_shoulder.cpp
         entity/player.cpp
         entity/resources.cpp
-        entity/player_manager.cpp
-        )
+        entity/player_manager.cpp)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

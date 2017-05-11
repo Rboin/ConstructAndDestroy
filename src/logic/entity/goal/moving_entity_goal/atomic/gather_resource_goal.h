@@ -12,7 +12,7 @@ class MovingEntity;
 class GatherResourceGoal : public AtomicGoal<MovingEntity> {
     ResourceEntity *resource;
 public:
-    GatherResourceGoal(MovingEntity *, vec2*);
+    GatherResourceGoal(MovingEntity *, vec2*, int initiator = Initiator::AI);
 
     void activate() override;
 

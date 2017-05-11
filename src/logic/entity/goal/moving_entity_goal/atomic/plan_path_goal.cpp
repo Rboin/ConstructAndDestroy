@@ -11,7 +11,7 @@
 #include "entity/moving/moving_entity.h"
 #include "graph/graph.h"
 
-PlanPathGoal::PlanPathGoal(MovingEntity *t, Node *g) : AtomicGoal(t, PLANPATH) {
+PlanPathGoal::PlanPathGoal(MovingEntity *t, Node *g, int initiator) : AtomicGoal(t, PLANPATH, initiator) {
     status = ACTIVE;
     goal = g;
 }

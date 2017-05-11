@@ -6,7 +6,7 @@
 #include "entity/moving/moving_entity.h"
 #include "sleep_goal.h"
 
-SleepGoal::SleepGoal(MovingEntity *e) : AtomicGoal<MovingEntity>(e, SLEEP) {
+SleepGoal::SleepGoal(MovingEntity *e, int initiator) : AtomicGoal<MovingEntity>(e, SLEEP, initiator) {
     tiredness_start = e->tiredness;
 }
 

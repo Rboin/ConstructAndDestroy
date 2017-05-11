@@ -12,11 +12,15 @@
 #include "strategy_goal_type.h"
 #include "follow_path_goal.h"
 
-GoEatGoal::GoEatGoal(MovingEntity *e) : GoalComposite(e, GOEAT) {
+GoEatGoal::GoEatGoal(MovingEntity *e, int initiator) : GoalComposite(e, GOEAT, initiator) {
     set_goal_plan_path_to_restaurant();
     set_goal_follow_path();
     set_goal_eat();
 }
+
+//GoEatGoal::GoEatGoal(MovingEntity *e) : GoalComposite(e, GOEAT, initiator) {
+//    GoEatGoal(e);
+//}
 
 void GoEatGoal::determine_next_goal() {
     if (this->sub_goals.size() == 0) {

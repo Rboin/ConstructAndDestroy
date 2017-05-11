@@ -2,6 +2,8 @@
 #define CONSTRUCT_AND_DESTROY_GROUND_ORDER_STRATEGY_H
 
 #include "order_strategy.h"
+
+class FollowPathGoal;
 class MovingEntity;
 class BaseEntity;
 

@@ -1,7 +1,6 @@
-#include <graph/graph_manager.h>
-#include <graph/graph.h>
-#include <iostream>
-#include <entity/goal/moving_entity_goal/atomic/plan_path_goal.h>
+#include "graph/graph_manager.h"
+#include "graph/graph.h"
+#include "entity/goal/moving_entity_goal/follow_path_goal.h"
 #include "ground_order_strategy.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 
@@ -23,7 +22,7 @@ void GroundOrderStrategy::execute(std::vector<MovingEntity *> *units, vec2 &targ
 
             selectedUnit->get_brain()->remove_all_subgoals();
             selectedUnit->path = path;
-            selectedUnit->get_brain()->set_goal_follow_path();
+            selectedUnit->get_brain()->add_subgoal(new FollowPathGoal(selectedUnit, Initiator::PLAYER));
         }
     }
 }

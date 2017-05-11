@@ -58,6 +58,8 @@ public:
     void terminate() override;
 
     const char *get_name() const override;
+
+    Goal<MovingEntity>* initiate_goal(Goal<MovingEntity>* goal, int initiator);
 };
 
 

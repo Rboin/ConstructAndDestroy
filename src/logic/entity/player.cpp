@@ -49,7 +49,6 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
 
         if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
             this->units[i]->select();
-            this->units[i]->take_possession();
             this->selected_units.push_back(this->units[i]);
         }
     }
@@ -78,7 +77,6 @@ void Player::select_one_unit(vec2 pos) {
 
         if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
             this->units[i]->select();
-            this->units[i]->take_possession();
             this->selected_units.push_back(this->units[i]);
 
             // exit for loop after selecting one unit.
@@ -92,7 +90,6 @@ void Player::select_one_unit(vec2 pos) {
 void Player::clear_selected_units() {
     for (int i = 0; i < this->selected_units.size(); i++) {
         this->selected_units[i]->deselect();
-        this->selected_units[i]->exorcise();
     }
     this->selected_units.clear();
 }
