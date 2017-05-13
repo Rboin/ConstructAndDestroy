@@ -27,32 +27,10 @@ TextureManager *TextureManager::get_instance() {
 
 SDL_Texture *TextureManager::load_texture(std::string path) {
     path = "res/textures/" + path;
-    int width, height;
 
     // Load the image into a texture
     SDL_Texture *image_texture = IMG_LoadTexture(_renderer, path.c_str());
-    // Don't blend the image together, if you do so,
-    // it will try to combine with what is already on the texture's position.
-    SDL_SetTextureBlendMode(image_texture, SDL_BLENDMODE_NONE);
-
-    // Get width and height
-    SDL_QueryTexture(image_texture, NULL, NULL, &width, &height);
-
-    // Create new texture with correct access and format.
-    // We need this to draw textures on top of one another.
-    SDL_Texture *result_texture = SDL_CreateTexture(_renderer,
-                                                    SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
-                                                    width, height);
-    SDL_SetTextureBlendMode(result_texture, SDL_BLENDMODE_BLEND);
-
-    // Copy image onto resulting texture
-    SDL_SetRenderTarget(_renderer, result_texture);
-    SDL_RenderCopy(_renderer, image_texture, NULL, NULL);
-    SDL_SetRenderTarget(_renderer, NULL);
-
-    // Destroy loaded image texture
-    SDL_DestroyTexture(image_texture);
-    return result_texture;
+    return image_texture;
 }
 
 
