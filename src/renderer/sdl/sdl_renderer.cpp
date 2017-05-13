@@ -10,17 +10,14 @@ SDLRenderer::SDLRenderer(SDL_Renderer *engine) : Renderer<SDL_Renderer>(engine) 
     SDL_GetRendererOutputSize(engine, &width, &height);
     _back_buffer = create_texture(width, height, SDL_TEXTUREACCESS_TARGET);
     SDL_SetRenderDrawBlendMode(engine, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderTarget(engine, _back_buffer);
 }
 
 void SDLRenderer::draw_to_back_buffer(SDL_Texture *t, SDL_Rect *r) {
     SDL_SetRenderTarget(engine, _back_buffer);
-    // Blend the textures
-    SDL_SetTextureBlendMode(_back_buffer, SDL_BLENDMODE_BLEND);
-    SDL_SetTextureBlendMode(t, SDL_BLENDMODE_BLEND);
     if (SDL_RenderCopy(engine, t, NULL, r) < 0) {
         std::cerr << SDL_GetError() << std::endl;
     }
-    SDL_SetRenderTarget(engine, NULL);
 }
 
 SDL_Texture *SDLRenderer::get_back_buffer() {
@@ -35,12 +32,14 @@ SDL_Texture *SDLRenderer::create_texture(int width, int height, SDL_TextureAcces
     return tmp;
 }
 
-void SDLRenderer::clear() {
+void SDLRenderer::clear () {
+    SDL_SetRenderDrawColor(engine, 0, 0, 0, 255);
     SDL_RenderClear(engine);
 }
 
-void SDLRenderer::show() {
+void SDLRenderer::show () {
     SDL_SetRenderTarget(engine, NULL);
     SDL_RenderCopy(engine, _back_buffer, NULL, NULL);
     SDL_RenderPresent(engine);
+    SDL_SetRenderTarget(engine, _back_buffer);
 }

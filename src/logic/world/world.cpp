@@ -52,7 +52,6 @@ void World::update(float d_t) {
 }
 
 void World::render(SDLRenderer *renderer) {
-    _representation->clear_data();
     _representation->render(renderer);
 
     for (unsigned long i = 0; i < entities.size(); i++) {

@@ -29,7 +29,6 @@ void SDLWorldPanel::render(SDLRenderer *renderer, float d) {
 
 void SDLWorldPanel::draw_selection_rect(int start_x, int start_y, int end_x, int end_y, SDLRenderer *_renderer) {
 
-    SDL_SetRenderTarget(_renderer->get_engine(), _renderer->get_back_buffer());
     SDL_SetRenderDrawColor(_renderer->get_engine(), 255, 0, 0, 255);
     SDL_Rect *rect = new SDL_Rect;
 
@@ -47,5 +46,4 @@ void SDLWorldPanel::draw_selection_rect(int start_x, int start_y, int end_x, int
     if (start_x > end_x) { rect->w = rect->w * -1; }
 
     SDL_RenderDrawRect(_renderer->get_engine(), rect);
-    SDL_SetRenderTarget(_renderer->get_engine(), NULL);
 }

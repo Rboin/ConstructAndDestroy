@@ -14,14 +14,8 @@ SDL_RenderObject::SDL_RenderObject(const vec2 &position, const vec2 &size, sdl_d
 }
 
 void SDL_RenderObject::render(SDLRenderer *renderer) {
-    if (!_result) {
-        init_texture(renderer);
-    }
-    SDL_SetRenderTarget(renderer->get_engine(), _result);
     SDL_SetRenderDrawColor(renderer->get_engine(), _data->red, _data->green, _data->blue, _data->alpha);
     SDL_RenderFillRect(renderer->get_engine(), rectangle);
-    renderer->draw_to_back_buffer(_result, rectangle);
-
 }
 
 void SDL_RenderObject::init_texture(SDLRenderer *renderer) {
@@ -29,7 +23,7 @@ void SDL_RenderObject::init_texture(SDLRenderer *renderer) {
         SDL_DestroyTexture(_result);
         _result = nullptr;
     }
-    _result = renderer->create_texture((int) _size.x, (int) _size.y);
+    _result = renderer->create_texture((int) _size.x, (int) _size.y, SDL_TEXTUREACCESS_TARGET);
 }
 
 void SDL_RenderObject::clear_texture(SDLRenderer *renderer, SDL_Rect *rect) {
