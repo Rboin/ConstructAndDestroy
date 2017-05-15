@@ -35,10 +35,9 @@ void WorkGoal::determine_next_goal() {
 }
 
 void WorkGoal::set_goal_plan_path_to_resource() {
-    GraphManager *gm = GraphManager::get_instance();
     resource = find_resource_node();
     if (resource->get_index() != 0) {
-        this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->find_closest_edge(resource)));
+        this->sub_goals.push_front(new PlanPathGoal(owner, resource));
     }
 }
 

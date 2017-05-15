@@ -22,6 +22,12 @@ const int PlanPathGoal::process() {
     GraphManager *gm = GraphManager::get_instance();
     Node *n = gm->graph->nodes[gm->graph->get_node_with_position(owner->get_position().clone())];
 
+    //Check if the node still has edges. When a player places a building on this node after the
+    //this goal has been initiated the goal could become unreachable.
+    if(!goal->is_walkable()){
+        goal = gm->graph->find_closest_edge(goal);
+    }
+
     owner->path = gm->graph->a_star_path(n,goal);
     //Popping the first edge from the path if we have more than 2.
     //This will prevent the entity from moving backwards while halfway
