@@ -156,7 +156,6 @@ set(SOURCE_FILES
         entity/goal/moving_entity_goal/hunt_target_goal.cpp
         entity/goal/moving_entity_goal/hunt_target_goal.h)
 
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
 

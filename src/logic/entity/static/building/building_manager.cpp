@@ -2,10 +2,10 @@
 // Created by Stephan on 18-04-2017.
 //
 
+#include "world/world.h"
 #include "building_manager.h"
 #include "entity/static/building/building_state/choosing_building_position.h"
 #include "entity/static/building/building_state/placing_building.h"
-#include "world/world.h"
 #include "castle_entity.h"
 #include "building_factory.h"
 #include "entity/player.h"
@@ -40,7 +40,7 @@ void BuildingManager::choose_building_position(int player_id, std::string type) 
     Player* player = PlayerManager::get_instance()->get_player(player_id);
 
     // Change state of player to ChoosingBuildingPosition
-    player->positioning_object = be;
+    player->positioning_building = be;
     player->state_machine->change_state(new ChoosingBuildingPosition());
 
 
@@ -51,7 +51,7 @@ void BuildingManager::add_building(Player* p, BuildingEntity *be) {
     buildings.emplace_back(be);
 
     // Add building to the player
-    p->buildings.push_back(p->positioning_object);
+    p->buildings.push_back(p->positioning_building);
 }
 
 void BuildingManager::add_building(int player_id, BuildingEntity *be)
@@ -80,7 +80,7 @@ vec2 BuildingManager::get_closest_building(vec2 pos, BuildingType bt) {
 void BuildingManager::remove_building(Player * p, BuildingEntity *be) {
 
     // Remove building entity from world so it will not be drawn anymore
-    World::get_instance()->remove_entity(p->positioning_object);
+    World::get_instance()->remove_entity(p->positioning_building);
     
     // Delete building from the building array kept by the BuildingManager
     for (std::vector<BuildingEntity *>::iterator iter = buildings.begin(); iter != buildings.end(); ++iter) {
@@ -99,6 +99,6 @@ void BuildingManager::remove_building(Player * p, BuildingEntity *be) {
     }
 
     // afterwards: safely delete the building
-    delete p->positioning_object;
-    p->positioning_object = nullptr;
+    delete p->positioning_building;
+    p->positioning_building = nullptr;
 }

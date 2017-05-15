@@ -11,8 +11,8 @@
 #include "entity/player.h"
 
 void AbortPlacingBuilding::enter(Player *p) {
-    BuildingManager::get_instance()->remove_building(p, p->positioning_object);
-
+    BuildingManager::get_instance()->remove_building(p, p->positioning_building);
+    p->state_machine->clear_state();
 }
 
 void AbortPlacingBuilding::execute(Player *p) {

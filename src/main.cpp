@@ -160,6 +160,7 @@ int main(int argc, char **argv) {
 
     knight_entity->set_behaviour(knight_behaviour);
     knight_entity->set_goal(knight_think_goal);
+
     knight_entity->set_player(2);
 
     vec2 knight_entity_size = {50, 50};

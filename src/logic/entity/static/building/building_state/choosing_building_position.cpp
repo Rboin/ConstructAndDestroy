@@ -12,10 +12,8 @@
 #include "entity/player.h"
 
 void ChoosingBuildingPosition::enter(Player *p) {
-
-
     // Set to transparent object
-    p->positioning_object->set_transparent_or_border(true);
+    p->positioning_building->set_transparent_or_border(true,false);
 }
 
 void ChoosingBuildingPosition::execute(Player *p) {
@@ -38,10 +36,10 @@ void ChoosingBuildingPosition::execute(Player *p) {
          * // Calculate the object its position if you want the mouse to be the
          * // center of the object.
          *
-         * int new_obj_x = x - (p->positioning_object->get_representation()->get_size()->x /2);
-         * int new_obj_y = y - (p->positioning_object->get_representation()->get_size()->y /2);
+         * int new_obj_x = x - (p->positioning_building->get_representation()->get_size()->x /2);
+         * int new_obj_y = y - (p->positioning_building->get_representation()->get_size()->y /2);
          *
-         * p->positioning_object->set_position(new_obj_x, new_obj_y, false);
+         * p->positioning_building->set_position(new_obj_x, new_obj_y, false);
          *
          * UNCOMMENT UNTIL HERE TO SET OBJECT TO MOUSE POSITION
         */
@@ -53,13 +51,13 @@ void ChoosingBuildingPosition::execute(Player *p) {
 
         float new_obj_x = curr_node->get_position()->x;
         float new_obj_y = curr_node->get_position()->y;
-        p->positioning_object->set_position(new_obj_x, new_obj_y, false);
+        p->positioning_building->set_position(new_obj_x, new_obj_y, false);
 
         if (!curr_node->is_walkable()) {
             // This node is not walkable, so set to other texture!
-            p->positioning_object->set_transparent_or_border(true, false);
+            p->positioning_building->set_transparent_or_border(true, true);
         } else {
-            p->positioning_object->set_transparent_or_border(true);
+            p->positioning_building->set_transparent_or_border(true, false);
         }
     }
 }

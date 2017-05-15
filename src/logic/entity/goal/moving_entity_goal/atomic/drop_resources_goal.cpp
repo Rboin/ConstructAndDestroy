@@ -18,7 +18,7 @@ void DropResourcesGoal::activate() {
 
 const int DropResourcesGoal::process() {
     activate_if_inactive();
-    owner->get_player()->resources.add_resources(rt,owner->carrying);
+    owner->get_player()->resources->add_resources(rt,owner->carrying);
     owner->carrying = 0.0f;
     status = COMPLETED;
     return status;

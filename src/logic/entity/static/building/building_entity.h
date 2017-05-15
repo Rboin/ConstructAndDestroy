@@ -9,16 +9,20 @@
 #include "entity/static/static_entity.h"
 
 template<class T> class StateMachine;
+class Resources;
 
 class BuildingEntity : public StaticEntity {
 private:
     BuildingType building_type;
+protected:
+    Resources* costs;
 public:
     BuildingEntity(const mesh *, vec2, float, BuildingType, TextureTypes);
     BuildingEntity(const mesh *, float, BuildingType, TextureTypes);
 
-    BuildingType get_building_type();
+    Resources* get_costs();
 
+    BuildingType get_building_type();
     /*
      * This will change the texture of a building entity.
      * The first boolean will determine if the texture should be transparent
@@ -27,7 +31,7 @@ public:
      *
      * TODO: transparency should be set with a SDL method instead of setting another texture!
      */
-    virtual void set_transparent_or_border(bool, bool = true) = 0;
+    virtual void set_transparent_or_border(bool, bool) = 0;
 };
 
 

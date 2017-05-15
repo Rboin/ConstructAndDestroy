@@ -6,6 +6,7 @@
 Player::Player(int id) {
     _id = id;
     state_machine = new StateMachine<Player>(this);
+    resources = new Resources(0, 0, 0, 0);
 }
 
 void Player::update() {
@@ -26,35 +27,36 @@ void Player::select_units_in_rectangle(float start_x, float start_y, float end_x
     // so that we can determine whether a position is inside or outside the selection.
 
     //Case: Standard selection. From Top Left to right bottom.
-    float leftOffset = start_x;
-    float rightOffset = end_x;
-    float topOffset = start_y;
-    float botOffset = end_y;
+    float left_offset = start_x;
+    float right_offset = end_x;
+    float top_offset = start_y;
+    float bot_offset = end_y;
 
     //Case: Reversed selection. from Right to left
     if (start_x > end_x) {
-        leftOffset = end_x;
-        rightOffset = start_x;
+        left_offset = end_x;
+        right_offset = start_x;
     }
 
     //Case: Upwards selection. From bot to top.
     if (start_y > end_y) {
-        topOffset = end_y;
-        botOffset = start_y;
+        top_offset = end_y;
+        bot_offset = start_y;
     }
 
 
     for (int i = 0; i < this->units.size(); i++) {
-        if (units[i]->get_player()->get_id() == player_id) {
-            float x = this->units[i]->get_position().x;
-            float y = this->units[i]->get_position().y;
+        float x = this->units[i]->get_position().x;
+        float y = this->units[i]->get_position().y;
 
-        if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
+
+        if (x >= left_offset && x <= right_offset && y >= top_offset && y <= bot_offset) {
+
             this->units[i]->select();
             this->selected_units.push_back(this->units[i]);
         }
+
     }
-}
 }
 
 
@@ -66,11 +68,11 @@ void Player::select_one_unit(vec2 pos) {
 
     //Create offsets of a rectangle. This is done because the image of a unit is also a rectangle but its position
     // is the top left corner of the rectangle. So we create a rectangle and look for the first unit found in the
-    // created rectangle. Values where determined by testing alot.
-    float leftOffset = pos.x - 45;
-    float rightOffset = pos.x;
-    float topOffset = pos.y -45;
-    float botOffset = pos.y;
+    // created rectangle. Values where determined by testing a lot.
+    float left_offset = pos.x - 45;
+    float right_offset = pos.x;
+    float top_offset = pos.y - 45;
+    float bot_offset = pos.y;
 
 
     for (int i = 0; i < this->units.size(); i++) {
@@ -78,7 +80,7 @@ void Player::select_one_unit(vec2 pos) {
         float x = this->units[i]->get_position().x;
         float y = this->units[i]->get_position().y;
 
-        if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
+        if (x >= left_offset && x <= right_offset && y >= top_offset && y <= bot_offset) {
             this->units[i]->select();
             this->selected_units.push_back(this->units[i]);
 
@@ -86,8 +88,6 @@ void Player::select_one_unit(vec2 pos) {
             break;
         }
     }
-
-
 }
 
 void Player::clear_selected_units() {
@@ -99,4 +99,5 @@ void Player::clear_selected_units() {
 
 int Player::get_id() {
     return _id;
+
 }

@@ -1,9 +1,8 @@
 //
 // Created by Stephan Schrijver on 1-5-2017.
 //
-
-#include "entity/player_manager.h"
 #include "entity/player.h"
+#include "entity/player_manager.h"
 #include "entity/state/state_machine.h"
 #include "entity/static/building/building_state/choosing_building_position.h"
 #include "entity/static/building/building_state/placing_building.h"

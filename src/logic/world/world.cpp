@@ -4,14 +4,13 @@
 
 #include <ctime>
 #include <iostream>
-#include <SDL_events.h>
-#include "neighbourhood/neighbourhood_manager.h"
 #include "world.h"
 #include "tree/bsp_tree.h"
 #include "tree/bsp_node.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include <typeinfo>
+#include "neighbourhood/neighbourhood_manager.h"
 #include "entity/static/resource_manager.h"
 #include "../globals.cpp"
 #include "entity/player.h"

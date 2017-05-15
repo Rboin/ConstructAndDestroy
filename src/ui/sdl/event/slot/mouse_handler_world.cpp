@@ -32,7 +32,8 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
     if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
         //it is a click
         vec2 pos = {(float) data.position.x, (float) data.position.y};
-        PlayerManager::get_instance()->get_player(1)->select_one_unit(pos);
+
+        PlayerManager::get_instance()->get_player(player_id)->select_one_unit(pos);
 
     } else {
         //it is a drag.
@@ -87,7 +88,6 @@ void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_p
             return;
     }
 }
-
 
 void MouseHandlerWorld::handle_right_button(sdl_mouse_event_data &data, const vec2 &v) {
     MoveOrder::get_instance()->orderMove(&PlayerManager::get_instance()->get_player(player_id)->selected_units, v);

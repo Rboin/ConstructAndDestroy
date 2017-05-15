@@ -4,13 +4,16 @@
 
 #include "sdl/image/sdl_image_render_object.h"
 #include "castle_entity.h"
+#include "entity/resources.h"
 
-CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : BuildingEntity(
+CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) :  BuildingEntity(
         base, position, mass, CASTLE, CASTLETEXTURE) {
+    costs = new Resources(0, 0, 5, 0);
 }
 
 CastleEntity::CastleEntity(const mesh *base, float mass) : BuildingEntity(
         base, mass, CASTLE, CASTLETEXTURE) {
+    costs = new Resources(0, 0, 5, 0);
 }
 
 void CastleEntity::set_transparent_or_border(bool transparent, bool border) {
