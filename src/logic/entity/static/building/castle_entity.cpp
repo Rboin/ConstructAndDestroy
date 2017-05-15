@@ -43,3 +43,18 @@ void CastleEntity::deselect(){
     this->representation->set_data(entity_data);
     this->representation->clear_data();
 }
+
+void CastleEntity::update(float d) {
+    if(!this->orders.empty()){
+        this->order_unit(_player, this->_position, orders.front());
+    }
+}
+
+void CastleEntity::order_unit(Player *player, vec2 position, MovingEntityType moving_entity_type) {
+    std::cout << "got em coach" << std::endl;
+    this->orders.pop_back();
+}
+
+void CastleEntity::order_unit(MovingEntityType moving_entity_type) {
+    this->orders.push_back(moving_entity_type);
+}

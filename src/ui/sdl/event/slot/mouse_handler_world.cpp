@@ -9,6 +9,7 @@
 #include "behaviour/move_order.h"
 #include <iostream>
 #include <entity/moving/moving_entity_manager.h>
+#include <entity/static/building/castle_entity.h>
 #include "sdl/panel/sdl_world_panel.h"
 #include "../globals.cpp"
 #include "../../../../logic/entity/moving/moving_entity_factory.h"
@@ -41,8 +42,12 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
             player->select_building(pos);
 
             //for test purposes only:
-            if(player->selected_building == nullptr){
-                MovingEntityManager::get_instance()->add_unit(player, pos, MovingEntityType::IRONMINER);
+            if(dynamic_cast<CastleEntity*>(player->selected_building) != NULL){
+                std::cout << "through if" << std::endl;
+                dynamic_cast<CastleEntity*>(player->selected_building)->order_unit(MovingEntityType::LUMBERJACK);
+            } else {
+                std::cout << "not through if" << std::endl;
+
             }
         }
 
