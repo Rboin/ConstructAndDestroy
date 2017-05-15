@@ -180,7 +180,7 @@ int main(int argc, char **argv) {
     // Begin gold miner entity
     ForceCalculator *gold_miner_calculator = new BasicForceCalculator();
     Behaviour *gold_miner_behaviour = new Behaviour(gold_miner_calculator);
-    MovingEntity *gold_miner_entity = new MinerEntity(&base, {100, 100}, 100, 0.2, 0.2, IRONMINER);
+    MovingEntity *gold_miner_entity = new MinerEntity(&base, {100, 100}, 100, 0.2, 0.2, GOLDMINER);
     ThinkGoal *gold_miner_think_goal = new ThinkGoal(gold_miner_entity);
     gold_miner_think_goal->add_evaluator(new WorkEvaluator());
     gold_miner_think_goal->add_evaluator(new FollowPathEvaluator());
@@ -221,7 +221,7 @@ int main(int argc, char **argv) {
     // End warehouse entity
 
     // Begin gold mine entity
-    vec2 gold_mine_position = {300, 280}, gold_mine_size = {50, 50};
+    vec2 gold_mine_position = {320, 280}, gold_mine_size = {50, 50};
     ResourceEntity *gold_mine_entity = new GoldMineEntity(&base, gold_mine_position, 50);
     sdl_image_data *gold_mine_data = new sdl_image_data{"goldmine.png"};
     gold_mine_entity->set_textures("goldmine.png", "depletedgoldmine.png");
