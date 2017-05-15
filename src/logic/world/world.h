@@ -12,11 +12,10 @@
 #include "entity/base_entity.h"
 #include "sdl/sdl_render_object.h"
 
-class BSPTree;
-
+class BaseEntity;
 class MovingEntity;
 class Player;
-class BaseEntity;
+class Wave;
 
 class World {
 private:
@@ -25,6 +24,7 @@ private:
     std::vector<BaseEntity *> entities;
     Graph *graph;
     SDL_RenderObject *_representation;
+    Wave *_wave;
 
     World();
 
@@ -32,6 +32,8 @@ public:
     ~World();
 
     void set_render_object(SDL_RenderObject *);
+
+    void set_wave(Wave *);
 
     static World *get_instance();
 

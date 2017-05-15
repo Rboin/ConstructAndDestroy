@@ -2,17 +2,14 @@
 // Created by robin on 2/21/17.
 //
 
-#include <ctime>
 #include "neighbourhood/neighbourhood_manager.h"
-#include <iostream>
 #include "world.h"
+#include "wave/wave.h"
 #include "tree/bsp_tree.h"
 #include "tree/bsp_node.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
-#include <typeinfo>
 #include "entity/static/resource_manager.h"
-#include "../globals.cpp"
 #include "entity/player.h"
 #include "entity/player_manager.h"
 
@@ -35,6 +32,9 @@ World *World::get_instance() {
 void World::update(float d_t) {
     for (unsigned int i = 0; i < entities.size(); i++) {
         entities.at(i)->update(d_t);
+    }
+    if(_wave) {
+        _wave->update(d_t);
     }
     ResourceManager *rm = ResourceManager::get_instance();
     rm->replenish_resources(d_t);
@@ -92,4 +92,8 @@ void World::add_graph(Graph *g) {
 
 void World::set_render_object(SDL_RenderObject *r) {
     _representation = r;
+}
+
+void World::set_wave(Wave *wave) {
+    _wave = wave;
 }

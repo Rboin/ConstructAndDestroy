@@ -7,8 +7,8 @@
 
 class Wave {
 private:
-    static float WAVE_DURATION, STAT_MODIFIER_INCREMENT, SPAWNER_DOWNTIME;
-    float _delta_time_wave, _delta_time_spawner, _stat_modifier;
+    float _wave_duration, _stat_modifier_increment, _spawner_downtime,
+        _delta_time_wave, _delta_time_spawner, _stat_modifier;
 
     unsigned int _wave_size, _current_wave;
 
@@ -30,6 +30,8 @@ public:
      * @param float delta time
      */
     void update(float);
+
+    const unsigned int get_wave_size();
 
     const unsigned int get_current_wave();
 
