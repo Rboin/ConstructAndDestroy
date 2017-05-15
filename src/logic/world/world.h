@@ -20,16 +20,13 @@ class BaseEntity;
 
 class World {
 private:
-    std::vector<BaseEntity *> entities;
-    MovingEntity *controllable_character;
-    static World *instance;
-    Graph *graph;
-    std::string texture_path;
-    World();
     static World *_instance;
 
-public:
+    std::vector<BaseEntity *> entities;
+    Graph *graph;
     SDL_RenderObject *_representation;
+
+    World();
 
 public:
     ~World();
@@ -55,8 +52,6 @@ public:
     std::vector<BaseEntity *> get_entities();
 
     void add_graph(Graph *);
-
-    void add_controllable_character(MovingEntity *);
 
     Player* getPlayer();
 };

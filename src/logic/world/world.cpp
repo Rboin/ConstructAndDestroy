@@ -20,20 +20,16 @@
 extern const std::string path_to_texture;
 World *World::_instance = nullptr;
 
-World::World() {
-    texture_path = path_to_texture + "world.png";
-}
+World::World() {}
 
 World::~World() {
     // Clear world.
 }
 
-World *World::instance = nullptr;
-
 World *World::get_instance() {
-    if (!instance)
-        instance = new World();
-    return instance;
+    if (!_instance)
+        _instance = new World();
+    return _instance;
 }
 
 void World::update(float d_t) {
@@ -42,7 +38,6 @@ void World::update(float d_t) {
     }
     ResourceManager *rm = ResourceManager::get_instance();
     rm->replenish_resources(d_t);
-//    controllable_character->update(d_t);
 
     std::vector<int> player_ids = PlayerManager::get_instance()->get_player_ids();
     for (int i = 0; i < player_ids.size(); i++) {
@@ -93,12 +88,6 @@ std::vector<BaseEntity *> World::get_entities() {
 
 void World::add_graph(Graph *g) {
     graph = g;
-}
-
-void World::add_controllable_character(MovingEntity *me) {
-    controllable_character = me;
-    entities.push_back((BaseEntity *) me);
-    NeighbourhoodManager::get_instance()->insert(me);
 }
 
 void World::set_render_object(SDL_RenderObject *r) {
