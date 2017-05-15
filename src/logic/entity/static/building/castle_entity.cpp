@@ -56,5 +56,6 @@ void CastleEntity::order_unit(Player *player, vec2 position, MovingEntityType mo
 }
 
 void CastleEntity::order_unit(MovingEntityType moving_entity_type) {
+
     this->orders.push_back(moving_entity_type);
 }

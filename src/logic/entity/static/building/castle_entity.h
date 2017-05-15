@@ -14,7 +14,7 @@ class BuildingEntity;
 
 class CastleEntity : public BuildingEntity {
     float delta_time;
-    std::vector<MovingEntityType> orders;
+    std::vector<MovingEntityType > orders;
 
 public:
     CastleEntity(const mesh *, vec2, float);
