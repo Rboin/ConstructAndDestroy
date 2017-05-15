@@ -160,7 +160,7 @@ set(SOURCE_FILES
         entity/goal/evaluator/combat_evaluator.cpp
         entity/goal/evaluator/combat_evaluator.h
         entity/goal/moving_entity_goal/hunt_target_goal.cpp
-        entity/goal/moving_entity_goal/hunt_target_goal.h)
+        entity/goal/moving_entity_goal/hunt_target_goal.h entity/static/gold_mine_entity.h entity/static/gold_mine_entity.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

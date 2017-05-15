@@ -63,7 +63,8 @@ vec2 ResourceManager::get_closest_resource(vec2 pos) {
 ResourceType ResourceManager::get_resource_type(JobType jt) {
     ResourceType rt;
     if (jt == WOODCUTTER) { rt = WOOD; }
-    else if (jt == MINER) { rt = IRON; }
+    if (jt == IRONMINER) { rt = IRON; }
+    if (jt == GOLDMINER) {rt = GOLD;}
     return rt;
 }
 

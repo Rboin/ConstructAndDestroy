@@ -6,6 +6,7 @@
 #define C_AND_D_PROJECT_MOVINGENTITY_H
 
 #include <stack>
+#include "entity/static/resource_type.h"
 #include "fuzzy/fuzzy_module.h"
 #include "weapon.h"
 #include "entity/base_entity.h"

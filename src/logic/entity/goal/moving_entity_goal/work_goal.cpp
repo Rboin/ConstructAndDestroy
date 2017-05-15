@@ -69,8 +69,11 @@ Node *WorkGoal::find_resource_node() {
     if (owner->job_type == WOODCUTTER) {
         rt = WOOD;
     }
-    if (owner->job_type == MINER) {
+    if (owner->job_type == IRONMINER) {
         rt = IRON;
+    }
+    if (owner->job_type == GOLDMINER) {
+        rt = GOLD;
     }
     ResourceManager *rm = ResourceManager::get_instance();
     vec2 targetVector = _target_resource != nullptr ? *_target_resource : owner->get_position();

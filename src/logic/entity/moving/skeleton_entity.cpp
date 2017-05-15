@@ -7,7 +7,6 @@
 #include "sdl/image/sdl_image_render_object.h"
 
 extern const std::string path_to_texture;
-extern const std::string path_to_selected_texture;
 
 SkeletonEntity::SkeletonEntity(const mesh *base, vec2 position, float mass,
                                const float max_force, const float max_speed) :

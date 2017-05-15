@@ -27,8 +27,8 @@ MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingE
             me = new KnightEntity(base, position, 100, 0.2, 0.2);
             break;
 
-        case MovingEntityType::IRONMINER:
-            me = new MinerEntity(base, position, 100, 0.2, 0.2);
+        case MovingEntityType::MINER:
+            me = new MinerEntity(base, position, 100, 0.2, 0.2, GOLDMINER);
             break;
 
         case MovingEntityType::LUMBERJACK:

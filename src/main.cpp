@@ -5,8 +5,8 @@
 #include "sdl/panel/sdl_resource_panel.h"
 #include "entity/player.h"
 #include "sdl/label/sdl_render_label.h"
+#include "entity/static/gold_mine_entity.h"
 #include "entity/moving/knight_entity.h"
-#include "entity/static/iron_mine_entity.h"
 #include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "graph/graph_manager.h"
@@ -133,6 +133,7 @@ int main(int argc, char **argv) {
     mesh base = {4, default_shape};
     vec2 pos = {0, 0};
 
+    // Begin lumberjack entity
     ForceCalculator *calculator = new BasicForceCalculator();
     Behaviour *behaviour = new Behaviour(calculator);
     MovingEntity *entity = new LumberJackEntity(&base, pos, 100, 0.2, 0.2);
@@ -151,10 +152,14 @@ int main(int argc, char **argv) {
     entity->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(entity);
+    // End lumberjack entity
 
-    MovingEntity *knight_entity = new KnightEntity(&base, {100,100}, 100, 0.2, 0.2);
+
+    // Begin knight entity
+    MovingEntity *knight_entity = new KnightEntity(&base, {100, 100}, 100, 0.2, 0.2);
     ForceCalculator *knight_calculator = new BasicForceCalculator();
     Behaviour *knight_behaviour = new Behaviour(knight_calculator);
+
     ThinkGoal *knight_think_goal = new ThinkGoal(knight_entity);
     knight_think_goal->add_evaluator(new CombatEvaluator());
 
@@ -165,11 +170,36 @@ int main(int argc, char **argv) {
 
     vec2 knight_entity_size = {50, 50};
     sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};
-    SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageRenderObject(pos, knight_entity_size, knight_entity_data);
+    SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageRenderObject(pos, knight_entity_size,
+                                                                                   knight_entity_data);
     knight_entity->set_representation(knight_entity_render_object);
 
     World::get_instance()->add_entity(knight_entity);
+    // End knight entity
 
+    // Begin gold miner entity
+    ForceCalculator *gold_miner_calculator = new BasicForceCalculator();
+    Behaviour *gold_miner_behaviour = new Behaviour(gold_miner_calculator);
+    MovingEntity *gold_miner_entity = new MinerEntity(&base, {100, 100}, 100, 0.2, 0.2, IRONMINER);
+    ThinkGoal *gold_miner_think_goal = new ThinkGoal(gold_miner_entity);
+    gold_miner_think_goal->add_evaluator(new WorkEvaluator());
+    gold_miner_think_goal->add_evaluator(new FollowPathEvaluator());
+
+    gold_miner_entity->set_behaviour(gold_miner_behaviour);
+    gold_miner_entity->set_goal(gold_miner_think_goal);
+
+    gold_miner_entity->set_player(1);
+
+    vec2 gold_miner_entity_size = {50, 50};
+    sdl_image_data *gold_miner_entity_data = new sdl_image_data{"miner.png"};
+    SDL_ImageRenderObject *gold_miner_entity_render_object = new SDL_ImageRenderObject(pos, gold_miner_entity_size,
+                                                                                       gold_miner_entity_data);
+    gold_miner_entity->set_representation(gold_miner_entity_render_object);
+
+    World::get_instance()->add_entity(gold_miner_entity);
+    // End gold mine miner entity
+
+    // Begin tree entity
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
     sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
@@ -177,6 +207,10 @@ int main(int argc, char **argv) {
     SDL_ImageRenderObject *tree_object = new SDL_ImageRenderObject(s_position, s_size, tree_data);
     s_entity->set_representation(tree_object);
 
+    World::get_instance()->add_entity(s_entity);
+    // End tree entity
+
+    // Begin warehouse entity
     vec2 s_position7 = {600, 400};
     BuildingEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
     sdl_image_data *entity7_data = new sdl_image_data{"warehouse.png"};
@@ -184,7 +218,18 @@ int main(int argc, char **argv) {
     s_entity7->set_representation(e7_object);
 
     World::get_instance()->add_entity(s_entity7);
-    World::get_instance()->add_entity(s_entity);
+    // End warehouse entity
+
+    // Begin gold mine entity
+    vec2 gold_mine_position = {300, 280}, gold_mine_size = {50, 50};
+    ResourceEntity *gold_mine_entity = new GoldMineEntity(&base, gold_mine_position, 50);
+    sdl_image_data *gold_mine_data = new sdl_image_data{"goldmine.png"};
+    gold_mine_entity->set_textures("goldmine.png", "depletedgoldmine.png");
+    SDL_ImageRenderObject *gold_mine_object = new SDL_ImageRenderObject(gold_mine_position, gold_mine_size, gold_mine_data);
+    gold_mine_entity->set_representation(gold_mine_object);
+
+    World::get_instance()->add_entity(gold_mine_entity);
+    // End gold mine entity
 
     // TODO: when merged enemy_player, change 1 to player_id
     BuildingManager::get_instance()->add_building(1, s_entity7);

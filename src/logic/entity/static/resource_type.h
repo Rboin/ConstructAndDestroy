@@ -8,6 +8,6 @@ enum ResourceType {
     STONE = 0,
     WOOD = 1,
     IRON = 2,
-    GOLD = 3
+    GOLD = 3,
 };
 #endif //C_AND_D_PROJECT_RESOURCE_TYPE_H

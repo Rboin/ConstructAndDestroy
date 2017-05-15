@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cfloat>
 #include <iostream>
+#include <entity/static/resource_type.h>
 #include "sdl/image/sdl_image_render_object.h"
 #include "weapon.h"
 #include "entity/weapon/axe_weapon.h"
@@ -22,7 +23,6 @@ MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass,
                            const float max_force, const float max_speed, JobType jt) :
         MAX_FORCE(max_force), MAX_SPEED(max_speed),
         BaseEntity(MOVING, base, position, mass) {
-
     _velocity = {0, 0, 0};
     _behaviour = NULL;
     _brain = NULL;
