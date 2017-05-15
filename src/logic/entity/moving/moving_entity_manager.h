@@ -20,6 +20,7 @@ public:
 
     void add_unit(Player *player, vec2 position, MovingEntityType moving_entity_type);
 
+    void order_unit(Player *player, vec2 position, MovingEntityType moving_entity_type);
 };
 
 

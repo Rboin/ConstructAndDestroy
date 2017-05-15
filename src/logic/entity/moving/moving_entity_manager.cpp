@@ -1,6 +1,7 @@
 
 #include <entity/goal/evaluator/work_evaluator.h>
 #include <sdl/image/sdl_image_render_object.h>
+#include <iostream>
 #include "world/world.h"
 #include "behaviour/force_calculator.h"
 #include "behaviour/calculator/basic_force_calculator.h"
@@ -30,9 +31,10 @@ MovingEntityManager *MovingEntityManager::get_instance() {
 
 
 
+
 void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityType moving_entity_type) {
 
-    
+    order_unit(player, position, moving_entity_type);
 
 
 //    MovingEntity* me = MovingEntityFactory::create(player, position, moving_entity_type);
