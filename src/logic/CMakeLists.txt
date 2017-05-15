@@ -155,12 +155,14 @@ set(SOURCE_FILES
         entity/moving/moving_entity_manager.h
         entity/moving/moving_entity_manager.cpp
         entity/moving/knight_entity.cpp
-        entity/goal/moving_entity_goal/combat_goal.cpp
         entity/goal/moving_entity_goal/combat_goal.h
-        entity/goal/evaluator/combat_evaluator.cpp
+        entity/goal/moving_entity_goal/combat_goal.cpp
         entity/goal/evaluator/combat_evaluator.h
-        entity/goal/moving_entity_goal/hunt_target_goal.cpp
+        entity/goal/evaluator/combat_evaluator.cpp
         entity/goal/moving_entity_goal/hunt_target_goal.h
+        entity/goal/moving_entity_goal/hunt_target_goal.cpp
+        wave/wave.h
+        wave/wave.cpp
         entity/static/gold_mine_entity.h
         entity/static/gold_mine_entity.cpp)
 
