@@ -5,6 +5,7 @@
 #ifndef C_AND_D_PROJECT_MOVINGENTITY_H
 #define C_AND_D_PROJECT_MOVINGENTITY_H
 
+#include <stack>
 #include "fuzzy/fuzzy_module.h"
 #include "weapon.h"
 #include "entity/base_entity.h"
@@ -58,7 +59,7 @@ public:
 
     void select_weapon();
 
-    std::vector<vec2 *> path;
+    std::stack<vec2 *> path;
 
     float carrying;
 
@@ -70,15 +71,10 @@ public:
 
     JobType job_type;
 
-    void exorcise();
-
-    bool is_possessed();
-
-    void take_possession();
-
     virtual std::string get_texture();
 
     virtual void set_texture(std::string src);
+
 };
 
 #endif //C_AND_D_PROJECT_MOVINGENTITY_H

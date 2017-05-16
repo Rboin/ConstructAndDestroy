@@ -19,12 +19,23 @@ public:
         sub_goals = std::deque<Goal<T> *>();
     };
 
+    GoalComposite(T *t, int gt, int initiator) : Goal<T>(t, gt, STRATEGY, initiator) {
+        sub_goals = std::deque<Goal<T> *>();
+    };
+
     virtual ~GoalComposite() {
         remove_all_subgoals();
     };
 
     std::deque<Goal<T> *> get_sub_goals() {
         return sub_goals;
+    }
+
+    Goal<T>* get_active_goal() {
+        if (!sub_goals.empty())
+            return sub_goals.front();
+
+        return nullptr;
     }
 
     void add_subgoal(Goal<T> *goal, bool front) {

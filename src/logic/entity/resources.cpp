@@ -2,22 +2,34 @@
 
 
 Resources::Resources() {
-    _resources = new float[4]{0,0,0,0};
+    _resources = new float[4]{0, 0, 0, 0};
+}
+
+Resources::Resources(float gold, float wood, float stone, float iron) {
+    _resources = new float[4]{gold, wood, stone, iron};
 }
 
 Resources::~Resources() {}
 
 void Resources::add_resources(ResourceType rt, float amount) {
-    switch (rt) {
-        case TREE:
-            _resources[1 << (int) WOOD] += amount;
-            break;
-        case IRONMINE:
-            _resources[1 << (int) IRON] += amount;
-            break;
-    }
+    _resources[1 << (int) rt] += amount;
 }
 
 float Resources::get_resources(ResourceType rt) {
     return _resources[1 << (int) rt];
+}
+
+void Resources::subtract_resources(Resources *r) {
+    for (int i = 0; i < 4; i++) {
+        _resources[i] -= r->_resources[i];
+    }
+}
+
+bool Resources::check_if_sufficient_resources(Resources *r) {
+    for (int i = 0; i < 4; i++) {
+        if (_resources[i] < r->_resources[i]) {
+            return false;
+        }
+    }
+    return true;
 }

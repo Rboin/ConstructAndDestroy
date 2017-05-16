@@ -93,21 +93,3 @@ vec2 s_vec2::normalize() const {
 float s_vec2::dot(const vec2 &v) const {
     return (x * v.x) + (y * v.y);
 }
-
-void wrap_around(vec2 &pos) {
-    float world_max_x = 800;
-    float world_max_y = 600;
-    float move_from_wall = 50.0; //setting this to 50.0 for now, otherwise some behaviours gets tuck in the wall;
-    if (pos.x > world_max_x) {
-        pos.x = move_from_wall;
-    }
-    if (pos.x < 0) {
-        pos.x = world_max_x - move_from_wall;
-    }
-    if (pos.y > world_max_y) {
-        pos.y = move_from_wall;
-    }
-    if (pos.y < 0) {
-        pos.y = world_max_y - move_from_wall;
-    }
-}

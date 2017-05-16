@@ -20,7 +20,7 @@ private:
     std::vector<GoalEvaluator<MovingEntity> *> _evaluators;
     MovingEntity *_owner;
 public:
-    FollowPathGoal(MovingEntity *);
+    FollowPathGoal(MovingEntity *, int initiator = Initiator::AI);
 
     void add_evaluator(GoalEvaluator<MovingEntity> *);
 

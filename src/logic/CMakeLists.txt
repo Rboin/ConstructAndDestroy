@@ -18,9 +18,7 @@ set(SOURCE_FILES
         entity/static/resource_manager.h
         entity/static/tree_entity.h
         entity/static/iron_mine_entity.h
-        entity/static/warehouse_entity.h
-        entity/static/restaurant_entity.h
-        entity/static/campfire_entity.h
+        entity/static/building/warehouse_entity.h
         entity/static/building/building_factory.h
         entity/static/building/building_manager.h
         entity/static/building/castle_entity.h
@@ -33,7 +31,7 @@ set(SOURCE_FILES
         entity/state/state_machine.h
         entity/goal/evaluator/obstacle_avoid_evaluator.h
         entity/goal/evaluator/wander_evaluator.h
-        entity/goal/evaluator/explore_evaluator.h
+        entity/goal/moving_entity_goal/initiator.h
         entity/goal/moving_entity_goal/atomic_goal_type.h
         entity/goal/moving_entity_goal/strategy_goal_type.h
         entity/goal/moving_entity_goal/job_type.h
@@ -42,12 +40,7 @@ set(SOURCE_FILES
         entity/goal/moving_entity_goal/think_goal.h
         entity/goal/moving_entity_goal/atomic/gather_resource_goal.h
         entity/goal/moving_entity_goal/atomic/drop_resources_goal.h
-        entity/goal/moving_entity_goal/rest_goal.h
-        entity/goal/moving_entity_goal/atomic/sleep_goal.h
-        entity/goal/moving_entity_goal/go_eat_goal.h
-        entity/goal/moving_entity_goal/atomic/eat_goal.h
         entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h
-        entity/goal/moving_entity_goal/atomic/explore_goal.h
         entity/goal/moving_entity_goal/follow_path_goal.h
         entity/goal/moving_entity_goal/atomic/plan_path_goal.h
         entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h
@@ -55,15 +48,12 @@ set(SOURCE_FILES
         entity/goal/evaluator/gather_resource_evaluator.h
         entity/goal/evaluator/work_evaluator.h
         entity/goal/evaluator/follow_path_evaluator.h
-        entity/goal/evaluator/rest_evaluator.h
-        entity/goal/evaluator/eat_evaluator.h
         behaviour/calculator/basic_force_calculator.h
         behaviour/strategy/arrive_strategy.h
         behaviour/strategy/seek_strategy.h
         behaviour/strategy/flee_strategy.h
         behaviour/strategy/obstacle_avoidance_strategy.h
         behaviour/strategy/wander_strategy.h
-        behaviour/strategy/explore_strategy.h
         behaviour/orderstrategies/default_order_strategy.h
         behaviour/move_order.h
         behaviour/orderstrategies/ground_order_strategy.h
@@ -106,9 +96,7 @@ set(SOURCE_FILES
         entity/static/resource_manager.cpp
         entity/static/tree_entity.cpp
         entity/static/iron_mine_entity.cpp
-        entity/static/warehouse_entity.cpp
-        entity/static/restaurant_entity.cpp
-        entity/static/campfire_entity.cpp
+        entity/static/building/warehouse_entity.cpp
         entity/static/building/building_factory.cpp
         entity/static/building/building_manager.cpp
         entity/static/building/castle_entity.cpp
@@ -118,26 +106,18 @@ set(SOURCE_FILES
         entity/static/building/building_state/abort_placing_building.cpp
         entity/goal/evaluator/obstacle_avoid_evaluator.cpp
         entity/goal/evaluator/wander_evaluator.cpp
-        entity/goal/evaluator/explore_evaluator.cpp
         entity/goal/moving_entity_goal/atomic/wander_goal.cpp
         entity/goal/moving_entity_goal/think_goal.cpp
         entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.cpp
-        entity/goal/moving_entity_goal/atomic/explore_goal.cpp
         entity/goal/moving_entity_goal/follow_path_goal.cpp
         entity/goal/moving_entity_goal/atomic/plan_path_goal.cpp
         entity/goal/moving_entity_goal/atomic/traverse_edge_goal.cpp
         entity/goal/moving_entity_goal/work_goal.cpp
         entity/goal/moving_entity_goal/atomic/gather_resource_goal.cpp
         entity/goal/moving_entity_goal/atomic/drop_resources_goal.cpp
-        entity/goal/moving_entity_goal/rest_goal.cpp
-        entity/goal/moving_entity_goal/atomic/sleep_goal.cpp
-        entity/goal/moving_entity_goal/go_eat_goal.cpp
-        entity/goal/moving_entity_goal/atomic/eat_goal.cpp
         entity/goal/evaluator/gather_resource_evaluator.cpp
         entity/goal/evaluator/work_evaluator.cpp
         entity/goal/evaluator/follow_path_evaluator.cpp
-        entity/goal/evaluator/rest_evaluator.cpp
-        entity/goal/evaluator/eat_evaluator.cpp
         behaviour/behaviour.cpp
         behaviour/calculator/basic_force_calculator.cpp
         behaviour/strategy/behaviour_strategy.cpp
@@ -146,7 +126,6 @@ set(SOURCE_FILES
         behaviour/strategy/flee_strategy.cpp
         behaviour/strategy/obstacle_avoidance_strategy.cpp
         behaviour/strategy/wander_strategy.cpp
-        behaviour/strategy/explore_strategy.cpp
         behaviour/orderstrategies/default_order_strategy.cpp
         behaviour/move_order.cpp
         behaviour/orderstrategies/ground_order_strategy.cpp
@@ -169,8 +148,19 @@ set(SOURCE_FILES
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp
-         entity/moving/knight_entity.cpp entity/moving/moving_entity_factory.h entity/moving/moving_entity_types.h entity/moving/moving_entity_factory.cpp entity/moving/moving_entity_manager.h entity/moving/moving_entity_manager.cpp)
-
+         entity/moving/knight_entity.cpp
+        entity/moving/moving_entity_factory.h
+        entity/moving/moving_entity_types.h
+        entity/moving/moving_entity_factory.cpp
+        entity/moving/moving_entity_manager.h
+        entity/moving/moving_entity_manager.cpp
+        entity/moving/knight_entity.cpp
+        entity/goal/moving_entity_goal/combat_goal.cpp
+        entity/goal/moving_entity_goal/combat_goal.h
+        entity/goal/evaluator/combat_evaluator.cpp
+        entity/goal/evaluator/combat_evaluator.h
+        entity/goal/moving_entity_goal/hunt_target_goal.cpp
+        entity/goal/moving_entity_goal/hunt_target_goal.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

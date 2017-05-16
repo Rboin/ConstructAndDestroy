@@ -2,7 +2,7 @@
 // Created by Sander on 19-3-2017.
 //
 
-#include <goal/composite_goal.h>
+#include "goal/composite_goal.h"
 #include <iostream>
 #include "entity/static/resource_manager.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
@@ -14,9 +14,10 @@
 #include "work_goal.h"
 #include "strategy_goal_type.h"
 #include "follow_path_goal.h"
-#include "job_type.h"
+#include "entity/static/building/building_manager.h"
 
-WorkGoal::WorkGoal(MovingEntity *e) : GoalComposite(e, WORK) {
+WorkGoal::WorkGoal(MovingEntity *e, vec2* target_resource, int initiator) : GoalComposite(e, WORK, initiator) {
+    _target_resource = target_resource;
     set_goal_plan_path_to_resource();
     if (resource->get_index() != 0) {
         set_goal_follow_path();
@@ -27,10 +28,6 @@ WorkGoal::WorkGoal(MovingEntity *e) : GoalComposite(e, WORK) {
     }
 }
 
-void WorkGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
-    _evaluators.push_back(e);
-}
-
 void WorkGoal::determine_next_goal() {
     if (this->sub_goals.size() == 0) {
         status = COMPLETED;
@@ -38,12 +35,9 @@ void WorkGoal::determine_next_goal() {
 }
 
 void WorkGoal::set_goal_plan_path_to_resource() {
-    GraphManager *gm = GraphManager::get_instance();
-    int start = gm->graph->get_node_with_position(owner->get_position());
-
     resource = find_resource_node();
     if (resource->get_index() != 0) {
-        this->sub_goals.push_front(new PlanPathGoal(owner, gm->graph->find_closest_edge(resource)));
+        this->sub_goals.push_front(new PlanPathGoal(owner, resource));
     }
 }
 
@@ -73,13 +67,14 @@ void WorkGoal::terminate() {
 
 Node *WorkGoal::find_resource_node() {
     if (owner->job_type == WOODCUTTER) {
-        rt = TREE;
+        rt = WOOD;
     }
     if (owner->job_type == MINER) {
-        rt = IRONMINE;
+        rt = IRON;
     }
     ResourceManager *rm = ResourceManager::get_instance();
-    vec2 resource_position = rm->get_closest_resource(owner->get_position(), rt);
+    vec2 targetVector = _target_resource != nullptr ? *_target_resource : owner->get_position();
+    vec2 resource_position = rm->get_closest_resource(targetVector, rt);
 
     GraphManager *gm = GraphManager::get_instance();
     int index = gm->graph->get_node_with_exact_position(resource_position);
@@ -90,9 +85,9 @@ Node *WorkGoal::find_resource_node() {
 
 Node *WorkGoal::find_depot() {
     GraphManager *gm = GraphManager::get_instance();
-    ResourceManager *rm = ResourceManager::get_instance();
+    BuildingManager *bm = BuildingManager::get_instance();
 
-    vec2 warehouse_position = rm->get_closest_resource(owner->get_position(), WAREHOUSE);
+    vec2 warehouse_position = bm->get_closest_building(owner->get_position(), WAREHOUSE);
     int index = gm->graph->get_node_with_exact_position(warehouse_position);
     Node *goal = gm->graph->nodes.at(index);
     goal = gm->graph->find_closest_edge(goal);

@@ -12,14 +12,14 @@ SDLWindow::SDLWindow(SDL_RenderObject *r) :
 SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window) :
         SDLWindow(r, sdl_window, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer) :
+SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, SDLRenderer *renderer) :
         SDLWindow(r, sdl_window, renderer, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
+SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, SDLRenderer *renderer,
                      EventDispatcher<SDL_UIComponent, sdl_mouse_event_data> *mouse) :
         SDLWindow(r, sdl_window, renderer, mouse, nullptr) {}
 
-SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, Renderer<SDL_Renderer> *renderer,
+SDLWindow::SDLWindow(SDL_RenderObject *r, SDL_Window *sdl_window, SDLRenderer *renderer,
                      EventDispatcher<SDL_UIComponent, sdl_mouse_event_data> *mouse,
                      EventDispatcher<SDL_UIComponent, sdl_key_event_data> *key) : SDL_UIComponent(r) {
     _mouse_event_dispatcher = mouse;
@@ -59,10 +59,8 @@ int SDLWindow::show() {
     }
 }
 
-SDL_Texture *SDLWindow::render(Renderer<SDL_Renderer> *renderer, float delta) {
-    SDL_RenderClear(renderer->get_engine());
-    SDL_Texture *resulting_texture = SDL_UIComponent::render(renderer, delta);
-    SDL_RenderCopy(renderer->get_engine(), resulting_texture, NULL, NULL);
-    SDL_RenderPresent(renderer->get_engine());
-    return resulting_texture;
+void SDLWindow::render(SDLRenderer *renderer, float delta) {
+    renderer->clear();
+    SDL_UIComponent::render(renderer, delta);
+    renderer->show();
 }

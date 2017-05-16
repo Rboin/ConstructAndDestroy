@@ -2,17 +2,18 @@
 // Created by Mark on 1-5-2017.
 //
 
+#include <iostream>
 #include "mouse_handler_world.h"
 #include "world/world.h"
 #include "cmath"
 #include "entity/player.h"
 #include "behaviour/move_order.h"
-#include <iostream>
-#include <entity/moving/moving_entity_manager.h>
-#include <entity/static/building/castle_entity.h>
+#include "entity/moving/moving_entity_manager.h"
 #include "sdl/panel/sdl_world_panel.h"
 #include "../globals.cpp"
 #include "../../../../logic/entity/moving/moving_entity_factory.h"
+#include "entity/player_manager.h"
+
 
 MouseHandlerWorld::MouseHandlerWorld() {
     start_drag_x = -1;

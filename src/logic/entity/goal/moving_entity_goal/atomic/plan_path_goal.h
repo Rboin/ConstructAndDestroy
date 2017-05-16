@@ -8,7 +8,7 @@
 #include <vector>
 #include <types.h>
 #include <queue>
-#include <goal/atomic_goal.h>
+#include "goal/atomic_goal.h"
 
 class MovingEntity;
 
@@ -17,15 +17,13 @@ class Node;
 class PlanPathGoal : public AtomicGoal<MovingEntity> {
     Node *goal;
 public:
-    PlanPathGoal(MovingEntity *, Node *);
+    PlanPathGoal(MovingEntity *, Node *, int initiator = Initiator::AI);
 
     void activate() override;
 
     const int process() override;
 
     void terminate() override;
-
-    std::queue<vec2 *> path;
 
     const char *get_name() const override;
 };

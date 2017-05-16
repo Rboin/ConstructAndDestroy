@@ -5,7 +5,7 @@
 #include <cmath>
 #include <cfloat>
 #include <iostream>
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 #include "weapon.h"
 #include "entity/weapon/axe_weapon.h"
 #include "entity/weapon/bow_weapon.h"
@@ -75,12 +75,9 @@ void MovingEntity::update(float d_t) {
     _velocity = _velocity.truncate(MAX_SPEED);
 
     //Update vehicle's position
-    _position += _velocity * d_t;
-
+    add_to_position(_velocity * d_t);
     // Update the render mesh
     update_render_mesh();
-
-    wrap_around(_position);
 
     // Update the neighbourhood if we've moved
     if (_position != old) {
@@ -98,18 +95,6 @@ float MovingEntity::get_max_speed() {
 
 vec2 MovingEntity::get_velocity() {
     return _velocity;
-}
-
-void MovingEntity::exorcise() {
-    _possessed = false;
-}
-
-bool MovingEntity::is_possessed() {
-    return _possessed;
-}
-
-void MovingEntity::take_possession() {
-    _possessed = true;
 }
 
 void MovingEntity::update_render_mesh() {

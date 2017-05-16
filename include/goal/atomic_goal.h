@@ -13,6 +13,7 @@ template<typename T>
 class AtomicGoal : public Goal<T> {
 public:
     AtomicGoal(T *t, int gt) : Goal<T>(t, gt, ATOMIC) {};
+    AtomicGoal(T *t, int gt, int init) : Goal<T>(t, gt, ATOMIC, init) {};
 
     void add_subgoal(Goal<T> *goal) {
         throw std::invalid_argument("Can not add a subgoal to an atomic goal.");

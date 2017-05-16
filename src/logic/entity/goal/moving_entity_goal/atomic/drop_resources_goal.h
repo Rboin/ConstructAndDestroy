@@ -17,7 +17,7 @@ public:
     /*!
      * Extracts resources from the worker and adds it to the player.
      */
-    DropResourcesGoal(MovingEntity *, ResourceType);
+    DropResourcesGoal(MovingEntity *, ResourceType, int initiator = Initiator::AI);
 
     void activate() override;
 

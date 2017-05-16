@@ -5,7 +5,7 @@
 #ifndef CONSTRUCT_AND_DESTROY_ABORT_PLACING_BUILDING_H
 #define CONSTRUCT_AND_DESTROY_ABORT_PLACING_BUILDING_H
 
-#include <entity/state/state.h>
+#include "entity/state/state.h"
 
 class Player;
 

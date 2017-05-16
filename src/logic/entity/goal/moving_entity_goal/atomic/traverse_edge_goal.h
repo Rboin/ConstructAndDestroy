@@ -15,7 +15,7 @@ class TraverseEdgeGoal : public AtomicGoal<MovingEntity> {
 private:
     vec2 *goal;
 public:
-    TraverseEdgeGoal(MovingEntity *t, vec2*);
+    TraverseEdgeGoal(MovingEntity *t, vec2*, int initiator = Initiator::AI);
 
     void activate() override;
 

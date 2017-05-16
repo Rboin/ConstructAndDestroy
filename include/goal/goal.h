@@ -5,6 +5,8 @@
 #ifndef C_AND_D_PROJECT_GOAL_H
 #define C_AND_D_PROJECT_GOAL_H
 
+#include "entity/goal/moving_entity_goal/initiator.h"
+
 enum ProcessStatus {
     INACTIVE, ACTIVE, COMPLETED, FAILED
 };
@@ -16,13 +18,31 @@ protected:
     int status;
     int type;
     int level_type;
+    int initiator;
 public:
     Goal(T *t, int gt, int lt) {
         owner = t;
         type = gt;
         status = INACTIVE;
         level_type = lt;
+        initiator = Initiator::AI;
     };
+
+    Goal(T *t, int gt, int lt, int init) {
+        owner = t;
+        type = gt;
+        status = INACTIVE;
+        level_type = lt;
+        initiator = init;
+    };
+
+    void set_initiator(int init) {
+        initiator = init;
+    }
+
+    bool get_initiator() {
+        return initiator;
+    }
 
     const bool is_active() {
         return status == ACTIVE;

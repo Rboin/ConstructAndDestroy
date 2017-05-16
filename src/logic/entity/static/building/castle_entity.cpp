@@ -2,17 +2,19 @@
 // Created by Sander on 18-4-2017.
 //
 
-#include <sdl/image/sdl_image_render_object.h>
-#include "castle_entity.h"
 #include <iostream>
+#include "sdl/image/sdl_image_render_object.h"
+#include "castle_entity.h"
 #include <entity/moving/moving_entity_manager.h>
+#include "entity/resources.h"
+
 
 CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : BuildingEntity(
         base, position, mass, CASTLE, WAREHOUSETEXTURE) {
     order_time = 10000;
     spawn = this->_position;
     spawn.y += 40;
-
+    costs = new Resources(0, 0, 5, 0);
 }
 
 CastleEntity::CastleEntity(const mesh *base, float mass) : BuildingEntity(
@@ -20,12 +22,14 @@ CastleEntity::CastleEntity(const mesh *base, float mass) : BuildingEntity(
     order_time = 10000;
     spawn = this->_position;
     spawn.y += 40;
+    costs = new Resources(0, 0, 5, 0);
 }
 
-void CastleEntity::set_to_transparent(bool transparent, bool placeable) {
+
+void CastleEntity::set_transparent_or_border(bool transparent, bool border) {
     sdl_image_data *image;
     if (transparent) {
-        if(placeable) {
+        if(!border) {
             image = new sdl_image_data{"transp_castle.png"};
         }
         else

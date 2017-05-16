@@ -13,8 +13,7 @@ public:
     void select();
     void deselect();
 
-    std::string get_texture()override ;
-    void set_texture(std::string src) override ;
-
+    std::string get_texture() override;
+    void set_texture(std::string src) override;
 };
 #endif //CONSTRUCT_AND_DESTROY_KNIGHT_ENTITY_H

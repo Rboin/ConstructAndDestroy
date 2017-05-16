@@ -10,7 +10,7 @@
 #include "types.h"
 #include "render_object.h"
 
-struct SDL_Renderer;
+struct SDLRenderer;
 
 struct sdl_data {
     uint8_t red, green, blue, alpha;
@@ -22,15 +22,17 @@ struct sdl_data {
     }
 };
 
-class SDL_RenderObject : public RenderObject<SDL_Renderer, sdl_data, SDL_Texture> {
+class SDL_RenderObject : public RenderObject<SDLRenderer, sdl_data, SDL_Texture> {
+protected:
+    SDL_Rect *rectangle;
 public:
     SDL_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data);
 
-    SDL_Texture *render(Renderer<SDL_Renderer> *renderer) override;
+    void render(SDLRenderer *t) override;
 
-    virtual void init_texture(Renderer<SDL_Renderer> *);
+    virtual void init_texture(SDLRenderer *);
 
-    void clear_texture(Renderer<SDL_Renderer> *, SDL_Rect *);
+    void clear_texture(SDLRenderer *, SDL_Rect *);
 
     void clear_data() override;
 };

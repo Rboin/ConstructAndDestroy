@@ -4,9 +4,7 @@
 
 #include <iostream>
 #include "follow_path_goal.h"
-#include "behaviour/strategy/explore_strategy.h"
 #include "entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h"
-#include "entity/goal/moving_entity_goal/atomic/explore_goal.h"
 #include "entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h"
 #include "graph/graph.h"
 #include "entity/moving/moving_entity.h"
@@ -14,19 +12,13 @@
 #include "strategy_goal_type.h"
 #include "goal/goal_evaluator.h"
 #include "behaviour/behaviour.h"
+#include "atomic_goal_type.h"
 
-FollowPathGoal::FollowPathGoal(MovingEntity *e) : GoalComposite(e, FOLLOWPATH) {
+FollowPathGoal::FollowPathGoal(MovingEntity *e, int initiator) : GoalComposite(e, FOLLOWPATH, initiator) {
     _owner = e;
 }
 
 void FollowPathGoal::add_evaluator(GoalEvaluator<MovingEntity> *e) {
-    _evaluators.push_back(e);
-}
-
-void FollowPathGoal::determine_next_goal() {
-    if(this->sub_goals.size() == 0){
-        status = COMPLETED;
-    }
 }
 
 void FollowPathGoal::set_goal_traverse_edge(vec2 *g) {
@@ -35,23 +27,22 @@ void FollowPathGoal::set_goal_traverse_edge(vec2 *g) {
 
 void FollowPathGoal::activate() {
     status = ACTIVE;
+    set_goal_traverse_edge(owner->path.top());
+    owner->path.pop();
 }
 
 const int FollowPathGoal::process() {
     activate_if_inactive();
-    if(owner->path.size()!=0){
-        owner->path.erase (owner->path.begin(),owner->path.begin()+ 1);
-        for(int i = 0; i < owner->path.size(); i++){
-            set_goal_traverse_edge(owner->path.at(i));
-        }
-        owner->path.erase (owner->path.begin(),owner->path.begin()+ owner->path.size());
+    status = process_subgoals();
+    if(status == COMPLETED && !owner->path.empty()){
+        activate();
     }
-    determine_next_goal();
-    return process_subgoals();
+    return status;
 }
 
 void FollowPathGoal::terminate() {
     remove_all_subgoals();
+    owner->get_behaviour()->remove(TRAVERSEEDGE);
 }
 
 const char *FollowPathGoal::get_name() const {

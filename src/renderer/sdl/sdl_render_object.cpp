@@ -3,43 +3,30 @@
 //
 
 #include "sdl_render_object.h"
-#include "renderer.h"
+#include "sdl/sdl_renderer.h"
 
 SDL_RenderObject::SDL_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data)
         : RenderObject(position, size, data) {
-}
-
-SDL_Texture *SDL_RenderObject::render(Renderer<SDL_Renderer> *renderer) {
-    if (!_result) {
-        init_texture(renderer);
-    }
-
-    SDL_SetRenderTarget(renderer->get_engine(), _result);
-    SDL_Rect rect = {
-            (int) _position.x, (int) _position.y, (int) _size.x, (int) _size.y
+    rectangle = new SDL_Rect{
+            (int) position.x, (int) position.y,
+            (int) size.x, (int) size.y
     };
-    clear_texture(renderer, &rect);
-
-    SDL_SetRenderDrawColor(renderer->get_engine(), _data->red, _data->green, _data->blue, _data->alpha);
-    SDL_RenderFillRect(renderer->get_engine(), &rect);
-
-    return _result;
 }
 
-void SDL_RenderObject::init_texture(Renderer<SDL_Renderer> *renderer) {
-    if(_result){
+void SDL_RenderObject::render(SDLRenderer *renderer) {
+    SDL_SetRenderDrawColor(renderer->get_engine(), _data->red, _data->green, _data->blue, _data->alpha);
+    SDL_RenderFillRect(renderer->get_engine(), rectangle);
+}
+
+void SDL_RenderObject::init_texture(SDLRenderer *renderer) {
+    if (_result) {
         SDL_DestroyTexture(_result);
         _result = nullptr;
     }
-    _result = SDL_CreateTexture(renderer->get_engine(),
-                                SDL_PIXELFORMAT_RGBA8888,
-                                SDL_TEXTUREACCESS_STREAMING,
-                                (int) _size.x,
-                                (int) _size.y);
-    SDL_SetTextureBlendMode(_result, SDL_BLENDMODE_BLEND);
+    _result = renderer->create_texture((int) _size.x, (int) _size.y, SDL_TEXTUREACCESS_TARGET);
 }
 
-void SDL_RenderObject::clear_texture(Renderer<SDL_Renderer> *renderer, SDL_Rect *rect) {
+void SDL_RenderObject::clear_texture(SDLRenderer *renderer, SDL_Rect *rect) {
     SDL_SetRenderDrawColor(renderer->get_engine(), 0, 0, 0, 255);
     SDL_RenderFillRect(renderer->get_engine(), rect);
 }

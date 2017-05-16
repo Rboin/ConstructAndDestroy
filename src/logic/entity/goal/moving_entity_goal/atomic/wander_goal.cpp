@@ -8,7 +8,7 @@
 #include "behaviour/behaviour.h"
 #include "behaviour/strategy/wander_strategy.h"
 
-WanderGoal::WanderGoal(MovingEntity *e) : AtomicGoal<MovingEntity>(e, WANDER) {}
+WanderGoal::WanderGoal(MovingEntity *e, int initiator) : AtomicGoal<MovingEntity>(e, WANDER, initiator) {}
 
 WanderGoal::~WanderGoal() {}
 

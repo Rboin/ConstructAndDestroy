@@ -5,8 +5,8 @@
 #ifndef CONSTRUCT_AND_DESTROY_BUILDING_FACTORY_H
 #define CONSTRUCT_AND_DESTROY_BUILDING_FACTORY_H
 
-#include <types.h>
-#include "string"
+#include "types.h"
+#include <string>
 
 class BuildingEntity;
 

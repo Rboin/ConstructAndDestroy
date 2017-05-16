@@ -20,6 +20,7 @@ void KnightEntity::select() {
     representation->clear_data();
 }
 
+
 void KnightEntity::deselect() {
     sdl_image_data *entity_data = new sdl_image_data{texture};
     representation->set_data(entity_data);
@@ -34,3 +35,4 @@ std::string KnightEntity::get_texture() {
 void KnightEntity::set_texture(std::string src) {
     this->texture = src;
 }
+
