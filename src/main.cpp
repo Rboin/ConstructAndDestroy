@@ -268,18 +268,25 @@ int main(int argc, char **argv) {
 
     main_window->add_component(&main_panel);
 
-    vec2 resource_panel_pos = {600, 0}, resource_panel_size = {200, 30};
+    vec2 resource_panel_pos_wood = {600, 0}, resource_panel_size = {200, 30};
+    vec2 resource_panel_pos_gold = {700, 0};
     sdl_data resource_panel_data = {100, 100, 100, 0};
-    SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos, resource_panel_size, &resource_panel_data);
+    SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos_wood, resource_panel_size, &resource_panel_data);
     SDLResourcePanel right_panel(&panel_o);
 
-    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos, {60, 30}, &resource_panel_data, "log.png",
+    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, &resource_panel_data, "log.png",
                                                     ResourceType::WOOD, f_font);
     SDLPanel *wood_panel = new SDLPanel(wood_label);
 
     right_panel.add_component(wood_panel);
-    main_window->add_component(&right_panel);
 
+    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, &resource_panel_data, "gold.png",
+                                                    ResourceType::GOLD, f_font);
+    SDLPanel *gold_panel = new SDLPanel(gold_label);
+
+    right_panel.add_component(gold_panel);
+
+    main_window->add_component(&right_panel);
     main_window->show();
 
     delete main_window;
