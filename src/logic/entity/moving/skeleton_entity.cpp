@@ -2,9 +2,9 @@
 // Created by Sander on 6-4-2017.
 //
 
-#include "skeleton_entity.h"
 #include <iostream>
-#include <sdl/image/sdl_image_render_object.h>
+#include "skeleton_entity.h"
+#include "sdl/image/sdl_image_render_object.h"
 
 extern const std::string path_to_texture;
 extern const std::string path_to_selected_texture;

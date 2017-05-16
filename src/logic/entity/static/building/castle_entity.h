@@ -5,10 +5,11 @@
 #ifndef C_AND_D_PROJECT_CASTLE_ENTITY_H
 #define C_AND_D_PROJECT_CASTLE_ENTITY_H
 
-#include "entity/moving/moving_entity_types.h"
-#include "building_entity.h"
 #include <types.h>
 #include <vector>
+#include "entity/moving/moving_entity_types.h"
+#include "building_entity.h"
+
 
 class CastleEntity : public BuildingEntity {
     float delta_time;

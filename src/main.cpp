@@ -2,11 +2,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
-#include <sdl/panel/sdl_resource_panel.h>
-#include <entity/player.h>
-#include <sdl/label/sdl_render_label.h>
-#include <entity/moving/knight_entity.h>
-#include <entity/static/iron_mine_entity.h>
+#include "sdl/panel/sdl_resource_panel.h"
+#include "entity/player.h"
+#include "sdl/label/sdl_render_label.h"
+#include "entity/moving/knight_entity.h"
+#include "entity/static/iron_mine_entity.h"
 #include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "graph/graph_manager.h"

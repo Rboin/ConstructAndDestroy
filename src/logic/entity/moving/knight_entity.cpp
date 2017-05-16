@@ -1,8 +1,8 @@
 //
 // Created by Stephan Schrijver on 9-5-2017.
 //
-#include <sdl/image/sdl_image_render_object.h>
 #include <iostream>
+#include "sdl/image/sdl_image_render_object.h"
 #include "knight_entity.h"
 
 KnightEntity::KnightEntity(const mesh *base, vec2 position, float mass,

@@ -2,7 +2,7 @@
 // Created by Mark on 10-5-2017.
 //
 
-#include <world/world.h>
+#include "world/world.h"
 #include "moving_entity.h"
 #include "moving_entity_types.h"
 #include "moving_entity_factory.h"
@@ -10,7 +10,6 @@
 #include "miner_entity.h"
 #include "lumberjack_entity.h"
 #include "skeleton_entity.h"
-#include "../../../globals.cpp"
 #include "../player.h"
 #include "mesh.h"
 

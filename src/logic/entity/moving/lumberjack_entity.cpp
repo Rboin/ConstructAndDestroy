@@ -3,7 +3,7 @@
 //
 
 #include "lumberjack_entity.h"
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 #include <iostream>
 
 LumberJackEntity::LumberJackEntity(const mesh *base, vec2 position, float mass,
