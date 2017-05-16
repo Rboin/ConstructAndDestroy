@@ -16,7 +16,6 @@ void SDLWorldPanel::set_world(World *world) {
 }
 
 void SDLWorldPanel::render(SDLRenderer *renderer, float d) {
-//    SDLPanel::render(renderer, d);
     _current_world->update(d);
     _current_world->render(renderer);
 
@@ -24,6 +23,9 @@ void SDLWorldPanel::render(SDLRenderer *renderer, float d) {
     if (dragging) {
         this->draw_selection_rect((int) start_drag.x, (int) start_drag.y, (int) end_drag.x, (int) end_drag.y,
                                   renderer);
+    }
+    for(unsigned int i = 0; i < children.size(); i++) {
+        children[i]->render(renderer, d);
     }
 }
 
