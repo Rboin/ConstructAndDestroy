@@ -121,7 +121,7 @@ int main(int argc, char **argv) {
     std::stack<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
 
     World::get_instance()->add_graph(gm->graph);
-    World::get_instance()->set_wave(new Wave(10));
+    World::get_instance()->set_wave(new Wave(1, 10));
 
     NeighbourhoodManager *n = NeighbourhoodManager::get_instance();
     n->setup({(float) size_x, (float) size_y}, {200.0f, 200.0f});

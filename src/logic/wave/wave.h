@@ -10,7 +10,7 @@ private:
     float _wave_duration, _stat_modifier_increment, _spawner_downtime,
         _delta_time_wave, _delta_time_spawner, _stat_modifier;
 
-    unsigned int _wave_size, _current_wave;
+    unsigned int _wave_count, _current_wave;
 
 
     /*!
@@ -24,7 +24,7 @@ private:
     void spawn_entity();
 
 public:
-    explicit Wave(unsigned int);
+    explicit Wave(unsigned int, unsigned int);
 
     /*!
      * Increments the timers and calls the next_wave and spawn_entity methods.
