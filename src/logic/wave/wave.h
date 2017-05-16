@@ -12,6 +12,7 @@ private:
 
     unsigned int _wave_size, _current_wave;
 
+
     /*!
      * Checks whether it's time to move on to the next wave.
      */

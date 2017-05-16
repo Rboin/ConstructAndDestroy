@@ -11,7 +11,7 @@ Wave::Wave(unsigned int wave_size) {
     _stat_modifier = 1.0f;
     _delta_time_wave = _delta_time_spawner = 0.0f;
 
-    _wave_duration = 60000.0f;
+    _wave_duration = 10000.0f;
     _stat_modifier_increment = .5f;
     _spawner_downtime = _wave_duration / (float) wave_size;
 }

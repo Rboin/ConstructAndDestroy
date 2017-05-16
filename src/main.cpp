@@ -34,6 +34,7 @@
 #include "sdl/event/slot/mouse_handler_world.h"
 #include "entity/player_manager.h"
 #include "entity/goal/evaluator/combat_evaluator.h"
+#include "wave/wave.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
@@ -120,6 +121,7 @@ int main(int argc, char **argv) {
     std::stack<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
 
     World::get_instance()->add_graph(gm->graph);
+    World::get_instance()->set_wave(new Wave(10));
 
     NeighbourhoodManager *n = NeighbourhoodManager::get_instance();
     n->setup({(float) size_x, (float) size_y}, {200.0f, 200.0f});
