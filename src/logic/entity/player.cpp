@@ -1,7 +1,6 @@
 #include "entity/state/state_machine.h"
 #include "player.h"
 #include "entity/moving/moving_entity.h"
-#include "../globals.cpp"
 
 
 Player::Player(int id) {
