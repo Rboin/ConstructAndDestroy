@@ -40,15 +40,6 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
 
         if(player->selected_units.empty()){
             player->select_building(pos);
-
-            //for test purposes only:
-            if(dynamic_cast<CastleEntity*>(player->selected_building) != NULL){
-                std::cout << "through if" << std::endl;
-                dynamic_cast<CastleEntity*>(player->selected_building)->order_unit(MovingEntityType::LUMBERJACK);
-            } else {
-                std::cout << "not through if" << std::endl;
-
-            }
         }
 
     } else {

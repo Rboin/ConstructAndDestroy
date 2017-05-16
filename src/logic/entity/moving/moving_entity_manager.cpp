@@ -34,27 +34,27 @@ MovingEntityManager *MovingEntityManager::get_instance() {
 
 void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityType moving_entity_type) {
 
-//    MovingEntity* me = MovingEntityFactory::create(player, position, moving_entity_type);
-//
-//    ForceCalculator *calculator = new BasicForceCalculator();
-//    Behaviour *behaviour = new Behaviour(calculator);
-//    ThinkGoal *think_goal = new ThinkGoal(me);
-//
-//    think_goal->add_evaluator(new WorkEvaluator());
-//
-//    me->set_behaviour(behaviour);
-//    me->set_goal(think_goal);
-//    me->set_player(1);
-//
-//    vec2 entity_size = {50, 50};
-//
-//
-//    sdl_image_data *entity_data = new sdl_image_data{me->get_texture()};
-//
-//    SDL_ImageRenderObject *entity_render_object = new SDL_ImageRenderObject(position, entity_size, entity_data);
-//    me->set_representation(entity_render_object);
-//
-//    World::get_instance()->add_entity(me);
+    MovingEntity* me = MovingEntityFactory::create(player, position, moving_entity_type);
+
+    ForceCalculator *calculator = new BasicForceCalculator();
+    Behaviour *behaviour = new Behaviour(calculator);
+    ThinkGoal *think_goal = new ThinkGoal(me);
+
+    think_goal->add_evaluator(new WorkEvaluator());
+
+    me->set_behaviour(behaviour);
+    me->set_goal(think_goal);
+    me->set_player(1);
+
+    vec2 entity_size = {50, 50};
+
+
+    sdl_image_data *entity_data = new sdl_image_data{me->get_texture()};
+
+    SDL_ImageRenderObject *entity_render_object = new SDL_ImageRenderObject(position, entity_size, entity_data);
+    me->set_representation(entity_render_object);
+
+    World::get_instance()->add_entity(me);
 
 }
 

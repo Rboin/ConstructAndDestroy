@@ -14,7 +14,9 @@ class BuildingEntity;
 
 class CastleEntity : public BuildingEntity {
     float delta_time;
-    std::vector<MovingEntityType > orders;
+    float order_time;
+    vec2 spawn;
+    std::vector<MovingEntityType> orders;
 
 public:
     CastleEntity(const mesh *, vec2, float);
@@ -25,7 +27,7 @@ public:
     void deselect();
 
     void update(float d) override;
-    void order_unit(Player *player, vec2 position, MovingEntityType moving_entity_type);
+    void order_unit_from_factory(Player *player, vec2 position, MovingEntityType moving_entity_type);
     void order_unit(MovingEntityType moving_entity_type);
 };
 
