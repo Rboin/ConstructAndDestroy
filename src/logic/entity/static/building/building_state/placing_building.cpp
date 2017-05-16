@@ -6,7 +6,7 @@
 #include "graph/graph_manager.h"
 #include "placing_building.h"
 #include "entity/static/building/building_entity.h"
-#include "entity/state/state_machine.h"
+#include "state/state_machine.h"
 #include "entity/player.h"
 #include "graph/graph.h"
 #include "choosing_building_position.h"

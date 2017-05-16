@@ -27,8 +27,8 @@ set(SOURCE_FILES
         entity/static/building/building_state/choosing_building_position.h
         entity/static/building/building_state/placing_building.h
         entity/static/building/building_state/abort_placing_building.h
-        entity/state/state.h
-        entity/state/state_machine.h
+        state/state.h
+        state/state_machine.h
         entity/goal/evaluator/obstacle_avoid_evaluator.h
         entity/goal/evaluator/wander_evaluator.h
         entity/goal/moving_entity_goal/initiator.h

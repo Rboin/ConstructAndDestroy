@@ -7,7 +7,7 @@
 #include "world/world.h"
 #include "abort_placing_building.h"
 #include "entity/static/building/building_entity.h"
-#include "entity/state/state_machine.h"
+#include "state/state_machine.h"
 #include "entity/player.h"
 
 void AbortPlacingBuilding::enter(Player *p) {

@@ -1,5 +1,5 @@
-#include "entity/state/state_machine.h"
 #include "player.h"
+#include "state/state_machine.h"
 #include "entity/moving/moving_entity.h"
 
 

@@ -5,11 +5,9 @@
 #ifndef CONSTRUCT_AND_DESTROY_CHOOSING_BUILDING_POSITION_H
 #define CONSTRUCT_AND_DESTROY_CHOOSING_BUILDING_POSITION_H
 
-#include "entity/state/state.h"
+#include "state/state.h"
 
 class Player;
-
-template<class T> class State;
 
 class ChoosingBuildingPosition : public State<Player> {
 private:
