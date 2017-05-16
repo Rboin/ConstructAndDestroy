@@ -2,10 +2,9 @@
 // Created by Mark on 1-5-2017.
 //
 
-#include <iostream>
+#include <cmath>
 #include "mouse_handler_world.h"
 #include "world/world.h"
-#include "cmath"
 #include "entity/player.h"
 #include "behaviour/move_order.h"
 #include "entity/moving/moving_entity_manager.h"

@@ -91,17 +91,17 @@ void Player::select_one_unit(vec2 pos) {
 }
 
 void Player::select_building(vec2 pos) {
-    float leftOffset = pos.x - 45;
-    float rightOffset = pos.x;
-    float topOffset = pos.y -45;
-    float botOffset = pos.y;
+    float left_offset = pos.x - 45;
+    float right_offset = pos.x;
+    float top_offset = pos.y -45;
+    float bot_offset = pos.y;
 
     for (int i = 0; i < this->buildings.size(); i++) {
         if(this->buildings[i] != NULL && this->buildings[i] != nullptr) {
             float x = this->buildings[i]->get_position().x;
             float y = this->buildings[i]->get_position().y;
 
-            if (x >= leftOffset && x <= rightOffset && y >= topOffset && y <= botOffset) {
+            if (x >= left_offset && x <= right_offset && y >= top_offset && y <= bot_offset) {
                 this->buildings[i]->select();
                 this->selected_building = this->buildings[i];
                 // exit for loop after selecting one unit.

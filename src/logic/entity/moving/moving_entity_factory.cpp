@@ -17,11 +17,11 @@ vec2* MovingEntityFactory::default_shape = new vec2[4] {vec2(-20,20), vec2(20,-2
 
 mesh* MovingEntityFactory::base = new mesh {4, default_shape};
 
-MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingEntityType movingEntityType) {
+MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingEntityType moving_entity_type) {
 
     MovingEntity* me;
 
-    switch(movingEntityType){
+    switch(moving_entity_type){
 
         case MovingEntityType::KNIGHT:
             me = new KnightEntity(base, position, 100, 0.2, 0.2);
