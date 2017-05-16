@@ -12,11 +12,11 @@ Resources::Resources(float gold, float wood, float stone, float iron) {
 Resources::~Resources() {}
 
 void Resources::add_resources(ResourceType rt, float amount) {
-    _resources[1 << (int) rt] += amount;
+    _resources[(int) rt] += amount;
 }
 
 float Resources::get_resources(ResourceType rt) {
-    return _resources[1 << (int) rt];
+    return _resources[(int) rt];
 }
 
 void Resources::subtract_resources(Resources *r) {

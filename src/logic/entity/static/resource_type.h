@@ -5,9 +5,9 @@
 #ifndef C_AND_D_PROJECT_RESOURCE_TYPE_H
 #define C_AND_D_PROJECT_RESOURCE_TYPE_H
 enum ResourceType {
-    STONE = 0,
+    GOLD =0,
     WOOD = 1,
-    IRON = 2,
-    GOLD = 3,
+    STONE = 2,
+    IRON = 3
 };
 #endif //C_AND_D_PROJECT_RESOURCE_TYPE_H
