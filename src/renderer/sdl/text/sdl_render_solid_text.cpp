@@ -6,12 +6,14 @@
 #include "sdl_render_solid_text.h"
 #include "sdl/sdl_renderer.h"
 
-sdl_solid_text::sdl_solid_text(SDL_Color b, SDL_Color f, std::string &font_path, unsigned int pt, std::string &s)
+sdl_solid_text::sdl_solid_text(SDL_Color b, SDL_Color f, std::string &font_path, unsigned int pt,
+                               unsigned int pad, std::string &s)
     : sdl_data(0, 0, 0, 0) {
     background = b;
     foreground = f;
     font = font_path;
     font_size = pt;
+    padding = pad;
     text = s;
 }
 
@@ -23,10 +25,6 @@ SDLRenderSolidText::SDLRenderSolidText(const vec2 &position, const vec2 &size, s
 void SDLRenderSolidText::render(SDLRenderer *renderer) {
     draw_background(renderer);
     draw_foreground(renderer);
-}
-
-void SDLRenderSolidText::init_texture(SDLRenderer *renderer) {
-    sdl_solid_text *data = (sdl_solid_text *) _data;
 }
 
 void SDLRenderSolidText::draw_background(SDLRenderer *renderer) {
@@ -48,7 +46,13 @@ void SDLRenderSolidText::draw_foreground(SDLRenderer *renderer) {
         std::cout << "Unable to load text surface: " << SDL_GetError() << std::endl;
     }
     SDL_Texture *text_texture = SDL_CreateTextureFromSurface(renderer->get_engine(), text_surface);
-    renderer->draw_to_back_buffer(text_texture, rectangle);
+
+    SDL_Rect padded_rect = {
+        (int) (_position.x + _text_data->padding), (int) (_position.y + _text_data->padding),
+        (int) (_size.x - (_text_data->padding * 2)), (int) (_size.y - (_text_data->padding * 2))
+    };
+
+    renderer->draw_to_back_buffer(text_texture, &padded_rect);
 
     // Destroy the textures and font
     SDL_FreeSurface(text_surface);
@@ -56,7 +60,7 @@ void SDLRenderSolidText::draw_foreground(SDLRenderer *renderer) {
     TTF_CloseFont(font);
 }
 
-sdl_solid_text * SDLRenderSolidText::get_data() {
+sdl_solid_text *SDLRenderSolidText::get_data() {
     return _text_data;
 }
 

@@ -10,11 +10,11 @@
 #include "sdl/sdl_render_object.h"
 
 struct sdl_solid_text : public sdl_data {
-    unsigned int font_size;
+    unsigned int font_size, padding;
     SDL_Color foreground, background;
     std::string font;
     std::string text;
-    sdl_solid_text(SDL_Color, SDL_Color, std::string &, unsigned int, std::string &);
+    sdl_solid_text(SDL_Color, SDL_Color, std::string &, unsigned int, unsigned int, std::string &);
 };
 
 class SDLRenderSolidText : public SDL_RenderObject {
@@ -27,8 +27,6 @@ public:
     explicit SDLRenderSolidText(const vec2 &, const vec2 &, sdl_solid_text *);
 
     void render(SDLRenderer *) override;
-
-    void init_texture(SDLRenderer *) override;
 
     sdl_solid_text *get_data() override;
 };
