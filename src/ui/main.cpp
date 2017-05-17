@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
     SDLPanel right_panel_top(panel_top_o);
     
     vec2 button_pos = {601, 250}, button_size = {100, 50};
-    sdl_ui_text_data *button_data = new sdl_ui_text_data{255, 255, 50, "hallo", f_font};
+    sdl_text *button_data = new sdl_text{255, 255, 50, "hallo", f_font};
     SDL_UI_RenderTextObject *button_o = new SDL_UI_RenderTextObject(button_pos, button_size, button_data);
     SDLButton button(button_o);
     
