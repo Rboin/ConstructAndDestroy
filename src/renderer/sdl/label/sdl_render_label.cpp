@@ -22,14 +22,14 @@ SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data 
     Player *p = pm->get_player(player_id);
     _resource = p->resources;
 
-    sdl_ui_text_data *text_data = new sdl_ui_text_data{_data->red, _data->green, _data->blue, std::to_string((int)_resource->get_resources(_rt)).c_str(), font};
+    sdl_text *text_data = new sdl_text{_data->red, _data->green, _data->blue, std::to_string((int)_resource->get_resources(_rt)).c_str(), font};
     _text = new SDL_UI_RenderTextObject(text_pos,text_size,text_data);
 
     _image = new SDL_ImageRenderObject(image_pos,image_size,image_data);
 }
 
 void SDLRenderLabel::render(SDLRenderer *renderer) {
-    sdl_ui_text_data *temp = (sdl_ui_text_data*)_text->get_data();
+    sdl_text *temp = (sdl_text*)_text->get_data();
     int a = (int)_resource->get_resources(_rt);
     temp->text = std::to_string((int)_resource->get_resources(_rt)).c_str();
 
