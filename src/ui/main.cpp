@@ -6,7 +6,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "sdl/event/slot/sdl_mouse_event_slot.h"
-#include "sdl/ui/sdl_ui_render_text_object.h"
+#include "sdl/ui/sdl_render_text_object.h"
 #include "sdl/button/sdl_button.h"
 #include "sdl/event/sdl_key_event_dispatcher.h"
 #include "sdl/window/sdl_window.h"

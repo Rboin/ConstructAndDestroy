@@ -15,7 +15,7 @@
 #include "entity/moving/lumberjack_entity.h"
 #include "sdl/panel/sdl_world_panel.h"
 #include "sdl/image/sdl_image_render_object.h"
-#include "sdl/ui/sdl_ui_render_text_object.h"
+#include "sdl/text/sdl_render_text_object.h"
 #include "sdl/panel/sdl_wave_panel.h"
 #include "sdl/window/sdl_window.h"
 #include "entity/static/tree_entity.h"

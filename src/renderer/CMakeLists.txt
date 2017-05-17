@@ -8,8 +8,8 @@ set(SOURCE_FILES
         renderer.h render_object.h
         sdl/sdl_render_object.cpp
         sdl/sdl_render_object.h
-        sdl/ui/sdl_ui_render_text_object.h
-        sdl/ui/sdl_ui_render_text_object.cpp
+        sdl/text/sdl_render_text_object.h
+        sdl/text/sdl_render_text_object.cpp
         sdl/image/sdl_image_render_object.cpp
         sdl/image/sdl_image_render_object.h
         sdl/label/sdl_render_label.cpp

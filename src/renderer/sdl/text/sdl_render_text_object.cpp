@@ -2,7 +2,7 @@
 // Created by robin on 4/26/17.
 //
 
-#include "sdl_ui_render_text_object.h"
+#include "sdl_render_text_object.h"
 #include "sdl/sdl_renderer.h"
 
 SDL_UI_RenderTextObject::SDL_UI_RenderTextObject(const vec2 &position, const vec2 &size, sdl_ui_text_data *data) :
