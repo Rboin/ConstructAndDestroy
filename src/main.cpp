@@ -15,6 +15,8 @@
 #include "entity/moving/lumberjack_entity.h"
 #include "sdl/panel/sdl_world_panel.h"
 #include "sdl/image/sdl_image_render_object.h"
+#include "sdl/ui/sdl_ui_render_text_object.h"
+#include "sdl/panel/sdl_wave_panel.h"
 #include "sdl/window/sdl_window.h"
 #include "entity/static/tree_entity.h"
 #include "entity/goal/evaluator/obstacle_avoid_evaluator.h"
@@ -34,7 +36,6 @@
 #include "sdl/event/slot/mouse_handler_world.h"
 #include "entity/player_manager.h"
 #include "entity/goal/evaluator/combat_evaluator.h"
-#include "wave/wave.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
@@ -42,7 +43,7 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 
 bool init_sdl() {
-    if (SDL_Init(0) == -1) {
+    if(SDL_Init(0) == -1) {
         std::cout << " Failed to open SDL: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -52,7 +53,7 @@ bool init_sdl() {
 bool create_window() {
     window = SDL_CreateWindow("Construct And Destroy", pos_x, pos_y, size_x, size_y, 0);
 
-    if (!window) {
+    if(!window) {
         std::cout << " Failed to open window: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -60,8 +61,8 @@ bool create_window() {
 }
 
 bool create_renderer() {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-    if (!renderer) {
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
+    if(!renderer) {
         std::cout << " Failed to create renderer: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -76,7 +77,7 @@ void setup_renderer() {
 }
 
 bool init_font() {
-    if (TTF_Init() == -1) {
+    if(TTF_Init() == -1) {
         std::cout << "Failed to initialize SDL2_TTF: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -85,7 +86,7 @@ bool init_font() {
 
 bool init_img() {
     int flags = IMG_INIT_JPG | IMG_INIT_PNG;
-    if (IMG_Init(flags) == -1) {
+    if(IMG_Init(flags) == -1) {
         std::cout << "Failed to initialize SDL2_IMG: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -94,14 +95,14 @@ bool init_img() {
 
 // Initializes our window, renderer and sdl itself.
 bool init_everything() {
-    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img())
+    if(!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img())
         return false;
     setup_renderer();
     return true;
 }
 
 int main(int argc, char **argv) {
-    if (!init_everything()) {
+    if(!init_everything()) {
         return -1;
     }
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
@@ -121,16 +122,15 @@ int main(int argc, char **argv) {
     std::stack<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
 
     World::get_instance()->add_graph(gm->graph);
-    World::get_instance()->set_wave(new Wave(1, 10));
 
     NeighbourhoodManager *n = NeighbourhoodManager::get_instance();
     n->setup({(float) size_x, (float) size_y}, {200.0f, 200.0f});
 
     vec2 default_shape[] = {
-            {-20, -20},
-            {20,  -20},
-            {20,  20},
-            {-20, 20},
+        {-20, -20},
+        {20,  -20},
+        {20,  20},
+        {-20, 20},
     };
     mesh base = {4, default_shape};
     vec2 pos = {0, 0};
@@ -281,6 +281,16 @@ int main(int argc, char **argv) {
     SDLPanel *wood_panel = new SDLPanel(wood_label);
 
     right_panel.add_component(wood_panel);
+    main_panel.add_component(&right_panel);
+
+    vec2 wave_panel_position = {0, 300}, wave_panel_size = {200, 200};
+    sdl_ui_text_data *wave_panel_data = new sdl_ui_text_data{0, 0, 0, "WavePanel", f_font};
+    SDL_UI_RenderTextObject *wave_render_object = new SDL_UI_RenderTextObject(wave_panel_position, wave_panel_size,
+                                                                              wave_panel_data);
+    SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object);
+
+    main_panel.add_component(wave_panel);
+
 
     SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, &resource_panel_data, "gold.png",
                                                     ResourceType::GOLD, f_font);

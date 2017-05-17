@@ -5,6 +5,8 @@
 #ifndef CONSTRUCT_AND_DESTROY_WAVE_H
 #define CONSTRUCT_AND_DESTROY_WAVE_H
 
+class MovingEntityManager;
+
 class Wave {
 private:
     float _wave_duration, _stat_modifier_increment, _spawner_downtime,
@@ -12,6 +14,7 @@ private:
 
     unsigned int _wave_count, _current_wave;
 
+    MovingEntityManager *_entity_manager;
 
     /*!
      * Checks whether it's time to move on to the next wave.

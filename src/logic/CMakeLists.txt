@@ -162,7 +162,7 @@ set(SOURCE_FILES
         entity/goal/moving_entity_goal/hunt_target_goal.h
         entity/goal/moving_entity_goal/hunt_target_goal.cpp
         wave/wave.h
-        wave/wave.cpp
+        wave/wave.cpp wave/state/wave_start.h wave/state/wave_start.cpp wave/state/wave_end.h wave/state/wave_end.cpp
         entity/static/gold_mine_entity.h
         entity/static/gold_mine_entity.cpp)
 

@@ -33,9 +33,6 @@ void World::update(float d_t) {
     for (unsigned int i = 0; i < entities.size(); i++) {
         entities.at(i)->update(d_t);
     }
-    if(_wave) {
-        _wave->update(d_t);
-    }
     ResourceManager *rm = ResourceManager::get_instance();
     rm->replenish_resources(d_t);
 
@@ -92,8 +89,4 @@ void World::add_graph(Graph *g) {
 
 void World::set_render_object(SDL_RenderObject *r) {
     _representation = r;
-}
-
-void World::set_wave(Wave *wave) {
-    _wave = wave;
 }

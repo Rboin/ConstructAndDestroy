@@ -31,7 +31,7 @@ set(SOURCE_FILES
         sdl/event/slot/sdl_key_event_slot.cpp
         sdl/panel/sdl_resource_panel.h
         sdl/panel/sdl_resource_panel.cpp
-        )
+        sdl/panel/sdl_wave_panel.cpp sdl/panel/sdl_wave_panel.h)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

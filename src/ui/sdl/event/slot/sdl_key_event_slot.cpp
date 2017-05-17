@@ -4,7 +4,7 @@
 
 #include "entity/player_manager.h"
 #include "entity/player.h"
-#include "entity/state/state_machine.h"
+#include "state/state_machine.h"
 #include "entity/static/building/building_state/choosing_building_position.h"
 #include "entity/static/building/building_state/placing_building.h"
 #include "entity/static/building/building_state/abort_placing_building.h"

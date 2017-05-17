@@ -14,6 +14,8 @@ Wave::Wave(unsigned int wave_count, unsigned int spawn_amount) {
     _wave_duration = 10000.0f;
     _stat_modifier_increment = .5f;
     _spawner_downtime = _wave_duration / (float) spawn_amount;
+
+    _entity_manager = nullptr; // MovingEntityManager::get_instance();
 }
 
 void Wave::update(float delta) {
