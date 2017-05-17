@@ -50,7 +50,7 @@ public:
         return &_size;
     }
 
-    D *get_data() {
+    virtual D *get_data() {
         return _data;
     }
 
