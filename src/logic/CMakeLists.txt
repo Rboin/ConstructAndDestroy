@@ -148,7 +148,7 @@ set(SOURCE_FILES
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp
-         entity/moving/knight_entity.cpp
+        entity/moving/knight_entity.cpp
         entity/moving/moving_entity_factory.h
         entity/moving/moving_entity_types.h
         entity/moving/moving_entity_factory.cpp
@@ -160,7 +160,9 @@ set(SOURCE_FILES
         entity/goal/evaluator/combat_evaluator.cpp
         entity/goal/evaluator/combat_evaluator.h
         entity/goal/moving_entity_goal/hunt_target_goal.cpp
-        entity/goal/moving_entity_goal/hunt_target_goal.h entity/static/gold_mine_entity.h entity/static/gold_mine_entity.cpp)
+        entity/goal/moving_entity_goal/hunt_target_goal.h
+        entity/static/gold_mine_entity.h
+        entity/static/gold_mine_entity.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
