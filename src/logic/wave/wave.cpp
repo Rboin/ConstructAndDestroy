@@ -3,29 +3,32 @@
 //
 
 #include <iostream>
+#include <random>
+#include "entity/moving/moving_entity_manager.h"
+#include "entity/player_manager.h"
 #include "wave.h"
 
 Wave::Wave(unsigned int wave_count, unsigned int spawn_amount) {
     _wave_count = wave_count;
     _current_wave = 1;
     _stat_modifier = 1.0f;
-    _delta_time_wave = _delta_time_spawner = 0.0f;
+    _elapsed_time = _delta_time_wave = _delta_time_spawner = 0.0f;
 
     _wave_duration = 10000.0f;
     _stat_modifier_increment = .5f;
     _spawner_downtime = _wave_duration / (float) spawn_amount;
 
-    _entity_manager = nullptr; // MovingEntityManager::get_instance();
+    _entity_manager = MovingEntityManager::get_instance();
 }
 
 void Wave::update(float delta) {
     if(_current_wave > _wave_count) {
         std::cout << "Wave::update(): Finished last wave..." << std::endl;
         return;
-    }
-    else if(_current_wave <= _wave_count) {
+    } else if(_current_wave <= _wave_count) {
         _delta_time_wave += delta;
         _delta_time_spawner += delta;
+        _elapsed_time += delta;
         spawn_entity();
         next_wave();
     }
@@ -47,7 +50,13 @@ void Wave::spawn_entity() {
     _delta_time_spawner -= _spawner_downtime;
     std::cout << "Wave::spawn_entity(): Spawning new entity in wave " << _current_wave <<
               " with stat modifier " << _stat_modifier << " at time " << _delta_time_wave << std::endl;
-    // TODO determine what kind of entity to spawn and call SpawningEntity with that type.
+
+    // Generate a random index from the range of 0 - N
+    std::random_device rand_dev;
+    std::mt19937 engine(rand_dev());
+    std::uniform_int_distribution<> dist(0, (int) _spawn_possibilities.size() - 1);
+    int index = dist(engine);
+    _entity_manager->add_unit(PlayerManager::get_instance()->get_player(2), {0, 0}, _spawn_possibilities[index]);
 }
 
 const unsigned int Wave::get_wave_size() {
@@ -62,6 +71,10 @@ const float Wave::get_stat_modifier() {
     return _stat_modifier;
 }
 
-const float Wave::get_time_wave() {
-    return _delta_time_wave;
+const float Wave::get_elapsed_time() {
+    return _elapsed_time;
+}
+
+void Wave::set_spawn_possibilities(std::vector<MovingEntityType> &v) {
+    _spawn_possibilities = v;
 }
