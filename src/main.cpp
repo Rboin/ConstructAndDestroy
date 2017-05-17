@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include <sdl/text/sdl_render_solid_text.h>
 #include "sdl/panel/sdl_resource_panel.h"
 #include "entity/player.h"
 #include "sdl/label/sdl_render_label.h"
@@ -36,6 +37,7 @@
 #include "sdl/event/slot/mouse_handler_world.h"
 #include "entity/player_manager.h"
 #include "entity/goal/evaluator/combat_evaluator.h"
+#include "wave/wave.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
@@ -283,11 +285,20 @@ int main(int argc, char **argv) {
     right_panel.add_component(wood_panel);
     main_panel.add_component(&right_panel);
 
-    vec2 wave_panel_position = {0, 300}, wave_panel_size = {200, 200};
-    sdl_ui_text_data *wave_panel_data = new sdl_ui_text_data{0, 0, 0, "WavePanel", f_font};
-    SDL_UI_RenderTextObject *wave_render_object = new SDL_UI_RenderTextObject(wave_panel_position, wave_panel_size,
+    std::vector<MovingEntityType> possibilities = {
+        MovingEntityType::KNIGHT,
+        MovingEntityType::LUMBERJACK,
+        MovingEntityType::IRONMINER
+    };
+    Wave *wave = new Wave(10, 10);
+    wave->set_spawn_possibilities(possibilities);
+    vec2 wave_panel_position = {10, 300}, wave_panel_size = {150, 200};
+    std::string wave_content = "";
+    std::string wave_font = "res/font/Roboto/Roboto-Regular.ttf";
+    sdl_solid_text *wave_panel_data = new sdl_solid_text{{0,0,0,100}, {255,255,255,255}, wave_font, 18, 15, wave_content};
+    SDLRenderSolidText *wave_render_object = new SDLRenderSolidText(wave_panel_position, wave_panel_size,
                                                                               wave_panel_data);
-    SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object);
+    SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, wave);
 
     main_panel.add_component(wave_panel);
 
