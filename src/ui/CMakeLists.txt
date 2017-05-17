@@ -31,7 +31,12 @@ set(SOURCE_FILES
         sdl/event/slot/sdl_key_event_slot.cpp
         sdl/panel/sdl_resource_panel.h
         sdl/panel/sdl_resource_panel.cpp
-        sdl/panel/sdl_wave_panel.cpp sdl/panel/sdl_wave_panel.h)
+        sdl/panel/wave/sdl_wave_panel.cpp
+        sdl/panel/wave/sdl_wave_panel.h
+        sdl/panel/wave/state/wave_panel_preparing.cpp
+        sdl/panel/wave/state/wave_panel_preparing.h
+        sdl/panel/wave/state/wave_panel_spawning.cpp
+        sdl/panel/wave/state/wave_panel_spawning.h)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -41,7 +46,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(../renderer ../logic)
 
 add_library(cd_ui STATIC
-            ${SOURCE_FILES} )
+        ${SOURCE_FILES})
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

@@ -173,6 +173,6 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(../renderer)
 
 add_library(cd_logic STATIC
-            ${SOURCE_FILES})
+        ${SOURCE_FILES})
 
 target_link_libraries(cd_logic cd_renderer)

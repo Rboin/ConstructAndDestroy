@@ -12,7 +12,8 @@ class MovingEntityManager;
 
 class Wave {
 private:
-    float _wave_duration, _stat_modifier_increment, _spawner_downtime,
+    bool _preparing;
+    float _prep_time, _current_prep_time, _wave_duration, _stat_modifier_increment, _spawner_downtime,
         _delta_time_wave, _delta_time_spawner, _stat_modifier, _elapsed_time;
 
     unsigned int _wave_count, _current_wave;
@@ -32,7 +33,7 @@ private:
     void spawn_entity();
 
 public:
-    explicit Wave(unsigned int, unsigned int);
+    explicit Wave(float, unsigned int, unsigned int);
 
     void set_spawn_possibilities(std::vector<MovingEntityType> &);
 
@@ -49,6 +50,10 @@ public:
     const float get_stat_modifier();
 
     const float get_elapsed_time();
+
+    const float get_preparation_time();
+
+    const bool is_preparing();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_WAVE_H

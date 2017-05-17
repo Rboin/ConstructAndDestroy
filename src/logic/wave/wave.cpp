@@ -8,7 +8,9 @@
 #include "entity/player_manager.h"
 #include "wave.h"
 
-Wave::Wave(unsigned int wave_count, unsigned int spawn_amount) {
+Wave::Wave(float preparation, unsigned int wave_count, unsigned int spawn_amount) {
+    _preparing = true;
+    _prep_time = _current_prep_time = preparation;
     _wave_count = wave_count;
     _current_wave = 1;
     _stat_modifier = 1.0f;
@@ -22,15 +24,23 @@ Wave::Wave(unsigned int wave_count, unsigned int spawn_amount) {
 }
 
 void Wave::update(float delta) {
-    if(_current_wave > _wave_count) {
-        std::cout << "Wave::update(): Finished last wave..." << std::endl;
+    if(_current_prep_time > 0) {
+        _current_prep_time -= delta;
         return;
-    } else if(_current_wave <= _wave_count) {
-        _delta_time_wave += delta;
-        _delta_time_spawner += delta;
-        _elapsed_time += delta;
-        spawn_entity();
-        next_wave();
+    } else if(_current_prep_time <= 0) {
+        _preparing = false;
+    }
+    if(!_preparing) {
+        if(_current_wave > _wave_count) {
+            std::cout << "Wave::update(): Finished last wave..." << std::endl;
+            return;
+        } else if(_current_wave <= _wave_count) {
+            _delta_time_wave += delta;
+            _delta_time_spawner += delta;
+            _elapsed_time += delta;
+            spawn_entity();
+            next_wave();
+        }
     }
 }
 
@@ -41,6 +51,8 @@ void Wave::next_wave() {
     _delta_time_wave -= _wave_duration;
     _stat_modifier += _stat_modifier_increment;
     _current_wave++;
+    _current_prep_time = _prep_time;
+    _preparing = true;
 }
 
 void Wave::spawn_entity() {
@@ -48,8 +60,6 @@ void Wave::spawn_entity() {
         return;
     }
     _delta_time_spawner -= _spawner_downtime;
-    std::cout << "Wave::spawn_entity(): Spawning new entity in wave " << _current_wave <<
-              " with stat modifier " << _stat_modifier << " at time " << _delta_time_wave << std::endl;
 
     // Generate a random index from the range of 0 - N
     std::random_device rand_dev;
@@ -77,4 +87,12 @@ const float Wave::get_elapsed_time() {
 
 void Wave::set_spawn_possibilities(std::vector<MovingEntityType> &v) {
     _spawn_possibilities = v;
+}
+
+const float Wave::get_preparation_time() {
+    return _current_prep_time;
+}
+
+const bool Wave::is_preparing() {
+    return _preparing;
 }

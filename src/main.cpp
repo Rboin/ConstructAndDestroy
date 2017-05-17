@@ -17,7 +17,7 @@
 #include "sdl/panel/sdl_world_panel.h"
 #include "sdl/image/sdl_image_render_object.h"
 #include "sdl/text/sdl_render_text_object.h"
-#include "sdl/panel/sdl_wave_panel.h"
+#include "sdl/panel/wave/sdl_wave_panel.h"
 #include "sdl/window/sdl_window.h"
 #include "entity/static/tree_entity.h"
 #include "entity/goal/evaluator/obstacle_avoid_evaluator.h"
@@ -290,7 +290,7 @@ int main(int argc, char **argv) {
         MovingEntityType::LUMBERJACK,
         MovingEntityType::IRONMINER
     };
-    Wave *wave = new Wave(10, 10);
+    Wave *wave = new Wave(10000, 10, 10);
     wave->set_spawn_possibilities(possibilities);
     vec2 wave_panel_position = {10, 300}, wave_panel_size = {150, 200};
     std::string wave_content = "";
