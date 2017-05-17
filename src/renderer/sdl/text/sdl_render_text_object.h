@@ -8,11 +8,11 @@
 #include <SDL2/SDL_ttf.h>
 #include "sdl/sdl_render_object.h"
 
-struct sdl_ui_text_data : public sdl_data {
+struct sdl_text : public sdl_data {
     const char *text;
     TTF_Font *font;
 
-    sdl_ui_text_data(uint8_t r, uint8_t g, uint8_t b, const char *c, TTF_Font *f) : sdl_data(r, g, b) {
+    sdl_text(uint8_t r, uint8_t g, uint8_t b, const char *c, TTF_Font *f) : sdl_data(r, g, b) {
         text = c;
         font = f;
     }
@@ -20,7 +20,7 @@ struct sdl_ui_text_data : public sdl_data {
 
 class SDL_UI_RenderTextObject : public SDL_RenderObject {
 public:
-    SDL_UI_RenderTextObject(const vec2 &position, const vec2 &size, sdl_ui_text_data *data);
+    SDL_UI_RenderTextObject(const vec2 &position, const vec2 &size, sdl_text *data);
 
     void render(SDLRenderer *) override;
 
