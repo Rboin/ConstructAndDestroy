@@ -22,7 +22,6 @@ SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data 
     Player *p = pm->get_player(player_id);
     _resource = p->resources;
 
-
     sdl_ui_text_data *text_data = new sdl_ui_text_data{_data->red, _data->green, _data->blue, std::to_string((int)_resource->get_resources(_rt)).c_str(), font};
     _text = new SDL_UI_RenderTextObject(text_pos,text_size,text_data);
 

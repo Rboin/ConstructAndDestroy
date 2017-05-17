@@ -2,14 +2,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "sdl/panel/sdl_resource_panel.h"
+#include "entity/player.h"
+#include "sdl/label/sdl_render_label.h"
 #include "entity/moving/knight_entity.h"
+#include "entity/static/iron_mine_entity.h"
 #include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "graph/graph_manager.h"
 #include "entity/goal/moving_entity_goal/work_goal.h"
 #include "textures/texture_manager.h"
 #include "entity/moving/lumberjack_entity.h"
-#include "sdl/panel/sdl_panel.h"
 #include "sdl/panel/sdl_world_panel.h"
 #include "sdl/image/sdl_image_render_object.h"
 #include "sdl/window/sdl_window.h"
@@ -23,9 +26,6 @@
 #include "sdl/event/sdl_key_event_dispatcher.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl/event/slot/sdl_key_event_slot.h"
-#include "sdl/panel/sdl_resource_panel.h"
-#include "entity/player.h"
-#include "sdl/label/sdl_render_label.h"
 #include "entity/static/building/building_manager.h"
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
@@ -59,7 +59,7 @@ bool create_window() {
 }
 
 bool create_renderer() {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     if (!renderer) {
         std::cout << " Failed to create renderer: " << SDL_GetError() << std::endl;
         return false;
@@ -152,9 +152,9 @@ int main(int argc, char **argv) {
 
     World::get_instance()->add_entity(entity);
 
+    MovingEntity *knight_entity = new KnightEntity(&base, {100,100}, 100, 0.2, 0.2);
     ForceCalculator *knight_calculator = new BasicForceCalculator();
     Behaviour *knight_behaviour = new Behaviour(knight_calculator);
-    MovingEntity *knight_entity = new KnightEntity(&base, {100,100}, 100, 0.2, 0.2);
     ThinkGoal *knight_think_goal = new ThinkGoal(knight_entity);
     knight_think_goal->add_evaluator(new CombatEvaluator());
 

@@ -4,6 +4,7 @@
 
 #include "lumberjack_entity.h"
 #include "sdl/image/sdl_image_render_object.h"
+#include <iostream>
 
 LumberJackEntity::LumberJackEntity(const mesh *base, vec2 position, float mass,
                                    const float max_force, const float max_speed) :
@@ -11,17 +12,26 @@ LumberJackEntity::LumberJackEntity(const mesh *base, vec2 position, float mass,
     carrying = 0;
     tiredness = 0;
     hunger = 0;
+    texture = "lumberjack.png";
 }
 
 void LumberJackEntity::select() {
-    sdl_image_data* entity_data =  new sdl_image_data{"sel_lumberjack.png"};
+    sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
     this->representation->set_data(entity_data);
     this->representation->clear_data();
 }
 
 void LumberJackEntity::deselect() {
-    sdl_image_data* entity_data = new sdl_image_data{"lumberjack.png"};
+    sdl_image_data* entity_data = new sdl_image_data{texture};
     this->representation->set_data(entity_data);
     this->representation->clear_data();
 
+}
+
+std::string LumberJackEntity::get_texture() {
+    return texture;
+}
+
+void LumberJackEntity::set_texture(std::string src) {
+    this->texture = src;
 }

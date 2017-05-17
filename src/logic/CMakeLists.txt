@@ -148,6 +148,12 @@ set(SOURCE_FILES
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp
+         entity/moving/knight_entity.cpp
+        entity/moving/moving_entity_factory.h
+        entity/moving/moving_entity_types.h
+        entity/moving/moving_entity_factory.cpp
+        entity/moving/moving_entity_manager.h
+        entity/moving/moving_entity_manager.cpp
         entity/moving/knight_entity.cpp
         entity/goal/moving_entity_goal/combat_goal.cpp
         entity/goal/moving_entity_goal/combat_goal.h

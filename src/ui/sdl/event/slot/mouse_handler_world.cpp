@@ -2,15 +2,17 @@
 // Created by Mark on 1-5-2017.
 //
 
+#include <cmath>
 #include "mouse_handler_world.h"
 #include "world/world.h"
-#include "cmath"
 #include "entity/player.h"
 #include "behaviour/move_order.h"
-#include <iostream>
-#include "entity/player_manager.h"
+#include "entity/moving/moving_entity_manager.h"
 #include "sdl/panel/sdl_world_panel.h"
 #include "../globals.cpp"
+#include "../../../../logic/entity/moving/moving_entity_factory.h"
+#include "entity/player_manager.h"
+
 
 MouseHandlerWorld::MouseHandlerWorld() {
     start_drag_x = -1;
@@ -21,8 +23,8 @@ MouseHandlerWorld::~MouseHandlerWorld() {}
 
 
 void MouseHandlerWorld::handle_down(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
-    start_drag_x = data.position.x;
-    start_drag_y = data.position.y;
+    start_drag_x = (int)data.position.x;
+    start_drag_y = (int)data.position.y;
     world_panel->start_drag.x =  data.position.x;
     world_panel->start_drag.y =  data.position.y;
 }
@@ -31,9 +33,14 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
     //check if event is a click or a drag.
     if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
         //it is a click
-        vec2 pos = {(float) data.position.x, (float) data.position.y};
+        Player* player = PlayerManager::get_instance()->get_player(player_id);
+        vec2 pos = {data.position.x, data.position.y};
+        player->select_one_unit(pos);
 
-        PlayerManager::get_instance()->get_player(player_id)->select_one_unit(pos);
+
+        if(player->selected_units.empty()){
+            player->select_building(pos);
+        }
 
     } else {
         //it is a drag.
@@ -74,7 +81,6 @@ void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_p
                 world_panel->start_drag.x = -1;
                 world_panel->start_drag.y = -1;
                 return handle_up(data);
-
             }
 
             return;

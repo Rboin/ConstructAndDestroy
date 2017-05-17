@@ -5,7 +5,7 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_KEY_EVENT_SLOT_H
 #define CONSTRUCT_AND_DESTROY_SDL_KEY_EVENT_SLOT_H
 
-#include <sdl/sdl_ui_component.h>
+#include "sdl/sdl_ui_component.h"
 #include "event/slot.h"
 #include "event/event_types.h"
 

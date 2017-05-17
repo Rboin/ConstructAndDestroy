@@ -3,6 +3,7 @@
 //
 
 #include <ctime>
+#include "neighbourhood/neighbourhood_manager.h"
 #include <iostream>
 #include "world.h"
 #include "tree/bsp_tree.h"
@@ -10,7 +11,6 @@
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include <typeinfo>
-#include "neighbourhood/neighbourhood_manager.h"
 #include "entity/static/resource_manager.h"
 #include "../globals.cpp"
 #include "entity/player.h"

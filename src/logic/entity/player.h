@@ -4,7 +4,9 @@
 #include <vector>
 #include "types.h"
 #include "resources.h"
+#include "entity/static/building/building_entity.h"
 
+class MovingEntityFactory;
 class BuildingEntity;
 
 class StaticEntity;
@@ -15,6 +17,7 @@ template<class T>
 class StateMachine;
 
 class Player {
+
 private:
     int _id;
 public:
@@ -26,6 +29,8 @@ public:
     std::vector<MovingEntity *> selected_units;
     StateMachine<Player> *state_machine;
     BuildingEntity *positioning_building = nullptr;
+    BuildingEntity* selected_building;
+
 
     void update();
 
@@ -34,10 +39,12 @@ public:
     void select_units_in_rectangle(float start_x, float start_y, float end_x, float end_y);
 
     void select_one_unit(vec2 pos);
+    void select_building(vec2 pos);
 
-    void clear_selected_units();
-
+    void clear_all_selections();
     int get_id();
+
+
 };
 
 

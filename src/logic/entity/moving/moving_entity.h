@@ -29,6 +29,8 @@ private:
     ThinkGoal *_brain;
     std::vector<Weapon *> _weapons;
 public:
+    std::string texture;
+
     MovingEntity(const mesh *, vec2, float, const float, const float, JobType);
 
     virtual Behaviour *get_behaviour();
@@ -68,6 +70,11 @@ public:
     float delta_time;
 
     JobType job_type;
+
+    virtual std::string get_texture();
+
+    virtual void set_texture(std::string src);
+
 };
 
 #endif //C_AND_D_PROJECT_MOVINGENTITY_H
