@@ -6,15 +6,25 @@
 #define CONSTRUCT_AND_DESTROY_SDL_WAVE_PANEL_H
 
 #include "sdl_panel.h"
-#include "state/state_machine.h"
-#include "wave/wave.h"
+
+template<class T>
+class StateMachine;
+
+class Wave;
 
 class SDLWavePanel : public SDLPanel {
 private:
+    std::string _title, _max_wave, _current_wave, _modifier, _wave_time;
     StateMachine<Wave> *_wave_machine;
-public:
-    explicit SDLWavePanel(SDL_RenderObject *);
 
+    void update_wave_time();
+    void update_stat_modifier();
+    void update_representation();
+
+public:
+    explicit SDLWavePanel(SDLRenderSolidText *, Wave *);
+
+    void render(SDLRenderer *, float) override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_WAVE_PANEL_H
