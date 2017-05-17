@@ -18,7 +18,7 @@ public:
 
     SDL_Texture *get_back_buffer();
 
-    SDL_Texture *create_texture(int, int, SDL_TextureAccess access = SDL_TEXTUREACCESS_STREAMING);
+    SDL_Texture *create_texture(int, int, SDL_TextureAccess access = SDL_TEXTUREACCESS_TARGET);
 
     void clear() override;
 

@@ -23,7 +23,7 @@ void SDL_RenderObject::init_texture(SDLRenderer *renderer) {
         SDL_DestroyTexture(_result);
         _result = nullptr;
     }
-    _result = renderer->create_texture((int) _size.x, (int) _size.y, SDL_TEXTUREACCESS_TARGET);
+    _result = renderer->create_texture((int) _size.x, (int) _size.y);
 }
 
 void SDL_RenderObject::clear_texture(SDLRenderer *renderer, SDL_Rect *rect) {

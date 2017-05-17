@@ -8,7 +8,7 @@
 SDLRenderer::SDLRenderer(SDL_Renderer *engine) : Renderer<SDL_Renderer>(engine) {
     int width, height;
     SDL_GetRendererOutputSize(engine, &width, &height);
-    _back_buffer = create_texture(width, height, SDL_TEXTUREACCESS_TARGET);
+    _back_buffer = create_texture(width, height);
     SDL_SetRenderDrawBlendMode(engine, SDL_BLENDMODE_BLEND);
     SDL_SetRenderTarget(engine, _back_buffer);
 }
