@@ -5,8 +5,12 @@
 #ifndef C_AND_D_PROJECT_BUILDING_ENTITY_H
 #define C_AND_D_PROJECT_BUILDING_ENTITY_H
 
+#include <vector>
+#include "entity/moving/moving_entity_types.h"
 #include "building_type.h"
 #include "entity/static/static_entity.h"
+#include "types.h"
+
 
 template<class T> class StateMachine;
 class Resources;
@@ -14,6 +18,11 @@ class Resources;
 class BuildingEntity : public StaticEntity {
 private:
     BuildingType building_type;
+    float delta_time;
+    float order_time;
+    vec2 spawn;
+    std::vector<MovingEntityType> orders;
+
 protected:
     Resources* costs;
 public:
@@ -21,6 +30,10 @@ public:
     BuildingEntity(const mesh *, float, BuildingType, TextureTypes);
 
     Resources* get_costs();
+
+    void update(float d) override;
+    void order_unit_from_factory(Player *player, vec2 position, MovingEntityType moving_entity_type);
+    void order_unit(MovingEntityType moving_entity_type);
 
     BuildingType get_building_type();
     /*

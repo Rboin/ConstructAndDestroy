@@ -50,7 +50,6 @@ void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityTy
     me->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(me);
-
 }
 
 

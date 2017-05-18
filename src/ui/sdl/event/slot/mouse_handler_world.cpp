@@ -40,6 +40,7 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
 
         if(player->selected_units.empty()){
             player->select_building(pos);
+
         }
 
     } else {
