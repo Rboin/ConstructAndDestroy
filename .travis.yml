@@ -27,4 +27,4 @@ script:
     - cmake ..
     - make
     - ./bin/tests
-    - cppcheck --enable=warning,performance,portability,style --language=c++ .
+    - cppcheck --enable=warning,performance,portability,style --language=c++ ..
