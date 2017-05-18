@@ -23,9 +23,10 @@ protected:
     SDL_RenderObject *representation;
     Player * _player;
 
-    float health;
-    float attack_damage;
-    float attack_speed;
+    float _max_health;
+    float _health;
+    float _attack_damage;
+    float _attack_speed;
 
 public:
 
@@ -64,6 +65,7 @@ public:
     virtual void deselect();
 
     float get_health();
+    float get_health_divided_by_max_health();
     float get_attack_damage();
     float get_attack_speed();
 

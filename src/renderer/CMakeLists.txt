@@ -17,7 +17,9 @@ set(SOURCE_FILES
         sdl/sdl_renderer.h
         sdl/sdl_renderer.cpp
         sdl/text/sdl_render_solid_text.cpp
-        sdl/text/sdl_render_solid_text.h)
+        sdl/text/sdl_render_solid_text.h
+        sdl/image/sdl_image_health_render_object.cpp
+        sdl/image/sdl_image_health_render_object.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

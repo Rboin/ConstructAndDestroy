@@ -20,9 +20,10 @@ BaseEntity::BaseEntity(int type, const mesh *base, vec2 position, float mass) {
     vec2 *buf = new vec2[base->size]{{0, 0}};
     _buffer = new mesh{base->size, buf};
 
-    health = 10;
-    attack_damage = 2;
-    attack_speed = 1;
+    _max_health = 100;
+    _health = 100;
+    _attack_damage = 2;
+    _attack_speed = 1;
 }
 
 void BaseEntity::set_representation(SDL_RenderObject *r) {
@@ -91,4 +92,12 @@ void BaseEntity::deselect() {std::cout << "Can't deselect base entity" << std::e
 
 SDL_RenderObject *BaseEntity::get_representation() {
     return representation;
+}
+
+float BaseEntity::get_health() {
+    return _health;
+}
+
+float BaseEntity::get_health_divided_by_max_health() {
+    return _health / _max_health;
 }

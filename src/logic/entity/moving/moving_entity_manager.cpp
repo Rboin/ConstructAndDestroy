@@ -1,4 +1,5 @@
 
+#include "sdl/image/sdl_image_health_render_object.h"
 #include "entity/goal/evaluator/work_evaluator.h"
 #include "sdl/image/sdl_image_render_object.h"
 #include "world/world.h"
@@ -47,7 +48,7 @@ void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityTy
 
     sdl_image_data *entity_data = new sdl_image_data{me->get_texture()};
 
-    SDL_ImageRenderObject *entity_render_object = new SDL_ImageRenderObject(position, entity_size, entity_data);
+    SDL_ImageRenderObject *entity_render_object = new SDL_ImageHealthRenderObject(position, entity_size, entity_data, me);
     me->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(me);

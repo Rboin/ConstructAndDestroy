@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include "settings.h"
 #include "sdl/text/sdl_render_solid_text.h"
+#include "sdl/image/sdl_image_health_render_object.h"
 #include "sdl/panel/sdl_resource_panel.h"
 #include "entity/player.h"
 #include "sdl/label/sdl_render_label.h"
@@ -46,7 +47,7 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 
 bool init_sdl() {
-    if(SDL_Init(0) == -1) {
+    if (SDL_Init(0) == -1) {
         std::cout << " Failed to open SDL: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -56,7 +57,7 @@ bool init_sdl() {
 bool create_window() {
     window = SDL_CreateWindow("Construct And Destroy", pos_x, pos_y, size_x, size_y, 0);
 
-    if(!window) {
+    if (!window) {
         std::cout << " Failed to open window: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -65,7 +66,7 @@ bool create_window() {
 
 bool create_renderer() {
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
-    if(!renderer) {
+    if (!renderer) {
         std::cout << " Failed to create renderer: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -80,7 +81,7 @@ void setup_renderer() {
 }
 
 bool init_font() {
-    if(TTF_Init() == -1) {
+    if (TTF_Init() == -1) {
         std::cout << "Failed to initialize SDL2_TTF: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -89,7 +90,7 @@ bool init_font() {
 
 bool init_img() {
     int flags = IMG_INIT_JPG | IMG_INIT_PNG;
-    if(IMG_Init(flags) == -1) {
+    if (IMG_Init(flags) == -1) {
         std::cout << "Failed to initialize SDL2_IMG: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -98,14 +99,14 @@ bool init_img() {
 
 // Initializes our window, renderer and sdl itself.
 bool init_everything() {
-    if(!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img())
+    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img())
         return false;
     setup_renderer();
     return true;
 }
 
 int main(int argc, char **argv) {
-    if(!init_everything()) {
+    if (!init_everything()) {
         return -1;
     }
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
@@ -130,10 +131,10 @@ int main(int argc, char **argv) {
     n->setup({(float) size_x, (float) size_y}, {200.0f, 200.0f});
 
     vec2 default_shape[] = {
-        {-20, -20},
-        {20,  -20},
-        {20,  20},
-        {-20, 20},
+            {-20, -20},
+            {20,  -20},
+            {20,  20},
+            {-20, 20},
     };
     mesh base = {4, default_shape};
     vec2 pos = {0, 0};
@@ -153,7 +154,8 @@ int main(int argc, char **argv) {
 
     vec2 entity_size = {50, 50};
     sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
-    SDL_ImageRenderObject *entity_render_object = new SDL_ImageRenderObject(pos, entity_size, entity_data);
+    SDL_ImageRenderObject *entity_render_object = new SDL_ImageHealthRenderObject(pos, entity_size, entity_data,
+                                                                                  entity);
     entity->set_representation(entity_render_object);
 
     World::get_instance()->add_entity(entity);
@@ -175,8 +177,10 @@ int main(int argc, char **argv) {
 
     vec2 knight_entity_size = {50, 50};
     sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};
-    SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageRenderObject(pos, knight_entity_size,
-                                                                                   knight_entity_data);
+    SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageHealthRenderObject(pos, knight_entity_size,
+                                                                                         knight_entity_data,
+                                                                                         knight_entity);
+
     knight_entity->set_representation(knight_entity_render_object);
 
     World::get_instance()->add_entity(knight_entity);
@@ -197,8 +201,10 @@ int main(int argc, char **argv) {
 
     vec2 gold_miner_entity_size = {50, 50};
     sdl_image_data *gold_miner_entity_data = new sdl_image_data{"miner.png"};
-    SDL_ImageRenderObject *gold_miner_entity_render_object = new SDL_ImageRenderObject(pos, gold_miner_entity_size,
-                                                                                       gold_miner_entity_data);
+    SDL_ImageRenderObject *gold_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
+                                                                                             gold_miner_entity_size,
+                                                                                             gold_miner_entity_data,
+                                                                                             gold_miner_entity);
     gold_miner_entity->set_representation(gold_miner_entity_render_object);
 
     World::get_instance()->add_entity(gold_miner_entity);
@@ -230,7 +236,8 @@ int main(int argc, char **argv) {
     ResourceEntity *gold_mine_entity = new GoldMineEntity(&base, gold_mine_position, 50);
     sdl_image_data *gold_mine_data = new sdl_image_data{"goldmine.png"};
     gold_mine_entity->set_textures("goldmine.png", "depletedgoldmine.png");
-    SDL_ImageRenderObject *gold_mine_object = new SDL_ImageRenderObject(gold_mine_position, gold_mine_size, gold_mine_data);
+    SDL_ImageRenderObject *gold_mine_object = new SDL_ImageRenderObject(gold_mine_position, gold_mine_size,
+                                                                        gold_mine_data);
     gold_mine_entity->set_representation(gold_mine_object);
 
     World::get_instance()->add_entity(gold_mine_entity);
@@ -273,43 +280,49 @@ int main(int argc, char **argv) {
 
     main_window->add_component(&main_panel);
 
-    vec2 resource_panel_pos_wood = {600, 0}, resource_panel_size = {200, 30};
-    vec2 resource_panel_pos_gold = {700, 0};
-    sdl_data resource_panel_data = {100, 100, 100, 0};
-    SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos_wood, resource_panel_size, &resource_panel_data);
-    SDLResourcePanel right_panel(&panel_o);
+    ///Begin Resource panel
+    vec2 resource_panel_pos = {600,0}, resource_panel_size = {200, 40};
+    sdl_data resource_panel_data = {0, 0, 0, 100};
+    SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos, resource_panel_size, &resource_panel_data);
+    SDLResourcePanel resource_panel(&panel_o);
 
-    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, &resource_panel_data, "log.png",
+    sdl_data sdl_label_data = {255, 255, 255, 255};
+    vec2 resource_panel_pos_wood = {605, 5};
+    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, &sdl_label_data, "log.png",
                                                     ResourceType::WOOD, f_font);
     SDLPanel *wood_panel = new SDLPanel(wood_label);
 
-    right_panel.add_component(wood_panel);
-    main_panel.add_component(&right_panel);
+    vec2 resource_panel_pos_gold = {675, 5};
+    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, &sdl_label_data, "gold.png",
+                                                    ResourceType::GOLD, f_font);
+    SDLPanel *gold_panel = new SDLPanel(gold_label);
 
+
+    resource_panel.add_component(wood_panel);
+    resource_panel.add_component(gold_panel);
+    main_panel.add_component(&resource_panel);
+    main_window->add_component(&resource_panel);
+
+    ///End Resource Panel
+
+    ///Begin Waves
     std::vector<MovingEntityType> possibilities = {
-        MovingEntityType::KNIGHT,
-        MovingEntityType::LUMBERJACK
+            MovingEntityType::KNIGHT,
+            MovingEntityType::LUMBERJACK
     };
     Wave *wave = new Wave(10000, 10, 10);
     wave->set_spawn_possibilities(possibilities);
     vec2 wave_panel_position = {10, 300}, wave_panel_size = {150, 200};
     std::string wave_content = "";
     std::string wave_font = "res/font/Roboto/Roboto-Regular.ttf";
-    sdl_solid_text *wave_panel_data = new sdl_solid_text{{0,0,0,100}, {255,255,255,255}, wave_font, 18, 15, wave_content};
+    sdl_solid_text *wave_panel_data = new sdl_solid_text{{0, 0, 0, 100}, {255, 255, 255, 255}, wave_font, 18, 15,
+                                                         wave_content};
     SDLRenderSolidText *wave_render_object = new SDLRenderSolidText(wave_panel_position, wave_panel_size,
-                                                                              wave_panel_data);
+                                                                    wave_panel_data);
     SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, wave);
-
     main_panel.add_component(wave_panel);
+    ///End Waves
 
-
-    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, &resource_panel_data, "gold.png",
-                                                    ResourceType::GOLD, f_font);
-    SDLPanel *gold_panel = new SDLPanel(gold_label);
-
-    right_panel.add_component(gold_panel);
-
-    main_window->add_component(&right_panel);
     main_window->show();
 
     delete main_window;
