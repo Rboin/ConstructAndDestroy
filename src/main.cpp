@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
-#include <sdl/text/sdl_render_solid_text.h>
+#include "sdl/text/sdl_render_solid_text.h"
 #include "sdl/panel/sdl_resource_panel.h"
 #include "entity/player.h"
 #include "sdl/label/sdl_render_label.h"
