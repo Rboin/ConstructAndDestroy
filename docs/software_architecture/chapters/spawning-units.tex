@@ -1,0 +1,70 @@
+\section{Creating units}
+In this chapter we will explain how creating units is implemented in the game. We will go through some of the code and show the design patterns we used.
+
+\subsection{Panel}
+A unit can be created in a building. For example a castle. When the player selects the castle the building panel shows the units that can be created in that building.
+
+%-- This part will be extend by @JeroenVinke later.
+
+\subsection{Ordering units}
+When a user orders a unit from a building we will look at the order time of the castle which represents the time the castle needs to create the unit. This time can be seen as time that is needed to train the unit and make it ready to participate in your world to give it a more realistic feeling than spawning the unit immediately on the screen. 
+
+When the player orders a unit. The following method is called:
+
+\begin{lstlisting}
+void CastleEntity::order_unit(MovingEntityType moving_entity_type) {
+    this->orders.push_back(moving_entity_type);
+}
+\end{lstlisting}
+
+We add the type of the unit to a vector called orders. In which the orders placed by the player on that building are saved. The order is pushed to the back of the vector so that the array somewhat resembles a queue. A enum member of the enum MovingEntityType is used to determine what kind of unit needs to be created. After the completion of this method a unit is successfully ordered and waits for time to pass to be created.
+
+\subsection{Handling the orders}
+To handle orders placed in the building we use the update method. The update method is called every game-update so it is perfect to calculate time and decide if anything needs to be done with the orders. Below you can see the code of the update method:
+
+%-- Do not worry about the code listings being half on two different pages. This will be fixed when Jeroen is done. 
+
+\begin{lstlisting}
+void CastleEntity::update(float d) {
+    if(!this->orders.empty()){
+        delta_time += d;
+        if(delta_time >= order_time){
+
+
+            this->order_unit_from_factory(_player, spawn, orders.front());
+
+            //remove first from orders.
+            orders.erase(orders.begin());
+ 
+            //reset order time.
+            delta_time = 0;
+        }
+    };
+}
+\end{lstlisting}
+
+First we check if order is not empty. If that is the case, we update the delta\_time. This is so we know the time that has passed since the an order was placed. Then we check if the order\_time, the time it takes to create a unit, has been surpassed by the time that has passed since the order was placed. If that is the case we handle off the order of the unit by calling the method order\_unit\_from\_factory which we will explain below. After ordering from the factory, we take out the order from the orders vector since the order has been handled. And we also reset the delta\_time to zero so we can handle the next order after the same order\_time.
+
+\subsection{MovingEntity Factory}
+The order\_unit\_from\_factory method calls the MovingEntityManager's method add\_unit. As parameters it provides:
+
+\begin{itemize}  
+\item A Player*, the player for which the unit has to be created.
+\item A vec2 Position, the X and Y coordinates where the unit should be spawned.
+\item A MovingEntityType, type of the unit(FE: Lumberjack, Miner, Knight and more...)
+\end{itemize}
+The MovingEntityManager handles any interaction with the factory. And uses the parameters to call the factory and create the unit. We have implemented the structure of this code like a factory pattern as can be seen in the following class diagram below. The class diagram focusses on the factory and the classes that use and so only the really important classes are completely shown with all it's methods and attributes.  
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[scale=0.55]{res/MovingEntityFactoryClass.png}
+    \caption{Class structure around the MovingEntity factory.}
+\end{figure}
+\newpage
+ 
+There is also a rotated version of this image in the appendix for a sharper image if needed.
+
+After the MovingEntityManager has completed an order from the factory the unit will spawn in the given location. This process will repeat until all orders have been handled.
+
+
+
+
