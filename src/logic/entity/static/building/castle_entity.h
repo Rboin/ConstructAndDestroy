@@ -12,10 +12,7 @@
 
 
 class CastleEntity : public BuildingEntity {
-    float delta_time;
-    float order_time;
-    vec2 spawn;
-    std::vector<MovingEntityType> orders;
+
 
 public:
     CastleEntity(const mesh *, vec2, float);
@@ -24,9 +21,6 @@ public:
     void select();
     void deselect();
 
-    void update(float d) override;
-    void order_unit_from_factory(Player *player, vec2 position, MovingEntityType moving_entity_type);
-    void order_unit(MovingEntityType moving_entity_type);
     void set_transparent_or_border(bool, bool = false);
 };
 
