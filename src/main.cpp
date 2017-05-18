@@ -288,8 +288,7 @@ int main(int argc, char **argv) {
 
     std::vector<MovingEntityType> possibilities = {
         MovingEntityType::KNIGHT,
-        MovingEntityType::LUMBERJACK,
-        MovingEntityType::IRONMINER
+        MovingEntityType::LUMBERJACK
     };
     Wave *wave = new Wave(10000, 10, 10);
     wave->set_spawn_possibilities(possibilities);
