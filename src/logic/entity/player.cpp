@@ -8,6 +8,9 @@ Player::Player(int id) {
     selected_building = nullptr;
     state_machine = new StateMachine<Player>(this);
     resources = new Resources(0, 0, 0, 0);
+    buildings = std::vector<BuildingEntity *>();
+    units = std::vector<MovingEntity *>();
+    selected_units = std::vector<MovingEntity *>();
 }
 
 void Player::update() {
