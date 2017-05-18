@@ -57,7 +57,6 @@ void BuildingEntity::update(float d) {
 }
 
 void BuildingEntity::order_unit_from_factory(Player *player, vec2 position, MovingEntityType moving_entity_type) {
-    std::cout << "ordering" << std::endl;
     MovingEntityManager::get_instance()->add_unit(player, position, moving_entity_type);
 }
 
