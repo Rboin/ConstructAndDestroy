@@ -9,8 +9,8 @@
 #include "behaviour/move_order.h"
 #include "entity/moving/moving_entity_manager.h"
 #include "sdl/panel/sdl_world_panel.h"
-#include "../globals.cpp"
-#include "../../../../logic/entity/moving/moving_entity_factory.h"
+#include "settings.h"
+#include "entity/moving/moving_entity_factory.h"
 #include "entity/player_manager.h"
 
 

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <random>
+#include "settings.h"
 #include "entity/moving/moving_entity_manager.h"
 #include "entity/player_manager.h"
 #include "wave.h"
@@ -63,10 +64,11 @@ void Wave::spawn_entity() {
 
     // Generate a random index from the range of 0 - N
     std::random_device rand_dev;
+    // Seed the random generator
     std::mt19937 engine(rand_dev());
     std::uniform_int_distribution<> dist(0, (int) _spawn_possibilities.size() - 1);
     int index = dist(engine);
-    _entity_manager->add_unit(PlayerManager::get_instance()->get_player(2), {0, 0}, _spawn_possibilities[index]);
+    _entity_manager->add_unit(PlayerManager::get_instance()->get_player(computer_id), {0, 0}, _spawn_possibilities[index]);
 }
 
 const unsigned int Wave::get_wave_size() {

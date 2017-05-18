@@ -8,7 +8,7 @@
 #include "sdl/sdl_renderer.h"
 #include "entity/player_manager.h"
 #include "entity/player.h"
-#include "../globals.cpp"
+#include "settings.h"
 
 
 SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string image_path, ResourceType rt, TTF_Font *font) : SDL_RenderObject(position,

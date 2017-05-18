@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "settings.h"
 #include "sdl/text/sdl_render_solid_text.h"
 #include "sdl/panel/sdl_resource_panel.h"
 #include "entity/player.h"
@@ -148,7 +149,7 @@ int main(int argc, char **argv) {
 
     entity->set_behaviour(behaviour);
     entity->set_goal(think_goal);
-    entity->set_player(1);
+    entity->set_player(player_id);
 
     vec2 entity_size = {50, 50};
     sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
@@ -170,7 +171,7 @@ int main(int argc, char **argv) {
     knight_entity->set_behaviour(knight_behaviour);
     knight_entity->set_goal(knight_think_goal);
 
-    knight_entity->set_player(2);
+    knight_entity->set_player(computer_id);
 
     vec2 knight_entity_size = {50, 50};
     sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};

@@ -9,7 +9,7 @@
 #include "entity/static/building/building_state/placing_building.h"
 #include "entity/static/building/building_state/abort_placing_building.h"
 #include "sdl_key_event_slot.h"
-#include "../globals.cpp"
+#include "settings.h"
 #include "entity/static/building/building_manager.h"
 
 SDL_KeyEventSlot::SDL_KeyEventSlot() : Slot<sdl_key_event_data>() {}

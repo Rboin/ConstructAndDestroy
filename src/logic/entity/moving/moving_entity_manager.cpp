@@ -9,6 +9,7 @@
 #include "moving_entity_manager.h"
 #include "moving_entity_factory.h"
 #include "moving_entity.h"
+#include "entity/player.h"
 
 MovingEntityManager* MovingEntityManager::instance = nullptr;
 
@@ -39,7 +40,7 @@ void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityTy
 
     me->set_behaviour(behaviour);
     me->set_goal(think_goal);
-    me->set_player(1);
+    me->set_player(player->get_id());
 
     vec2 entity_size = {50, 50};
 
