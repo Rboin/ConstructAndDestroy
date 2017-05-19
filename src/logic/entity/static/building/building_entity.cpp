@@ -74,3 +74,14 @@ BuildingEntity::~BuildingEntity() {
         delete spawnable_entities.at(i);
     }
 }
+
+void BuildingEntity::set_position(float x, float y, bool finalposition) {
+    StaticEntity::set_position(x, y, finalposition);
+
+    spawn = this->_position;
+    spawn.y += 40;
+}
+
+int BuildingEntity::get_order_time() {
+    return order_time;
+}

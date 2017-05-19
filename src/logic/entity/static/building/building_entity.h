@@ -34,8 +34,10 @@ public:
     Resources* get_costs();
 
     void update(float d) override;
+    void set_position(float, float, bool);
     void order_unit_from_factory(Player *player, vec2 position, MovingEntityType moving_entity_type);
     void order_unit(MovingEntityType moving_entity_type);
+    int get_order_time();
 
     BuildingType get_building_type();
 
