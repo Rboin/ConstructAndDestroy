@@ -46,7 +46,15 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(../renderer ../logic)
 
 add_library(cd_ui STATIC
-        ${SOURCE_FILES})
+    ${SOURCE_FILES}
+        sdl/panel/sdl_building_panel.cpp
+        sdl/panel/sdl_building_panel.h
+        sdl/event/slot/mouse_handler_buildingpanel.cpp
+        sdl/event/slot/mouse_handler_buildingpanel.h
+        sdl/panel/sdl_unit_panel.cpp
+        sdl/panel/sdl_unit_panel.h
+        sdl/event/slot/mouse_handler_entitypanel.cpp
+        sdl/event/slot/mouse_handler_entitypanel.h sdl/panel/sdl_entity_panel.cpp sdl/panel/sdl_entity_panel.h sdl/panel/sdl_control_panel.cpp sdl/panel/sdl_control_panel.h)
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

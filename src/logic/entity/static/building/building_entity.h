@@ -10,7 +10,7 @@
 #include "building_type.h"
 #include "entity/static/static_entity.h"
 #include "types.h"
-
+#include "spawnable_entity.h"
 
 template<class T> class StateMachine;
 class Resources;
@@ -25,7 +25,9 @@ private:
 
 protected:
     Resources* costs;
+    std::vector<SpawnableEntity*> spawnable_entities;
 public:
+    ~BuildingEntity();
     BuildingEntity(const mesh *, vec2, float, BuildingType, TextureTypes);
     BuildingEntity(const mesh *, float, BuildingType, TextureTypes);
 
@@ -36,6 +38,9 @@ public:
     void order_unit(MovingEntityType moving_entity_type);
 
     BuildingType get_building_type();
+
+    std::vector<SpawnableEntity*> get_spawnable_entities();
+
     /*
      * This will change the texture of a building entity.
      * The first boolean will determine if the texture should be transparent

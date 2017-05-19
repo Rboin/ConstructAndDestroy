@@ -6,6 +6,7 @@
 #define CONSTRUCT_AND_DESTROY_BUILDING_FACTORY_H
 
 #include "types.h"
+#include "building_type.h"
 #include <string>
 
 class BuildingEntity;
@@ -16,7 +17,7 @@ private:
     static mesh *base;
 
 public:
-    static BuildingEntity *create(std::string);
+    static BuildingEntity *create(BuildingType);
 
 };
 

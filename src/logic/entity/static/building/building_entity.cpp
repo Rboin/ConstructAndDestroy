@@ -13,6 +13,7 @@ BuildingEntity::BuildingEntity(const mesh *base, vec2 position, float mass, Buil
                        position,
                        mass) {
     building_type = bt;
+    costs = new Resources(0, 0, 0, 0);
     order_time = 10000;
     spawn = this->_position;
     spawn.y += 40;
@@ -23,7 +24,7 @@ BuildingEntity::BuildingEntity(const mesh *base, float mass, BuildingType bt, Te
         : StaticEntity(base,
                        mass) {
     building_type = bt;
-    costs = new Resources(0, 100, 100, 0);
+    costs = new Resources(0, 0, 0, 0);
     order_time = 10000;
     spawn = this->_position;
     spawn.y += 40;
@@ -62,4 +63,14 @@ void BuildingEntity::order_unit_from_factory(Player *player, vec2 position, Movi
 
 void BuildingEntity::order_unit(MovingEntityType moving_entity_type) {
     this->orders.push_back(moving_entity_type);
+}
+
+std::vector<SpawnableEntity*> BuildingEntity::get_spawnable_entities() {
+    return spawnable_entities;
+}
+
+BuildingEntity::~BuildingEntity() {
+    for(int i = 0; i < spawnable_entities.size(); i++) {
+        delete spawnable_entities.at(i);
+    }
 }

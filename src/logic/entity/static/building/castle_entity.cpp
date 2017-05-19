@@ -9,12 +9,22 @@
 
 CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : BuildingEntity(
         base, position, mass, CASTLE, WAREHOUSETEXTURE) {
-    costs = new Resources(0, 0, 5, 0);
+    costs = new Resources(0, 5, 0, 0);
+
+    spawnable_entities = {
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK),
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER)
+    };
 }
 
 CastleEntity::CastleEntity(const mesh *base, float mass) : BuildingEntity(
         base, mass, CASTLE, WAREHOUSETEXTURE) {
-    costs = new Resources(0, 0, 5, 0);
+    costs = new Resources(0, 5, 0, 0);
+
+    spawnable_entities = {
+        new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK),
+        new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER)
+    };
 }
 
 

@@ -10,6 +10,7 @@
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/static/resource_manager.h"
+#include "settings.h"
 #include "entity/player.h"
 #include "entity/player_manager.h"
 

@@ -30,6 +30,23 @@ public:
     }
 
     /**
+     * Unregisters a Slot object which contains a callback function.
+     * @param instance
+     * @param s
+     */
+    void unregister_callback(T *instance) {
+        for(typename std::map<T*, Slot<D> *>::iterator it = _registered_slots.begin(); it != _registered_slots.end();) {
+            if (it->first == instance) {
+                _registered_slots.erase(it);
+                delete it->second;
+                break;
+            } else {
+                it++;
+            }
+        }
+    }
+
+    /**
      * Determines to which object we need to send the event and calls that object's callback function.
      * @param d
      */
