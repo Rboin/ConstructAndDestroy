@@ -82,6 +82,15 @@ public:
         this->children.clear();
     }
 
+    void remove_component(UIComponent* component) {
+        for (int i = 0; i < this->children.size(); i++) {
+            if (this->children.at(i) == component) {
+                delete component;
+                this->children.erase(this->children.begin() + i);
+            }
+        }
+    }
+
     bool contains_point(vec2 v) {
         return representation->contains(v);
     }
