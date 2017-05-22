@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
 #include "sdl/text/sdl_render_solid_text.h"
 #include "sdl/image/sdl_image_health_render_object.h"
@@ -32,6 +33,8 @@
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl/event/slot/sdl_key_event_slot.h"
 #include "entity/static/building/building_manager.h"
+#include "sdl/panel/sdl_building_panel.h"
+#include "sdl/event/slot/mouse_handler_buildingpanel.h"
 #include "logic/neighbourhood/neighbourhood_manager.h"
 #include "renderer/mesh.h"
 #include "logic/world/world.h"
@@ -45,6 +48,35 @@ int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
 SDL_Window *window;
 SDL_Renderer *renderer;
+
+// initialize buildings and textures
+std::vector<building_with_texture> buildings_with_textures = {
+    {"castle.png", BuildingType::CASTLE},
+    {"warehouse.png", BuildingType::WAREHOUSE}
+};
+
+std::vector<entity_with_texture> entities_with_textures = {
+    {"lumberjack.png", MovingEntityType::LUMBERJACK},
+    {"miner.png", MovingEntityType::MINER},
+    {"knight.png", MovingEntityType::KNIGHT}
+};
+
+
+std::string get_texture_of_entity(MovingEntityType type) {
+    for(int i = 0; i < entities_with_textures.size(); i++) {
+        if (entities_with_textures.at(i).type == type) {
+            return entities_with_textures.at(i).texture;
+        }
+    }
+}
+
+std::string get_texture_of_building(BuildingType building) {
+    for(int i = 0; i < buildings_with_textures.size(); i++) {
+        if (buildings_with_textures.at(i).type == building) {
+            return buildings_with_textures.at(i).texture;
+        }
+    }
+}
 
 bool init_sdl() {
     if (SDL_Init(0) == -1) {
@@ -322,6 +354,15 @@ int main(int argc, char **argv) {
     SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, wave);
     main_panel.add_component(wave_panel);
     ///End Waves
+
+
+    // building/control panel
+    vec2 control_panel_pos = {0, 500}, control_panel_size = {800, 100.0};
+    sdl_data control_panel_data = {100, 100, 100, 100};
+    SDL_RenderObject panel_b = SDL_RenderObject(control_panel_pos, control_panel_size, &control_panel_data);
+    SDLControlPanel control_panel(&panel_b);
+    main_window->add_component(&control_panel);
+
 
     main_window->show();
 

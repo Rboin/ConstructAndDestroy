@@ -31,7 +31,7 @@ BuildingManager *BuildingManager::get_instance() {
     return instance;
 }
 
-void BuildingManager::choose_building_position(int player_id, std::string type) {
+void BuildingManager::choose_building_position(int player_id, BuildingType type) {
     BuildingEntity *be = BuildingFactory::create(type);
 
     // Add building to the world (so it will be rendered)

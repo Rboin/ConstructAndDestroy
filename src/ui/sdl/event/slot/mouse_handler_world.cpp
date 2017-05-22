@@ -7,12 +7,16 @@
 #include "world/world.h"
 #include "entity/player.h"
 #include "behaviour/move_order.h"
+#include <iostream>
+#include "settings.h"
+#include "entity/static/building/building_state/placing_building.h"
+#include "entity/static/building/building_state/choosing_building_position.h"
+#include "state/state_machine.h"
 #include "entity/moving/moving_entity_manager.h"
 #include "sdl/panel/sdl_world_panel.h"
 #include "settings.h"
 #include "entity/moving/moving_entity_factory.h"
 #include "entity/player_manager.h"
-
 
 MouseHandlerWorld::MouseHandlerWorld() {
     start_drag_x = -1;
@@ -30,22 +34,27 @@ void MouseHandlerWorld::handle_down(sdl_mouse_event_data data, SDLWorldPanel *wo
 }
 
 void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
-    //check if event is a click or a drag.
-    if(std::abs(start_drag_x - data.position.x) < 10 &&  std::abs(start_drag_y - data.position.y) < 10){
-        //it is a click
-        Player* player = PlayerManager::get_instance()->get_player(player_id);
-        vec2 pos = {data.position.x, data.position.y};
-        player->select_one_unit(pos);
+    Player* player = PlayerManager::get_instance()->get_player(player_id);
 
-
-        if(player->selected_units.empty()){
-            player->select_building(pos);
-
-        }
-
+    // if the player is in the ChoosingBuildingPosition state, change state to placing building
+    if (dynamic_cast<ChoosingBuildingPosition*>(player->state_machine->current_state)) {
+        player->state_machine->change_state(new PlacingBuilding());
     } else {
-        //it is a drag.
-        PlayerManager::get_instance()->get_player(player_id)->select_units_in_rectangle(start_drag_x, start_drag_y, data.position.x, data.position.y);
+        //check if event is a click or a drag.
+        if (std::abs(start_drag_x - data.position.x) < 10 && std::abs(start_drag_y - data.position.y) < 10) {
+            //it is a click
+            vec2 pos = {data.position.x, data.position.y};
+            player->select_one_unit(pos);
+
+            if (player->selected_units.empty()) {
+                player->select_building(pos);
+            }
+
+        } else {
+            //it is a drag.
+            player->select_units_in_rectangle(start_drag_x, start_drag_y,
+                                              data.position.x, data.position.y);
+        }
     }
 }
 

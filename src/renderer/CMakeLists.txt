@@ -19,7 +19,9 @@ set(SOURCE_FILES
         sdl/text/sdl_render_solid_text.cpp
         sdl/text/sdl_render_solid_text.h
         sdl/image/sdl_image_health_render_object.cpp
-        sdl/image/sdl_image_health_render_object.h)
+        sdl/image/sdl_image_health_render_object.h
+        sdl/progressbar/sdl_progressbar_render_object.cpp
+        sdl/progressbar/sdl_progressbar_render_object.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

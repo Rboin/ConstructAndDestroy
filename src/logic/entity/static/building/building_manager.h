@@ -26,7 +26,7 @@ public:
 
     static BuildingManager *get_instance();
 
-    void choose_building_position(int, std::string);
+    void choose_building_position(int, BuildingType);
     std::vector<BuildingEntity *> get_buildings();
 
     void add_building(Player*, BuildingEntity*);

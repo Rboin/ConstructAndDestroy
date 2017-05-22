@@ -13,8 +13,8 @@
 /**
  * @tparam T = Type of renderer, i.e SDL_Renderer.
  * @tparam D = Type of data for RenderObject to draw.
- * @tparam R = The result of the RenderObject::render method.
- * @tparam S = Type of data for the Slot object.
+Type o * @tparam R = The result of the RenderObject::render method.
+ * @tparam S = f data for the Slot object.
  */
 template<typename T, typename D, typename R, typename S, typename K>
 class UIComponent {
@@ -71,6 +71,24 @@ public:
 
     void add_component(UIComponent *child) {
         children.push_back(child);
+    }
+
+    void clear_components() {
+        for (int i = 0; i < this->children.size(); i++) {
+            this->children[i]->clear_components();
+            delete this->children[i];
+        }
+
+        this->children.clear();
+    }
+
+    void remove_component(UIComponent* component) {
+        for (int i = 0; i < this->children.size(); i++) {
+            if (this->children.at(i) == component) {
+                delete component;
+                this->children.erase(this->children.begin() + i);
+            }
+        }
     }
 
     bool contains_point(vec2 v) {

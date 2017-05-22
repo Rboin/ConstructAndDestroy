@@ -11,6 +11,7 @@ Player::Player(int id) {
     buildings = std::vector<BuildingEntity *>();
     units = std::vector<MovingEntity *>();
     selected_units = std::vector<MovingEntity *>();
+    resources = new Resources(50, 50, 50, 50);
 }
 
 void Player::update() {
