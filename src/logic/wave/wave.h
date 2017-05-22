@@ -12,7 +12,7 @@ class MovingEntityManager;
 
 class Wave {
 private:
-    bool _preparing;
+    bool _preparing, _finished;
     float _prep_time, _current_prep_time, _wave_duration, _stat_modifier_increment, _spawner_downtime,
         _delta_time_wave, _delta_time_spawner, _stat_modifier, _elapsed_time;
 
