@@ -1,4 +1,5 @@
 
+#include <entity/goal/evaluator/combat_evaluator.h>
 #include "sdl/image/sdl_image_health_render_object.h"
 #include "entity/goal/evaluator/work_evaluator.h"
 #include "sdl/image/sdl_image_render_object.h"
@@ -38,6 +39,10 @@ void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityTy
     ThinkGoal *think_goal = new ThinkGoal(me);
 
     think_goal->add_evaluator(new WorkEvaluator());
+
+    if (moving_entity_type == MovingEntityType::KNIGHT) {
+        think_goal->add_evaluator(new CombatEvaluator());
+    }
 
     me->set_behaviour(behaviour);
     me->set_goal(think_goal);

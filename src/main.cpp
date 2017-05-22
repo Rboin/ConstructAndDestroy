@@ -339,10 +339,9 @@ int main(int argc, char **argv) {
 
     ///Begin Waves
     std::vector<MovingEntityType> possibilities = {
-            MovingEntityType::KNIGHT,
-            MovingEntityType::LUMBERJACK
+            MovingEntityType::KNIGHT
     };
-    Wave *wave = new Wave(10000, 10, 10);
+    Wave *wave = new Wave(30000, 10, 2);
     wave->set_spawn_possibilities(possibilities);
     vec2 wave_panel_position = {10, 300}, wave_panel_size = {150, 200};
     std::string wave_content = "";
