@@ -18,9 +18,9 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
     // for each building that can be created
     // render one panel per building
     for(int i = 0; i < buildings_with_textures.size(); i++) {
-        building_with_texture building = buildings_with_textures.at(i);
+        building_with_texture building = buildings_with_textures.at((unsigned int) i);
 
-        vec2 pos = { 100 * i, this->get_representation()->get_position()->clone().y };
+        vec2 pos = { (float)(100 * i), this->get_representation()->get_position()->clone().y };
         vec2 size = { 100, 100 };
         SDLUnitPanel* unit_panel = new SDLUnitPanel(building.texture, pos, size, building.type);
         unit_panel->set_mouse_callback(slot);
@@ -40,6 +40,6 @@ SDLBuildingPanel::~SDLBuildingPanel() {
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
 
     for(int i = 0; i < mouse_callbacks.size(); i++) {
-        mouse_dispatcher->unregister_callback(mouse_callbacks.at(i));
+        mouse_dispatcher->unregister_callback(mouse_callbacks.at((unsigned int)i));
     }
 }

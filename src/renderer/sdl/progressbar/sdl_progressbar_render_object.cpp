@@ -24,18 +24,18 @@ void SDL_ProgressbarRenderObject::render(SDLRenderer *renderer) {
 }
 
 void SDL_ProgressbarRenderObject::draw(SDLRenderer *renderer) {
-    int x = this->get_position()->x;
-    int y = this->get_position()->y;
+    int x = (int)this->get_position()->x;
+    int y = (int)this->get_position()->y;
     float progress_bar_width = this->get_size()->x;
     float progress_bar_height = this->get_size()->y;
 
-    SDL_Rect background_rect = {x, y, progress_bar_width, progress_bar_height};
+    SDL_Rect background_rect = {x, y, (int)progress_bar_width, (int)progress_bar_height};
     SDL_SetRenderDrawColor(renderer->get_engine(), 0, 0, 0, 255);
     SDL_RenderFillRect(renderer->get_engine(), &background_rect);
 
-    int pb_percentage = _progress * progress_bar_width;
+    float pb_percentage = _progress * progress_bar_width;
 
-    SDL_Rect progressbar_rect = {x, y, pb_percentage, progress_bar_height};
+    SDL_Rect progressbar_rect = {x, y, (int)pb_percentage, (int)progress_bar_height};
     SDL_SetRenderDrawColor(renderer->get_engine(), _color.r, _color.g, _color.b, _color.a);
     SDL_RenderFillRect(renderer->get_engine(), &progressbar_rect);
 }

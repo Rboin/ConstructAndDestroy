@@ -46,8 +46,8 @@ void ChoosingBuildingPosition::execute(Player *p) {
 
 
         GraphManager *gm = GraphManager::get_instance();
-        int node_index = gm->graph->get_node_with_position({x, y});
-        Node *curr_node = gm->graph->nodes.at(node_index);
+        int node_index = gm->graph->get_node_with_position({(float)x, (float)y});
+        Node *curr_node = gm->graph->nodes.at((unsigned int)node_index);
 
         float new_obj_x = curr_node->get_position()->x;
         float new_obj_y = curr_node->get_position()->y;

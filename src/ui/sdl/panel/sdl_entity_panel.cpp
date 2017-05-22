@@ -21,9 +21,9 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity* selected_bui
     // for each spawnable entity of the selected building
     // render one panel per entity
     for(int i = 0; i < entities.size(); i++) {
-        MovingEntityType type = entities.at(i)->get_entity_type();
+        MovingEntityType type = entities.at((unsigned int)i)->get_entity_type();
 
-        vec2 pos = { 100 * i, this->get_representation()->get_position()->clone().y };
+        vec2 pos = { (float)(100 * i), this->get_representation()->get_position()->clone().y };
         vec2 size = { 75, 75 };
         SDLUnitPanel* unit_panel = new SDLUnitPanel(get_texture_of_entity(type), pos, size, entities.at(i), p->selected_building);
         unit_panel->set_mouse_callback(slot);
