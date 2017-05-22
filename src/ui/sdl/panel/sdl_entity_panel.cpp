@@ -24,7 +24,7 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity* selected_bui
         MovingEntityType type = entities.at(i)->get_entity_type();
 
         vec2 pos = { 100 * i, this->get_representation()->get_position()->clone().y };
-        vec2 size = { 100, 100 };
+        vec2 size = { 75, 75 };
         SDLUnitPanel* unit_panel = new SDLUnitPanel(get_texture_of_entity(type), pos, size, entities.at(i), p->selected_building);
         unit_panel->set_mouse_callback(slot);
         mouse_dispatcher->register_callback(unit_panel, slot);

@@ -36,7 +36,7 @@ void MouseHandlerEntityPanel::handle_up(sdl_mouse_event_data data, SDLUnitPanel 
         // indicating how long it will take to spawn the selected unit
         const vec2* parent_size = sdl_panel->get_size();
         const vec2* parent_pos = sdl_panel->get_position();
-        vec2 pb_panel_pos = {parent_pos->x + (parent_size->x / 2 - 15.0), parent_pos->y + (parent_size->y / 2 - 2.5)}, pb_panel_size = {30, 5};
+        vec2 pb_panel_pos = {parent_pos->x + (parent_size->x / 2 - 15.0), parent_pos->y + parent_size->y + 5}, pb_panel_size = {30, 10};
         sdl_data pb_panel_data = {0, 0, 0, 0};
         SDL_ProgressbarRenderObject* panel_pb = new SDL_ProgressbarRenderObject(pb_panel_pos, pb_panel_size, { 255, 255, 255, 255}, &pb_panel_data);
         SDLProgressBarPanel* pb_panel = new SDLProgressBarPanel(panel_pb, building->get_order_time(), sdl_panel);
