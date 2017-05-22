@@ -18,7 +18,7 @@ void Behaviour::add(int type, BehaviourStrategy *s) {
 }
 
 void Behaviour::remove(int type) {
-    if(_behaviours[type]) {
+    if (_behaviours[type]) {
         BehaviourStrategy *strategy = _behaviours[type];
         _behaviours.erase(type);
         delete strategy;
@@ -44,5 +44,7 @@ bool Behaviour::has_behaviour(int type) {
     return _behaviours[type] != NULL;
 }
 
-
+void Behaviour::remove_all() {
+    _behaviours.clear();
+}
 

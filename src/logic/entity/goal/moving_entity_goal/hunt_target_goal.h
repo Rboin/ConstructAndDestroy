@@ -8,6 +8,7 @@
 
 #include "types.h"
 #include "goal/composite_goal.h"
+#include "vector.h"
 
 class MovingEntity;
 
@@ -18,13 +19,20 @@ class Node;
 class HuntTargetGoal : public GoalComposite<MovingEntity> {
 private:
     Node *_enemy_node;
+    MovingEntity *_enemy;
 public:
     /*!
      * If the _enemy_node index == 0 there is no enemy available
      * so new goals won't be set because there is nothing to attack/kill.
      */
-    HuntTargetGoal(MovingEntity *);
+    HuntTargetGoal(MovingEntity *, MovingEntity*);
 
+    /*!
+     * If the sub_goals size == 0 then this goal's status will be set to completed.
+     * Otherwise, we check how far the enemy is from its 'old node' if the distance
+     * is greater than a certain threshold this goal will be terminated, and we set a Seek
+     * to the enemy's current position. If we don't do this the bot will stand still for a bit.
+     */
     void determine_next_goal();
 
     /*!
@@ -36,13 +44,6 @@ public:
      * Follows the path that has been planned
      */
     void set_goal_follow_path();
-
-    /*!
-     * Searches an enemy entity.
-     * An enemy entity is an entity from the opposite player.
-     * @return the node on which the entity is currently closest to.
-     */
-    Node* find_enemy();
 
     void activate() override;
 

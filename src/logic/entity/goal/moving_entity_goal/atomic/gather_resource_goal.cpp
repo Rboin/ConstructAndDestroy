@@ -10,7 +10,7 @@
 
 GatherResourceGoal::GatherResourceGoal(MovingEntity *e, vec2 *pos, int initiator) : AtomicGoal<MovingEntity>(e, GATHER, initiator) {
     ResourceManager *rm = ResourceManager::get_instance();
-    resource = rm->get_resource(pos);
+    _resource = rm->get_resource(pos);
 }
 
 void GatherResourceGoal::activate() {
@@ -19,8 +19,8 @@ void GatherResourceGoal::activate() {
 
 const int GatherResourceGoal::process() {
     activate_if_inactive();
-    owner->carrying+= resource->gather(owner->delta_time);
-    if(owner->carrying >= 5 || resource->is_depleted()){
+    owner->carrying+= _resource->gather(owner->delta_time);
+    if(owner->carrying >= 5 || _resource->is_depleted()){
         status = COMPLETED;
     }
     return status;

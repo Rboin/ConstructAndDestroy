@@ -7,7 +7,7 @@
 #include "entity/moving/moving_entity.h"
 
 const float CombatEvaluator::calculate_desirability(MovingEntity *t) {
-    return 0.1;
+    return 0.2;
 }
 
 void CombatEvaluator::set_goal(MovingEntity *t) {

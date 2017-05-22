@@ -5,6 +5,7 @@
 #include "entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h"
 #include "entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h"
 #include <iostream>
+#include "entity/goal/moving_entity_goal/atomic/fight_goal.h"
 #include "think_goal.h"
 #include "goal/goal_evaluator.h"
 #include "vector.h"
@@ -66,9 +67,9 @@ void ThinkGoal::set_goal_follow_path() {
     add_subgoal(new FollowPathGoal(owner));
 }
 
-void ThinkGoal::set_goal_combat() {
+void ThinkGoal::set_goal_combat(MovingEntity* enemy) {
     if(!has_sub_goal(COMBAT)){
-        add_subgoal(new CombatGoal(owner));
+        add_subgoal(new CombatGoal(owner,enemy));
     }
 }
 
@@ -115,4 +116,18 @@ void ThinkGoal::terminate() {
 
 const char *ThinkGoal::get_name() const {
     return "Think";
+}
+
+void ThinkGoal::failed_all_current_goals() {
+    for (typename std::deque<Goal<MovingEntity> *>::iterator it = sub_goals.begin(); it != sub_goals.end(); it++) {
+        Goal<MovingEntity> *current_goal = (*it);
+        current_goal->set_status(FAILED);
+    }
+}
+
+void ThinkGoal::resume_sub_goals() {
+    for (typename std::deque<Goal<MovingEntity> *>::iterator it = sub_goals.begin(); it != sub_goals.end(); it++) {
+        Goal<MovingEntity> *current_goal = (*it);
+        current_goal->set_status(ACTIVE);
+    }
 }

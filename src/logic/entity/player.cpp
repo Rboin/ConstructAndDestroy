@@ -132,3 +132,12 @@ void Player::clear_all_selections() {
 int Player::get_id() {
     return _id;
 }
+
+void Player::remove_unit(BaseEntity*e) {
+    for (std::vector<MovingEntity *>::iterator iter = units.begin(); iter != units.end(); ++iter) {
+        if (*iter == e) {
+            units.erase(iter);
+            break;
+        }
+    }
+}

@@ -101,3 +101,11 @@ float BaseEntity::get_health() {
 float BaseEntity::get_health_divided_by_max_health() {
     return _health / _max_health;
 }
+
+void BaseEntity::attack(float damage) {
+    _health -= damage;
+}
+
+float BaseEntity::get_attack_damage() {
+    return _attack_damage;
+}

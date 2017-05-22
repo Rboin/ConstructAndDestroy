@@ -205,7 +205,7 @@ int main(int argc, char **argv) {
     knight_entity->set_behaviour(knight_behaviour);
     knight_entity->set_goal(knight_think_goal);
 
-    knight_entity->set_player(computer_id);
+    knight_entity->set_player(player_id);
 
     vec2 knight_entity_size = {50, 50};
     sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};

@@ -10,7 +10,8 @@
 class MovingEntity;
 
 class GatherResourceGoal : public AtomicGoal<MovingEntity> {
-    ResourceEntity *resource;
+private:
+    ResourceEntity *_resource;
 public:
     GatherResourceGoal(MovingEntity *, vec2*, int initiator = Initiator::AI);
 

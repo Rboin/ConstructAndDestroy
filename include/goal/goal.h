@@ -60,6 +60,14 @@ public:
         return status == FAILED;
     };
 
+    void set_status(ProcessStatus s){
+        status = s;
+    }
+
+    int get_status(){
+        return status;
+    }
+
     const int get_type() {
         return type;
     };
@@ -99,6 +107,7 @@ public:
     virtual void add_subgoal(Goal<T> *) = 0;
 
     virtual const char *get_name() const = 0;
+
 };
 
 #endif //C_AND_D_PROJECT_GOAL_H

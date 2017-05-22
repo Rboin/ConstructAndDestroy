@@ -11,6 +11,7 @@ KnightEntity::KnightEntity(const mesh *base, vec2 position, float mass,
     carrying = 0;
     tiredness = 0;
     hunger = 0;
+    _attack_damage = 8;
     texture = "knight.png";
 }
 

@@ -45,7 +45,7 @@ public:
 
     void set_goal_gather_resource();
 
-    void set_goal_combat();
+    void set_goal_combat(MovingEntity* = nullptr);
 
     void activate() override;
 
@@ -55,7 +55,19 @@ public:
 
     const char *get_name() const override;
 
+    /*!
+     * Set the status of all sub_goals to failed
+     */
+    void failed_all_current_goals();
+
+    /*!
+     * Set the status of all sub_goals to active
+     */
+    void resume_sub_goals();
+
     Goal<MovingEntity>* initiate_goal(Goal<MovingEntity>* goal, int initiator);
+
+
 };
 
 

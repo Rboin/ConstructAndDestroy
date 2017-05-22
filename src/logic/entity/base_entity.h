@@ -62,12 +62,18 @@ public:
     void set_deselected_texture(TextureTypes);
 
     virtual void select();
+
     virtual void deselect();
 
     float get_health();
+
     float get_health_divided_by_max_health();
+
     float get_attack_damage();
+
     float get_attack_speed();
+
+    void attack(float);
 
 };
 

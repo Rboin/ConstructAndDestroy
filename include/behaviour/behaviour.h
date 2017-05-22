@@ -38,6 +38,8 @@ public:
     bool has_behaviour(int);
 
     vec2 calculate_force(MovingEntity &, std::vector<BaseEntity *>);
+
+    void remove_all();
 };
 
 #endif //C_AND_D_PROJECT_BEHAVIOUR_H

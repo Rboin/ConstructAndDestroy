@@ -44,6 +44,8 @@ public:
     void clear_all_selections();
     int get_id();
 
+    void remove_unit(BaseEntity*);
+
 
 };
 
