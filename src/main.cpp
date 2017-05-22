@@ -249,8 +249,17 @@ int main(int argc, char **argv) {
     s_entity->set_textures("tree.png", "trunk.png");
     SDL_ImageRenderObject *tree_object = new SDL_ImageRenderObject(s_position, s_size, tree_data);
     s_entity->set_representation(tree_object);
-
     World::get_instance()->add_entity(s_entity);
+    // End tree entity
+
+    // Begin tree entity
+    vec2 s1_position = {400, 240}, s1_size = {50, 50};
+    ResourceEntity *s1_entity = new TreeEntity(&base, s1_position, 50);
+    sdl_image_data *tree1_data = new sdl_image_data{"tree.png"};
+    s1_entity->set_textures("tree.png", "trunk.png");
+    SDL_ImageRenderObject *tree1_object = new SDL_ImageRenderObject(s1_position, s1_size, tree1_data);
+    s1_entity->set_representation(tree1_object);
+    World::get_instance()->add_entity(s1_entity);
     // End tree entity
 
     // Begin warehouse entity

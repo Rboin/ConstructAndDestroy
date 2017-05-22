@@ -48,7 +48,7 @@ void CombatGoal::set_goal_hunt_target() {
     float distance_to_enemy = _enemy->get_position().distance(owner->get_position());
     if (distance_to_enemy < 40) {
         //fight
-        _enemy->get_brain()->failed_all_current_goals();
+        _enemy->get_brain()->remove_all_subgoals();
         _enemy->get_brain()->set_goal_combat(owner);
     } else {
         this->sub_goals.push_front(new HuntTargetGoal(owner, _enemy));

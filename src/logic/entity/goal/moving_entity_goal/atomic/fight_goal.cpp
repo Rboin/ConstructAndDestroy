@@ -42,6 +42,9 @@ const int FightGoal::process() {
     else if(_enemy->get_health() <= 0){
         status = COMPLETED;
         owner->get_brain()->resume_sub_goals();
+        _enemy->get_player()->remove_unit(_enemy);
+        World *w = World::get_instance();
+        w->remove_entity(_enemy);
     }
 
     return status;

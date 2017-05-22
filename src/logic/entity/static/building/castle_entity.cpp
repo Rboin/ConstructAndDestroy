@@ -13,7 +13,8 @@ CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : Buildi
 
     spawnable_entities = {
             new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK),
-            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER)
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER),
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::KNIGHT)
     };
 }
 
@@ -23,7 +24,8 @@ CastleEntity::CastleEntity(const mesh *base, float mass) : BuildingEntity(
 
     spawnable_entities = {
         new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK),
-        new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER)
+        new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER),
+        new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::KNIGHT)
     };
 }
 
