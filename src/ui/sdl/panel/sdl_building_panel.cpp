@@ -6,9 +6,9 @@
 #include "sdl/image/sdl_image_render_object.h"
 #include "sdl/event/slot/mouse_handler_buildingpanel.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
-#include <entity/player_manager.h>
-#include <entity/player.h>
-#include <sdl/event/slot/mouse_handler_entitypanel.h>
+#include "entity/player_manager.h"
+#include "entity/player.h"
+#include "sdl/event/slot/mouse_handler_entitypanel.h"
 #include "settings.h"
 
 SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {

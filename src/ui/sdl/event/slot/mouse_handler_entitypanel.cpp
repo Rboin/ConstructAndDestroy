@@ -3,12 +3,12 @@
 //
 
 #include "mouse_handler_entitypanel.h"
-#include <entity/player_manager.h>
-#include <entity/static/building/building_state/choosing_building_position.h>
-#include <entity/static/building/building_state/placing_building.h>
-#include <entity/static/building/building_manager.h>
-#include <sdl/progressbar/sdl_progressbar_render_object.h>
-#include <sdl/panel/sdl_progressbar_panel.h>
+#include "entity/player_manager.h"
+#include "entity/static/building/building_state/choosing_building_position.h"
+#include "entity/static/building/building_state/placing_building.h"
+#include "entity/static/building/building_manager.h"
+#include "sdl/progressbar/sdl_progressbar_render_object.h"
+#include "sdl/panel/sdl_progressbar_panel.h"
 #include "mouse_handler_buildingpanel.h"
 #include "world/world.h"
 #include "entity/player.h"

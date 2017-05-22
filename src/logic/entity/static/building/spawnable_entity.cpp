@@ -2,7 +2,7 @@
 // Created by Jeroen on 5/18/2017.
 //
 
-#include <entity/resources.h>
+#include "entity/resources.h"
 #include "spawnable_entity.h"
 
 SpawnableEntity::SpawnableEntity(Resources* cost, MovingEntityType entityType) {

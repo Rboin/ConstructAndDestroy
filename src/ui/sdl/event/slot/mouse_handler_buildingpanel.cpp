@@ -2,11 +2,11 @@
 // Created by Jeroen on 5/11/2017.
 //
 
-#include <sdl/panel/sdl_unit_panel.h>
-#include <entity/player_manager.h>
-#include <entity/static/building/building_state/choosing_building_position.h>
-#include <entity/static/building/building_state/placing_building.h>
-#include <entity/static/building/building_manager.h>
+#include "sdl/panel/sdl_unit_panel.h"
+#include "entity/player_manager.h"
+#include "entity/static/building/building_state/choosing_building_position.h"
+#include "entity/static/building/building_state/placing_building.h"
+#include "entity/static/building/building_manager.h"
 #include "mouse_handler_buildingpanel.h"
 #include "world/world.h"
 #include "entity/player.h"

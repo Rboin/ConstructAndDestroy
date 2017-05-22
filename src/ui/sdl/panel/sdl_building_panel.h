@@ -5,7 +5,7 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_BUILDING_PANEL_H
 #define CONSTRUCT_AND_DESTROY_SDL_BUILDING_PANEL_H
 
-#include <sdl/event/slot/sdl_mouse_event_slot.h>
+#include "sdl/event/slot/sdl_mouse_event_slot.h"
 #include "sdl_panel.h"
 #include <string>
 

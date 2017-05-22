@@ -8,7 +8,7 @@
 #include "entity/player.h"
 #include "behaviour/move_order.h"
 #include <iostream>
-#include <settings.h>
+#include "settings.h"
 #include "entity/static/building/building_state/placing_building.h"
 #include "entity/static/building/building_state/choosing_building_position.h"
 #include "state/state_machine.h"

@@ -1,8 +1,8 @@
-#include <entity/static/building/building_entity.h>
+#include "entity/static/building/building_entity.h"
 #include "entity/base_entity.h"
 #include "sdl_unit_panel.h"
 #include <string>
-#include <sdl/image/sdl_image_render_object.h>
+#include "sdl/image/sdl_image_render_object.h"
 
 SDLUnitPanel::SDLUnitPanel(std::string texture, vec2 pos, vec2 size, BuildingType unit) : SDLPanel(get_render_object(texture, pos, size)) {
     _buildingType = unit;

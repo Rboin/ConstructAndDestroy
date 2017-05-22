@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
-#include <sdl/panel/sdl_control_panel.h>
+#include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
 #include "sdl/text/sdl_render_solid_text.h"
 #include "sdl/image/sdl_image_health_render_object.h"

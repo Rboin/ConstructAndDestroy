@@ -165,7 +165,10 @@ set(SOURCE_FILES
         wave/wave.cpp
         entity/static/gold_mine_entity.h
         entity/static/gold_mine_entity.cpp
-        entity/goal/moving_entity_goal/hunt_target_goal.h entity/moving/moving_entity_types.h entity/static/building/spawnable_entity.cpp entity/static/building/spawnable_entity.h)
+        entity/goal/moving_entity_goal/hunt_target_goal.h
+        entity/moving/moving_entity_types.h
+        entity/static/building/spawnable_entity.cpp
+        entity/static/building/spawnable_entity.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
