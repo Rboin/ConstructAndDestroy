@@ -5,8 +5,8 @@
 #ifndef CONSTRUCT_AND_DESTROY_MOUSE_HANDLER_ENTITYPANEL_H
 #define CONSTRUCT_AND_DESTROY_MOUSE_HANDLER_ENTITYPANEL_H
 
-#include <sdl/panel/sdl_panel.h>
-#include <sdl/panel/sdl_unit_panel.h>
+#include "sdl/panel/sdl_panel.h"
+#include "sdl/panel/sdl_unit_panel.h"
 #include "sdl/event/slot/sdl_mouse_event_slot.h"
 
 class SDL_ImageRenderObject;
