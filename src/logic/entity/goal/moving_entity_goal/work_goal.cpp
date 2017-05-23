@@ -75,6 +75,9 @@ Node *WorkGoal::find_resource_node() {
     if (owner->job_type == GOLDMINER) {
         rt = GOLD;
     }
+    if (owner->job_type == STONEMINER) {
+        rt = STONE;
+    }
     ResourceManager *rm = ResourceManager::get_instance();
     vec2 targetVector = _target_resource != nullptr ? *_target_resource : owner->get_position();
     vec2 resource_position = rm->get_closest_resource(targetVector, rt);

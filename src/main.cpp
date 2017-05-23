@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
 #include "sdl/text/sdl_render_solid_text.h"
@@ -242,6 +243,30 @@ int main(int argc, char **argv) {
     World::get_instance()->add_entity(gold_miner_entity);
     // End gold mine miner entity
 
+    // Begin stone miner entity
+    ForceCalculator *stone_miner_calculator = new BasicForceCalculator();
+    Behaviour *stone_miner_behaviour = new Behaviour(stone_miner_calculator);
+    MovingEntity *stone_miner_entity = new MinerEntity(&base, {100, 100}, 100, 0.2, 0.2, STONEMINER);
+    ThinkGoal *stone_miner_think_goal = new ThinkGoal(stone_miner_entity);
+    stone_miner_think_goal->add_evaluator(new WorkEvaluator());
+    stone_miner_think_goal->add_evaluator(new FollowPathEvaluator());
+
+    stone_miner_entity->set_behaviour(stone_miner_behaviour);
+    stone_miner_entity->set_goal(stone_miner_think_goal);
+
+    stone_miner_entity->set_player(1);
+
+    vec2 stone_miner_entity_size = {50, 50};
+    sdl_image_data *stone_miner_entity_data = new sdl_image_data{"miner.png"};
+    SDL_ImageRenderObject *stone_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
+                                                                                             stone_miner_entity_size,
+                                                                                             stone_miner_entity_data,
+                                                                                             stone_miner_entity);
+    stone_miner_entity->set_representation(stone_miner_entity_render_object);
+
+    World::get_instance()->add_entity(stone_miner_entity);
+    // End stone mine miner entity
+
     // Begin tree entity
     vec2 s_position = {400, 280}, s_size = {50, 50};
     ResourceEntity *s_entity = new TreeEntity(&base, s_position, 50);
@@ -282,6 +307,18 @@ int main(int argc, char **argv) {
     gold_mine_entity->set_representation(gold_mine_object);
 
     World::get_instance()->add_entity(gold_mine_entity);
+    // End gold mine entity
+
+    // Begin stone mine entity
+    vec2 stone_mine_position = {240, 240}, stone_mine_size = {50, 50};
+    ResourceEntity *stone_mine_entity = new StoneMineEntity(&base, stone_mine_position, 50);
+    sdl_image_data *stone_mine_data = new sdl_image_data{"stonemine.png"};
+    stone_mine_entity->set_textures("stonemine.png", "depletedstonemine.png");
+    SDL_ImageRenderObject *stone_mine_object = new SDL_ImageRenderObject(stone_mine_position, stone_mine_size,
+                                                                        stone_mine_data);
+    stone_mine_entity->set_representation(stone_mine_object);
+
+    World::get_instance()->add_entity(stone_mine_entity);
     // End gold mine entity
 
     // TODO: when merged enemy_player, change 1 to player_id
@@ -338,9 +375,15 @@ int main(int argc, char **argv) {
                                                     ResourceType::GOLD, f_font);
     SDLPanel *gold_panel = new SDLPanel(gold_label);
 
+    vec2 resource_panel_pos_stone = {740, 5};
+    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, &sdl_label_data, "stone.png",
+                                                    ResourceType::STONE, f_font);
+    SDLPanel *stone_panel = new SDLPanel(stone_label);
+
 
     resource_panel.add_component(wood_panel);
     resource_panel.add_component(gold_panel);
+    resource_panel.add_component(stone_panel);
     main_panel.add_component(&resource_panel);
     main_window->add_component(&resource_panel);
 
