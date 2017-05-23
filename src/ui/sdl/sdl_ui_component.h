@@ -15,6 +15,8 @@ class SDL_UIComponent : public UIComponent<SDLRenderer, sdl_data, SDL_Texture, s
 public:
     explicit SDL_UIComponent(SDL_RenderObject *);
 
+    ~SDL_UIComponent() override;
+
     /*!
      * The base rendering function. Do not modify this, instead create a derived class with custom rendering.
      * @return SDL_Texture *

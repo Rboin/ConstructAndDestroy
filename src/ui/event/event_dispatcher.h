@@ -35,14 +35,8 @@ public:
      * @param s
      */
     void unregister_callback(T *instance) {
-        for(typename std::map<T*, Slot<D> *>::iterator it = _registered_slots.begin(); it != _registered_slots.end();) {
-            if (it->first == instance) {
-                _registered_slots.erase(it);
-                delete it->second;
-                break;
-            } else {
-                it++;
-            }
+        if(_registered_slots[instance]) {
+            _registered_slots.erase(instance);
         }
     }
 

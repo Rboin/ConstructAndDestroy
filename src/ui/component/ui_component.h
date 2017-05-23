@@ -49,21 +49,21 @@ public:
     }
 
     void set_mouse_callback(Slot<S> *s) {
-        if (mouse_callback) {
+        if(mouse_callback) {
             delete mouse_callback;
         }
         mouse_callback = s;
     }
 
     void set_key_callback(Slot<K> *s) {
-        if (key_callback) {
+        if(key_callback) {
             delete key_callback;
         }
         key_callback = s;
     }
 
     virtual void set_representation(RenderObject<T, D, R> *ro) {
-        if (representation) {
+        if(representation) {
             delete representation;
         }
         representation = ro;
@@ -78,13 +78,12 @@ public:
             this->children[i]->clear_components();
             delete this->children[i];
         }
-
-        this->children.clear();
+        children.clear();
     }
 
-    void remove_component(UIComponent* component) {
+    void remove_component(UIComponent *component) {
         for (int i = 0; i < this->children.size(); i++) {
-            if (this->children.at(i) == component) {
+            if(this->children.at(i) == component) {
                 delete component;
                 this->children.erase(this->children.begin() + i);
             }
@@ -96,7 +95,6 @@ public:
     }
 
     virtual void render(T *, float) = 0;
-
 };
 
 #endif //CONSTRUCT_AND_DESTROY_UI_COMPONENT_H

@@ -9,6 +9,7 @@ template<typename T>
 class Slot {
 public:
     Slot() {}
+    virtual ~Slot() {}
     virtual void on(T) = 0;
 };
 
