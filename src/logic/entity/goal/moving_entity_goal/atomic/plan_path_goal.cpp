@@ -28,12 +28,12 @@ const int PlanPathGoal::process() {
         goal = gm->graph->find_closest_edge(goal);
     }
 
-    owner->path = gm->graph->a_star_path(n,goal);
+    owner->set_path(gm->graph->a_star_path(n,goal));
     //Popping the first edge from the path if we have more than 2.
     //This will prevent the entity from moving backwards while halfway
     //on a edge.
-    if(owner->path.size() > 2){
-        owner->path.pop();
+    if(owner->get_path().size() > 2){
+        owner->get_path().pop();
     }
 
     terminate();

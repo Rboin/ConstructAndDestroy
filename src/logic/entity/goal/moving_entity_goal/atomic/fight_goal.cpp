@@ -24,7 +24,7 @@ void FightGoal::activate() {
 const int FightGoal::process() {
     activate_if_inactive();
 
-    _last_attack_time += owner->delta_time;
+    _last_attack_time += owner->get_delta_time();
     if(_last_attack_time > 100){
 
         _enemy->attack(owner->get_attack_damage());
@@ -36,12 +36,12 @@ const int FightGoal::process() {
         owner->get_player()->remove_unit(owner);
         World *w = World::get_instance();
         w->remove_entity(owner);
-//        delete owner;
     }
     //Enemy is killed and the goal is completed.
     else if(_enemy->get_health() <= 0){
         status = COMPLETED;
         owner->get_brain()->resume_sub_goals();
+        owner->set_engaged(false);
         _enemy->get_player()->remove_unit(_enemy);
         World *w = World::get_instance();
         w->remove_entity(_enemy);

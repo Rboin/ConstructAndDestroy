@@ -21,7 +21,7 @@ void TraverseEdgeGoal::activate() {
 
 const int TraverseEdgeGoal::process() {
     activate_if_inactive();
-    _goal_time += owner->delta_time;
+    _goal_time += owner->get_delta_time();
 
     //Extra check to prevent the bot from getting stuck.
     if (_goal_time > 1000) {
@@ -45,7 +45,7 @@ const char *TraverseEdgeGoal::get_name() const {
 }
 
 void TraverseEdgeGoal::is_stuck() {
-    _goal_time = owner->delta_time;
+    _goal_time = owner->get_delta_time();
     owner->get_behaviour()->remove_all();
     owner->get_behaviour()->add(TRAVERSEEDGE, new SeekStrategy());
     owner->get_behaviour()->set_target_for(TRAVERSEEDGE, goal, 1);

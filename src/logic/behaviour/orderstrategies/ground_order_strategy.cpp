@@ -16,12 +16,12 @@ void GroundOrderStrategy::execute(std::vector<MovingEntity *> *units, vec2 &targ
     for(int i = 0; i < units->size(); i++){
         MovingEntity* selectedUnit = units->at(i);
 
-        if (selectedUnit->job_type != JobType::ENEMY) {
+        if (selectedUnit->get_job_type() != JobType::ENEMY) {
             int start = graph->get_node_with_position(selectedUnit->get_position());
             std::stack<vec2 *> path = graph->a_star_path(graph->nodes[start], graph->nodes[goal]);
 
             selectedUnit->get_brain()->remove_all_subgoals();
-            selectedUnit->path = path;
+            selectedUnit->set_path(path);
             selectedUnit->get_brain()->add_subgoal(new FollowPathGoal(selectedUnit, Initiator::PLAYER));
         }
     }

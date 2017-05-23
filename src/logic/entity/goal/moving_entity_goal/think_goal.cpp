@@ -58,8 +58,10 @@ void ThinkGoal::set_goal_obstacle_avoidance(vec2 *v) {
 }
 
 void ThinkGoal::set_goal_work() {
-    if (!has_sub_goal(WORK)) {
-        add_subgoal(new WorkGoal(owner));
+    if(!owner->is_engaged()){
+        if (!has_sub_goal(WORK)) {
+            add_subgoal(new WorkGoal(owner));
+        }
     }
 }
 

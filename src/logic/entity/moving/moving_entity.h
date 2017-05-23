@@ -25,10 +25,16 @@ class MovingEntity : public BaseEntity {
 private:
     const float MAX_FORCE, MAX_SPEED;
     vec2 _velocity;
-    bool _possessed;
+    bool _engaged;
     Behaviour *_behaviour;
     ThinkGoal *_brain;
     std::vector<Weapon *> _weapons;
+    JobType _job_type;
+    std::stack<vec2 *> _path;
+    float _delta_time;
+
+protected:
+    float carrying;
 public:
     std::string texture;
 
@@ -60,22 +66,27 @@ public:
 
     void select_weapon();
 
-    std::stack<vec2 *> path;
-
-    float carrying;
-
-    float tiredness;
-
-    float hunger;
-
-    float delta_time;
-
-    JobType job_type;
-
     virtual std::string get_texture();
 
     virtual void set_texture(std::string src);
 
+    bool is_engaged();
+
+    void set_engaged(bool);
+
+    void set_job_type(JobType);
+
+    void set_carrying(float);
+
+    float get_carrying();
+
+    JobType get_job_type();
+
+    void set_path(std::stack<vec2 *>);
+
+    std::stack<vec2 *>& get_path();
+
+    float get_delta_time();
 };
 
 #endif //C_AND_D_PROJECT_MOVINGENTITY_H

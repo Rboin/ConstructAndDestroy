@@ -393,7 +393,7 @@ int main(int argc, char **argv) {
     std::vector<MovingEntityType> possibilities = {
             MovingEntityType::KNIGHT
     };
-    Wave *wave = new Wave(30000, 10, 2);
+    Wave *wave = new Wave(300, 10, 2);
     wave->set_spawn_possibilities(possibilities);
     vec2 wave_panel_position = {10, 300}, wave_panel_size = {150, 200};
     std::string wave_content = "";

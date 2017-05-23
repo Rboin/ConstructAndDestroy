@@ -9,8 +9,6 @@ KnightEntity::KnightEntity(const mesh *base, vec2 position, float mass,
                                    const float max_force, const float max_speed) :
         MovingEntity(base, position, mass, max_force, max_speed, ENEMY) {
     carrying = 0;
-    tiredness = 0;
-    hunger = 0;
     _attack_damage = 8;
     texture = "knight.png";
 }

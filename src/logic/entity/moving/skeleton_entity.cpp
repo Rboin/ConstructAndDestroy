@@ -14,8 +14,6 @@ SkeletonEntity::SkeletonEntity(const mesh *base, vec2 position, float mass,
                      max_force,
                      max_speed, ENEMY) {
     carrying = 0;
-    tiredness = 0;
-    hunger = 0;
     texture = "axe.png";
 }
 

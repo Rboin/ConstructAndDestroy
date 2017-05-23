@@ -66,16 +66,16 @@ void WorkGoal::terminate() {
 }
 
 Node *WorkGoal::find_resource_node() {
-    if (owner->job_type == WOODCUTTER) {
+    if (owner->get_job_type() == WOODCUTTER) {
         rt = WOOD;
     }
-    if (owner->job_type == IRONMINER) {
+    if (owner->get_job_type() == IRONMINER) {
         rt = IRON;
     }
-    if (owner->job_type == GOLDMINER) {
+    if (owner->get_job_type() == GOLDMINER) {
         rt = GOLD;
     }
-    if (owner->job_type == STONEMINER) {
+    if (owner->get_job_type() == STONEMINER) {
         rt = STONE;
     }
     ResourceManager *rm = ResourceManager::get_instance();

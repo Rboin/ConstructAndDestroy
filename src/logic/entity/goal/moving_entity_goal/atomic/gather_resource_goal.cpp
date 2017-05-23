@@ -8,7 +8,8 @@
 #include "gather_resource_goal.h"
 #include "entity/moving/moving_entity.h"
 
-GatherResourceGoal::GatherResourceGoal(MovingEntity *e, vec2 *pos, int initiator) : AtomicGoal<MovingEntity>(e, GATHER, initiator) {
+GatherResourceGoal::GatherResourceGoal(MovingEntity *e, vec2 *pos, int initiator) : AtomicGoal<MovingEntity>(e, GATHER,
+                                                                                                             initiator) {
     ResourceManager *rm = ResourceManager::get_instance();
     _resource = rm->get_resource(pos);
 }
@@ -19,8 +20,8 @@ void GatherResourceGoal::activate() {
 
 const int GatherResourceGoal::process() {
     activate_if_inactive();
-    owner->carrying+= _resource->gather(owner->delta_time);
-    if(owner->carrying >= 5 || _resource->is_depleted()){
+    owner->set_carrying(owner->get_carrying() + _resource->gather(owner->get_delta_time()));
+    if (owner->get_carrying() >= 5 || _resource->is_depleted()) {
         status = COMPLETED;
     }
     return status;

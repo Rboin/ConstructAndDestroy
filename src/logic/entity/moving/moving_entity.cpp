@@ -26,8 +26,8 @@ MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass,
     _velocity = {0, 0, 0};
     _behaviour = NULL;
     _brain = NULL;
-    job_type = jt;
-    _possessed = false;
+    _job_type = jt;
+    _engaged = false;
 }
 
 Behaviour *MovingEntity::get_behaviour() {
@@ -47,7 +47,7 @@ void MovingEntity::set_goal(ThinkGoal *g) {
 }
 
 void MovingEntity::update(float d_t) {
-    delta_time = d_t;
+    _delta_time = d_t;
     if (_brain)
         _brain->process();
 
@@ -175,3 +175,38 @@ void MovingEntity::set_texture(std::string src) {
     std::cout << "you cannot set the texture of a moving entity class itself." << std::endl;
 }
 
+bool MovingEntity::is_engaged() {
+    return _engaged;
+}
+
+void MovingEntity::set_engaged(bool engaged) {
+    _engaged = engaged;
+}
+
+void MovingEntity::set_job_type(JobType jt) {
+    _job_type = jt;
+}
+
+void MovingEntity::set_carrying(float c) {
+    carrying = c;
+}
+
+float MovingEntity::get_carrying() {
+    return carrying;
+}
+
+JobType MovingEntity::get_job_type() {
+    return _job_type;
+}
+
+void MovingEntity::set_path(std::stack<vec2 *> p) {
+    _path = p;
+}
+
+std::stack<vec2 *>& MovingEntity::get_path() {
+    return _path;
+}
+
+float MovingEntity::get_delta_time() {
+    return _delta_time;
+}

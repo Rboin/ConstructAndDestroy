@@ -20,7 +20,7 @@ void LumberOrderStrategy::execute(std::vector<MovingEntity *> *units, vec2 &targ
     for(int i = 0; i < units->size(); i++){
         MovingEntity* selectedUnit = units->at(i);
 
-        if (selectedUnit->job_type != JobType::ENEMY) {
+        if (selectedUnit->get_job_type() != JobType::ENEMY) {
             selectedUnit->get_brain()->remove_all_subgoals();
             selectedUnit->get_brain()->add_subgoal(new WorkGoal(selectedUnit, &targetVector, Initiator::PLAYER));
         }

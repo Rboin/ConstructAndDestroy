@@ -12,8 +12,6 @@ MinerEntity::MinerEntity(const mesh *base, vec2 position, float mass,
                          const float max_force, const float max_speed, const JobType jt) :
         MovingEntity(base, position, mass, max_force, max_speed, jt) {
     carrying = 0;
-    tiredness = 0;
-    hunger = 0;
     texture = "miner.png";
 
 }

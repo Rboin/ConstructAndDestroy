@@ -26,10 +26,10 @@ void FollowPathGoal::set_goal_traverse_edge(vec2 *g) {
 }
 
 void FollowPathGoal::activate() {
-    if(owner->path.size()!= 0){
+    if(owner->get_path().size()!= 0){
         status = ACTIVE;
-        set_goal_traverse_edge(owner->path.top());
-        owner->path.pop();
+        set_goal_traverse_edge(owner->get_path().top());
+        owner->get_path().pop();
     }else{
         status = COMPLETED;
     }
@@ -38,7 +38,7 @@ void FollowPathGoal::activate() {
 const int FollowPathGoal::process() {
     activate_if_inactive();
     status = process_subgoals();
-    if(status == COMPLETED && !owner->path.empty()){
+    if(status == COMPLETED && !owner->get_path().empty()){
         activate();
     }
     return status;
