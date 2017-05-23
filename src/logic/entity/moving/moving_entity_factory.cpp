@@ -2,6 +2,7 @@
 // Created by Mark on 10-5-2017.
 //
 
+#include "settings.h"
 #include "world/world.h"
 #include "moving_entity.h"
 #include "moving_entity_types.h"
@@ -25,6 +26,10 @@ MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingE
 
         case MovingEntityType::KNIGHT:
             me = new KnightEntity(base, position, 100, 0.2, 0.2);
+            if(player->get_id() != player_id)
+            {
+                me->set_texture("blackknight.png");
+            }
             break;
 
         case MovingEntityType::MINER:
