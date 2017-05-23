@@ -8,6 +8,7 @@
 #include "wave/wave.h"
 #include "state/state_machine.h"
 #include "wave_panel_spawning.h"
+#include "wave_panel_finished.h"
 
 void WavePanelPreparing::enter(SDLWavePanel *panel) {
     std::cout << "Entering WavePanelPreparing State..." << std::endl;
@@ -16,6 +17,8 @@ void WavePanelPreparing::enter(SDLWavePanel *panel) {
 void WavePanelPreparing::execute(SDLWavePanel *panel) {
     if(!panel->get_wave()->is_preparing()) {
         panel->get_state_machine()->change_state(new WavePanelSpawning());
+    } else if(panel->get_wave()->is_finished()) {
+        panel->get_state_machine()->change_state(new WavePanelFinished());
     }
     update_text(panel->get_wave(), (sdl_solid_text *) panel->get_representation()->get_data());
 }
