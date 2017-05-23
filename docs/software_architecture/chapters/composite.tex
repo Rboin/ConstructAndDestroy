@@ -25,3 +25,10 @@ gathering it plans another path, this time to the closest warehouse/depot. It fo
 this path and after it arrives it drops its resources 
 (\cref{sec:dropresources}). Once all these goals are completed the work goal is completed as well.
 
+\subsection{Combat}
+\label{sec:combat}
+This goal can be initialized with or without an enemy. When this goal is initialized with an enemy it means the owner of this goal is being attacked, thus it doesn’t have to hunt a target (\cref{sec:hunttarget}) and the fight goal can be added right away. When the goal is initialized without an enemy it means this entity will look for an enemy. If there is no enemy entity present the goal will be removed, if there is an enemy the goals hunt target and fight goal will be added to the owner.
+
+\subsection{Hunt Target}
+\label{sec:hunttarget}
+This goal will hunt down an enemy moving entity. This is done by using the plan path (\cref{sec:planpath}) and follow path (\cref{sec:followpath}) goals. The most notable thing for this goal is when it is completed or terminated. If the sub goals of hunt target are empty it means we have followed the path to the enemy’s location. Since we are chasing moving entities we regularly have to check whether or not the enemy has moved to much from its initial location. When this is the case we set a seek to the current enemy location, after that the goal will be removed. We have to do this otherwise the entity will stop moving for a bit. After this the combat goal (\cref{sec:combat}) will be called again and hunt target goal can plan a new path to the enemy’s location. This process is repeated untill we are close enough to attack the enemy entity.

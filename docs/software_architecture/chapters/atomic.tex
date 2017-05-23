@@ -49,3 +49,6 @@ to check whether the entity has this behaviour, and if so if it's close
 enough to the next node on the graph. If it's close enough, the goal has been 
 completed.
 
+\subsection{Fight}
+\label{sec:fight}
+This goal will damage an enemy entity. Every 100ms we will attack the enemy with the attack damage of the owner. When the owner’s or enemy’s health reaches 0 this goal can be completed. We will remove the entity that has died from the game. The entity that has survived will continue with his other goals. E.g. if the entity that has survived is a lumberjack he will continue gathering wood. If the entity that has survived is a knight it will search for another enemy and try to kill that.
