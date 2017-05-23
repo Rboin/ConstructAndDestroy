@@ -1,10 +1,23 @@
 \section{Creating units}
 In this chapter we will explain how creating units is implemented in the game. We will go through some of the code and show the design patterns we used.
 
-\subsection{Panel}
-A unit can be created in a building. For example a castle. When the player selects the castle the building panel shows the units that can be created in that building.
+\subsection{Entity Panel} \label{EntityPanel}
+A unit can be created in a building, in a castle for example. When the player selects a castle the building panel is replaced by a different panel which shows all units that can be spawned from the selected building. This can be seen in \cref{fig:entity-panel}, where the entity panel is the panel at the bottom of the screen. 
 
-%-- This part will be extend by @JeroenVinke later.
+When the player clicks on an entity in the entity panel, a progress bar will be displayed to indicate how long it will take for the entity to be actually spawned.
+
+In \cref{fig:unit-panel} all unit panels are highlighted. For each unit that can be spawned from the selected building, a unit panel is added to the entity panel at the bottom of the screen. A unit panel, as displayed in \cref{fig:unit-panel-class-diagram}, contains the EntityType that belongs to a unit panel which it uses to render the sprite that belongs to the EntityType.
+
+In order to capture click events, and trigger the unit spawning process, a MouseHandlerEntityPanel is used. When the player clicks on an entity, the mouse handler takes care of spawning the unit and subtracing the resource cost. The entity will only be ordered if the player has enough resources to pay for the unit, as shown below.
+
+\begin{lstlisting}
+ if (p->resources->check_if_sufficient_resources(spawnable_entity->get_cost())) {
+    // tell the building to spawn the selected entity type
+    building->order_unit(spawnable_entity->get_entity_type());
+    
+    p->resources->subtract_resources(spawnable_entity->get_cost());
+}
+\end{lstlisting}
 
 \subsection{Ordering units}
 When a user orders a unit from a building we will look at the order time of the castle which represents the time the castle needs to create the unit. This time can be seen as time that is needed to train the unit and make it ready to participate in your world to give it a more realistic feeling than spawning the unit immediately on the screen. 
