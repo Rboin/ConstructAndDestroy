@@ -25,12 +25,11 @@ void MouseHandlerEntityPanel::handle_up(sdl_mouse_event_data data, SDLUnitPanel 
 
     BuildingEntity* building = sdl_panel->get_building_entity();
 
-    if (p->resources->check_if_sufficient_resources(building->get_costs())) {
-        SpawnableEntity* spawnable_entity = sdl_panel->get_spawnable_entity();
+    SpawnableEntity* spawnable_entity = sdl_panel->get_spawnable_entity();
 
+    if (p->resources->check_if_sufficient_resources(spawnable_entity->get_cost())) {
         // tell the building to spawn the selected entity type
         building->order_unit(spawnable_entity->get_entity_type());
-
 
         // create a progressbarpanel at the center of the unit panel
         // indicating how long it will take to spawn the selected unit
