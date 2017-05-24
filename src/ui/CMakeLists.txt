@@ -36,7 +36,11 @@ set(SOURCE_FILES
         sdl/panel/wave/state/wave_panel_preparing.cpp
         sdl/panel/wave/state/wave_panel_preparing.h
         sdl/panel/wave/state/wave_panel_spawning.cpp
-        sdl/panel/wave/state/wave_panel_spawning.h sdl/panel/wave/state/wave_panel_finished.cpp sdl/panel/wave/state/wave_panel_finished.h sdl/button/restart_wave_button.cpp sdl/button/restart_wave_button.h)
+        sdl/panel/wave/state/wave_panel_spawning.h
+        sdl/panel/wave/state/wave_panel_finished.cpp
+        sdl/panel/wave/state/wave_panel_finished.h
+        sdl/button/restart_wave_button.cpp
+        sdl/button/restart_wave_button.h)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
