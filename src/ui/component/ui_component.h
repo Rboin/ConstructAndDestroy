@@ -73,6 +73,11 @@ public:
         children.push_back(child);
     }
 
+    std::vector<UIComponent<T, D, R, S, K> *> get_children()
+    {
+        return children;
+    }
+
     void clear_components() {
         for (int i = 0; i < this->children.size(); i++) {
             this->children[i]->clear_components();

@@ -131,13 +131,15 @@ set(SOURCE_FILES
         entity/goal/moving_entity_goal/atomic/fight_goal.h
         entity/goal/moving_entity_goal/hunt_target_goal.h
         entity/moving/moving_entity_types.h
-        entity/static/building/spawnable_entity.cpp
-        entity/static/building/spawnable_entity.h
+        entity/moving/spawnable_entity.cpp
+        entity/moving/spawnable_entity.h
         entity/static/stone_mine_entity.h
         entity/static/stone_mine_entity.cpp
         wave/wave_manager.cpp
         wave/wave_manager.h
-        entity/entity_marks.h)
+        entity/entity_marks.h
+        entity/moving/spawnable_entity_manager.h
+        entity/moving/spawnable_entity_manager.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

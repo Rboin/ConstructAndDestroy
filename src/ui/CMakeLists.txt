@@ -6,7 +6,6 @@ set(SOURCE_FILES
         sdl/window/sdl_window.cpp
         sdl/window/sdl_window.h
         sdl/sdl_ui_component.h
-        sdl/sdl_ui_component.h
         sdl/panel/sdl_panel.h
         sdl/panel/sdl_world_panel.h
         sdl/event/sdl_event_types.h
@@ -66,7 +65,7 @@ add_library(cd_ui STATIC
         sdl/panel/sdl_control_panel.cpp
         sdl/panel/sdl_control_panel.h
         sdl/panel/sdl_progressbar_panel.cpp
-        sdl/panel/sdl_progressbar_panel.h)
+        sdl/panel/sdl_progressbar_panel.h manager/build_and_spawn_manager.h manager/build_and_spawn_manager.cpp)
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

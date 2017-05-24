@@ -14,6 +14,8 @@
 BuildingEntity* last_selected_building = nullptr;
 bool firstRender = true;
 
+SDLControlPanel* SDLControlPanel::_instance = nullptr;
+
 SDLControlPanel::SDLControlPanel(SDL_RenderObject *r) : SDLPanel(r) {
 }
 
@@ -47,4 +49,16 @@ SDL_RenderObject* SDLControlPanel::get_similar_representation() {
     sdl_data* data = this->get_representation()->get_data();
     sdl_data* similar_data = new sdl_data {data->red, data->green, data->blue, data->alpha};
     return new SDL_RenderObject(this->get_position()->clone(), this->get_size()->clone(), similar_data);
+}
+
+SDLControlPanel *SDLControlPanel::get_instance(SDL_RenderObject *r) {
+    if (!_instance)
+        _instance = new SDLControlPanel(r);
+    return _instance;
+}
+
+SDLControlPanel *SDLControlPanel::get_instance() {
+    if (!_instance)
+       throw;
+    return _instance;
 }

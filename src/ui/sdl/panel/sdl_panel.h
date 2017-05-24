@@ -5,7 +5,6 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_PANEL_H
 #define CONSTRUCT_AND_DESTROY_SDL_PANEL_H
 
-
 #include "sdl/sdl_ui_component.h"
 
 class SDLPanel : public SDL_UIComponent {

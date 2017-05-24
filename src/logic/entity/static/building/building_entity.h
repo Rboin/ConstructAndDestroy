@@ -10,7 +10,7 @@
 #include "building_type.h"
 #include "entity/static/static_entity.h"
 #include "types.h"
-#include "spawnable_entity.h"
+#include "entity/moving/spawnable_entity.h"
 
 template<class T> class StateMachine;
 class Resources;

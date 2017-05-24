@@ -364,9 +364,6 @@ int main(int argc, char **argv) {
     SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data, "stone.png",
                                                      ResourceType::STONE, f_font);
     SDLPanel *stone_panel = new SDLPanel(stone_label);
-
-
-
     ///End Resource Panel
 
     ///Begin Waves
@@ -402,12 +399,13 @@ int main(int argc, char **argv) {
     mouse_dispatcher->register_callback(restart_button, reset);
     ///End Waves
 
-
     // building/control panel
     vec2 control_panel_pos = {0, 500}, control_panel_size = {800, 100.0};
     sdl_data *control_panel_data = new sdl_data{100, 100, 100, 100};
     SDL_RenderObject *panel_b = new SDL_RenderObject(control_panel_pos, control_panel_size, control_panel_data);
-    SDLControlPanel *control_panel = new SDLControlPanel(panel_b);
+
+    SDLControlPanel *control_panel = SDLControlPanel::get_instance(panel_b);
+
 
     resource_panel->add_component(wood_panel);
     resource_panel->add_component(gold_panel);
