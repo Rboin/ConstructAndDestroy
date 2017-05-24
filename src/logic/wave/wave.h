@@ -59,6 +59,10 @@ public:
     const bool is_preparing();
 
     const bool is_finished();
+
+    void reset(float, float, float, unsigned int, unsigned int);
+
+    bool has_lost();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_WAVE_H

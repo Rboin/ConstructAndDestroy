@@ -5,12 +5,15 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include "entity/player_manager.h"
+#include "settings.h"
 #include "wave_panel_spawning.h"
 #include "sdl/text/sdl_render_solid_text.h"
 #include "wave/wave.h"
 #include "state/state_machine.h"
 #include "wave_panel_preparing.h"
 #include "wave_panel_finished.h"
+#include "entity/player.h"
 
 void WavePanelSpawning::enter(SDLWavePanel *) {
     std::cout << "Entering WavePanelSpawning State..." << std::endl;

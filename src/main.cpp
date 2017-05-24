@@ -395,7 +395,7 @@ int main(int argc, char **argv) {
     Wave *wave = new Wave(wave_pre_stage_time, wave_preparation_time, wave_duration, wave_amount, wave_unit_size);
     wave->set_spawn_possibilities(possibilities);
     wm->set_wave(wave);
-    vec2 wave_panel_position = {10, 300}, wave_panel_size = {150, 200};
+    vec2 wave_panel_position = {10, 250}, wave_panel_size = {150, 250};
     std::string wave_content = "";
     std::string wave_font = "res/font/Roboto/Roboto-Regular.ttf";
     sdl_solid_text *wave_panel_data = new sdl_solid_text{{0, 0, 0, 100}, {255, 255, 255, 255}, wave_font, 18, 15,
@@ -404,7 +404,7 @@ int main(int argc, char **argv) {
                                                                     wave_panel_data);
     SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, wave);
 
-    vec2 restart_button_pos = {30, 400}, restart_button_size = {60, 30};
+    vec2 restart_button_pos = {50, 470}, restart_button_size = {60, 30};
     std::string restart_content = "Restart";
     sdl_solid_text *restart_text = new sdl_solid_text{{255, 0, 0, 255}, {255,255,255,255}, wave_font, 14, 5, restart_content};
     SDLRenderSolidText *restart_o = new SDLRenderSolidText(restart_button_pos, restart_button_size, restart_text);

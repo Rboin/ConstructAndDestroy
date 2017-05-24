@@ -8,6 +8,7 @@
 #include "entity/moving/moving_entity_manager.h"
 #include "entity/player_manager.h"
 #include "wave.h"
+#include "entity/player.h"
 
 Wave::Wave(float start_time, float preparation, float wave_duration, unsigned int wave_count, unsigned int spawn_amount) {
     _finished = false;
@@ -32,20 +33,21 @@ void Wave::update(float delta) {
             if(_pre_stage_time > 0) {
                 _pre_stage_time -= delta;
             } else {
-                _pre_stage = _preparing = false;
+                _pre_stage = false;
+                _preparing = false;
             }
             return;
         }
 
-        if(_current_wave == _wave_count && _delta_time_wave >= _wave_duration) {
+        if((_current_wave == _wave_count && _delta_time_wave >= _wave_duration) || has_lost()) {
             _finished = true;
             return;
         }
 
-        if(_current_prep_time > 0) {
+        if(_preparing && _current_prep_time > 0) {
             _current_prep_time -= delta;
             return;
-        } else if(_current_prep_time <= 0) {
+        } else if(_preparing && _current_prep_time <= 0) {
             _preparing = false;
         }
 
@@ -117,9 +119,28 @@ const float Wave::get_preparation_time() {
 }
 
 const bool Wave::is_preparing() {
-    return _preparing;
+    return _preparing || _pre_stage;
 }
 
 const bool Wave::is_finished() {
     return _finished;
+}
+
+void Wave::reset(float start_time, float preparation, float wave_duration, unsigned int wave_count, unsigned int spawn_amount) {
+    _finished = false;
+    _pre_stage = _preparing = true;
+    _pre_stage_time = start_time;
+    _prep_time = _current_prep_time = preparation;
+    _wave_count = wave_count;
+    _current_wave = 1;
+    _stat_modifier = 1.0f;
+    _elapsed_time = _delta_time_wave = _delta_time_spawner = 0.0f;
+
+    _wave_duration = wave_duration;
+    _stat_modifier_increment = .5f;
+    _spawner_downtime = _wave_duration / (float) spawn_amount;
+}
+
+bool Wave::has_lost() {
+    return PlayerManager::get_instance()->get_player(player_id)->units.size() == 0;
 }

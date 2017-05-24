@@ -33,4 +33,7 @@ void WaveManager::reset() {
     Player *player = PlayerManager::get_instance()->get_player(player_id);
 
     computer->clear_units();
+    player->clear_units();
+
+    _wave->reset(wave_pre_stage_time, wave_preparation_time, wave_duration, wave_amount, wave_unit_size);
 }
