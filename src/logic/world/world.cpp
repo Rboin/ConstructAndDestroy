@@ -2,6 +2,7 @@
 // Created by robin on 2/21/17.
 //
 
+#include <entity/entity_marks.h>
 #include "neighbourhood/neighbourhood_manager.h"
 #include "world.h"
 #include "wave/wave.h"
@@ -31,6 +32,7 @@ World *World::get_instance() {
 }
 
 void World::update(float d_t) {
+    remove_dead_entities();
     for (unsigned int i = 0; i < entities.size(); i++) {
         entities.at(i)->update(d_t);
     }
@@ -90,4 +92,16 @@ void World::add_graph(Graph *g) {
 
 void World::set_render_object(SDL_RenderObject *r) {
     _representation = r;
+}
+
+void World::remove_dead_entities() {
+    for(std::vector<BaseEntity *>::iterator it = entities.begin(); it != entities.end();) {
+        if((*it)->has_mark(EntityMark::DEAD)) {
+            (*it)->get_player()->remove_entity((*it));
+            delete (*it);
+            it = entities.erase(it);
+        } else {
+            ++it;
+        }
+    }
 }

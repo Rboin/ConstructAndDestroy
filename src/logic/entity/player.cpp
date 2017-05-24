@@ -1,3 +1,4 @@
+#include <world/world.h>
 #include "player.h"
 #include "state/state_machine.h"
 #include "entity/moving/moving_entity.h"
@@ -165,4 +166,11 @@ void Player::remove_building(BuildingEntity *e) {
             break;
         }
     }
+}
+
+void Player::clear_units() {
+    for (std::vector<MovingEntity *>::iterator iter = units.begin(); iter != units.end(); ++iter) {
+        World::get_instance()->remove_entity((*iter));
+    }
+    units.clear();
 }

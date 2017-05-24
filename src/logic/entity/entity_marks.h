@@ -1,0 +1,12 @@
+//
+// Created by robin on 5/24/17.
+//
+
+#ifndef CONSTRUCT_AND_DESTROY_ENTITY_MARKS_H
+#define CONSTRUCT_AND_DESTROY_ENTITY_MARKS_H
+
+enum EntityMark {
+    DEAD
+};
+
+#endif //CONSTRUCT_AND_DESTROY_ENTITY_MARKS_H

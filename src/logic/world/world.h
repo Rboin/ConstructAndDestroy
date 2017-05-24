@@ -52,6 +52,8 @@ public:
     void add_graph(Graph *);
 
     Player* getPlayer();
+
+    void remove_dead_entities();
 };
 
 #endif //C_AND_D_PROJECT_WORLD_H

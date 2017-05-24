@@ -50,7 +50,7 @@ public:
 
     void remove_building(BuildingEntity*);
 
-
+    void clear_units();
 };
 
 

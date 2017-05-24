@@ -24,6 +24,7 @@ BaseEntity::BaseEntity(int type, const mesh *base, vec2 position, float mass) {
     _health = 100;
     _attack_damage = 2;
     _attack_speed = 1;
+    _marking = 0;
 }
 
 void BaseEntity::set_representation(SDL_RenderObject *r) {
@@ -31,8 +32,10 @@ void BaseEntity::set_representation(SDL_RenderObject *r) {
 }
 
 BaseEntity::~BaseEntity() {
-    if (_buffer)
-        delete _buffer;
+    if(representation) {
+        delete representation;
+    }
+    _player = 0;
 }
 
 void BaseEntity::update_render_mesh(const mat2 &model) {
@@ -108,4 +111,12 @@ void BaseEntity::attack(float damage) {
 
 float BaseEntity::get_attack_damage() {
     return _attack_damage;
+}
+
+void BaseEntity::add_mark(uint8_t m) {
+    _marking |= (1 << m);
+}
+
+bool BaseEntity::has_mark(uint8_t m) {
+    return _marking & (1 << m) == (1 << m);
 }

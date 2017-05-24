@@ -174,7 +174,8 @@ set(SOURCE_FILES
         entity/static/stone_mine_entity.h
         entity/static/stone_mine_entity.cpp
         wave/wave_manager.cpp
-        wave/wave_manager.h)
+        wave/wave_manager.h
+        entity/entity_marks.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

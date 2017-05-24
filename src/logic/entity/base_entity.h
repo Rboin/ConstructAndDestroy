@@ -5,6 +5,7 @@
 #ifndef C_AND_D_PROJECT_BASE_GAME_ENTITY_H
 #define C_AND_D_PROJECT_BASE_GAME_ENTITY_H
 
+#include <cstdint>
 #include "types.h"
 #include "vector.h"
 #include "textures/texture_types.h"
@@ -23,6 +24,8 @@ protected:
     SDL_RenderObject *representation;
     Player * _player;
 
+    uint8_t _marking;
+
     float _max_health;
     float _health;
     float _attack_damage;
@@ -32,6 +35,7 @@ public:
 
     BaseEntity(int,const mesh *, vec2, float, TextureTypes);
     BaseEntity(int, const mesh*, vec2,float);
+    virtual ~BaseEntity();
 
     void set_representation(SDL_RenderObject *);
 
@@ -42,8 +46,6 @@ public:
     virtual void add_to_position(vec2);
 
     const bool is(int);
-
-    virtual ~BaseEntity();
 
     virtual void update_render_mesh(const mat2 &);
 
@@ -74,6 +76,10 @@ public:
     float get_attack_speed();
 
     void attack(float);
+
+    void add_mark(uint8_t);
+
+    bool has_mark(uint8_t);
 
 };
 
