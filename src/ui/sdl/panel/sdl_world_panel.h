@@ -19,6 +19,8 @@ public:
 
     explicit SDLWorldPanel(SDL_RenderObject *);
 
+    virtual ~SDLWorldPanel() override;
+
     void render(SDLRenderer *renderer, float d) override;
     void draw_selection_rect(int start_x, int start_y, int end_x, int end_y, SDLRenderer* _renderer);
     void set_world(World *);

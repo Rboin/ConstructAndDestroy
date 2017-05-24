@@ -337,16 +337,16 @@ int main(int argc, char **argv) {
     SDL_RenderObject *main_panel_representation = new SDL_RenderObject(main_panel_position, main_panel_size,
                                                                        panel_data);
 
-    SDLWorldPanel main_panel = SDLWorldPanel(main_panel_representation);
+    SDLWorldPanel *main_panel = new SDLWorldPanel(main_panel_representation);
 
-    main_panel.set_world(World::get_instance());
+    main_panel->set_world(World::get_instance());
 
-    SDLWindow *main_window = new SDLWindow(main_panel_representation, window, render_engine, mouse_dispatcher,
+    SDLWindow *main_window = new SDLWindow(nullptr, window, render_engine, mouse_dispatcher,
                                            key_dispatcher);
 
     MouseHandlerWorld *world_panel_slot = new MouseHandlerWorld();
 
-    main_panel.set_mouse_callback(world_panel_slot);
+    main_panel->set_mouse_callback(world_panel_slot);
 
     SDL_KeyEventSlot *key_slot = new SDL_KeyEventSlot();
 
@@ -354,38 +354,32 @@ int main(int argc, char **argv) {
 
     key_dispatcher->register_callback(main_window, key_slot);
 
-    mouse_dispatcher->register_callback(&main_panel, world_panel_slot);
+    mouse_dispatcher->register_callback(main_panel, world_panel_slot);
 
-    main_window->add_component(&main_panel);
 
     ///Begin Resource panel
     vec2 resource_panel_pos = {600,0}, resource_panel_size = {200, 40};
-    sdl_data resource_panel_data = {0, 0, 0, 100};
-    SDL_RenderObject panel_o = SDL_RenderObject(resource_panel_pos, resource_panel_size, &resource_panel_data);
-    SDLResourcePanel resource_panel(&panel_o);
+    sdl_data *resource_panel_data = new sdl_data{0, 0, 0, 100};
+    SDL_RenderObject *panel_o = new SDL_RenderObject(resource_panel_pos, resource_panel_size, resource_panel_data);
+    SDLResourcePanel *resource_panel = new SDLResourcePanel(panel_o);
 
-    sdl_data sdl_label_data = {255, 255, 255, 255};
+    sdl_data *sdl_label_data = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_wood = {605, 5};
-    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, &sdl_label_data, "log.png",
+    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data, "log.png",
                                                     ResourceType::WOOD, f_font);
     SDLPanel *wood_panel = new SDLPanel(wood_label);
 
     vec2 resource_panel_pos_gold = {675, 5};
-    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, &sdl_label_data, "gold.png",
+    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data, "gold.png",
                                                     ResourceType::GOLD, f_font);
     SDLPanel *gold_panel = new SDLPanel(gold_label);
 
     vec2 resource_panel_pos_stone = {740, 5};
-    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, &sdl_label_data, "stone.png",
+    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data, "stone.png",
                                                     ResourceType::STONE, f_font);
     SDLPanel *stone_panel = new SDLPanel(stone_label);
 
 
-    resource_panel.add_component(wood_panel);
-    resource_panel.add_component(gold_panel);
-    resource_panel.add_component(stone_panel);
-    main_panel.add_component(&resource_panel);
-    main_window->add_component(&resource_panel);
 
     ///End Resource Panel
 
@@ -403,20 +397,27 @@ int main(int argc, char **argv) {
     SDLRenderSolidText *wave_render_object = new SDLRenderSolidText(wave_panel_position, wave_panel_size,
                                                                     wave_panel_data);
     SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, wave);
-    main_panel.add_component(wave_panel);
     ///End Waves
 
 
     // building/control panel
     vec2 control_panel_pos = {0, 500}, control_panel_size = {800, 100.0};
-    sdl_data control_panel_data = {100, 100, 100, 100};
-    SDL_RenderObject panel_b = SDL_RenderObject(control_panel_pos, control_panel_size, &control_panel_data);
-    SDLControlPanel control_panel(&panel_b);
-    main_window->add_component(&control_panel);
+    sdl_data *control_panel_data = new sdl_data{100, 100, 100, 100};
+    SDL_RenderObject *panel_b = new SDL_RenderObject(control_panel_pos, control_panel_size, control_panel_data);
+    SDLControlPanel *control_panel = new SDLControlPanel(panel_b);
 
 
+    resource_panel->add_component(wood_panel);
+    resource_panel->add_component(gold_panel);
+    resource_panel->add_component(stone_panel);
+    main_panel->add_component(resource_panel);
+    main_panel->add_component(wave_panel);
+    main_panel->add_component(control_panel);
+    main_window->add_component(main_panel);
     main_window->show();
 
     delete main_window;
+    delete mouse_dispatcher;
+    delete key_dispatcher;
     return 0;
 }

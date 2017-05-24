@@ -2,6 +2,7 @@
 // Created by robin on 4/23/17.
 //
 
+#include <sdl/event/sdl_mouse_event_dispatcher.h>
 #include "sdl_window.h"
 #include "world/world.h"
 #include "entity/player.h"
@@ -63,4 +64,11 @@ void SDLWindow::render(SDLRenderer *renderer, float delta) {
     renderer->clear();
     SDL_UIComponent::render(renderer, delta);
     renderer->show();
+}
+
+SDLWindow::~SDLWindow() {
+    if(_renderer) {
+        delete _renderer;
+    }
+    SDL_DestroyWindow(_sdl_window);
 }

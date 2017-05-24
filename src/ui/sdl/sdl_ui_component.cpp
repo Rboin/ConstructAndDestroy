@@ -9,7 +9,9 @@ SDL_UIComponent::SDL_UIComponent(SDL_RenderObject *r) : UIComponent(r) {
 }
 
 void SDL_UIComponent::render(SDLRenderer *renderer, float delta) {
-    representation->render(renderer);
+    if(representation) {
+        representation->render(renderer);
+    }
 
     for (int i = 0; i < this->children.size(); i++) {
         children[i]->render(renderer, delta);
@@ -30,6 +32,6 @@ SDL_UIComponent::~SDL_UIComponent() {
     }
     for (unsigned int i = 0; i < children.size(); i++) {
         delete children[i];
-        children.erase(children.begin() + i);
     }
+    children.clear();
 }

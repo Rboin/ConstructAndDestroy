@@ -31,6 +31,8 @@ public:
                        EventDispatcher<SDL_UIComponent, sdl_mouse_event_data> *,
                        EventDispatcher<SDL_UIComponent, sdl_key_event_data> *);
 
+    virtual ~SDLWindow() override;
+
     int show();
 
     void render(SDLRenderer *t, float d) override;

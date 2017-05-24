@@ -49,3 +49,9 @@ void SDLWorldPanel::draw_selection_rect(int start_x, int start_y, int end_x, int
 
     SDL_RenderDrawRect(_renderer->get_engine(), rect);
 }
+
+SDLWorldPanel::~SDLWorldPanel() {
+    if(_current_world) {
+        delete _current_world;
+    }
+}
