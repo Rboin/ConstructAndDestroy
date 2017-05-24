@@ -172,7 +172,9 @@ set(SOURCE_FILES
         entity/static/building/spawnable_entity.cpp
         entity/static/building/spawnable_entity.h
         entity/static/stone_mine_entity.h
-        entity/static/stone_mine_entity.cpp)
+        entity/static/stone_mine_entity.cpp
+        wave/wave_manager.cpp
+        wave/wave_manager.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
