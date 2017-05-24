@@ -14,6 +14,11 @@ const std::string path_to_texture =  "res/textures/";
 const std::string path_to_selected_texture =  "res/textures/sel_";
 const int player_id = 1;
 const int computer_id = 0;
+const float wave_pre_stage_time = 60000.0f;
+const float wave_preparation_time = 30000.0f;
+const float wave_duration = 10000.0f;
+const int wave_amount = 10;
+const int wave_unit_size = 2;
 
 struct building_with_texture {
     std::string texture;
