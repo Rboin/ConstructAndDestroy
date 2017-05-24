@@ -10,7 +10,7 @@
 #include "entity/player.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 
-FightGoal::FightGoal(MovingEntity *e, MovingEntity *enemy, int initiator) : AtomicGoal<MovingEntity>(e, FIGHT,
+FightGoal::FightGoal(MovingEntity *e, BaseEntity *enemy, int initiator) : AtomicGoal<MovingEntity>(e, FIGHT,
                                                                                                      initiator) {
     _last_attack_time = 0;
     _enemy = enemy;
@@ -33,7 +33,7 @@ const int FightGoal::process() {
 
     //If the owners health gets below 0, it has died and can be removed from the game.
     if(owner->get_health() <= 0){
-        owner->get_player()->remove_unit(owner);
+        owner->get_player()->remove_entity(owner);
         World *w = World::get_instance();
         w->remove_entity(owner);
     }
@@ -42,7 +42,7 @@ const int FightGoal::process() {
         status = COMPLETED;
         owner->get_brain()->resume_sub_goals();
         owner->set_engaged(false);
-        _enemy->get_player()->remove_unit(_enemy);
+        _enemy->get_player()->remove_entity(_enemy);
         World *w = World::get_instance();
         w->remove_entity(_enemy);
     }

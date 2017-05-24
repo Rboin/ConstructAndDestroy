@@ -16,7 +16,7 @@
 #include "atomic_goal_type.h"
 #include "think_goal.h"
 
-HuntTargetGoal::HuntTargetGoal(MovingEntity *e, MovingEntity *enemy) : GoalComposite(e, HUNTTARGET) {
+HuntTargetGoal::HuntTargetGoal(MovingEntity *e, BaseEntity *enemy) : GoalComposite(e, HUNTTARGET) {
     _enemy = enemy;
     set_goal_plan_path_to_enemy();
     if (_enemy_node->get_index() != 0) {

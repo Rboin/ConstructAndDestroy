@@ -97,11 +97,11 @@ void Player::select_one_unit(vec2 pos) {
 void Player::select_building(vec2 pos) {
     float left_offset = pos.x - 45;
     float right_offset = pos.x;
-    float top_offset = pos.y -45;
+    float top_offset = pos.y - 45;
     float bot_offset = pos.y;
 
     for (int i = 0; i < this->buildings.size(); i++) {
-        if(this->buildings[i] != NULL && this->buildings[i] != nullptr) {
+        if (this->buildings[i] != NULL && this->buildings[i] != nullptr) {
             float x = this->buildings[i]->get_position().x;
             float y = this->buildings[i]->get_position().y;
 
@@ -121,7 +121,7 @@ void Player::clear_all_selections() {
         this->selected_units[i]->deselect();
     }
 
-    if(selected_building != nullptr){
+    if (selected_building != nullptr) {
         selected_building->deselect();
         selected_building = nullptr;
     }
@@ -133,10 +133,35 @@ int Player::get_id() {
     return _id;
 }
 
-void Player::remove_unit(BaseEntity*e) {
+void Player::remove_entity(BaseEntity *e) {
+    if (MovingEntity *moving_entity = dynamic_cast<MovingEntity *>(e)) {
+        if (moving_entity == nullptr) {
+            delete moving_entity;
+        } else {
+            remove_unit(moving_entity);
+        }
+    } else if (BuildingEntity *building_entity = dynamic_cast<BuildingEntity *>(e)) {
+        if (building_entity == nullptr) {
+            delete building_entity;
+        } else {
+            remove_building(building_entity);
+        }
+    }
+}
+
+void Player::remove_unit(MovingEntity *e) {
     for (std::vector<MovingEntity *>::iterator iter = units.begin(); iter != units.end(); ++iter) {
         if (*iter == e) {
             units.erase(iter);
+            break;
+        }
+    }
+}
+
+void Player::remove_building(BuildingEntity *e) {
+    for (std::vector<BuildingEntity *>::iterator iter = buildings.begin(); iter != buildings.end(); ++iter) {
+        if (*iter == e) {
+            buildings.erase(iter);
             break;
         }
     }

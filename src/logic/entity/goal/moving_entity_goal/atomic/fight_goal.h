@@ -9,13 +9,14 @@
 #include "goal/atomic_goal.h"
 
 class MovingEntity;
+class BaseEntity;
 
 class FightGoal : public AtomicGoal<MovingEntity> {
 private:
-    MovingEntity *_enemy;
+    BaseEntity *_enemy;
     float _last_attack_time;
 public:
-    FightGoal(MovingEntity *, MovingEntity*, int initiator = Initiator::AI);
+    FightGoal(MovingEntity *, BaseEntity*, int initiator = Initiator::AI);
 
     void activate() override;
 

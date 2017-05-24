@@ -51,7 +51,7 @@ void BuildingManager::add_building(Player* p, BuildingEntity *be) {
     buildings.emplace_back(be);
 
     // Add building to the player
-    p->buildings.push_back(p->positioning_building);
+    p->buildings.push_back(be);
 }
 
 void BuildingManager::add_building(int player_id, BuildingEntity *be)

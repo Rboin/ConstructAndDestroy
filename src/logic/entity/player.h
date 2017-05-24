@@ -44,7 +44,11 @@ public:
     void clear_all_selections();
     int get_id();
 
-    void remove_unit(BaseEntity*);
+    void remove_entity(BaseEntity*);
+
+    void remove_unit(MovingEntity*);
+
+    void remove_building(BuildingEntity*);
 
 
 };

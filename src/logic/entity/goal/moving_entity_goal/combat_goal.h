@@ -10,6 +10,7 @@
 #include "strategy_goal_type.h"
 
 class MovingEntity;
+class BuildingEntity;
 
 template<typename T>
 class GoalEvaluator;
@@ -18,6 +19,7 @@ class Node;
 class CombatGoal : public GoalComposite<MovingEntity> {
 private:
     MovingEntity *_enemy;
+    BuildingEntity *_building;
 public:
     /*!
      * A couple of things are happening in the constructor:
@@ -36,6 +38,10 @@ public:
     void set_goal_hunt_target();
 
     void set_goal_attack_enemy();
+
+    void set_goal_move_to_building(Player *);
+
+    void set_goal_attack_building();
 
     /*!
      * Checks whether or not the given sub goal is completed.

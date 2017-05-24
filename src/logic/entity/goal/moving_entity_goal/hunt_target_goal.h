@@ -19,13 +19,13 @@ class Node;
 class HuntTargetGoal : public GoalComposite<MovingEntity> {
 private:
     Node *_enemy_node;
-    MovingEntity *_enemy;
+    BaseEntity *_enemy;
 public:
     /*!
      * If the _enemy_node index == 0 there is no enemy available
      * so new goals won't be set because there is nothing to attack/kill.
      */
-    HuntTargetGoal(MovingEntity *, MovingEntity*);
+    HuntTargetGoal(MovingEntity *, BaseEntity*);
 
     /*!
      * If the sub_goals size == 0 then this goal's status will be set to completed.

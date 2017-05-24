@@ -294,6 +294,7 @@ int main(int argc, char **argv) {
     SDL_ImageRenderObject *e7_object = new SDL_ImageRenderObject(s_position7, {50, 50}, entity7_data);
     s_entity7->set_representation(e7_object);
 
+    s_entity7->set_player(player_id);
     World::get_instance()->add_entity(s_entity7);
     // End warehouse entity
 
@@ -322,7 +323,7 @@ int main(int argc, char **argv) {
     // End gold mine entity
 
     // TODO: when merged enemy_player, change 1 to player_id
-    BuildingManager::get_instance()->add_building(1, s_entity7);
+    BuildingManager::get_instance()->add_building(player_id, s_entity7);
 
     SDLRenderer *render_engine = new SDLRenderer(renderer);
 

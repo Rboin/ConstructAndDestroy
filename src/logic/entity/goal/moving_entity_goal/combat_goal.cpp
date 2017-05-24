@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <cfloat>
 #include "settings.h"
 #include "graph/graph_manager.h"
 #include "graph/graph.h"
@@ -35,7 +36,11 @@ CombatGoal::CombatGoal(MovingEntity *e, MovingEntity *enemy) : GoalComposite(e, 
             set_goal_attack_enemy();
         }
             //No enemy found so goal is completed
-        else {
+        else if (!enemy_player->buildings.empty()) {
+            set_goal_move_to_building(enemy_player);
+            set_goal_attack_building();
+        } else {
+            //todo:: if this is an entity of the player it should start roaming with A*
             status = COMPLETED;
         }
     } else {
@@ -58,6 +63,28 @@ void CombatGoal::set_goal_hunt_target() {
 
 void CombatGoal::set_goal_attack_enemy() {
     this->sub_goals.push_front(new FightGoal(owner, _enemy));
+}
+
+
+void CombatGoal::set_goal_move_to_building(Player *enemy_player) {
+    float closest = DBL_MAX;
+    for (int i = 0; i < enemy_player->buildings.size(); i++) {
+        float distance = owner->get_position().distance(enemy_player->buildings.at(i)->get_position());
+        if (distance < closest) {
+            closest = distance;
+            _building = enemy_player->buildings.at(i);
+        }
+    }
+
+
+//    float distance_to_enemy = _enemy->get_position().distance(owner->get_position());
+    if (closest > 40) {
+        this->sub_goals.push_front(new HuntTargetGoal(owner, _building));
+    }
+}
+
+void CombatGoal::set_goal_attack_building() {
+    this->sub_goals.push_front(new FightGoal(owner, _building));
 }
 
 void CombatGoal::activate() {
