@@ -10,7 +10,7 @@
 
 class SDLButton : public SDL_UIComponent {
 public:
-    SDLButton(SDL_UI_RenderTextObject *);
+    SDLButton(SDL_RenderObject *);
 
 };
 

@@ -5,6 +5,6 @@
 #include "sdl_button.h"
 
 
-SDLButton::SDLButton(SDL_UI_RenderTextObject *r) : SDL_UIComponent(r) {
+SDLButton::SDLButton(SDL_RenderObject *r) : SDL_UIComponent(r) {
 
 }

@@ -21,7 +21,7 @@ SDLWavePanel::SDLWavePanel(SDLRenderSolidText *r, Wave *wave) : SDLPanel(r) {
 void SDLWavePanel::render(SDLRenderer *renderer, float delta) {
     _wave->update(delta);
     _wave_panel_state_machine->update();
-    representation->render(renderer);
+    SDL_UIComponent::render(renderer, delta);
 }
 
 Wave *SDLWavePanel::get_wave() {
