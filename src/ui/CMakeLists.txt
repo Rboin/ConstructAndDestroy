@@ -40,7 +40,9 @@ set(SOURCE_FILES
         sdl/panel/wave/state/wave_panel_finished.cpp
         sdl/panel/wave/state/wave_panel_finished.h
         sdl/button/restart_wave_button.cpp
-        sdl/button/restart_wave_button.h)
+        sdl/button/restart_wave_button.h
+        sdl/event/slot/wave_reset_handler.h
+        sdl/event/slot/wave_reset_handler.cpp)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

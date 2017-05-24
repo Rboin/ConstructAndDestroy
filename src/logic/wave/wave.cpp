@@ -32,7 +32,7 @@ void Wave::update(float delta) {
             if(_pre_stage_time > 0) {
                 _pre_stage_time -= delta;
             } else {
-                _pre_stage = false;
+                _pre_stage = _preparing = false;
             }
             return;
         }

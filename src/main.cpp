@@ -44,6 +44,9 @@
 #include "entity/player_manager.h"
 #include "entity/goal/evaluator/combat_evaluator.h"
 #include "wave/wave.h"
+#include "wave/wave_manager.h"
+#include "sdl/button/sdl_button.h"
+#include "sdl/event/slot/wave_reset_handler.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
@@ -385,11 +388,13 @@ int main(int argc, char **argv) {
     ///End Resource Panel
 
     ///Begin Waves
+    WaveManager *wm = WaveManager::get_instance();
     std::vector<MovingEntityType> possibilities = {
             MovingEntityType::KNIGHT
     };
-    Wave *wave = new Wave(60000, 30000, 10000, 10, 2);
+    Wave *wave = new Wave(1000, 1000, 1000, 10, 2);
     wave->set_spawn_possibilities(possibilities);
+    wm->set_wave(wave);
     vec2 wave_panel_position = {10, 300}, wave_panel_size = {150, 200};
     std::string wave_content = "";
     std::string wave_font = "res/font/Roboto/Roboto-Regular.ttf";
@@ -398,6 +403,18 @@ int main(int argc, char **argv) {
     SDLRenderSolidText *wave_render_object = new SDLRenderSolidText(wave_panel_position, wave_panel_size,
                                                                     wave_panel_data);
     SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, wave);
+
+    vec2 restart_button_pos = {30, 400}, restart_button_size = {60, 30};
+    std::string restart_content = "Restart";
+    sdl_solid_text *restart_text = new sdl_solid_text{{255, 0, 0, 255}, {255,255,255,255}, wave_font, 14, 5, restart_content};
+    SDLRenderSolidText *restart_o = new SDLRenderSolidText(restart_button_pos, restart_button_size, restart_text);
+    SDLButton *restart_button = new SDLButton(restart_o);
+
+    wave_panel->add_component(restart_button);
+
+    WaveResetHandler *reset = new WaveResetHandler();
+    restart_button->set_mouse_callback(reset);
+    mouse_dispatcher->register_callback(restart_button, reset);
     ///End Waves
 
 

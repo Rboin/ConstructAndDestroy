@@ -2,6 +2,9 @@
 // Created by robin on 5/24/17.
 //
 
+#include "settings.h"
+#include "entity/player_manager.h"
+#include "entity/player.h"
 #include "wave_manager.h"
 #include "wave.h"
 
@@ -26,5 +29,8 @@ void WaveManager::set_wave(Wave *w) {
 }
 
 void WaveManager::reset() {
+    Player *computer = PlayerManager::get_instance()->get_player(computer_id);
+    Player *player = PlayerManager::get_instance()->get_player(player_id);
 
+    computer->clear_units();
 }
