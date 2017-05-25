@@ -20,6 +20,10 @@ public:
     void set_wave(Wave *);
 
     void reset();
+
+    void reset_player();
+
+    void reset_computer();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_WAVE_MANAGER_H

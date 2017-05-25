@@ -19,10 +19,11 @@ Wave::Wave(float start_time, float preparation, float wave_duration, unsigned in
     _current_wave = 1;
     _stat_modifier = 1.0f;
     _elapsed_time = _delta_time_wave = _delta_time_spawner = 0.0f;
-
+    _wave_spawned_count = 0;
     _wave_duration = wave_duration;
     _stat_modifier_increment = .5f;
-    _spawner_downtime = _wave_duration / (float) spawn_amount;
+    _spawn_limit = spawn_amount;
+    _spawner_downtime = _wave_duration / (float) _spawn_limit;
 
     _entity_manager = MovingEntityManager::get_instance();
 }
@@ -39,7 +40,8 @@ void Wave::update(float delta) {
             return;
         }
 
-        if((_current_wave == _wave_count && _delta_time_wave >= _wave_duration) || has_lost()) {
+
+        if(player_won() || computer_won()) {
             _finished = true;
             return;
         }
@@ -55,7 +57,9 @@ void Wave::update(float delta) {
             _delta_time_wave += delta;
             _delta_time_spawner += delta;
             _elapsed_time += delta;
-            spawn_entity();
+            if(!spawn_limit_reached()) {
+                spawn_entity();
+            }
             if(_current_wave < _wave_count) {
                 next_wave();
             }
@@ -67,6 +71,7 @@ void Wave::next_wave() {
     if(_delta_time_wave < _wave_duration) {
         return;
     }
+    _wave_spawned_count = 0;
     _delta_time_wave -= _wave_duration;
     _stat_modifier += _stat_modifier_increment;
     _current_wave++;
@@ -79,7 +84,7 @@ void Wave::spawn_entity() {
         return;
     }
     _delta_time_spawner -= _spawner_downtime;
-
+    _wave_spawned_count++;
     // Generate a random index from the range of 0 - N
     std::random_device rand_dev;
     // Seed the random generator
@@ -90,19 +95,19 @@ void Wave::spawn_entity() {
                                                                                        0}, _spawn_possibilities[index]);
 }
 
-const unsigned int Wave::get_wave_size() {
+const unsigned int Wave::get_wave_size() const {
     return _wave_count;
 }
 
-const unsigned int Wave::get_current_wave() {
+const unsigned int Wave::get_current_wave() const {
     return _current_wave;
 }
 
-const float Wave::get_stat_modifier() {
+const float Wave::get_stat_modifier() const {
     return _stat_modifier;
 }
 
-const float Wave::get_elapsed_time() {
+const float Wave::get_elapsed_time() const {
     return _elapsed_time;
 }
 
@@ -110,7 +115,7 @@ void Wave::set_spawn_possibilities(std::vector<MovingEntityType> &v) {
     _spawn_possibilities = v;
 }
 
-const float Wave::get_preparation_time() {
+const float Wave::get_preparation_time() const {
     if(_pre_stage) {
         return _pre_stage_time;
     } else {
@@ -118,13 +123,10 @@ const float Wave::get_preparation_time() {
     }
 }
 
-const bool Wave::is_preparing() {
+const bool Wave::is_preparing() const {
     return _preparing || _pre_stage;
 }
 
-const bool Wave::is_finished() {
-    return _finished;
-}
 
 void Wave::reset(float start_time, float preparation, float wave_duration, unsigned int wave_count, unsigned int spawn_amount) {
     _finished = false;
@@ -135,12 +137,33 @@ void Wave::reset(float start_time, float preparation, float wave_duration, unsig
     _current_wave = 1;
     _stat_modifier = 1.0f;
     _elapsed_time = _delta_time_wave = _delta_time_spawner = 0.0f;
-
+    _wave_spawned_count = 0;
     _wave_duration = wave_duration;
     _stat_modifier_increment = .5f;
-    _spawner_downtime = _wave_duration / (float) spawn_amount;
+    _spawn_limit = spawn_amount;
+    _spawner_downtime = _wave_duration / (float) _spawn_limit;
 }
 
-bool Wave::has_lost() {
-    return PlayerManager::get_instance()->get_player(player_id)->units.size() == 0;
+const bool Wave::is_finished() const {
+    return _finished;
+}
+
+const bool Wave::player_won() const {
+    bool sufficient_units_player = PlayerManager::get_instance()->get_player(player_id)->units.size() > 0;
+    bool sufficient_units_computer = PlayerManager::get_instance()->get_player(computer_id)->units.size() > 0;
+    return sufficient_units_player && !sufficient_units_computer && time_limit_reached();
+}
+
+const bool Wave::computer_won() const {
+    bool sufficient_units_player = PlayerManager::get_instance()->get_player(player_id)->units.size() > 0;
+    bool sufficient_units_computer = PlayerManager::get_instance()->get_player(computer_id)->units.size() > 0;
+    return sufficient_units_computer && !sufficient_units_player && time_limit_reached();
+}
+
+const bool Wave::time_limit_reached() const {
+    return _current_wave == _wave_count && _delta_time_wave >= _wave_duration;
+}
+
+const bool Wave::spawn_limit_reached() const {
+    return _wave_spawned_count == _spawn_limit;
 }

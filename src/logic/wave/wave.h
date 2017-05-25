@@ -19,7 +19,7 @@ private:
         _spawner_downtime, _delta_time_spawner,
         _delta_time_wave, _elapsed_time;
 
-    unsigned int _wave_count, _current_wave;
+    unsigned int _wave_count, _current_wave, _spawn_limit, _wave_spawned_count;
 
     MovingEntityManager *_entity_manager;
 
@@ -46,23 +46,29 @@ public:
      */
     void update(float);
 
-    const unsigned int get_wave_size();
+    const unsigned int get_wave_size() const;
 
-    const unsigned int get_current_wave();
+    const unsigned int get_current_wave() const;
 
-    const float get_stat_modifier();
+    const float get_stat_modifier() const;
 
-    const float get_elapsed_time();
+    const float get_elapsed_time() const;
 
-    const float get_preparation_time();
+    const float get_preparation_time() const;
 
-    const bool is_preparing();
+    const bool is_preparing() const;
 
-    const bool is_finished();
+    const bool is_finished() const;
+
+    const bool player_won() const;
+
+    const bool computer_won() const;
+
+    const bool time_limit_reached() const;
+
+    const bool spawn_limit_reached() const;
 
     void reset(float, float, float, unsigned int, unsigned int);
-
-    bool has_lost();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_WAVE_H

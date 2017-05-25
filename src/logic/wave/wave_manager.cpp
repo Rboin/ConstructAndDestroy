@@ -29,11 +29,18 @@ void WaveManager::set_wave(Wave *w) {
 }
 
 void WaveManager::reset() {
-    Player *computer = PlayerManager::get_instance()->get_player(computer_id);
-    Player *player = PlayerManager::get_instance()->get_player(player_id);
-
-    computer->clear_units();
-    player->clear_units();
+    reset_computer();
+    reset_player();
 
     _wave->reset(wave_pre_stage_time, wave_preparation_time, wave_duration, wave_amount, wave_unit_size);
+}
+
+void WaveManager::reset_player() {
+    Player *player = PlayerManager::get_instance()->get_player(player_id);
+    player->clear_units();
+}
+
+void WaveManager::reset_computer() {
+    Player *computer = PlayerManager::get_instance()->get_player(computer_id);
+    computer->clear_units();
 }
