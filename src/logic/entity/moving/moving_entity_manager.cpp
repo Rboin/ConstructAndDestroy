@@ -30,9 +30,10 @@ MovingEntityManager *MovingEntityManager::get_instance() {
 
 }
 
-void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityType moving_entity_type) {
+void MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityType moving_entity_type, float stat_modifier) {
 
     MovingEntity* me = MovingEntityFactory::create(player, position, moving_entity_type);
+    me->multiply_stats(stat_modifier);
 
     ForceCalculator *calculator = new BasicForceCalculator();
     Behaviour *behaviour = new Behaviour(calculator);

@@ -120,3 +120,10 @@ void BaseEntity::add_mark(uint8_t m) {
 bool BaseEntity::has_mark(uint8_t m) {
     return _marking & (1 << m) == (1 << m);
 }
+
+void BaseEntity::multiply_stats(float f) {
+    _max_health *= f;
+    _health *= f;
+    _attack_damage *= f;
+    _attack_speed *= f;
+}

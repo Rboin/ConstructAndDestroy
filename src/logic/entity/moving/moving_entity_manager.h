@@ -18,7 +18,7 @@ public:
 
     static MovingEntityManager *get_instance();
 
-    void add_unit(Player *player, vec2 position, MovingEntityType moving_entity_type);
+    void add_unit(Player *player, vec2 position, MovingEntityType moving_entity_type, float stat_modifier = 1.0f);
 
 };
 

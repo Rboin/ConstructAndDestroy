@@ -10,20 +10,16 @@
 #include "wave.h"
 #include "entity/player.h"
 
-Wave::Wave(float start_time, float preparation, float wave_duration, unsigned int wave_count, unsigned int spawn_amount) {
+Wave::Wave(wave_setting &s) : _settings(s) {
     _finished = false;
     _pre_stage = _preparing = true;
-    _pre_stage_time = start_time;
-    _prep_time = _current_prep_time = preparation;
-    _wave_count = wave_count;
+    _pre_stage_time = _settings.pre_stage_time;
+    _current_prep_time = _settings.preparation_time;
     _current_wave = 1;
-    _stat_modifier = 1.0f;
+    _current_stat_modifier = _settings.stat_modifier;
     _elapsed_time = _delta_time_wave = _delta_time_spawner = 0.0f;
     _wave_spawned_count = 0;
-    _wave_duration = wave_duration;
-    _stat_modifier_increment = .5f;
-    _spawn_limit = spawn_amount;
-    _spawner_downtime = _wave_duration / (float) _spawn_limit;
+    _spawner_downtime = _settings.wave_duration / (float) _settings.spawn_limit;
 
     _entity_manager = MovingEntityManager::get_instance();
 }
@@ -60,7 +56,7 @@ void Wave::update(float delta) {
             if(!spawn_limit_reached()) {
                 spawn_entity();
             }
-            if(_current_wave < _wave_count) {
+            if(_current_wave < _settings.wave_count) {
                 next_wave();
             }
         }
@@ -68,14 +64,14 @@ void Wave::update(float delta) {
 }
 
 void Wave::next_wave() {
-    if(_delta_time_wave < _wave_duration) {
+    if(_delta_time_wave < _settings.wave_duration) {
         return;
     }
     _wave_spawned_count = 0;
-    _delta_time_wave -= _wave_duration;
-    _stat_modifier += _stat_modifier_increment;
+    _delta_time_wave -= _settings.wave_duration;
+    _current_stat_modifier += _settings.stat_modifier_increment;
     _current_wave++;
-    _current_prep_time = _prep_time;
+    _current_prep_time = _settings.preparation_time;
     _preparing = true;
 }
 
@@ -91,12 +87,12 @@ void Wave::spawn_entity() {
     std::mt19937 engine(rand_dev());
     std::uniform_int_distribution<> dist(0, (int) _spawn_possibilities.size() - 1);
     int index = dist(engine);
-    _entity_manager->add_unit(PlayerManager::get_instance()->get_player(computer_id), {0,
-                                                                                       0}, _spawn_possibilities[index]);
+    _entity_manager->add_unit(PlayerManager::get_instance()->get_player(computer_id), {0,0},
+                              _spawn_possibilities[index], _current_stat_modifier);
 }
 
 const unsigned int Wave::get_wave_size() const {
-    return _wave_count;
+    return _settings.wave_count;
 }
 
 const unsigned int Wave::get_current_wave() const {
@@ -104,7 +100,7 @@ const unsigned int Wave::get_current_wave() const {
 }
 
 const float Wave::get_stat_modifier() const {
-    return _stat_modifier;
+    return _current_stat_modifier;
 }
 
 const float Wave::get_elapsed_time() const {
@@ -128,20 +124,15 @@ const bool Wave::is_preparing() const {
 }
 
 
-void Wave::reset(float start_time, float preparation, float wave_duration, unsigned int wave_count, unsigned int spawn_amount) {
+void Wave::reset() {
     _finished = false;
     _pre_stage = _preparing = true;
-    _pre_stage_time = start_time;
-    _prep_time = _current_prep_time = preparation;
-    _wave_count = wave_count;
+    _pre_stage_time = _settings.pre_stage_time;
+    _current_prep_time = _settings.preparation_time;
     _current_wave = 1;
-    _stat_modifier = 1.0f;
+    _current_stat_modifier = _settings.stat_modifier;
     _elapsed_time = _delta_time_wave = _delta_time_spawner = 0.0f;
     _wave_spawned_count = 0;
-    _wave_duration = wave_duration;
-    _stat_modifier_increment = .5f;
-    _spawn_limit = spawn_amount;
-    _spawner_downtime = _wave_duration / (float) _spawn_limit;
 }
 
 const bool Wave::is_finished() const {
@@ -161,9 +152,9 @@ const bool Wave::computer_won() const {
 }
 
 const bool Wave::time_limit_reached() const {
-    return _current_wave == _wave_count && _delta_time_wave >= _wave_duration;
+    return _current_wave == _settings.wave_count && _delta_time_wave >= _settings.wave_duration;
 }
 
 const bool Wave::spawn_limit_reached() const {
-    return _wave_spawned_count == _spawn_limit;
+    return _wave_spawned_count == _settings.spawn_limit;
 }

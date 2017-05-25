@@ -10,16 +10,23 @@
 
 class MovingEntityManager;
 
+struct wave_setting {
+    float pre_stage_time, preparation_time,
+        wave_duration, stat_modifier, stat_modifier_increment;
+    unsigned int wave_count, spawn_limit;
+};
+
 class Wave {
 private:
     bool _pre_stage, _preparing, _finished;
-    float _pre_stage_time, _prep_time, _current_prep_time,
-        _wave_duration,
-        _stat_modifier, _stat_modifier_increment,
+    float _pre_stage_time, _current_prep_time,
         _spawner_downtime, _delta_time_spawner,
-        _delta_time_wave, _elapsed_time;
+        _delta_time_wave, _elapsed_time,
+        _current_stat_modifier;
 
-    unsigned int _wave_count, _current_wave, _spawn_limit, _wave_spawned_count;
+    unsigned int _current_wave, _wave_spawned_count;
+
+    wave_setting &_settings;
 
     MovingEntityManager *_entity_manager;
 
@@ -36,7 +43,7 @@ private:
     void spawn_entity();
 
 public:
-    explicit Wave(float, float, float, unsigned int, unsigned int);
+    explicit Wave(wave_setting &);
 
     void set_spawn_possibilities(std::vector<MovingEntityType> &);
 
@@ -68,7 +75,7 @@ public:
 
     const bool spawn_limit_reached() const;
 
-    void reset(float, float, float, unsigned int, unsigned int);
+    void reset();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_WAVE_H

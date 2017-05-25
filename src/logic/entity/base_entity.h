@@ -81,6 +81,8 @@ public:
 
     bool has_mark(uint8_t);
 
+    virtual void multiply_stats(float);
+
 };
 
 #endif //C_AND_D_PROJECT_BASE_GAME_ENTITY_H

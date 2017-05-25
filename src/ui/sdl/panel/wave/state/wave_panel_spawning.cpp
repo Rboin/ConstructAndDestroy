@@ -2,21 +2,17 @@
 // Created by robin on 5/17/17.
 //
 
-#include <iostream>
 #include <sstream>
 #include <iomanip>
 #include "entity/player_manager.h"
-#include "settings.h"
 #include "wave_panel_spawning.h"
 #include "sdl/text/sdl_render_solid_text.h"
 #include "wave/wave.h"
 #include "state/state_machine.h"
 #include "wave_panel_preparing.h"
 #include "wave_panel_finished.h"
-#include "entity/player.h"
 
 void WavePanelSpawning::enter(SDLWavePanel *) {
-    std::cout << "Entering WavePanelSpawning State..." << std::endl;
 }
 
 void WavePanelSpawning::execute(SDLWavePanel *panel) {
@@ -29,7 +25,6 @@ void WavePanelSpawning::execute(SDLWavePanel *panel) {
 }
 
 void WavePanelSpawning::exit(SDLWavePanel *) {
-    std::cout << "Exiting WavePanelSpawning State..." << std::endl;
 }
 
 void WavePanelSpawning::update_text(Wave *wave, sdl_solid_text *data) {
@@ -50,7 +45,8 @@ std::string WavePanelSpawning::update_wave_time(Wave *wave) {
 }
 
 std::string WavePanelSpawning::update_stat_modifier(Wave *wave) {
+    float modifier = wave->get_stat_modifier();
     std::ostringstream tmp;
-    tmp << std::setprecision(2) << wave->get_stat_modifier();
+    tmp << std::setprecision(4) << modifier;
     return tmp.str();
 }

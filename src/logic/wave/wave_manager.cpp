@@ -32,7 +32,7 @@ void WaveManager::reset() {
     reset_computer();
     reset_player();
 
-    _wave->reset(wave_pre_stage_time, wave_preparation_time, wave_duration, wave_amount, wave_unit_size);
+    _wave->reset();
 }
 
 void WaveManager::reset_player() {

@@ -392,7 +392,9 @@ int main(int argc, char **argv) {
     std::vector<MovingEntityType> possibilities = {
             MovingEntityType::KNIGHT
     };
-    Wave *wave = new Wave(wave_pre_stage_time, wave_preparation_time, wave_duration, wave_amount, wave_unit_size);
+    wave_setting setting = {wave_pre_stage_time, wave_preparation_time, wave_duration,
+                             stat_modifier, stat_modifier_increment, wave_amount, wave_unit_size};
+    Wave *wave = new Wave(setting);
     wave->set_spawn_possibilities(possibilities);
     wm->set_wave(wave);
     vec2 wave_panel_position = {10, 250}, wave_panel_size = {150, 250};
