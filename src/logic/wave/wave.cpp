@@ -55,8 +55,7 @@ void Wave::update(float delta) {
             _elapsed_time += delta;
             if(!spawn_limit_reached()) {
                 spawn_entity();
-            }
-            if(_current_wave < _settings.wave_count) {
+            } else if(spawn_limit_reached() && _current_wave < _settings.wave_count) {
                 next_wave();
             }
         }
