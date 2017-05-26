@@ -19,7 +19,7 @@ Wave::Wave(wave_setting &s) : _settings(s) {
     _current_stat_modifier = _settings.stat_modifier;
     _elapsed_time = _delta_time_wave = _delta_time_spawner = 0.0f;
     _wave_spawned_count = 0;
-    _spawner_downtime = _settings.wave_duration / (float) _settings.spawn_limit;
+    _spawner_downtime = (_settings.wave_duration / 2) / (float) _settings.spawn_limit;
 
     _entity_manager = MovingEntityManager::get_instance();
 }

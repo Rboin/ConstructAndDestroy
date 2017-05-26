@@ -2,7 +2,6 @@
 // Created by robin on 5/17/17.
 //
 
-#include <iostream>
 #include "wave_panel_preparing.h"
 #include "sdl/text/sdl_render_solid_text.h"
 #include "wave/wave.h"
@@ -10,9 +9,7 @@
 #include "wave_panel_spawning.h"
 #include "wave_panel_finished.h"
 
-void WavePanelPreparing::enter(SDLWavePanel *panel) {
-    std::cout << "Entering WavePanelPreparing State..." << std::endl;
-}
+void WavePanelPreparing::enter(SDLWavePanel *) {}
 
 void WavePanelPreparing::execute(SDLWavePanel *panel) {
     if(!panel->get_wave()->is_preparing()) {
@@ -23,9 +20,7 @@ void WavePanelPreparing::execute(SDLWavePanel *panel) {
     update_text(panel->get_wave(), (sdl_solid_text *) panel->get_representation()->get_data());
 }
 
-void WavePanelPreparing::exit(SDLWavePanel *panel) {
-    std::cout << "Exiting WavePanelPreparing State..." << std::endl;
-}
+void WavePanelPreparing::exit(SDLWavePanel *) {}
 
 void WavePanelPreparing::update_text(Wave *wave, sdl_solid_text *data) {
     std::string wave_title =
