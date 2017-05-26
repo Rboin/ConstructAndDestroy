@@ -21,6 +21,14 @@ WaveManager *WaveManager::get_instance() {
     return _instance;
 }
 
+void WaveManager::update(float d_t) {
+    _wave->update(d_t);
+}
+
+Wave *WaveManager::get_wave() {
+    return _wave;
+}
+
 void WaveManager::set_wave(Wave *w) {
     if(_wave) {
         delete _wave;

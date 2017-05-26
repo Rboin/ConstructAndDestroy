@@ -404,7 +404,7 @@ int main(int argc, char **argv) {
                                                          wave_content};
     SDLRenderSolidText *wave_render_object = new SDLRenderSolidText(wave_panel_position, wave_panel_size,
                                                                     wave_panel_data);
-    SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, wave);
+    SDLWavePanel *wave_panel = new SDLWavePanel(wave_render_object, WaveManager::get_instance());
 
     vec2 restart_button_pos = {50, 470}, restart_button_size = {60, 30};
     std::string restart_content = "Restart";

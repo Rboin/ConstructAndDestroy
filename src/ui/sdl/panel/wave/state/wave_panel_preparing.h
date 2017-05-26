@@ -5,6 +5,7 @@
 #ifndef CONSTRUCT_AND_DESTROY_WAVE_PANEL_PREPARATION_H
 #define CONSTRUCT_AND_DESTROY_WAVE_PANEL_PREPARATION_H
 
+#include <string>
 #include "state/state.h"
 #include "sdl/panel/wave/sdl_wave_panel.h"
 
