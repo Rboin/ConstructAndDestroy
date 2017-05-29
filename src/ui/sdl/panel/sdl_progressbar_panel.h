@@ -18,7 +18,7 @@ class SDLProgressBarPanel : public SDLPanel {
 private:
     SDLPanel* _parent;
     bool _finished;
-    float _targetDuration;
+    float _target_duration;
     float _elapsedDuration;
 public:
     explicit SDLProgressBarPanel(SDL_ProgressbarRenderObject *, float duration, SDLPanel* parent);

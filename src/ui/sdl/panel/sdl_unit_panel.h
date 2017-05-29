@@ -13,8 +13,8 @@ class SDL_ImageRenderObject;
 class SDLUnitPanel : public SDLPanel {
 private:
     BuildingType _buildingType;
-    SpawnableEntity* _spawnableEntity;
-    BuildingEntity* _buildingEntity;
+    SpawnableEntity* _spawnable_entity;
+    BuildingEntity* _building_entity;
     SDL_ImageRenderObject* get_render_object(std::string texture, vec2 pos, vec2 size);
 public:
     explicit SDLUnitPanel(std::string texture, vec2 pos, vec2 size, SpawnableEntity* spawnable_entity, BuildingEntity* building_entity);

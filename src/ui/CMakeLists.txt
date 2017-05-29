@@ -65,7 +65,9 @@ add_library(cd_ui STATIC
         sdl/panel/sdl_control_panel.cpp
         sdl/panel/sdl_control_panel.h
         sdl/panel/sdl_progressbar_panel.cpp
-        sdl/panel/sdl_progressbar_panel.h manager/build_and_spawn_manager.h manager/build_and_spawn_manager.cpp)
+        sdl/panel/sdl_progressbar_panel.h
+        manager/build_and_spawn_manager.h
+        manager/build_and_spawn_manager.cpp)
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

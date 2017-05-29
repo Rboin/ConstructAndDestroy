@@ -5,15 +5,15 @@
 #include <iostream>
 #include "sdl_key_event_dispatcher.h"
 
-SDL_KeyEventDispatcher *SDL_KeyEventDispatcher::INSTANCE = nullptr;
+SDL_KeyEventDispatcher *SDL_KeyEventDispatcher::_instance = nullptr;
 
 SDL_KeyEventDispatcher::SDL_KeyEventDispatcher() : SDL_EventDispatcher<sdl_key_event_data>() {}
 
 SDL_KeyEventDispatcher *SDL_KeyEventDispatcher::get_instance() {
-    if (!INSTANCE) {
-        INSTANCE = new SDL_KeyEventDispatcher();
+    if (!_instance) {
+        _instance = new SDL_KeyEventDispatcher();
     }
-    return INSTANCE;
+    return _instance;
 }
 
 void SDL_KeyEventDispatcher::dispatch(sdl_key_event_data d) {

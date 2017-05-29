@@ -6,7 +6,7 @@
 #include "sdl_progressbar_panel.h"
 
 SDLProgressBarPanel::SDLProgressBarPanel(SDL_ProgressbarRenderObject *r, float duration, SDLPanel* parent) : SDLPanel(r) {
-    _targetDuration = duration;
+    _target_duration = duration;
     _finished = false;
     _parent = parent;
 }
@@ -18,9 +18,9 @@ void SDLProgressBarPanel::render(SDLRenderer *renderer, float d) {
 
     _elapsedDuration += d;
 
-    if (_elapsedDuration < _targetDuration) {
+    if (_elapsedDuration < _target_duration) {
         if (SDL_ProgressbarRenderObject* rep = dynamic_cast<SDL_ProgressbarRenderObject*>(this->get_representation())) {
-            rep->set_progress(_elapsedDuration / _targetDuration);
+            rep->set_progress(_elapsedDuration / _target_duration);
 
             SDLPanel::render(renderer, d);
         }
