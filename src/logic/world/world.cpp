@@ -2,16 +2,14 @@
 // Created by robin on 2/21/17.
 //
 
-#include <entity/entity_marks.h>
+#include "entity/entity_marks.h"
 #include "neighbourhood/neighbourhood_manager.h"
 #include "world.h"
-#include "wave/wave.h"
 #include "tree/bsp_tree.h"
 #include "tree/bsp_node.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/static/resource_manager.h"
-#include "settings.h"
 #include "entity/player.h"
 #include "entity/player_manager.h"
 

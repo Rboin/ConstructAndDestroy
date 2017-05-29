@@ -2,7 +2,7 @@
 // Created by Sander on 18-5-2017.
 //
 
-#include <entity/entity_marks.h>
+#include "entity/entity_marks.h"
 #include "world/world.h"
 #include "entity/moving/moving_entity.h"
 #include "fight_goal.h"
