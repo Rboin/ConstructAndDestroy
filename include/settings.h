@@ -33,15 +33,11 @@ struct entity_with_texture {
     MovingEntityType type;
 };
 
-extern std::vector<building_with_texture>* buildings_with_textures;
-
-extern std::vector<entity_with_texture>* entities_with_textures;
+extern std::vector<building_with_texture> buildings_with_textures;
+extern std::vector<entity_with_texture> entities_with_textures;
 
 extern std::string get_texture_of_entity(MovingEntityType type);
 
-
 extern std::string get_texture_of_building(BuildingType building);
-
-
 
 #endif //CONSTRUCT_AND_DESTROY_SETTINGS_H

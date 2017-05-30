@@ -13,9 +13,9 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
 
     // for each building that can be created
     // render one panel per building
-    for (int i = 0; i < buildings_with_textures->size(); i++) {
+    for (int i = 0; i < buildings_with_textures.size(); i++) {
         MouseHandlerBuildingPanel *slot = new MouseHandlerBuildingPanel();
-        building_with_texture building = buildings_with_textures->at((unsigned int) i);
+        building_with_texture building = buildings_with_textures.at((unsigned int) i);
 
         vec2 pos = {(float) (100 * i), this->get_representation()->get_position()->clone().y};
         vec2 size = {100, 100};
