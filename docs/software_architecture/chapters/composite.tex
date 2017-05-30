@@ -32,3 +32,6 @@ This goal can be initialized with or without an enemy. When this goal is initial
 \subsection{Hunt Target}
 \label{sec:hunttarget}
 This goal will hunt down an enemy moving entity. This is done by using the plan path (\cref{sec:planpath}) and follow path (\cref{sec:followpath}) goals. The most notable thing for this goal is when it is completed or terminated. If the sub goals of hunt target are empty it means we have followed the path to the enemy’s location. Since we are chasing moving entities we regularly have to check whether or not the enemy has moved to much from its initial location. When this is the case we set a seek to the current enemy location, after that the goal will be removed. We have to do this otherwise the entity will stop moving for a bit. After this the combat goal (\cref{sec:combat}) will be called again and hunt target goal can plan a new path to the enemy’s location. This process is repeated untill we are close enough to attack the enemy entity.
+
+\subsubsection{Wander}
+The wander goal is a goal that gets activated when there are no enemies present on the map. A random node is chosen and we plan a path to that node. Then the followpath goal will be activated and we traverse the edges. This process is continued until a new enemy enters the game world.
