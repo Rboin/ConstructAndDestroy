@@ -6,7 +6,7 @@
 #define CONSTRUCT_AND_DESTROY_WAVE_H
 
 #include <vector>
-#include "entity/moving/moving_entity_types.h"
+#include "moving_entity_types.h"
 
 class MovingEntityManager;
 

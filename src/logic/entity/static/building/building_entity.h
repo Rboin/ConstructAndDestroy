@@ -6,14 +6,14 @@
 #define C_AND_D_PROJECT_BUILDING_ENTITY_H
 
 #include <vector>
-#include "entity/moving/moving_entity_types.h"
+#include "moving_entity_types.h"
 #include "building_type.h"
 #include "entity/static/static_entity.h"
 #include "types.h"
-#include "entity/moving/spawnable_entity.h"
 
 template<class T> class StateMachine;
 class Resources;
+class SpawnableEntity;
 
 class BuildingEntity : public StaticEntity {
 private:

@@ -2,19 +2,20 @@
 // Created by Mark on 1-5-2017.
 //
 
+#include "settings.h"
 #include <cmath>
 #include "mouse_handler_world.h"
 #include "world/world.h"
 #include "entity/player.h"
 #include "behaviour/move_order.h"
 #include <iostream>
-#include "settings.h"
+#include "sdl/event/sdl_event_types.h"
+
 #include "entity/static/building/building_state/placing_building.h"
 #include "entity/static/building/building_state/choosing_building_position.h"
 #include "state/state_machine.h"
 #include "entity/moving/moving_entity_manager.h"
 #include "sdl/panel/sdl_world_panel.h"
-#include "settings.h"
 #include "entity/moving/moving_entity_factory.h"
 #include "entity/player_manager.h"
 

@@ -20,7 +20,6 @@ set(SOURCE_FILES
         entity/static/building/building_manager.h
         entity/static/building/castle_entity.h
         entity/static/building/building_entity.h
-        entity/static/building/building_type.h
         entity/static/building/building_state/choosing_building_position.h
         entity/static/building/building_state/placing_building.h
         entity/static/building/building_state/abort_placing_building.h
@@ -112,7 +111,6 @@ set(SOURCE_FILES
         entity/player_manager.cpp
         entity/moving/knight_entity.cpp
         entity/moving/moving_entity_factory.h
-        entity/moving/moving_entity_types.h
         entity/moving/moving_entity_factory.cpp
         entity/moving/moving_entity_manager.h
         entity/moving/moving_entity_manager.cpp
@@ -130,7 +128,6 @@ set(SOURCE_FILES
         entity/goal/moving_entity_goal/atomic/fight_goal.cpp
         entity/goal/moving_entity_goal/atomic/fight_goal.h
         entity/goal/moving_entity_goal/hunt_target_goal.h
-        entity/moving/moving_entity_types.h
         entity/moving/spawnable_entity.cpp
         entity/moving/spawnable_entity.h
         entity/static/stone_mine_entity.h

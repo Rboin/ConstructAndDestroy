@@ -7,6 +7,7 @@
 #include "building_manager.h"
 #include "entity/moving/moving_entity_manager.h"
 #include "entity/resources.h"
+#include "entity/moving/spawnable_entity.h"
 
 BuildingEntity::BuildingEntity(vec2 position, float mass, BuildingType bt, TextureTypes texture_types)
         : StaticEntity(position,

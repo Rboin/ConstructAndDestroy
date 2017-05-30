@@ -2,6 +2,7 @@
 // Created by Jeroen on 5/18/2017.
 //
 
+#include "sdl/event/sdl_event_types.h"
 #include "manager/build_and_spawn_manager.h"
 #include "mouse_handler_entitypanel.h"
 

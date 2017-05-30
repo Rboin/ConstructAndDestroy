@@ -5,6 +5,7 @@
 #include "sdl/image/sdl_image_render_object.h"
 #include "castle_entity.h"
 #include "entity/resources.h"
+#include "entity/moving/spawnable_entity.h"
 
 
 CastleEntity::CastleEntity(vec2 position, float mass) : BuildingEntity(

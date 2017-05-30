@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "types.h"
-#include "entity/moving/moving_entity_types.h"
+#include "moving_entity_types.h"
 #include "building_entity.h"
 
 

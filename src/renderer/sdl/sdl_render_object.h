@@ -7,10 +7,9 @@
 
 #include <SDL2/SDL.h>
 #include <cstdint>
-#include "types.h"
 #include "render_object.h"
 
-struct SDLRenderer;
+class SDLRenderer;
 
 struct sdl_data {
     uint8_t red, green, blue, alpha;

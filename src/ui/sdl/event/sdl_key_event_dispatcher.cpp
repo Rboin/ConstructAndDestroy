@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "sdl_key_event_dispatcher.h"
+#include "sdl_event_types.h"
 
 SDL_KeyEventDispatcher *SDL_KeyEventDispatcher::_instance = nullptr;
 

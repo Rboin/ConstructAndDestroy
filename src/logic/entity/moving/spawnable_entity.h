@@ -6,7 +6,7 @@
 #define CONSTRUCT_AND_DESTROY_SPAWNABLE_ENTITY_H
 
 class Resources;
-#include "entity/moving/moving_entity_types.h"
+#include "moving_entity_types.h"
 
 class SpawnableEntity {
 private:

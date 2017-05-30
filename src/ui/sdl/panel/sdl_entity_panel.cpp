@@ -2,6 +2,7 @@
 // Created by Jeroen on 5/19/2017.
 //
 
+#include "settings.h"
 #include "sdl_entity_panel.h"
 #include "sdl/image/sdl_image_render_object.h"
 #include "sdl/event/slot/mouse_handler_buildingpanel.h"
@@ -9,7 +10,8 @@
 #include "entity/player_manager.h"
 #include "entity/player.h"
 #include "sdl/event/slot/mouse_handler_entitypanel.h"
-#include "settings.h"
+#include "sdl_unit_panel.h"
+#include "entity/moving/spawnable_entity.h"
 
 SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_building) : SDLPanel(r) {
     Player *p = PlayerManager::get_instance()->get_player(player_id);

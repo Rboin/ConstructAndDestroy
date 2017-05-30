@@ -6,6 +6,7 @@
 #include "entity/player_manager.h"
 #include "entity/player.h"
 #include "spawnable_entity_manager.h"
+#include "spawnable_entity.h"
 
 SpawnableEntityManager *SpawnableEntityManager::_instance = nullptr;
 

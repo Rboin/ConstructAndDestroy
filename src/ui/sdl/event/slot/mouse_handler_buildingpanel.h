@@ -5,12 +5,11 @@
 #ifndef CONSTRUCT_AND_DESTROY_MOUSE_HANDLER_BUILDINGPANEL_H
 #define CONSTRUCT_AND_DESTROY_MOUSE_HANDLER_BUILDINGPANEL_H
 
-
-#include <sdl/panel/sdl_panel.h>
-#include <sdl/panel/sdl_unit_panel.h>
+#include "sdl/event/sdl_event_types.h"
 #include "sdl/event/slot/sdl_mouse_event_slot.h"
 
 class SDL_ImageRenderObject;
+class SDLUnitPanel;
 
 class MouseHandlerBuildingPanel : public SDL_MouseEventSlot {
 private:

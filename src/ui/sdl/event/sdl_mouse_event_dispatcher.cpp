@@ -3,6 +3,7 @@
 //
 
 #include "sdl_mouse_event_dispatcher.h"
+#include "sdl/event/sdl_event_types.h"
 
 SDL_MouseEventDispatcher* SDL_MouseEventDispatcher::INSTANCE = nullptr;
 

@@ -2,6 +2,7 @@
 // Created by Jeroen on 5/11/2017.
 //
 
+#include "sdl/event/sdl_event_types.h"
 #include "sdl/panel/sdl_unit_panel.h"
 #include "entity/player_manager.h"
 #include "entity/static/building/building_state/choosing_building_position.h"

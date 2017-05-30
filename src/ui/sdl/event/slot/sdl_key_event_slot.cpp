@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <iostream>
+#include "sdl/event/sdl_event_types.h"
 #include "manager/build_and_spawn_manager.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "entity/moving/spawnable_entity.h"

@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "sdl/sdl_renderer.h"
 #include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
@@ -48,30 +49,30 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 
 // initialize buildings and textures
-std::vector<building_with_texture> buildings_with_textures = {
-        {"castle.png",    BuildingType::CASTLE},
+
+std::vector<building_with_texture> *buildings_with_textures = new std::vector<building_with_texture>{
+        {"castle.png", BuildingType::CASTLE},
         {"warehouse.png", BuildingType::WAREHOUSE}
 };
 
-std::vector<entity_with_texture> entities_with_textures = {
+std::vector<entity_with_texture> *entities_with_textures = new std::vector<entity_with_texture>{
         {"lumberjack.png", MovingEntityType::LUMBERJACK},
-        {"miner.png",      MovingEntityType::MINER},
-        {"knight.png",     MovingEntityType::KNIGHT}
+        {"miner.png", MovingEntityType::MINER},
+        {"knight.png", MovingEntityType::KNIGHT}
 };
 
-
 std::string get_texture_of_entity(MovingEntityType type) {
-    for (int i = 0; i < entities_with_textures.size(); i++) {
-        if (entities_with_textures.at(i).type == type) {
-            return entities_with_textures.at(i).texture;
+    for(int i = 0; i < entities_with_textures->size(); i++) {
+        if (entities_with_textures->at(i).type == type) {
+            return entities_with_textures->at(i).texture;
         }
     }
 }
 
 std::string get_texture_of_building(BuildingType building) {
-    for (int i = 0; i < buildings_with_textures.size(); i++) {
-        if (buildings_with_textures.at(i).type == building) {
-            return buildings_with_textures.at(i).texture;
+    for(int i = 0; i < buildings_with_textures->size(); i++) {
+        if (buildings_with_textures->at(i).type == building) {
+            return buildings_with_textures->at(i).texture;
         }
     }
 }
@@ -139,6 +140,7 @@ int main(int argc, char **argv) {
     if (!init_everything()) {
         return -1;
     }
+
     TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
 
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();

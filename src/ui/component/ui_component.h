@@ -8,7 +8,10 @@
 #include <vector>
 #include <cstdint>
 #include "render_object.h"
-#include "event/slot.h"
+#include "types.h"
+#include "vector.h"
+
+template<typename T> class Slot;
 
 /**
  * @tparam T = Type of renderer, i.e SDL_Renderer.

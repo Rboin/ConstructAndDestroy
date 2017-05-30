@@ -4,6 +4,7 @@
 
 #include "sdl_ui_component.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
+#include "sdl/sdl_render_object.h"
 
 SDL_UIComponent::SDL_UIComponent(SDL_RenderObject *r) : UIComponent(r) {
 }

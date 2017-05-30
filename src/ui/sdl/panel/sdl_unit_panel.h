@@ -4,7 +4,7 @@
 
 #include "sdl_panel.h"
 #include <string>
-#include "entity/static/building/building_type.h"
+#include "building_type.h"
 
 class BuildingEntity;
 class SpawnableEntity;
