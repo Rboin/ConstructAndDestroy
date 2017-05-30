@@ -95,6 +95,8 @@ void World::set_render_object(SDL_RenderObject *r) {
 void World::remove_dead_entities() {
     for(std::vector<BaseEntity *>::iterator it = entities.begin(); it != entities.end();) {
         if((*it)->has_mark(EntityMark::DEAD)) {
+            //clear selected buildings if the entity that is destroyed is a building.
+            (*it)->get_player()->clear_selected_building((*it));
             (*it)->get_player()->remove_entity((*it));
             delete (*it);
             it = entities.erase(it);

@@ -18,6 +18,8 @@ BuildingEntity::BuildingEntity(const mesh *base, vec2 position, float mass, Buil
     spawn = this->_position;
     spawn.y += 40;
     delta_time = 0;
+    _health = 1000;
+    _max_health = 1000;
 }
 
 BuildingEntity::BuildingEntity(const mesh *base, float mass, BuildingType bt, TextureTypes texture_types)
@@ -29,6 +31,8 @@ BuildingEntity::BuildingEntity(const mesh *base, float mass, BuildingType bt, Te
     spawn = this->_position;
     spawn.y += 40;
     delta_time = 0;
+    _health = 1000;
+    _max_health = 1000;
 }
 
 Resources *BuildingEntity::get_costs() {

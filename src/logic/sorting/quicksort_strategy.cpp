@@ -2,6 +2,7 @@
 // Created by robin on 3/8/17.
 //
 
+#include "entity/entity_marks.h"
 #include "quicksort_strategy.h"
 #include "vector.h"
 #include "entity/base_entity.h"
@@ -13,14 +14,16 @@ std::vector<BaseEntity *> QuicksortStrategy::sort(BaseEntity *b, std::vector<Bas
 
         for (unsigned int i = 0; i < entities.size(); i++) {
             BaseEntity *current = entities.at(i);
-            float current_distance = b->get_position().distance_squared(current->get_position());
-            if (b != current) {
-                if (current_distance < chosen_distance)
-                    smaller.push_back(current);
-                else if (current_distance > chosen_distance)
-                    greater.push_back(current);
-                else
-                    same.push_back(current);
+            if(!current->has_mark(EntityMark::DEAD)){
+                float current_distance = b->get_position().distance_squared(current->get_position());
+                if (b != current) {
+                    if (current_distance < chosen_distance)
+                        smaller.push_back(current);
+                    else if (current_distance > chosen_distance)
+                        greater.push_back(current);
+                    else
+                        same.push_back(current);
+                }
             }
         }
 

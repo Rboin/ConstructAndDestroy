@@ -37,7 +37,7 @@ void BuildingManager::choose_building_position(int player_id, BuildingType type)
     // Add building to the world (so it will be rendered)
     World::get_instance()->add_entity(be);
 
-    Player* player = PlayerManager::get_instance()->get_player(player_id);
+    Player *player = PlayerManager::get_instance()->get_player(player_id);
 
     // Change state of player to ChoosingBuildingPosition
     player->positioning_building = be;
@@ -46,7 +46,7 @@ void BuildingManager::choose_building_position(int player_id, BuildingType type)
 
 }
 
-void BuildingManager::add_building(Player* p, BuildingEntity *be) {
+void BuildingManager::add_building(Player *p, BuildingEntity *be) {
     // Add building to building array kept by the BuildingManager
     buildings.emplace_back(be);
 
@@ -54,9 +54,8 @@ void BuildingManager::add_building(Player* p, BuildingEntity *be) {
     p->buildings.push_back(be);
 }
 
-void BuildingManager::add_building(int player_id, BuildingEntity *be)
-{
-    Player * p= PlayerManager::get_instance()->get_player(player_id);
+void BuildingManager::add_building(int player_id, BuildingEntity *be) {
+    Player *p = PlayerManager::get_instance()->get_player(player_id);
     add_building(p, be);
 }
 
@@ -77,11 +76,11 @@ vec2 BuildingManager::get_closest_building(vec2 pos, BuildingType bt) {
     return closest;
 }
 
-void BuildingManager::remove_building(Player * p, BuildingEntity *be) {
+void BuildingManager::remove_building(Player *p, BuildingEntity *be) {
 
     // Remove building entity from world so it will not be drawn anymore
     World::get_instance()->remove_entity(p->positioning_building);
-    
+
     // Delete building from the building array kept by the BuildingManager
     for (std::vector<BuildingEntity *>::iterator iter = buildings.begin(); iter != buildings.end(); ++iter) {
         if (*iter == be) {
@@ -102,3 +101,12 @@ void BuildingManager::remove_building(Player * p, BuildingEntity *be) {
     delete p->positioning_building;
     p->positioning_building = nullptr;
 }
+
+bool BuildingManager::has_building_type(BuildingType bt) {
+    for (int i = 0; i < buildings.size(); i++) {
+        if (bt == buildings.at(i)->get_building_type())
+            return true;
+    }
+    return false;
+}
+

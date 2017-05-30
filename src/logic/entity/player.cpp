@@ -1,3 +1,4 @@
+#include <entity/moving/knight_entity.h>
 #include "world/world.h"
 #include "player.h"
 #include "state/state_machine.h"
@@ -173,4 +174,24 @@ void Player::clear_units() {
         World::get_instance()->remove_entity((*iter));
     }
     units.clear();
+}
+
+void Player::clear_selected_building(BaseEntity *be) {
+    if (be == selected_building) {
+        selected_building = nullptr;
+    }
+}
+
+KnightEntity *Player::has_knight() {
+    for(int i = 0; i <units.size(); i++){
+        if(KnightEntity* knight_entity = dynamic_cast<KnightEntity*>(units.at(i)))
+        {
+            if(knight_entity == nullptr){
+                delete knight_entity;
+                return knight_entity;
+            } else {
+                return knight_entity;
+            }
+        }
+    }
 }

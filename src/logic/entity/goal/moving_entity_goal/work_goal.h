@@ -20,8 +20,8 @@ class Node;
 class WorkGoal : public GoalComposite<MovingEntity> {
 private:
     std::vector<GoalEvaluator<MovingEntity> *> _evaluators;
-    Node *resource;
-    ResourceType rt;
+    Node *_resource;
+    ResourceType _rt;
     vec2* _target_resource;
 public:
     /*!

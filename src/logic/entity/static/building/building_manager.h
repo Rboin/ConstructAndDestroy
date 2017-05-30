@@ -37,6 +37,8 @@ public:
 
     void remove_building(Player*, BuildingEntity*);
 
+    bool has_building_type(BuildingType);
+
 };
 
 #endif //C_AND_D_PROJECT_BUILDING_MANAGER_H

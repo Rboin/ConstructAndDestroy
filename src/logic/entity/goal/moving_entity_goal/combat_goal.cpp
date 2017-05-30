@@ -4,8 +4,8 @@
 
 #include <iostream>
 #include <cfloat>
+#include "entity/moving/knight_entity.h"
 #include "settings.h"
-#include "graph/graph_manager.h"
 #include "graph/graph.h"
 #include "entity/goal/moving_entity_goal/atomic/fight_goal.h"
 #include "entity/player_manager.h"
@@ -14,7 +14,6 @@
 #include "combat_goal.h"
 #include "think_goal.h"
 #include "follow_path_goal.h"
-#include "entity/moving/moving_entity.h"
 #include "behaviour/behaviour.h"
 #include "hunt_target_goal.h"
 
@@ -28,9 +27,16 @@ CombatGoal::CombatGoal(MovingEntity *e, MovingEntity *enemy) : GoalComposite(e, 
         } else {
             enemy_player = pm->get_player(computer_id);
         }
-        //todo:: change this, maybe pick the closest or the most threatening enemy
+
         if (!enemy_player->units.empty()) {
-            _enemy = enemy_player->units.front();
+            ///If there is an knight attack that first
+            KnightEntity *knight_entity = enemy_player->has_knight();
+            if (knight_entity) {
+                _enemy = knight_entity;
+            } else {
+                _enemy = enemy_player->units.front();
+            }
+
 
             set_goal_hunt_target();
             set_goal_attack_enemy();
@@ -53,9 +59,11 @@ void CombatGoal::set_goal_hunt_target() {
     float distance_to_enemy = _enemy->get_position().distance(owner->get_position());
     if (distance_to_enemy < 40) {
         //fight
-        _enemy->set_engaged(true);
-        _enemy->get_brain()->remove_all_subgoals();
-        _enemy->get_brain()->set_goal_combat(owner);
+        if (!_enemy->is_engaged()) {
+            _enemy->set_engaged(true);
+            _enemy->get_brain()->remove_all_subgoals();
+            _enemy->get_brain()->set_goal_combat(owner);
+        }
     } else {
         this->sub_goals.push_front(new HuntTargetGoal(owner, _enemy));
     }

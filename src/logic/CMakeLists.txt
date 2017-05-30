@@ -36,7 +36,7 @@ set(SOURCE_FILES
         entity/goal/moving_entity_goal/strategy_goal_type.h
         entity/goal/moving_entity_goal/job_type.h
         entity/goal/moving_entity_goal/level_type.h
-        entity/goal/moving_entity_goal/atomic/wander_goal.h
+        entity/goal/moving_entity_goal/wander_goal.h
         entity/goal/moving_entity_goal/think_goal.h
         entity/goal/moving_entity_goal/atomic/gather_resource_goal.h
         entity/goal/moving_entity_goal/atomic/drop_resources_goal.h
@@ -106,7 +106,7 @@ set(SOURCE_FILES
         entity/static/building/building_state/abort_placing_building.cpp
         entity/goal/evaluator/obstacle_avoid_evaluator.cpp
         entity/goal/evaluator/wander_evaluator.cpp
-        entity/goal/moving_entity_goal/atomic/wander_goal.cpp
+        entity/goal/moving_entity_goal/wander_goal.cpp
         entity/goal/moving_entity_goal/think_goal.cpp
         entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.cpp
         entity/goal/moving_entity_goal/follow_path_goal.cpp

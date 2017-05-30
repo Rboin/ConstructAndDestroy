@@ -5,7 +5,7 @@
 #include "wander_evaluator.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
-#include "entity/goal/moving_entity_goal/atomic/wander_goal.h"
+#include "entity/goal/moving_entity_goal/wander_goal.h"
 
 const float WanderEvaluator::calculate_desirability(MovingEntity *t) {
     // This has low desirability, because you don't actually want to just wander around.

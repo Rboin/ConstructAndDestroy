@@ -1,8 +1,8 @@
 //
 // Created by Stephan Schrijver on 3-5-2017.
 //
+#include "sdl/image/sdl_image_health_render_object.h"
 #include "building_factory.h"
-#include "sdl/image/sdl_image_render_object.h"
 #include "building_entity.h"
 #include "castle_entity.h"
 #include "mesh.h"
@@ -15,7 +15,7 @@ mesh* BuildingFactory::base = new mesh {4, default_shape};
 
 BuildingEntity *BuildingFactory::create(BuildingType type) {
     BuildingEntity *be;
-    SDL_ImageRenderObject *iro;
+    SDL_ImageHealthRenderObject *iro;
     sdl_image_data *bd;
 
     if (type == BuildingType::CASTLE) {
@@ -26,7 +26,7 @@ BuildingEntity *BuildingFactory::create(BuildingType type) {
         bd = new sdl_image_data{"warehouse.png"};
     }
 
-    iro = new SDL_ImageRenderObject({0, 0}, {50, 50}, bd);
+    iro = new SDL_ImageHealthRenderObject({0, 0}, {50, 50}, bd, be);
     be->set_player(player_id);
     be->set_representation(iro);
     return be;

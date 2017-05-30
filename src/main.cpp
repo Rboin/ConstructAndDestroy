@@ -205,7 +205,7 @@ int main(int argc, char **argv) {
 
     ThinkGoal *knight_think_goal = new ThinkGoal(knight_entity);
     knight_think_goal->add_evaluator(new CombatEvaluator());
-
+    knight_think_goal->add_evaluator(new WanderEvaluator());
     knight_entity->set_behaviour(knight_behaviour);
     knight_entity->set_goal(knight_think_goal);
 
@@ -294,11 +294,11 @@ int main(int argc, char **argv) {
     vec2 s_position7 = {600, 400};
     BuildingEntity *s_entity7 = new WarehouseEntity(&base, s_position7, 50);
     sdl_image_data *entity7_data = new sdl_image_data{"warehouse.png"};
-    SDL_ImageRenderObject *e7_object = new SDL_ImageRenderObject(s_position7, {50, 50}, entity7_data);
+    SDL_ImageRenderObject *e7_object = new SDL_ImageHealthRenderObject(s_position7, {50, 50}, entity7_data,s_entity7);
     s_entity7->set_representation(e7_object);
 
     s_entity7->set_player(player_id);
-    World::get_instance()->add_entity(s_entity7);
+//    World::get_instance()->add_entity(s_entity7);
     // End warehouse entity
 
     // Begin gold mine entity
@@ -326,7 +326,7 @@ int main(int argc, char **argv) {
     // End gold mine entity
 
     // TODO: when merged enemy_player, change 1 to player_id
-    BuildingManager::get_instance()->add_building(player_id, s_entity7);
+//    BuildingManager::get_instance()->add_building(player_id, s_entity7);
 
     SDLRenderer *render_engine = new SDLRenderer(renderer);
 

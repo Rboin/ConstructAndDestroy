@@ -12,6 +12,7 @@ class BuildingEntity;
 class StaticEntity;
 
 class MovingEntity;
+class KnightEntity;
 
 template<class T>
 class StateMachine;
@@ -44,6 +45,8 @@ public:
     void clear_all_selections();
     int get_id();
 
+    void clear_selected_building(BaseEntity* be);
+
     void remove_entity(BaseEntity*);
 
     void remove_unit(MovingEntity*);
@@ -51,6 +54,8 @@ public:
     void remove_building(BuildingEntity*);
 
     void clear_units();
+
+    KnightEntity* has_knight();
 };
 
 

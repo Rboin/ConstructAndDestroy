@@ -10,7 +10,7 @@
 #include "goal/goal_evaluator.h"
 #include "vector.h"
 #include "follow_path_goal.h"
-#include "entity/goal/moving_entity_goal/atomic/wander_goal.h"
+#include "wander_goal.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
 #include "work_goal.h"
@@ -46,7 +46,7 @@ void ThinkGoal::determine_next_goal() {
 }
 
 void ThinkGoal::set_goal_wander() {
-    if (!has_atomic_goal(WANDER)) {
+    if (!has_sub_goal(WANDER)) {
         add_subgoal(new WanderGoal(owner));
     }
 }
