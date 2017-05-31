@@ -1,0 +1,19 @@
+\subsection{Panel}
+\label{sec:wave-panel}
+
+We've also created a panel that shows information about the waves. It shows 
+at which wave we are, the maximum amount of waves, the stat multiplier if 
+the wave is spawning entities and the elapsed time. If the wave is in the 
+preparation state, the panels shows the time left that you have to prepare.
+There's also a button to reset the game, this button resets the player's 
+units and the computer's units using the WaveManager class shown in 
+\cref{fig:wave}.
+
+To use this panel for states, we used the statemachine pattern. The 
+transitions of states are shown in \cref{fig:wavepanel-states}.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{res/wave-panel-states.png}
+    \caption{Wave panel state transitions.}\label{fig:wavepanel-states}
+\end{figure}
