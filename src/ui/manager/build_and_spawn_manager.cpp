@@ -38,3 +38,7 @@ void BuildAndSpawnManager::spawn_spawnable_entity(SDLUnitPanel *sdl_panel) {
     SDLProgressBarPanel *pb_panel = new SDLProgressBarPanel(panel_pb, building->get_order_time(), sdl_panel);
     sdl_panel->add_component(pb_panel);
 }
+
+BuildAndSpawnManager::~BuildAndSpawnManager() {
+    _instance = nullptr;
+}

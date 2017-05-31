@@ -30,3 +30,8 @@ bool SpawnableEntityManager::spawn_entity(BuildingEntity *building, SpawnableEnt
     }
     return false;
 }
+
+SpawnableEntityManager::~SpawnableEntityManager() {
+    _instance = nullptr;
+
+}

@@ -14,7 +14,7 @@ private:
     BuildAndSpawnManager() {}
 
 public:
-    ~BuildAndSpawnManager() {}
+    ~BuildAndSpawnManager();
     void spawn_spawnable_entity(SDLUnitPanel *);
 
     static BuildAndSpawnManager *get_instance();
