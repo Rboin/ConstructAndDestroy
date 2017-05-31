@@ -19,7 +19,7 @@ private:
     SDLPanel* _parent;
     bool _finished;
     float _target_duration;
-    float _elapsedDuration;
+    float _elapsed_duration;
 public:
     explicit SDLProgressBarPanel(SDL_ProgressbarRenderObject *, float duration, SDLPanel* parent);
     void render(SDLRenderer *renderer, float d) override;

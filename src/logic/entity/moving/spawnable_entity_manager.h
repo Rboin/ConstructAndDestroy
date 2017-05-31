@@ -11,9 +11,10 @@ class SpawnableEntity;
 class SpawnableEntityManager {
 private:
     static SpawnableEntityManager* _instance;
-    SpawnableEntityManager();
+    SpawnableEntityManager() {}
 
 public:
+    ~SpawnableEntityManager(){}
     static SpawnableEntityManager *get_instance();
 
     bool spawn_entity(BuildingEntity *, SpawnableEntity *);

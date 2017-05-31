@@ -9,7 +9,7 @@
 
 class SDL_MouseEventDispatcher : public SDL_EventDispatcher<sdl_mouse_event_data> {
 private:
-    static SDL_MouseEventDispatcher *INSTANCE;
+    static SDL_MouseEventDispatcher *_instance;
     SDL_MouseEventDispatcher();
 public:
 

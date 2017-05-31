@@ -11,9 +11,10 @@ class BuildAndSpawnManager {
 private:
     static BuildAndSpawnManager *_instance;
 
-    BuildAndSpawnManager();
+    BuildAndSpawnManager() {}
 
 public:
+    ~BuildAndSpawnManager() {}
     void spawn_spawnable_entity(SDLUnitPanel *);
 
     static BuildAndSpawnManager *get_instance();

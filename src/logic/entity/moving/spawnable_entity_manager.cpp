@@ -10,8 +10,6 @@
 
 SpawnableEntityManager *SpawnableEntityManager::_instance = nullptr;
 
-SpawnableEntityManager::SpawnableEntityManager() {}
-
 SpawnableEntityManager *SpawnableEntityManager::get_instance() {
     if (_instance == nullptr) {
         _instance = new SpawnableEntityManager();

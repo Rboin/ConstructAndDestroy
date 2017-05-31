@@ -50,19 +50,19 @@ SDL_Renderer *renderer;
 
 // initialize buildings and textures
 std::vector<building_with_texture> buildings_with_textures = std::vector<building_with_texture>{
-    {"castle.png",    BuildingType::CASTLE},
-    {"warehouse.png", BuildingType::WAREHOUSE}
+        {"castle.png",    BuildingType::CASTLE},
+        {"warehouse.png", BuildingType::WAREHOUSE}
 };
 
 std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
-    {"lumberjack.png", MovingEntityType::LUMBERJACK},
-    {"miner.png",      MovingEntityType::MINER},
-    {"knight.png",     MovingEntityType::KNIGHT}
+        {"lumberjack.png", MovingEntityType::LUMBERJACK},
+        {"miner.png",      MovingEntityType::MINER},
+        {"knight.png",     MovingEntityType::KNIGHT}
 };
 
 std::string get_texture_of_entity(MovingEntityType type) {
     for (int i = 0; i < entities_with_textures.size(); i++) {
-        if(entities_with_textures.at(i).type == type) {
+        if (entities_with_textures.at(i).type == type) {
             return entities_with_textures.at(i).texture;
         }
     }
@@ -70,7 +70,7 @@ std::string get_texture_of_entity(MovingEntityType type) {
 
 std::string get_texture_of_building(BuildingType building) {
     for (int i = 0; i < buildings_with_textures.size(); i++) {
-        if(buildings_with_textures.at(i).type == building) {
+        if (buildings_with_textures.at(i).type == building) {
             return buildings_with_textures.at(i).texture;
         }
     }

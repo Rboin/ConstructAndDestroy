@@ -16,11 +16,11 @@ void SDLProgressBarPanel::render(SDLRenderer *renderer, float d) {
         return;
     }
 
-    _elapsedDuration += d;
+    _elapsed_duration += d;
 
-    if (_elapsedDuration < _target_duration) {
+    if (_elapsed_duration < _target_duration) {
         if (SDL_ProgressbarRenderObject* rep = dynamic_cast<SDL_ProgressbarRenderObject*>(this->get_representation())) {
-            rep->set_progress(_elapsedDuration / _target_duration);
+            rep->set_progress(_elapsed_duration / _target_duration);
 
             SDLPanel::render(renderer, d);
         }
