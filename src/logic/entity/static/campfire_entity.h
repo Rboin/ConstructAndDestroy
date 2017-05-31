@@ -10,7 +10,7 @@
 
 class CampfireEntity : public ResourceEntity {
 public:
-    CampfireEntity(const mesh *, vec2, float);
+    CampfireEntity(vec2, float);
 };
 
 

@@ -5,15 +5,11 @@
 #ifndef CONSTRUCT_AND_DESTROY_HUNT_TARGET_GOAL_H
 #define CONSTRUCT_AND_DESTROY_HUNT_TARGET_GOAL_H
 
-
 #include "types.h"
 #include "goal/composite_goal.h"
 #include "vector.h"
 
 class MovingEntity;
-
-template<typename T>
-class GoalEvaluator;
 class Node;
 
 class HuntTargetGoal : public GoalComposite<MovingEntity> {
@@ -26,6 +22,8 @@ public:
      * so new goals won't be set because there is nothing to attack/kill.
      */
     HuntTargetGoal(MovingEntity *, BaseEntity*);
+
+    ~HuntTargetGoal();
 
     /*!
      * If the sub_goals size == 0 then this goal's status will be set to completed.

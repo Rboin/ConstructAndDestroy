@@ -9,7 +9,7 @@
 
 class GoldMineEntity : public ResourceEntity {
 public:
-    GoldMineEntity(const mesh *, vec2, float);
+    GoldMineEntity(vec2, float);
 };
 
 #endif //CONSTRUCT_AND_DESTROY_GOLD_MINE_H

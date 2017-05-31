@@ -10,13 +10,17 @@
 
 TraverseEdgeGoal::TraverseEdgeGoal(MovingEntity *e, vec2 *g, int initiator) : AtomicGoal<MovingEntity>(e, TRAVERSEEDGE,
                                                                                                        initiator) {
-    goal = g;
+    _goal = g;
+}
+
+TraverseEdgeGoal::~TraverseEdgeGoal() {
+    _goal = nullptr;
 }
 
 void TraverseEdgeGoal::activate() {
     status = ACTIVE;
     owner->get_behaviour()->add(TRAVERSEEDGE, new SeekStrategy());
-    owner->get_behaviour()->set_target_for(TRAVERSEEDGE, goal, 1);
+    owner->get_behaviour()->set_target_for(TRAVERSEEDGE, _goal, 1);
 }
 
 const int TraverseEdgeGoal::process() {
@@ -28,7 +32,7 @@ const int TraverseEdgeGoal::process() {
         is_stuck();
     }
 
-    float distance = owner->get_position().distance(*goal);
+    float distance = owner->get_position().distance(*_goal);
     if (distance < 5) {
         status = COMPLETED;
     }
@@ -48,5 +52,5 @@ void TraverseEdgeGoal::is_stuck() {
     _goal_time = owner->get_delta_time();
     owner->get_behaviour()->remove_all();
     owner->get_behaviour()->add(TRAVERSEEDGE, new SeekStrategy());
-    owner->get_behaviour()->set_target_for(TRAVERSEEDGE, goal, 1);
+    owner->get_behaviour()->set_target_for(TRAVERSEEDGE, _goal, 1);
 }

@@ -14,6 +14,10 @@ GatherResourceGoal::GatherResourceGoal(MovingEntity *e, vec2 *pos, int initiator
     _resource = rm->get_resource(pos);
 }
 
+GatherResourceGoal::~GatherResourceGoal() {
+    _resource = nullptr;
+}
+
 void GatherResourceGoal::activate() {
     status = ACTIVE;
 }

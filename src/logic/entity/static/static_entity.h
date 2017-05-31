@@ -10,8 +10,8 @@
 
 class StaticEntity : public BaseEntity {
 public:
-    StaticEntity(const mesh *, vec2, float);
-    StaticEntity(const mesh *,float);
+    StaticEntity(vec2, float);
+    StaticEntity(float);
     void set_position(float, float, bool);
 };
 

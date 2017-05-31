@@ -9,9 +9,6 @@ set(SOURCE_FILES
         entity/moving/moving_entity.h
         entity/moving/lumberjack_entity.h
         entity/moving/miner_entity.h
-        entity/moving/skeleton_entity.h
-        entity/weapon/axe_weapon.h
-        entity/weapon/bow_weapon.h
         entity/static/resource_type.h
         entity/static/static_entity.h
         entity/static/resource_entity.h
@@ -29,7 +26,6 @@ set(SOURCE_FILES
         entity/static/building/building_state/abort_placing_building.h
         state/state.h
         state/state_machine.h
-        entity/goal/evaluator/obstacle_avoid_evaluator.h
         entity/goal/evaluator/wander_evaluator.h
         entity/goal/moving_entity_goal/initiator.h
         entity/goal/moving_entity_goal/atomic_goal_type.h
@@ -40,7 +36,6 @@ set(SOURCE_FILES
         entity/goal/moving_entity_goal/think_goal.h
         entity/goal/moving_entity_goal/atomic/gather_resource_goal.h
         entity/goal/moving_entity_goal/atomic/drop_resources_goal.h
-        entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h
         entity/goal/moving_entity_goal/follow_path_goal.h
         entity/goal/moving_entity_goal/atomic/plan_path_goal.h
         entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h
@@ -52,7 +47,6 @@ set(SOURCE_FILES
         behaviour/strategy/arrive_strategy.h
         behaviour/strategy/seek_strategy.h
         behaviour/strategy/flee_strategy.h
-        behaviour/strategy/obstacle_avoidance_strategy.h
         behaviour/strategy/wander_strategy.h
         behaviour/orderstrategies/default_order_strategy.h
         behaviour/move_order.h
@@ -64,33 +58,13 @@ set(SOURCE_FILES
         graph/a_star_node.h
         graph/edge.h
         graph/graph.h
-        tree/bsp_tree.h
-        tree/bsp_node.h
-        sorting/sort_strategy.h
-        sorting/quicksort_strategy.h
-        fuzzy/fuzzy_hedges.h
-        fuzzy/fz_set.h
-        fuzzy/fuzzy_rule.h
-        fuzzy/fuzzy_set.h
-        fuzzy/fuzzy_term.h
-        fuzzy/fuzzy_module.h
-        fuzzy/fuzzy_operators.h
-        fuzzy/fuzzy_set_triangle.h
-        fuzzy/fuzzy_variable.h
-        fuzzy/fuzzy_set_singleton.h
-        fuzzy/fuzzy_set_left_shoulder.h
-        fuzzy/fuzzy_set_right_shoulder.h
         entity/player.h
         entity/player_manager.h
         world/world.cpp
-        tree/bsp_tree.cpp
         entity/base_entity.cpp
         entity/moving/moving_entity.cpp
         entity/moving/lumberjack_entity.cpp
         entity/moving/miner_entity.cpp
-        entity/moving/skeleton_entity.cpp
-        entity/weapon/axe_weapon.cpp
-        entity/weapon/bow_weapon.cpp
         entity/static/static_entity.cpp
         entity/static/resource_entity.cpp
         entity/static/resource_manager.cpp
@@ -104,11 +78,9 @@ set(SOURCE_FILES
         entity/static/building/building_state/choosing_building_position.cpp
         entity/static/building/building_state/placing_building.cpp
         entity/static/building/building_state/abort_placing_building.cpp
-        entity/goal/evaluator/obstacle_avoid_evaluator.cpp
         entity/goal/evaluator/wander_evaluator.cpp
         entity/goal/moving_entity_goal/wander_goal.cpp
         entity/goal/moving_entity_goal/think_goal.cpp
-        entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.cpp
         entity/goal/moving_entity_goal/follow_path_goal.cpp
         entity/goal/moving_entity_goal/atomic/plan_path_goal.cpp
         entity/goal/moving_entity_goal/atomic/traverse_edge_goal.cpp
@@ -124,7 +96,6 @@ set(SOURCE_FILES
         behaviour/strategy/arrive_strategy.cpp
         behaviour/strategy/seek_strategy.cpp
         behaviour/strategy/flee_strategy.cpp
-        behaviour/strategy/obstacle_avoidance_strategy.cpp
         behaviour/strategy/wander_strategy.cpp
         behaviour/orderstrategies/default_order_strategy.cpp
         behaviour/move_order.cpp
@@ -136,15 +107,6 @@ set(SOURCE_FILES
         graph/a_star_node.cpp
         graph/edge.cpp
         graph/graph.cpp
-        neighbourhood/neighbourhood_manager.cpp
-        sorting/quicksort_strategy.cpp
-        fuzzy/fuzzy_module.cpp
-        fuzzy/fuzzy_operators.cpp
-        fuzzy/fuzzy_set_triangle.cpp
-        fuzzy/fuzzy_variable.cpp
-        fuzzy/fuzzy_set_singleton.cpp
-        fuzzy/fuzzy_set_left_shoulder.cpp
-        fuzzy/fuzzy_set_right_shoulder.cpp
         entity/player.cpp
         entity/resources.cpp
         entity/player_manager.cpp

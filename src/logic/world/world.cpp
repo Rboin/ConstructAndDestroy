@@ -3,10 +3,7 @@
 //
 
 #include "entity/entity_marks.h"
-#include "neighbourhood/neighbourhood_manager.h"
 #include "world.h"
-#include "tree/bsp_tree.h"
-#include "tree/bsp_node.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/static/resource_manager.h"
@@ -14,13 +11,16 @@
 #include "entity/player_manager.h"
 
 //declaration of global variable.
-extern const std::string path_to_texture;
 World *World::_instance = nullptr;
 
 World::World() {}
 
 World::~World() {
-    // Clear world.
+    for(int i = 0; i < _entities.size(); i++){
+        delete _entities.at(i);
+    }
+    delete _representation;
+    _instance = nullptr;
 }
 
 World *World::get_instance() {
@@ -31,8 +31,8 @@ World *World::get_instance() {
 
 void World::update(float d_t) {
     remove_dead_entities();
-    for (unsigned int i = 0; i < entities.size(); i++) {
-        entities.at(i)->update(d_t);
+    for (unsigned int i = 0; i < _entities.size(); i++) {
+        _entities.at(i)->update(d_t);
     }
     ResourceManager *rm = ResourceManager::get_instance();
     rm->replenish_resources(d_t);
@@ -46,8 +46,8 @@ void World::update(float d_t) {
 void World::render(SDLRenderer *renderer) {
     _representation->render(renderer);
 
-    for (unsigned long i = 0; i < entities.size(); i++) {
-        entities.at(i)->render(renderer);
+    for (unsigned long i = 0; i < _entities.size(); i++) {
+        _entities.at(i)->render(renderer);
     }
 }
 
@@ -65,15 +65,14 @@ World &World::add_entity(BaseEntity *e) {
         }
     }
 
-    entities.push_back(e);
-    NeighbourhoodManager::get_instance()->insert(e);
+    _entities.push_back(e);
     return *this;
 }
 
 World &World::remove_entity(BaseEntity *e) {
-    for (std::vector<BaseEntity *>::iterator iter = entities.begin(); iter != entities.end(); ++iter) {
+    for (std::vector<BaseEntity *>::iterator iter = _entities.begin(); iter != _entities.end(); ++iter) {
         if (*iter == e) {
-            entities.erase(iter);
+            _entities.erase(iter);
             break;
         }
     }
@@ -81,11 +80,7 @@ World &World::remove_entity(BaseEntity *e) {
 }
 
 std::vector<BaseEntity *> World::get_entities() {
-    return this->entities;
-}
-
-void World::add_graph(Graph *g) {
-    graph = g;
+    return this->_entities;
 }
 
 void World::set_render_object(SDL_RenderObject *r) {
@@ -93,15 +88,28 @@ void World::set_render_object(SDL_RenderObject *r) {
 }
 
 void World::remove_dead_entities() {
-    for(std::vector<BaseEntity *>::iterator it = entities.begin(); it != entities.end();) {
+    for(std::vector<BaseEntity *>::iterator it = _entities.begin(); it != _entities.end();) {
         if((*it)->has_mark(EntityMark::DEAD)) {
             //clear selected buildings if the entity that is destroyed is a building.
             (*it)->get_player()->clear_selected_building((*it));
             (*it)->get_player()->remove_entity((*it));
             delete (*it);
-            it = entities.erase(it);
+            it = _entities.erase(it);
         } else {
             ++it;
         }
     }
 }
+
+BaseEntity *World::get_closest_to(vec2 v) {
+    if(_entities.size() > 0) {
+        for(int i = 0; i < _entities.size(); i++) {
+            BaseEntity *closest_to_v = _entities.at(i);
+            if (closest_to_v->get_representation()->contains(v))
+                return closest_to_v;
+        }
+    }
+    return nullptr;
+}
+
+

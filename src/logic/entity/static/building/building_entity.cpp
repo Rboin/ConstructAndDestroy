@@ -8,9 +8,8 @@
 #include "entity/moving/moving_entity_manager.h"
 #include "entity/resources.h"
 
-BuildingEntity::BuildingEntity(const mesh *base, vec2 position, float mass, BuildingType bt, TextureTypes texture_types)
-        : StaticEntity(base,
-                       position,
+BuildingEntity::BuildingEntity(vec2 position, float mass, BuildingType bt, TextureTypes texture_types)
+        : StaticEntity(position,
                        mass) {
     building_type = bt;
     costs = new Resources(0, 0, 0, 0);
@@ -22,9 +21,8 @@ BuildingEntity::BuildingEntity(const mesh *base, vec2 position, float mass, Buil
     _max_health = 1000;
 }
 
-BuildingEntity::BuildingEntity(const mesh *base, float mass, BuildingType bt, TextureTypes texture_types)
-        : StaticEntity(base,
-                       mass) {
+BuildingEntity::BuildingEntity(float mass, BuildingType bt, TextureTypes texture_types)
+        : StaticEntity(mass) {
     building_type = bt;
     costs = new Resources(0, 0, 0, 0);
     order_time = 10000;
@@ -44,11 +42,11 @@ BuildingType BuildingEntity::get_building_type() {
 }
 
 void BuildingEntity::update(float d) {
-    if(!this->orders.empty()){
+    if (!this->orders.empty()) {
 
         delta_time += d;
 
-        if(delta_time >= order_time){
+        if (delta_time >= order_time) {
 
             this->order_unit_from_factory(_player, spawn, orders.front());
 
@@ -69,14 +67,15 @@ void BuildingEntity::order_unit(MovingEntityType moving_entity_type) {
     this->orders.push_back(moving_entity_type);
 }
 
-std::vector<SpawnableEntity*> BuildingEntity::get_spawnable_entities() {
+std::vector<SpawnableEntity *> BuildingEntity::get_spawnable_entities() {
     return spawnable_entities;
 }
 
 BuildingEntity::~BuildingEntity() {
-    for(int i = 0; i < spawnable_entities.size(); i++) {
+    for (int i = 0; i < spawnable_entities.size(); i++) {
         delete spawnable_entities.at(i);
     }
+    delete costs;
 }
 
 void BuildingEntity::set_position(float x, float y, bool finalposition) {

@@ -3,7 +3,6 @@
 //
 
 #include "SDL_mouse.h"
-#include "neighbourhood/neighbourhood_manager.h"
 #include "graph/graph_manager.h"
 #include "graph/graph.h"
 #include "world/world.h"

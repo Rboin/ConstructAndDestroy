@@ -7,21 +7,21 @@
 #include "entity/moving/moving_entity.h"
 #include "wander_strategy.h"
 
-vec2 WanderStrategy::calculate_force(MovingEntity &e, std::vector<BaseEntity *> neighbourhood) {
+vec2 WanderStrategy::calculate_force(MovingEntity &e) {
     //calculate the circle center
     vec2 circle_center;
     circle_center = e.get_velocity();
     circle_center.normalize();
-    circle_center *= circle_distance;
+    circle_center *= _circle_distance;
 
     //calculate the displacement force
     vec2 displacement_force = {0, -1};
-    displacement_force *= circle_radius;
+    displacement_force *= _circle_radius;
 
     //randomly change the vector direction by changing the angle.
-    set_angle(displacement_force, wander_angle);
+    set_angle(displacement_force, _wander_angle);
     float angle_change = 1;
-    wander_angle += rand() % 2 * angle_change - angle_change * 0.5;
+    _wander_angle += rand() % 2 * angle_change - angle_change * 0.5;
 
     //calculate and return wander force
     vec2 wander_force = circle_center + displacement_force;

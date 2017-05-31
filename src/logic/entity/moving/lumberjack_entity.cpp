@@ -6,23 +6,23 @@
 #include "sdl/image/sdl_image_render_object.h"
 #include <iostream>
 
-LumberJackEntity::LumberJackEntity(const mesh *base, vec2 position, float mass,
+LumberJackEntity::LumberJackEntity(vec2 position, float mass,
                                    const float max_force, const float max_speed) :
-        MovingEntity(base, position, mass, max_force, max_speed, WOODCUTTER) {
+        MovingEntity(position, mass, max_force, max_speed, WOODCUTTER) {
     carrying = 0;
     texture = "lumberjack.png";
 }
 
 void LumberJackEntity::select() {
     sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
-    this->representation->set_data(entity_data);
-    this->representation->clear_data();
+    this->_representation->set_data(entity_data);
+    this->_representation->clear_data();
 }
 
 void LumberJackEntity::deselect() {
     sdl_image_data* entity_data = new sdl_image_data{texture};
-    this->representation->set_data(entity_data);
-    this->representation->clear_data();
+    this->_representation->set_data(entity_data);
+    this->_representation->clear_data();
 
 }
 

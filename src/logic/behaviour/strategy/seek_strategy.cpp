@@ -5,7 +5,7 @@
 #include "seek_strategy.h"
 #include "entity/moving/moving_entity.h"
 
-vec2 SeekStrategy::calculate_force(MovingEntity &e, std::vector<BaseEntity *> neighbourhood) {
+vec2 SeekStrategy::calculate_force(MovingEntity &e) {
     if(_targets)
     return ((*_targets - e.get_position()).normalize() * e.get_max_speed()) - e.get_velocity();
 }

@@ -24,6 +24,8 @@ private:
 public:
     ThinkGoal(MovingEntity *);
 
+    ~ThinkGoal();
+
     void add_evaluator(GoalEvaluator<MovingEntity> *);
 
     /**
@@ -33,8 +35,6 @@ public:
 
     void set_goal_wander();
 
-    void set_goal_obstacle_avoidance(vec2 *);
-
     void set_goal_follow_path();
 
     bool has_sub_goal(StrategyGoalType);
@@ -42,8 +42,6 @@ public:
     bool has_atomic_goal(AtomicGoalType);
 
     void set_goal_work();
-
-    void set_goal_gather_resource();
 
     void set_goal_combat(MovingEntity* = nullptr);
 

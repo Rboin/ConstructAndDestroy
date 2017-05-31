@@ -21,7 +21,19 @@ void Player::update() {
 }
 
 Player::~Player() {
+    delete resources;
+    delete state_machine;
+    delete positioning_building;
     delete selected_building;
+    for(int i = 0; i < buildings.size(); i++){
+        delete buildings.at(i);
+    }
+    for(int i = 0; i < units.size(); i++){
+        delete units.at(i);
+    }
+    for(int i = 0; i < selected_units.size(); i++){
+        delete selected_units.at(i);
+    }
 }
 
 

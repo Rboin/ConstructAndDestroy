@@ -17,6 +17,10 @@ FightGoal::FightGoal(MovingEntity *e, BaseEntity *enemy, int initiator) : Atomic
     _enemy = enemy;
 }
 
+FightGoal::~FightGoal() {
+    _enemy = nullptr;
+}
+
 void FightGoal::activate() {
     owner->get_behaviour()->remove_all();
     status = ACTIVE;
@@ -43,7 +47,6 @@ const int FightGoal::process() {
         owner->get_brain()->resume_sub_goals();
         _enemy->add_mark(EntityMark::DEAD);
     }
-
     return status;
 }
 

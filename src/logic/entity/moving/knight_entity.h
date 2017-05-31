@@ -9,7 +9,7 @@
 
 class KnightEntity : public MovingEntity {
 public:
-    KnightEntity(const mesh *, vec2, float, const float, const float);
+    KnightEntity(vec2, float, const float, const float);
     void select();
     void deselect();
 

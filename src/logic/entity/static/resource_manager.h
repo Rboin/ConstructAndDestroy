@@ -13,9 +13,9 @@ class ResourceManager {
 private:
     ResourceManager();
 
-    static ResourceManager *instance;
+    static ResourceManager *_instance;
 
-    std::vector<ResourceEntity *> resources;
+    std::vector<ResourceEntity *> _resources;
 public:
     ~ResourceManager();
 

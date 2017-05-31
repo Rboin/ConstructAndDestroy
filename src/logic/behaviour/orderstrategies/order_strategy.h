@@ -2,8 +2,8 @@
 #define CONSTRUCT_AND_DESTROY_ORDER_STRATEGY_BASE_H
 
 #include <vector>
-#include <types.h>
-#include <entity/moving/moving_entity.h>
+#include "types.h"
+#include "entity/moving/moving_entity.h"
 
 
 class OrderStrategy {

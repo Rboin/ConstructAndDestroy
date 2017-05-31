@@ -10,10 +10,12 @@ class Resources;
 
 class SpawnableEntity {
 private:
-    Resources* cost;
-    MovingEntityType entityType;
+    Resources* _cost;
+    MovingEntityType _entity_type;
 public:
     SpawnableEntity(Resources* cost, MovingEntityType entityType);
+
+    ~SpawnableEntity();
 
     SpawnableEntity(Resources* cost);
 

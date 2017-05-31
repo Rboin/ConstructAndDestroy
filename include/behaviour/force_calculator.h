@@ -26,7 +26,7 @@ public:
      * Method that calculates the total amount of force produced by the attached behaviours.
      * @return vec2 force
      */
-    virtual vec2 calculate(MovingEntity &, std::vector<BehaviourStrategy *>, std::vector<BaseEntity *>) = 0;
+    virtual vec2 calculate(MovingEntity &, std::vector<BehaviourStrategy *>) = 0;
 };
 
 #endif //C_AND_D_PROJECT_FORCE_CALCULATOR_H

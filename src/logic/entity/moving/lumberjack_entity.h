@@ -7,14 +7,13 @@
 
 #include "moving_entity.h"
 
-
 class MovingEntity;
 
 class LumberJackEntity : public MovingEntity {
 private:
 
 public:
-    LumberJackEntity(const mesh *, vec2, float, const float, const float);
+    LumberJackEntity(vec2, float, const float, const float);
     void select();
     void deselect();
 

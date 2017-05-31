@@ -8,3 +8,7 @@ void BehaviourStrategy::set_targets(vec2 *v, int size) {
     _targets = v;
     _target_size = size;
 }
+
+BehaviourStrategy::~BehaviourStrategy() {
+    _targets = nullptr;
+}

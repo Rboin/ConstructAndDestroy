@@ -8,7 +8,6 @@
 enum MovingEntityType {
     KNIGHT,
     LUMBERJACK,
-    SKELETON,
     MINER
 };
 

@@ -23,9 +23,9 @@ MouseHandlerEntityPanel::~MouseHandlerEntityPanel() {}
 void MouseHandlerEntityPanel::handle_up(sdl_mouse_event_data data, SDLUnitPanel *sdl_panel) {
     Player *p = PlayerManager::get_instance()->get_player(player_id);
 
-    BuildingEntity* building = sdl_panel->get_building_entity();
+    BuildingEntity *building = sdl_panel->get_building_entity();
 
-    SpawnableEntity* spawnable_entity = sdl_panel->get_spawnable_entity();
+    SpawnableEntity *spawnable_entity = sdl_panel->get_spawnable_entity();
 
     if (p->resources->check_if_sufficient_resources(spawnable_entity->get_cost())) {
         // tell the building to spawn the selected entity type
@@ -33,12 +33,14 @@ void MouseHandlerEntityPanel::handle_up(sdl_mouse_event_data data, SDLUnitPanel 
 
         // create a progressbarpanel at the center of the unit panel
         // indicating how long it will take to spawn the selected unit
-        const vec2* parent_size = sdl_panel->get_size();
-        const vec2* parent_pos = sdl_panel->get_position();
-        vec2 pb_panel_pos = {parent_pos->x + (parent_size->x / 2 - 15), parent_pos->y + parent_size->y + 5}, pb_panel_size = {30, 10};
+        const vec2 *parent_size = sdl_panel->get_size();
+        const vec2 *parent_pos = sdl_panel->get_position();
+        vec2 pb_panel_pos = {parent_pos->x + (parent_size->x / 2 - 15),
+                             parent_pos->y + parent_size->y + 5}, pb_panel_size = {30, 10};
         sdl_data pb_panel_data = {0, 0, 0, 0};
-        SDL_ProgressbarRenderObject* panel_pb = new SDL_ProgressbarRenderObject(pb_panel_pos, pb_panel_size, { 255, 255, 255, 255}, &pb_panel_data);
-        SDLProgressBarPanel* pb_panel = new SDLProgressBarPanel(panel_pb, building->get_order_time(), sdl_panel);
+        SDL_ProgressbarRenderObject *panel_pb = new SDL_ProgressbarRenderObject(pb_panel_pos, pb_panel_size,
+                                                                                {255, 255, 255, 255}, &pb_panel_data);
+        SDLProgressBarPanel *pb_panel = new SDLProgressBarPanel(panel_pb, building->get_order_time(), sdl_panel);
         sdl_panel->add_component(pb_panel);
 
         // remove resources from the player
@@ -49,15 +51,13 @@ void MouseHandlerEntityPanel::handle_up(sdl_mouse_event_data data, SDLUnitPanel 
 
 void MouseHandlerEntityPanel::on(sdl_mouse_event_data data) {
     SDLUnitPanel *sdl_panel = (SDLUnitPanel *) data.component;
-    if( data.type == SDL_MOUSEBUTTONDOWN || data.type == SDL_MOUSEBUTTONUP){
+    if (data.type == SDL_MOUSEBUTTONDOWN || data.type == SDL_MOUSEBUTTONUP) {
         handle(data, sdl_panel);
     }
 }
 
 void MouseHandlerEntityPanel::handle(sdl_mouse_event_data data, SDLUnitPanel *sdl_panel) {
-    vec2 pos = data.position;
-
-    switch(data.button) {
+    switch (data.button) {
         case SDL_BUTTON_LEFT:
             if (data.type == SDL_MOUSEBUTTONUP) {
                 return handle_up(data, sdl_panel);

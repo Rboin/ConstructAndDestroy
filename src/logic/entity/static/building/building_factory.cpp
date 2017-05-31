@@ -5,13 +5,8 @@
 #include "building_factory.h"
 #include "building_entity.h"
 #include "castle_entity.h"
-#include "mesh.h"
 #include "settings.h"
 #include "warehouse_entity.h"
-
-vec2* BuildingFactory::default_shape = new vec2[4] {vec2(-20,20), vec2(20,-20), vec2(20,20), vec2(-20, 20)};
-
-mesh* BuildingFactory::base = new mesh {4, default_shape};
 
 BuildingEntity *BuildingFactory::create(BuildingType type) {
     BuildingEntity *be;
@@ -19,10 +14,10 @@ BuildingEntity *BuildingFactory::create(BuildingType type) {
     sdl_image_data *bd;
 
     if (type == BuildingType::CASTLE) {
-        be = new CastleEntity(base, 50);
+        be = new CastleEntity(50);
         bd = new sdl_image_data{"castle.png"};
     } else if (type == BuildingType::WAREHOUSE) {
-        be = new WarehouseEntity(base, 50);
+        be = new WarehouseEntity(50);
         bd = new sdl_image_data{"warehouse.png"};
     }
 

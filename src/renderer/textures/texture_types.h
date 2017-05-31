@@ -9,9 +9,6 @@ enum TextureTypes {
     //Not selected:              selected:
     LUMBERJACKTEXTURE,          SEL_LUMBERJACKTEXTURE,
     MINERTEXTURE,               SEL_MINERTEXTURE,
-    BOWTEXTURE,                 SEL_BOWTEXTURE,
-    AXETEXTURE,                 SEL_AXETEXTURE,
-
     TREETEXTURE,
     TREEDEPLETEDTEXTURE,
     IRONMINETEXTURE,

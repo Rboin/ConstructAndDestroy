@@ -7,14 +7,13 @@
 #include "behaviour/behaviour_strategy.h"
 
 vec2 BasicForceCalculator::calculate(MovingEntity &entity,
-                                     std::vector<BehaviourStrategy *> strategies,
-                                     std::vector<BaseEntity *> neighbourhood) {
+                                     std::vector<BehaviourStrategy *> strategies) {
 
     vec2 force = {0, 0, 0};
-    if(strategies.size() > 0){
+    if (strategies.size() > 0) {
         for (unsigned int i = 0; i < strategies.size(); i++) {
-            if(strategies.at(i) != 0)
-            force += strategies.at(i)->calculate_force(entity, neighbourhood);
+            if (strategies.at(i) != 0)
+                force += strategies.at(i)->calculate_force(entity);
         }
     }
     return force;

@@ -11,7 +11,7 @@ class MovingEntityManager {
 private:
     MovingEntityManager();
 
-    static MovingEntityManager *instance;
+    static MovingEntityManager *_instance;
 
 public:
     ~MovingEntityManager();

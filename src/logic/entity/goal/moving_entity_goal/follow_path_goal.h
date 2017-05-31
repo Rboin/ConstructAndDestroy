@@ -12,22 +12,9 @@
 
 class MovingEntity;
 
-template<typename T>
-class GoalEvaluator;
-
 class FollowPathGoal : public GoalComposite<MovingEntity> {
-private:
-    std::vector<GoalEvaluator<MovingEntity> *> _evaluators;
-    MovingEntity *_owner;
 public:
     FollowPathGoal(MovingEntity *, int initiator = Initiator::AI);
-
-    void add_evaluator(GoalEvaluator<MovingEntity> *);
-
-    /**
-     * calculate the most desirable goal, based on given evaluators.
-     */
-    void determine_next_goal();
 
     void set_goal_traverse_edge(vec2*);
 

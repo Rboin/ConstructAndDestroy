@@ -10,7 +10,7 @@
 class BasicForceCalculator : public ForceCalculator {
 
 public:
-    vec2 calculate(MovingEntity &, std::vector<BehaviourStrategy *>, std::vector<BaseEntity *>);
+    vec2 calculate(MovingEntity &, std::vector<BehaviourStrategy *>);
 };
 
 #endif //C_AND_D_PROJECT_BASIC_FORCE_CALCULATOR_H

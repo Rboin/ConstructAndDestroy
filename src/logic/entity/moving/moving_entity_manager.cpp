@@ -13,20 +13,20 @@
 #include "moving_entity.h"
 #include "entity/player.h"
 
-MovingEntityManager *MovingEntityManager::instance = nullptr;
+MovingEntityManager *MovingEntityManager::_instance = nullptr;
 
 MovingEntityManager::MovingEntityManager() {}
 
 MovingEntityManager::~MovingEntityManager() {
-    delete this->instance;
+    delete this->_instance;
 }
 
 MovingEntityManager *MovingEntityManager::get_instance() {
-    if (!instance) {
-        instance = new MovingEntityManager();
+    if (!_instance) {
+        _instance = new MovingEntityManager();
     }
 
-    return instance;
+    return _instance;
 
 }
 

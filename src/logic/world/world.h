@@ -19,13 +19,9 @@ class Player;
 class World {
 private:
     static World *_instance;
-
-    std::vector<BaseEntity *> entities;
-    Graph *graph;
+    std::vector<BaseEntity *> _entities;
     SDL_RenderObject *_representation;
-
     World();
-
 public:
     ~World();
 
@@ -49,11 +45,9 @@ public:
 
     std::vector<BaseEntity *> get_entities();
 
-    void add_graph(Graph *);
-
-    Player* getPlayer();
-
     void remove_dead_entities();
+
+    BaseEntity *get_closest_to(vec2);
 };
 
 #endif //C_AND_D_PROJECT_WORLD_H

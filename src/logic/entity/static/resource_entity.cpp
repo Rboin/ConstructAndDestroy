@@ -6,11 +6,10 @@
 #include "resource_entity.h"
 #include "resource_manager.h"
 
-ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, ResourceType rt)
-        : StaticEntity(base,
-                       position,
+ResourceEntity::ResourceEntity(vec2 position, float mass, ResourceType rt)
+        : StaticEntity(position,
                        mass) {
-    resource_type = rt;
+    _resource_type = rt;
     _units = 50.f;
     _depleted = false;
     _max_units = 250.f;
@@ -20,8 +19,12 @@ ResourceEntity::ResourceEntity(const mesh *base, vec2 position, float mass, Reso
     rm->add_resource(this);
 }
 
+ResourceEntity::~ResourceEntity() {
+
+}
+
 ResourceType ResourceEntity::get_resource_type() {
-    return resource_type;
+    return _resource_type;
 }
 
 int ResourceEntity::get_units() {

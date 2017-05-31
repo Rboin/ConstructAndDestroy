@@ -12,7 +12,7 @@
 class ResourceEntity : public StaticEntity {
 private:
     //Determines the kind of resource
-    ResourceType resource_type;
+    ResourceType _resource_type;
     //Amount of units the resource actually has
     float _units;
     //The max units a resource can have, this could be influenced by upgrades
@@ -24,7 +24,9 @@ private:
     std::string _depleted_texture;
     std::string _current_texture;
 public:
-    ResourceEntity(const mesh*,vec2,float, ResourceType);
+    ResourceEntity(vec2,float, ResourceType);
+
+    ~ResourceEntity();
 
     void set_textures(std::string, std::string);
     /*!

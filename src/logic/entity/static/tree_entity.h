@@ -11,7 +11,7 @@
 class TreeEntity : public ResourceEntity {
 
 public:
-    TreeEntity(const mesh *, vec2, float);
+    TreeEntity(vec2, float);
 };
 
 

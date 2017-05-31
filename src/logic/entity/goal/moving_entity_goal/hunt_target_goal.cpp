@@ -2,7 +2,6 @@
 // Created by Sander on 10-5-2017.
 //
 
-#include <iostream>
 #include "behaviour/strategy/seek_strategy.h"
 #include "hunt_target_goal.h"
 #include "entity/player.h"
@@ -22,6 +21,12 @@ HuntTargetGoal::HuntTargetGoal(MovingEntity *e, BaseEntity *enemy) : GoalComposi
     if (_enemy_node->get_index() != 0) {
         set_goal_follow_path();
     }
+}
+
+HuntTargetGoal::~HuntTargetGoal() {
+    remove_all_subgoals();
+    _enemy_node = nullptr;
+    _enemy = nullptr;
 }
 
 void HuntTargetGoal::determine_next_goal() {

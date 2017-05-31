@@ -2,6 +2,7 @@
 // Created by robin on 3/11/17.
 //
 
+#include <iostream>
 #include "graph/graph.h"
 #include "graph/graph_manager.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
@@ -17,7 +18,9 @@ WanderGoal::WanderGoal(MovingEntity *e, int initiator) : GoalComposite<MovingEnt
     set_goal_follow_path();
 }
 
-WanderGoal::~WanderGoal() {}
+WanderGoal::~WanderGoal() {
+    remove_all_subgoals();
+}
 
 void WanderGoal::determine_next_goal() {
     if (this->sub_goals.size() == 0) {
@@ -27,7 +30,9 @@ void WanderGoal::determine_next_goal() {
 
 Node* WanderGoal::choose_random_goal() {
     GraphManager *gm = GraphManager::get_instance();
-    return gm->graph->nodes[rand() % gm->graph->nodes.size() - 1];
+    int i = random_number(gm->graph->nodes.size());
+    std::cout << i << std::endl;
+    return gm->graph->nodes[i];
 }
 
 void WanderGoal::set_goal_plan_path() {
@@ -57,3 +62,12 @@ void WanderGoal::terminate() {
 const char *WanderGoal::get_name() const {
     return "Wander";
 }
+
+int WanderGoal::random_number(int size)
+{
+    static int number = 1;
+    number = (221 * number + 1) % size;
+    return number;
+}
+
+

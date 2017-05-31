@@ -29,6 +29,8 @@ private:
 public:
     Behaviour(ForceCalculator *);
 
+    ~Behaviour();
+
     void add(int, BehaviourStrategy *);
 
     void remove(int);
@@ -37,7 +39,7 @@ public:
 
     bool has_behaviour(int);
 
-    vec2 calculate_force(MovingEntity &, std::vector<BaseEntity *>);
+    vec2 calculate_force(MovingEntity &);
 
     void remove_all();
 };

@@ -14,6 +14,11 @@ WaveManager::WaveManager() {
     _wave = nullptr;
 }
 
+WaveManager::~WaveManager() {
+    delete _wave;
+    _instance = nullptr;
+}
+
 WaveManager *WaveManager::get_instance() {
     if(!_instance) {
         _instance = new WaveManager();

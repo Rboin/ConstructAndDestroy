@@ -11,8 +11,7 @@ class MovingEntity;
 
 class MinerEntity : public MovingEntity {
 public:
-    ResourceType resource_type;
-    MinerEntity(const mesh *, vec2, float, const float, const float, const JobType);
+    MinerEntity(vec2, float, const float, const float, const JobType);
     void select();
     void deselect();
 

@@ -17,6 +17,8 @@ private:
 public:
     static WaveManager *get_instance();
 
+    ~WaveManager();
+
     void update(float);
 
     Wave *get_wave();

@@ -9,7 +9,7 @@
 
 class SeekStrategy : public BehaviourStrategy {
 public:
-    vec2 calculate_force(MovingEntity &, std::vector<BaseEntity *>);
+    vec2 calculate_force(MovingEntity &);
 };
 
 #endif //C_AND_D_PROJECT_SEEK_STRATEGY_H

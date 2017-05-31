@@ -7,6 +7,14 @@
 
 PlayerManager *PlayerManager::_instance = nullptr;
 
+PlayerManager::~PlayerManager() {
+    for (std::map<int, Player *>::iterator it = _players.begin(); it != _players.end(); it++) {
+        delete (it->second);
+    }
+    _players.clear();
+    _instance = nullptr;
+}
+
 PlayerManager::PlayerManager() {
     _players = std::map<int, Player *>();
 }

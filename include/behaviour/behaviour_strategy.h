@@ -23,11 +23,12 @@ protected:
 public:
     void set_targets(vec2 *, int size = 1);
 
+    ~BehaviourStrategy();
     /**
      * Method that calculates the amount of force for our given entity.
      * @return
      */
-    virtual vec2 calculate_force(MovingEntity &, std::vector<BaseEntity *>) = 0;
+    virtual vec2 calculate_force(MovingEntity &) = 0;
 };
 
 #endif //C_AND_D_PROJECT_BEHAVIOUR_STRATEGY_H

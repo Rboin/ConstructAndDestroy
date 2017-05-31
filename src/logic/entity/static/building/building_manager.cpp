@@ -12,23 +12,24 @@
 #include "state/state_machine.h"
 #include "entity/player_manager.h"
 
-BuildingManager *BuildingManager::instance = nullptr;
+BuildingManager *BuildingManager::_instance = nullptr;
 
 BuildingManager::BuildingManager() {
 }
 
 BuildingManager::~BuildingManager() {
-    if (buildings.size() > 0) {
-        for (int i = 0; i < buildings.size(); i++) {
-            delete buildings.at(i);
+    if (_buildings.size() > 0) {
+        for (int i = 0; i < _buildings.size(); i++) {
+            delete _buildings.at(i);
         }
     }
+    _instance = nullptr;
 }
 
 BuildingManager *BuildingManager::get_instance() {
-    if (!instance)
-        instance = new BuildingManager();
-    return instance;
+    if (!_instance)
+        _instance = new BuildingManager();
+    return _instance;
 }
 
 void BuildingManager::choose_building_position(int player_id, BuildingType type) {
@@ -48,7 +49,7 @@ void BuildingManager::choose_building_position(int player_id, BuildingType type)
 
 void BuildingManager::add_building(Player *p, BuildingEntity *be) {
     // Add building to building array kept by the BuildingManager
-    buildings.emplace_back(be);
+    _buildings.emplace_back(be);
 
     // Add building to the player
     p->buildings.push_back(be);
@@ -60,17 +61,17 @@ void BuildingManager::add_building(int player_id, BuildingEntity *be) {
 }
 
 std::vector<BuildingEntity *> BuildingManager::get_buildings() {
-    return buildings;
+    return _buildings;
 }
 
 vec2 BuildingManager::get_closest_building(vec2 pos, BuildingType bt) {
     float distance = -1;
     vec2 closest;
-    for (int i = 0; i < buildings.size(); i++) {
-        if (distance == -1 && bt == buildings.at(i)->get_building_type() ||
-            pos.distance(buildings.at(i)->get_position()) < distance && bt == buildings.at(i)->get_building_type()) {
-            distance = pos.distance(buildings.at(i)->get_position());
-            closest = buildings.at(i)->get_position();
+    for (int i = 0; i < _buildings.size(); i++) {
+        if (distance == -1 && bt == _buildings.at(i)->get_building_type() ||
+            pos.distance(_buildings.at(i)->get_position()) < distance && bt == _buildings.at(i)->get_building_type()) {
+            distance = pos.distance(_buildings.at(i)->get_position());
+            closest = _buildings.at(i)->get_position();
         }
     }
     return closest;
@@ -82,9 +83,9 @@ void BuildingManager::remove_building(Player *p, BuildingEntity *be) {
     World::get_instance()->remove_entity(p->positioning_building);
 
     // Delete building from the building array kept by the BuildingManager
-    for (std::vector<BuildingEntity *>::iterator iter = buildings.begin(); iter != buildings.end(); ++iter) {
+    for (std::vector<BuildingEntity *>::iterator iter = _buildings.begin(); iter != _buildings.end(); ++iter) {
         if (*iter == be) {
-            buildings.erase(iter);
+            _buildings.erase(iter);
             break;
         }
     }
@@ -103,8 +104,8 @@ void BuildingManager::remove_building(Player *p, BuildingEntity *be) {
 }
 
 bool BuildingManager::has_building_type(BuildingType bt) {
-    for (int i = 0; i < buildings.size(); i++) {
-        if (bt == buildings.at(i)->get_building_type())
+    for (int i = 0; i < _buildings.size(); i++) {
+        if (bt == _buildings.at(i)->get_building_type())
             return true;
     }
     return false;

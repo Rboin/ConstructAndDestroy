@@ -12,14 +12,10 @@
 #include "entity/static/resource_type.h"
 
 class MovingEntity;
-
-template<typename T>
-class GoalEvaluator;
 class Node;
 
 class WorkGoal : public GoalComposite<MovingEntity> {
 private:
-    std::vector<GoalEvaluator<MovingEntity> *> _evaluators;
     Node *_resource;
     ResourceType _rt;
     vec2* _target_resource;
@@ -30,6 +26,8 @@ public:
      * so new goals won't be set because there is nothing to collect.
      */
     WorkGoal(MovingEntity *, vec2* target_resource = nullptr, int initiator = Initiator::AI);
+
+    ~WorkGoal();
 
     /**
      * calculate the most desirable goal, based on given evaluators.

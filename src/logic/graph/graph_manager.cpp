@@ -5,7 +5,7 @@
 #include "graph_manager.h"
 #include "graph.h"
 
-GraphManager *GraphManager::instance = nullptr;
+GraphManager *GraphManager::_instance = nullptr;
 
 GraphManager::GraphManager() {
     graph = nullptr;
@@ -15,6 +15,7 @@ GraphManager::~GraphManager() {
     if(graph){
         delete graph;
     }
+    _instance = nullptr;
 }
 
 void GraphManager::setup(vec2 world_size) {
@@ -24,7 +25,7 @@ void GraphManager::setup(vec2 world_size) {
 }
 
 GraphManager *GraphManager::get_instance() {
-    if (!instance)
-        instance = new GraphManager();
-    return instance;
+    if (!_instance)
+        _instance = new GraphManager();
+    return _instance;
 }

@@ -22,7 +22,7 @@ private:
 
     GraphManager();
 
-    static GraphManager *instance;
+    static GraphManager *_instance;
 public:
     ~GraphManager();
 

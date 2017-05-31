@@ -8,9 +8,7 @@
 #include "matrix.h"
 #include "entity/entity_types.h"
 
-StaticEntity::StaticEntity(const mesh *base, vec2 position, float mass) : BaseEntity(STATIC, base, position, mass) {
-    update_render_mesh(mat2::translate(_position));
-
+StaticEntity::StaticEntity(vec2 position, float mass) : BaseEntity(STATIC, position, mass) {
     // Remove edges from graph
     GraphManager *gm = GraphManager::get_instance();
     gm->setup({800, 600});
@@ -30,9 +28,7 @@ StaticEntity::StaticEntity(const mesh *base, vec2 position, float mass) : BaseEn
  * It does not have a position yet, so no edges will be deleted from the graph, because
  * that would affect A*
  */
-StaticEntity::StaticEntity(const mesh *base, float mass) : BaseEntity(STATIC, base, {0,0}, mass) {
-    update_render_mesh(mat2::translate(_position));
-
+StaticEntity::StaticEntity(float mass) : BaseEntity(STATIC, {0,0}, mass) {
     GraphManager *gm = GraphManager::get_instance();
     gm->setup({800, 600});
 };

@@ -4,6 +4,6 @@
 
 #include "iron_mine_entity.h"
 
-IronMineEntity::IronMineEntity(const mesh *base, vec2 position, float mass) : ResourceEntity(
-        base, position, mass, IRON) {
+IronMineEntity::IronMineEntity(vec2 position, float mass) : ResourceEntity(
+        position, mass, IRON) {
 }

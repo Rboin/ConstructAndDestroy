@@ -6,9 +6,8 @@
 #define C_AND_D_PROJECT_MOVINGENTITY_H
 
 #include <stack>
+#include <string>
 #include "entity/static/resource_type.h"
-#include "fuzzy/fuzzy_module.h"
-#include "weapon.h"
 #include "entity/base_entity.h"
 #include "entity/goal/moving_entity_goal/job_type.h"
 
@@ -16,8 +15,6 @@
 class Behaviour;
 
 class ThinkGoal;
-
-struct bsp_node;
 
 //============================================================
 
@@ -28,7 +25,6 @@ private:
     bool _engaged;
     Behaviour *_behaviour;
     ThinkGoal *_brain;
-    std::vector<Weapon *> _weapons;
     JobType _job_type;
     std::stack<vec2 *> _path;
     float _delta_time;
@@ -38,7 +34,9 @@ protected:
 public:
     std::string texture;
 
-    MovingEntity(const mesh *, vec2, float, const float, const float, JobType);
+    MovingEntity(vec2, float, const float, const float, JobType);
+
+    ~MovingEntity();
 
     virtual Behaviour *get_behaviour();
 
@@ -52,19 +50,11 @@ public:
 
     virtual vec2 get_velocity();
 
-    virtual void update_render_mesh();
-
-    virtual void update_render_mesh(const mat2 &);
-
     virtual void update(float);
 
     virtual void select();
 
     virtual void deselect();
-
-    void add_weapons();
-
-    void select_weapon();
 
     virtual std::string get_texture();
 

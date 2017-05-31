@@ -17,9 +17,9 @@ class BuildingManager {
 private:
     BuildingManager();
 
-    static BuildingManager *instance;
+    static BuildingManager *_instance;
 
-    std::vector<BuildingEntity *> buildings;
+    std::vector<BuildingEntity *> _buildings;
 
 public:
     ~BuildingManager();

@@ -28,8 +28,8 @@ protected:
     std::vector<SpawnableEntity*> spawnable_entities;
 public:
     ~BuildingEntity();
-    BuildingEntity(const mesh *, vec2, float, BuildingType, TextureTypes);
-    BuildingEntity(const mesh *, float, BuildingType, TextureTypes);
+    BuildingEntity(vec2, float, BuildingType, TextureTypes);
+    BuildingEntity(float, BuildingType, TextureTypes);
 
     Resources* get_costs();
 

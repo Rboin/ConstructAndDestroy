@@ -5,9 +5,9 @@
 #include "sdl/image/sdl_image_render_object.h"
 #include "knight_entity.h"
 
-KnightEntity::KnightEntity(const mesh *base, vec2 position, float mass,
+KnightEntity::KnightEntity(vec2 position, float mass,
                                    const float max_force, const float max_speed) :
-        MovingEntity(base, position, mass, max_force, max_speed, ENEMY) {
+        MovingEntity(position, mass, max_force, max_speed, ENEMY) {
     carrying = 0;
     _attack_damage = 8;
     texture = "knight.png";
@@ -15,15 +15,15 @@ KnightEntity::KnightEntity(const mesh *base, vec2 position, float mass,
 
 void KnightEntity::select() {
     sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
-    representation->set_data(entity_data);
-    representation->clear_data();
+    _representation->set_data(entity_data);
+    _representation->clear_data();
 }
 
 
 void KnightEntity::deselect() {
     sdl_image_data *entity_data = new sdl_image_data{texture};
-    representation->set_data(entity_data);
-    representation->clear_data();
+    _representation->set_data(entity_data);
+    _representation->clear_data();
 }
 
 std::string KnightEntity::get_texture() {

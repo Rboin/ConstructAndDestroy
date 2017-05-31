@@ -9,7 +9,9 @@ Resources::Resources(float gold, float wood, float stone, float iron) {
     _resources = new float[4]{gold, wood, stone, iron};
 }
 
-Resources::~Resources() {}
+Resources::~Resources() {
+    delete _resources;
+}
 
 void Resources::add_resources(ResourceType rt, float amount) {
     _resources[(int) rt] += amount;

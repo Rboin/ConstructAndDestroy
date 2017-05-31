@@ -12,10 +12,6 @@
 class BuildingEntity;
 
 class BuildingFactory {
-private:
-    static vec2* default_shape;
-    static mesh *base;
-
 public:
     static BuildingEntity *create(BuildingType);
 

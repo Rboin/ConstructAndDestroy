@@ -5,16 +5,11 @@
 #ifndef CONSTRUCT_AND_DESTROY_COMBAT_GOAL_H
 #define CONSTRUCT_AND_DESTROY_COMBAT_GOAL_H
 
-
 #include "goal/composite_goal.h"
 #include "strategy_goal_type.h"
 
 class MovingEntity;
 class BuildingEntity;
-
-template<typename T>
-class GoalEvaluator;
-class Node;
 
 class CombatGoal : public GoalComposite<MovingEntity> {
 private:
@@ -30,6 +25,8 @@ public:
      *  3. If there is an enemy, we will hunt it down and once we are close we will try to kill it.
      */
     CombatGoal(MovingEntity *,MovingEntity* = nullptr);
+
+    ~CombatGoal();
 
     /*!
      * This method sets the 'hunt target goal' if the requirements are met. If there is an enemy close we won't set,

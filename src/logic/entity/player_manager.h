@@ -17,6 +17,9 @@ private:
     std::map<int, Player*> _players;
 public:
     static PlayerManager *get_instance();
+
+    ~PlayerManager();
+
     /*!
      * Creates the amount of players for the game
      * @param players - Amount of players to create

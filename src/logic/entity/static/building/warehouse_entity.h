@@ -9,8 +9,8 @@
 
 class WarehouseEntity : public BuildingEntity {
 public:
-    WarehouseEntity(const mesh *, vec2, float);
-    WarehouseEntity(const mesh *, float);
+    WarehouseEntity(vec2, float);
+    WarehouseEntity(float);
     void set_transparent_or_border(bool, bool = true);
 };
 

@@ -7,8 +7,8 @@
 #include "entity/resources.h"
 
 
-CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : BuildingEntity(
-        base, position, mass, CASTLE, WAREHOUSETEXTURE) {
+CastleEntity::CastleEntity(vec2 position, float mass) : BuildingEntity(
+        position, mass, CASTLE, WAREHOUSETEXTURE) {
     costs = new Resources(0, 5, 0, 0);
 
     spawnable_entities = {
@@ -18,8 +18,8 @@ CastleEntity::CastleEntity(const mesh *base, vec2 position, float mass) : Buildi
     };
 }
 
-CastleEntity::CastleEntity(const mesh *base, float mass) : BuildingEntity(
-        base, mass, CASTLE, WAREHOUSETEXTURE) {
+CastleEntity::CastleEntity(float mass) : BuildingEntity(
+        mass, CASTLE, WAREHOUSETEXTURE) {
     costs = new Resources(0, 5, 0, 0);
 
     spawnable_entities = {
@@ -44,18 +44,18 @@ void CastleEntity::set_transparent_or_border(bool transparent, bool border) {
         image = new sdl_image_data{"castle.png"};
     }
 
-    representation->set_data(image);
-    representation->clear_data();
+    _representation->set_data(image);
+    _representation->clear_data();
 }
 
 void CastleEntity::select(){
     sdl_image_data* entity_data =  new sdl_image_data{"sel_castle.png"};
-    this->representation->set_data(entity_data);
-    this->representation->clear_data();
+    this->_representation->set_data(entity_data);
+    this->_representation->clear_data();
 }
 
 void CastleEntity::deselect(){
     sdl_image_data* entity_data =  new sdl_image_data{"castle.png"};
-    this->representation->set_data(entity_data);
-    this->representation->clear_data();
+    this->_representation->set_data(entity_data);
+    this->_representation->clear_data();
 }

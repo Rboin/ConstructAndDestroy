@@ -12,16 +12,23 @@
 #include "a_star_node.h"
 
 Graph::Graph(vec2 world_s) {
-    world_size = world_s;
+    _world_size = world_s;
     generate_nodes();
     generate_adjacency_edges();
+}
+
+Graph::~Graph() {
+    for(int i = 0; i < nodes.size(); i++){
+        delete nodes.at(i);
+    }
+    nodes.clear();
 }
 
 void Graph::generate_nodes() {
     nodes.reserve(300);
     int index = 0;
-    for (int row = 0; row < world_size.y; row += 40) {
-        for (int column = 0; column < world_size.x; column += 40) {
+    for (int row = 0; row < _world_size.y; row += 40) {
+        for (int column = 0; column < _world_size.x; column += 40) {
             Node *node = new Node(index, {(float) column, (float) row});
             nodes.emplace_back(node);
             index++;
@@ -31,8 +38,8 @@ void Graph::generate_nodes() {
 
 void Graph::generate_adjacency_edges() {
     int index = 0;
-    for (int row = 0; row < world_size.y; row += 40) {
-        for (int column = 0; column < world_size.x; column += 40) {
+    for (int row = 0; row < _world_size.y; row += 40) {
+        for (int column = 0; column < _world_size.x; column += 40) {
             //don't add edges top when this is a node of the top row
             if (row != 0) {
                 Edge *e1 = new Edge(index, index - 20);
@@ -89,17 +96,6 @@ void Graph::remove_edge(vec2 edge) {
     if (index)
         nodes[index]->remove_edges();
 
-}
-
-void Graph::render(SDL_Renderer *renderer) {
-    if (draw_path.size() > 0) {
-        for (int i = 0; i < draw_path.size() - 1; i++) {
-            vec2 *pos = draw_path.at(i);
-            vec2 *pos2 = draw_path.at(i + 1);
-            SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-            SDL_RenderDrawLine(renderer, pos->x + 20, pos->y + 20, pos2->x + 20, pos2->y + 20);
-        }
-    }
 }
 
 std::stack<vec2 *> Graph::a_star_path(Node *start, Node *end) {

@@ -9,12 +9,12 @@
 
 class WanderStrategy : public BehaviourStrategy {
 private:
-    float wander_angle = 1;
-    const float circle_distance = 5;
-    const float circle_radius = 0.25; //increasing this number will lead to sharper turns.
+    float _wander_angle = 1;
+    const float _circle_distance = 5;
+    const float _circle_radius = 0.25; //increasing this number will lead to sharper turns.
 
 public:
-    vec2 calculate_force(MovingEntity &, std::vector<BaseEntity *>);
+    vec2 calculate_force(MovingEntity &);
 
     void set_angle(vec2 &, float);
 };

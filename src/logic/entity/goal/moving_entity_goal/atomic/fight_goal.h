@@ -18,6 +18,8 @@ private:
 public:
     FightGoal(MovingEntity *, BaseEntity*, int initiator = Initiator::AI);
 
+    ~FightGoal();
+
     void activate() override;
 
     /*!

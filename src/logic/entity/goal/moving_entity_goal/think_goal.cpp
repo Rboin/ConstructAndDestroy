@@ -2,7 +2,6 @@
 // Created by robin on 3/11/17.
 //
 
-#include "entity/goal/moving_entity_goal/atomic/obstacle_avoidance_goal.h"
 #include "entity/goal/moving_entity_goal/atomic/traverse_edge_goal.h"
 #include <iostream>
 #include "entity/goal/moving_entity_goal/atomic/fight_goal.h"
@@ -21,7 +20,15 @@ ThinkGoal::ThinkGoal(MovingEntity *e) : GoalComposite(e, THINK) {
     _evaluators = std::vector<GoalEvaluator<MovingEntity> *>();
 }
 
-Goal<MovingEntity>* ThinkGoal::initiate_goal(Goal<MovingEntity>* goal, int initiator) {
+ThinkGoal::~ThinkGoal() {
+    for (std::vector<GoalEvaluator<MovingEntity> *>::iterator it = _evaluators.begin(); it != _evaluators.end(); ++it) {
+        delete (*it);
+    }
+    _evaluators.clear();
+    remove_all_subgoals();
+}
+
+Goal<MovingEntity> *ThinkGoal::initiate_goal(Goal<MovingEntity> *goal, int initiator) {
     goal->set_initiator(initiator);
     return goal;
 }
@@ -51,14 +58,8 @@ void ThinkGoal::set_goal_wander() {
     }
 }
 
-void ThinkGoal::set_goal_obstacle_avoidance(vec2 *v) {
-    if (!has_atomic_goal(OBSTACLE_AVOIDANCE)) {
-        add_subgoal(new ObstacleAvoidanceGoal(owner, v));
-    }
-}
-
 void ThinkGoal::set_goal_work() {
-    if(!owner->is_engaged()){
+    if (!owner->is_engaged()) {
         if (!has_sub_goal(WORK)) {
             add_subgoal(new WorkGoal(owner));
         }
@@ -69,9 +70,9 @@ void ThinkGoal::set_goal_follow_path() {
     add_subgoal(new FollowPathGoal(owner));
 }
 
-void ThinkGoal::set_goal_combat(MovingEntity* enemy) {
-    if(!has_sub_goal(COMBAT)){
-        add_subgoal(new CombatGoal(owner,enemy));
+void ThinkGoal::set_goal_combat(MovingEntity *enemy) {
+    if (!has_sub_goal(COMBAT)) {
+        add_subgoal(new CombatGoal(owner, enemy));
     }
 }
 

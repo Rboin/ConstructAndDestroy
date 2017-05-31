@@ -12,13 +12,13 @@
 
 
 class CastleEntity : public BuildingEntity {
-
-
 public:
-    CastleEntity(const mesh *, vec2, float);
-    CastleEntity(const mesh *, float);
+    CastleEntity(vec2, float);
+
+    CastleEntity(float);
 
     void select();
+
     void deselect();
 
     void set_transparent_or_border(bool, bool = false);

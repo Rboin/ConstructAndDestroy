@@ -1,7 +1,7 @@
 project(construct_and_destroy)
 
 set(TEST_FILES
-        main.cpp example_test.cpp bsp_test.cpp)
+        main.cpp example_test.cpp)
 
 if (GTEST_FOUND)
     include_directories(../include ../src ../src/renderer ../src/logic)

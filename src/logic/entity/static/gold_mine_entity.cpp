@@ -4,6 +4,6 @@
 
 #include "gold_mine_entity.h"
 
-GoldMineEntity::GoldMineEntity(const mesh *base, vec2 position, float mass) : ResourceEntity(
-        base, position, mass, GOLD) {
+GoldMineEntity::GoldMineEntity(vec2 position, float mass) : ResourceEntity(
+        position, mass, GOLD) {
 }

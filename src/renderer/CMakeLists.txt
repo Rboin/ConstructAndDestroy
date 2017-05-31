@@ -1,7 +1,6 @@
 project(construct_and_destroy)
 
 set(SOURCE_FILES
-        mesh.h
         textures/texture_types.h
         textures/texture_manager.h
         textures/texture_manager.cpp

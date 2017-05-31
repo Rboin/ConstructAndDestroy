@@ -13,6 +13,13 @@ Behaviour::Behaviour(ForceCalculator *fc) {
     _behaviours = std::map<int, BehaviourStrategy *>();
 }
 
+Behaviour::~Behaviour() {
+    if(_calculator){
+        delete _calculator;
+    }
+    remove_all();
+}
+
 void Behaviour::add(int type, BehaviourStrategy *s) {
     _behaviours.insert(std::make_pair(type, s));
 }
@@ -30,14 +37,14 @@ void Behaviour::set_target_for(int type, vec2 *v, int target_size) {
         _behaviours[type]->set_targets(v, target_size);
 }
 
-vec2 Behaviour::calculate_force(MovingEntity &entity, std::vector<BaseEntity *> neighbourhood) {
+vec2 Behaviour::calculate_force(MovingEntity &entity) {
     std::vector<BehaviourStrategy *> strategies;
     for (std::map<int, BehaviourStrategy *>::iterator it = _behaviours.begin();
          it != _behaviours.end(); it++) {
 
         strategies.push_back(it->second);
     }
-    return _calculator->calculate(entity, strategies, neighbourhood);
+    return _calculator->calculate(entity, strategies);
 }
 
 bool Behaviour::has_behaviour(int type) {
@@ -45,6 +52,9 @@ bool Behaviour::has_behaviour(int type) {
 }
 
 void Behaviour::remove_all() {
+    for (std::map<int, BehaviourStrategy *>::iterator it = _behaviours.begin(); it != _behaviours.end(); it++) {
+        delete (it->second);
+    }
     _behaviours.clear();
 }
 

@@ -16,9 +16,11 @@ protected:
     int index;
     vec2 position;
     std::vector<Edge *> neighbors;
-    bool walkable = true;
+    bool walkable;
 public:
     Node(int, vec2);
+
+    virtual ~Node();
 
     virtual vec2 *get_position();
 

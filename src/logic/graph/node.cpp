@@ -11,6 +11,14 @@
 Node::Node(int i, vec2 v) {
     index = i;
     position = v;
+    walkable = true;
+}
+
+Node::~Node() {
+    for(int i = 0; i < neighbors.size(); i++){
+        delete neighbors.at(i);
+    }
+    neighbors.clear();
 }
 
 void Node::add_neighbors(Edge *e) {

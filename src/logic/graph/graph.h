@@ -16,11 +16,12 @@
 class AStarNode;
 class Graph {
 private:
-    vec2 world_size;
+    vec2 _world_size;
 public:
-    std::vector<vec2 *> draw_path;
-
     Graph(vec2 world_size);
+
+    ~Graph();
+
     std::vector<Node *> nodes;
 
     void generate_nodes();

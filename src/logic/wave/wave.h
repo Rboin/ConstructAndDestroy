@@ -45,6 +45,8 @@ private:
 public:
     explicit Wave(wave_setting &);
 
+    ~Wave();
+
     void set_spawn_possibilities(std::vector<MovingEntityType> &);
 
     /*!

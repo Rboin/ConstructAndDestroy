@@ -24,6 +24,10 @@ Wave::Wave(wave_setting &s) : _settings(s) {
     _entity_manager = MovingEntityManager::get_instance();
 }
 
+Wave::~Wave() {
+    _entity_manager = nullptr;
+}
+
 void Wave::update(float delta) {
     if(!_finished) {
         if(_pre_stage) {

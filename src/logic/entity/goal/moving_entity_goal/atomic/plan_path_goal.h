@@ -11,13 +11,14 @@
 #include "goal/atomic_goal.h"
 
 class MovingEntity;
-
 class Node;
 
 class PlanPathGoal : public AtomicGoal<MovingEntity> {
-    Node *goal;
+    Node *_goal;
 public:
     PlanPathGoal(MovingEntity *, Node *, int initiator = Initiator::AI);
+
+    ~PlanPathGoal();
 
     void activate() override;
 

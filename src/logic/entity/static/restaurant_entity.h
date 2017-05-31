@@ -10,7 +10,7 @@
 
 class RestaurantEntity : public ResourceEntity {
 public:
-    RestaurantEntity(const mesh *, vec2, float);
+    RestaurantEntity(vec2, float);
 };
 
 

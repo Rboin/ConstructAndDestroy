@@ -3,31 +3,31 @@
 //
 
 #include <cmath>
-#include <cfloat>
 #include <iostream>
-#include <entity/static/resource_type.h>
 #include "sdl/image/sdl_image_render_object.h"
-#include "weapon.h"
-#include "entity/weapon/axe_weapon.h"
-#include "entity/weapon/bow_weapon.h"
 #include "moving_entity.h"
-#include "matrix.h"
 #include "behaviour/behaviour.h"
-#include "tree/bsp_tree.h"
-#include "neighbourhood/neighbourhood_manager.h"
 #include "behaviour/behaviour_strategy.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/entity_types.h"
 
-MovingEntity::MovingEntity(const mesh *base, vec2 position, float mass,
+MovingEntity::MovingEntity(vec2 position, float mass,
                            const float max_force, const float max_speed, JobType jt) :
         MAX_FORCE(max_force), MAX_SPEED(max_speed),
-        BaseEntity(MOVING, base, position, mass) {
+        BaseEntity(MOVING, position, mass) {
     _velocity = {0, 0, 0};
     _behaviour = NULL;
     _brain = NULL;
     _job_type = jt;
     _engaged = false;
+}
+
+MovingEntity::~MovingEntity() {
+    _behaviour = nullptr;
+    _brain = nullptr;
+    while (!_path.empty()) {
+        _path.pop();
+    }
 }
 
 Behaviour *MovingEntity::get_behaviour() {
@@ -55,7 +55,7 @@ void MovingEntity::update(float d_t) {
     //calculate the combined force from each steering behavior
     vec2 steering_force;
     if (_behaviour)
-        steering_force = _behaviour->calculate_force(*this, NeighbourhoodManager::get_instance()->get_neighbours(this));
+        steering_force = _behaviour->calculate_force(*this);
     else
         steering_force = {0, 0, 0};
 
@@ -76,17 +76,6 @@ void MovingEntity::update(float d_t) {
 
     //Update vehicle's position
     add_to_position(_velocity * d_t);
-    // Update the render mesh
-    update_render_mesh();
-
-    // Update the neighbourhood if we've moved
-    if (_position != old) {
-        NeighbourhoodManager::get_instance()->update(this);
-    }
-
-    if (_weapons.size() != 0) {
-        select_weapon();
-    }
 }
 
 float MovingEntity::get_max_speed() {
@@ -97,74 +86,13 @@ vec2 MovingEntity::get_velocity() {
     return _velocity;
 }
 
-void MovingEntity::update_render_mesh() {
-    float angle = std::atan2(_velocity.y, _velocity.x);
-    update_render_mesh(mat2::translate(_position) * mat2::rotate(angle));
-}
-
-void MovingEntity::update_render_mesh(const mat2 &model) {
-    BaseEntity::update_render_mesh(model);
-}
-
-void MovingEntity::select_weapon() {
-    {
-        //if a target is present use fuzzy logic to determine the most desirable
-        //weapon.
-        NeighbourhoodManager *n = NeighbourhoodManager::get_instance();
-
-        std::vector<BaseEntity *> entities = n->get_neighbours(this);
-
-        if (entities.size()) {
-            double distance_to_target = DBL_MAX;
-            //calculate the distance to the closest target
-            for (int i = 0; i < entities.size(); i++) {
-                if (entities.at(i)->is(MOVING)) {
-                    double dist = entities.at(i)->get_position().distance(this->get_position());
-                    if (dist < distance_to_target) {
-                        distance_to_target = dist;
-                    }
-                }
-            }
-            //for each weapon in the inventory calculate its desirability given the
-            //current situation. The most desirable weapon is selected
-            double best_so_far = DBL_MIN;
-
-            for (int i = 0; i < _weapons.size(); i++) {
-                //grab the desirability of this weapon (desirability is based upon
-                //distance to target and ammo remaining)
-                double score = _weapons.at(i)->get_desirability(distance_to_target);
-
-                //if it is the most desirable so far select it
-                if (score > best_so_far) {
-                    best_so_far = score;
-
-                    //Change the texture of the bos
-                    sdl_image_data *new_data = new sdl_image_data("axe.png");
-                    representation->set_data(new_data);
-                }
-            }
-        } else {
-            sdl_image_data *new_data = new sdl_image_data("bow.png");
-            representation->set_data(new_data);
-        }
-
-    }
-}
-
-void MovingEntity::add_weapons() {
-    Axe *axe = new Axe();
-    _weapons.push_back((Weapon *) axe);
-    Bow *bow = new Bow();
-    _weapons.push_back((Weapon *) bow);
-}
-
 void MovingEntity::select() {
     std::cout << "Selecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
 }
 
 void MovingEntity::deselect() {
-    std::cout << "Deselecting an instance of class MovingEntity is impossible, try selecting a child class." << std::endl;
-
+    std::cout << "Deselecting an instance of class MovingEntity is impossible, try selecting a child class."
+              << std::endl;
 }
 
 std::string MovingEntity::get_texture() {
@@ -203,7 +131,7 @@ void MovingEntity::set_path(std::stack<vec2 *> p) {
     _path = p;
 }
 
-std::stack<vec2 *>& MovingEntity::get_path() {
+std::stack<vec2 *> &MovingEntity::get_path() {
     return _path;
 }
 

@@ -9,7 +9,7 @@
 
 class StoneMineEntity : public ResourceEntity {
 public:
-    StoneMineEntity(const mesh *, vec2, float);
+    StoneMineEntity(vec2, float);
 };
 
 #endif //CONSTRUCT_AND_DESTROY_STONE_MINE_ENTITY_H

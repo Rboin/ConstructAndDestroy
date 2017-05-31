@@ -30,6 +30,8 @@ public:
     void terminate() override;
 
     const char *get_name() const override;
+
+    int random_number(int);
 };
 
 

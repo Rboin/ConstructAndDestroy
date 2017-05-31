@@ -41,18 +41,24 @@ CombatGoal::CombatGoal(MovingEntity *e, MovingEntity *enemy) : GoalComposite(e, 
             set_goal_hunt_target();
             set_goal_attack_enemy();
         }
-            //No enemy found so goal is completed
         else if (!enemy_player->buildings.empty()) {
             set_goal_move_to_building(enemy_player);
             set_goal_attack_building();
-        } else {
-            //todo:: if this is an entity of the player it should start roaming with A*
+        }
+        //No enemy found so goal is completed
+        else {
             status = COMPLETED;
         }
     } else {
         _enemy = enemy;
         set_goal_attack_enemy();
     }
+}
+
+CombatGoal::~CombatGoal() {
+    remove_all_subgoals();
+    _building = nullptr;
+    _enemy = nullptr;
 }
 
 void CombatGoal::set_goal_hunt_target() {

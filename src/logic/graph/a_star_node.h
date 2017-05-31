@@ -12,7 +12,7 @@
 class AStarNode : public Node {
 public:
     AStarNode(int, vec2, std::vector<Edge *>, int, int);
-
+    ~AStarNode();
     AStarNode *parent;
     int f; //calculated total for A*
     int g; //Stepcost for A*

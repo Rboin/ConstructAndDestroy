@@ -12,3 +12,7 @@ AStarNode::AStarNode(int i, vec2 v, std::vector<Edge*> neighbor, int a, int b) :
     h = b;
     parent = nullptr;
 }
+
+AStarNode::~AStarNode() {
+    parent = nullptr;
+}

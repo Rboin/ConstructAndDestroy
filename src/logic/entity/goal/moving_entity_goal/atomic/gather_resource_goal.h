@@ -15,6 +15,8 @@ private:
 public:
     GatherResourceGoal(MovingEntity *, vec2*, int initiator = Initiator::AI);
 
+    ~GatherResourceGoal();
+
     void activate() override;
 
     /*!

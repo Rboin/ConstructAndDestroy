@@ -30,6 +30,12 @@ WorkGoal::WorkGoal(MovingEntity *e, vec2 *target_resource, int initiator) : Goal
     }
 }
 
+WorkGoal::~WorkGoal() {
+    _resource = nullptr;
+    _target_resource = nullptr;
+    remove_all_subgoals();
+}
+
 void WorkGoal::determine_next_goal() {
     if (this->sub_goals.size() == 0) {
         status = COMPLETED;

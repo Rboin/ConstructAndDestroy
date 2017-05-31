@@ -5,7 +5,7 @@
 #include "arrive_strategy.h"
 #include "entity/moving/moving_entity.h"
 
-vec2 ArriveStrategy::calculate_force(MovingEntity &e, std::vector<BaseEntity *> neighbourhood) {
+vec2 ArriveStrategy::calculate_force(MovingEntity &e) {
     vec2 heading = (*_targets) - e.get_position();
     float distance;
     if ((distance = heading.length()) != 0) {

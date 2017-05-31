@@ -13,11 +13,12 @@ class Node;
 
 class TraverseEdgeGoal : public AtomicGoal<MovingEntity> {
 private:
-    vec2 *goal;
+    vec2 *_goal;
     float _goal_time;
-    bool stuck;
 public:
     TraverseEdgeGoal(MovingEntity *t, vec2*, int initiator = Initiator::AI);
+
+    ~TraverseEdgeGoal();
 
     /*!
      * Sets SeekStrategy and a target. Also sets status to active.

@@ -11,7 +11,4 @@ typedef struct s_vec2 vec2;
 struct s_mat2;
 typedef struct s_mat2 mat2;
 
-struct s_mesh;
-typedef struct s_mesh mesh;
-
 #endif //C_AND_D_PROJECT_TYPES_H

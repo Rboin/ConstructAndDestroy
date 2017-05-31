@@ -10,7 +10,7 @@ class OrderStrategy;
 class MoveOrder {
 private:
     static MoveOrder *_instance;
-    std::vector<OrderStrategy*> strategies;
+    std::vector<OrderStrategy*> _strategies;
     MoveOrder();
 public:
     ~MoveOrder();

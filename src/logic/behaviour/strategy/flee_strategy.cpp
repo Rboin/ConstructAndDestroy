@@ -5,7 +5,7 @@
 #include "flee_strategy.h"
 #include "entity/moving/moving_entity.h"
 
-vec2 FleeStrategy::calculate_force(MovingEntity &e, std::vector<BaseEntity *> neighbourhood) {
+vec2 FleeStrategy::calculate_force(MovingEntity &e) {
     float panic_distance = 150 * 150;
     float distance = e.get_position().distance_squared(*_targets);
 
