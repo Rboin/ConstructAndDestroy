@@ -41,3 +41,9 @@ building_with_texture SDLUnitPanel::get_building_information() {
     return _building;
 }
 
+SDLUnitPanel::~SDLUnitPanel() {
+
+    clear_components();
+    _spawnable_entity = nullptr;
+    _building_entity = nullptr;
+}

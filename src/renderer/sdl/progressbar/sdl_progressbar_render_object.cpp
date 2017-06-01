@@ -43,3 +43,8 @@ void SDL_ProgressbarRenderObject::draw(SDLRenderer *renderer) {
 void SDL_ProgressbarRenderObject::set_progress(float progress) {
     _progress = progress;
 }
+
+SDL_ProgressbarRenderObject::~SDL_ProgressbarRenderObject() {
+    delete _data;
+    clear_data();
+}

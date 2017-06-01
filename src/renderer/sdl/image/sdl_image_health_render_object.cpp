@@ -12,6 +12,12 @@ SDL_ImageHealthRenderObject::SDL_ImageHealthRenderObject(const vec2 &position, c
     _owner = owner;
 }
 
+SDL_ImageHealthRenderObject::~SDL_ImageHealthRenderObject() {
+    _owner = nullptr;
+    delete _data;
+    clear_data();
+}
+
 void SDL_ImageHealthRenderObject::render(SDLRenderer *renderer) {
     if (!_result) {
         init_texture(renderer);

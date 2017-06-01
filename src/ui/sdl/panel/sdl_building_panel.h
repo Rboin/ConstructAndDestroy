@@ -13,6 +13,9 @@
 class SDLBuildingPanel : public SDLPanel {
 public:
     explicit SDLBuildingPanel(SDL_RenderObject *);
+
+    ~SDLBuildingPanel();
+
     void render(SDLRenderer *renderer, float d) override;
 };
 

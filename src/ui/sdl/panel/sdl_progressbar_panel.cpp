@@ -6,3 +6,7 @@
 #include "sdl_progressbar_panel.h"
 
 SDLProgressBarPanel::SDLProgressBarPanel(SDL_ProgressbarRenderObject *r) : SDLPanel(r) {}
+
+SDLProgressBarPanel::~SDLProgressBarPanel() {
+    clear_components();
+}

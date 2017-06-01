@@ -3,8 +3,9 @@
 
 #include <vector>
 #include "types.h"
-#include "entity/moving/moving_entity.h"
 
+class MovingEntity;
+class BaseEntity;
 
 class OrderStrategy {
 public:

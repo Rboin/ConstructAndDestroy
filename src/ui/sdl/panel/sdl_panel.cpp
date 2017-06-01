@@ -6,3 +6,11 @@
 
 SDLPanel::SDLPanel(SDL_RenderObject *r) : SDL_UIComponent(r){
 }
+
+SDLPanel::~SDLPanel() {
+    this->representation->clear_data();
+    for (int i = 0; i < this->children.size(); i++) {
+        this->children[i]->clear_components();
+        delete this->children[i];
+    }
+    children.clear();}

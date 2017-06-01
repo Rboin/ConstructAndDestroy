@@ -12,6 +12,11 @@ TextureManager::TextureManager() {
     _renderer = nullptr;
 }
 
+TextureManager::~TextureManager() {
+    SDL_DestroyRenderer(_renderer);
+    _instance = nullptr;
+}
+
 void TextureManager::setup(SDL_Renderer *renderer) {
     if (!_renderer) {
         _renderer = renderer;
@@ -50,4 +55,3 @@ SDL_Texture *TextureManager::get_texture(TextureTypes tt) {
 
     return load_texture(texture);
 }
-

@@ -24,6 +24,7 @@ private:
     void update_badge_color(std::vector<MovingEntityType> orders, MovingEntityType type, SDL_BadgeRenderObject* badge);
 public:
     explicit SDLEntityPanel(SDL_RenderObject *, BuildingEntity* selected_building);
+    ~SDLEntityPanel();
     void render(SDLRenderer *renderer, float d) override;
 };
 

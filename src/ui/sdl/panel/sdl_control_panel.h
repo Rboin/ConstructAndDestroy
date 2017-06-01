@@ -22,6 +22,7 @@ private:
 public:
     static SDLControlPanel* get_instance(SDL_RenderObject*);
     static SDLControlPanel* get_instance();
+    ~SDLControlPanel();
     void render(SDLRenderer *renderer, float d) override;
 };
 

@@ -15,6 +15,11 @@ SDLWavePanel::SDLWavePanel(SDLRenderSolidText *r, WaveManager *wave) : SDLPanel(
     _wave_panel_state_machine->change_state(new WavePanelPreparing());
 }
 
+SDLWavePanel::~SDLWavePanel() {
+    _wave_manager = nullptr;
+    _wave_panel_state_machine = nullptr;
+}
+
 void SDLWavePanel::render(SDLRenderer *renderer, float delta) {
     _wave_manager->update(delta);
     _wave_panel_state_machine->update();

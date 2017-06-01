@@ -14,6 +14,8 @@ private:
 public:
     explicit SDLRenderer(SDL_Renderer *engine);
 
+    ~SDLRenderer();
+
     void draw_to_back_buffer(SDL_Texture *, SDL_Rect *);
 
     SDL_Texture *get_back_buffer();

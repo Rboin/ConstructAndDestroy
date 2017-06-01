@@ -22,6 +22,12 @@ SDLRenderSolidText::SDLRenderSolidText(const vec2 &position, const vec2 &size, s
     _text_data = data;
 }
 
+SDLRenderSolidText::~SDLRenderSolidText() {
+    delete _data;
+    delete _text_data;
+    clear_data();
+}
+
 void SDLRenderSolidText::render(SDLRenderer *renderer) {
     draw_background(renderer);
     draw_foreground(renderer);
@@ -63,4 +69,3 @@ void SDLRenderSolidText::draw_foreground(SDLRenderer *renderer) {
 sdl_solid_text *SDLRenderSolidText::get_data() {
     return _text_data;
 }
-

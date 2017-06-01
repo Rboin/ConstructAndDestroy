@@ -9,6 +9,11 @@
 SDL_ImageRenderObject::SDL_ImageRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data)
         : SDL_RenderObject(position, size, data) {}
 
+SDL_ImageRenderObject::~SDL_ImageRenderObject() {
+    clear_data();
+    delete _data;
+}
+
 void SDL_ImageRenderObject::render(SDLRenderer *renderer) {
     if (!_result) {
         init_texture(renderer);

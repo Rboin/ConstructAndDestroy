@@ -11,6 +11,7 @@
 class SDLResourcePanel : public SDLPanel {
 public:
     explicit SDLResourcePanel(SDL_RenderObject *);
+    ~SDLResourcePanel();
 
 };
 

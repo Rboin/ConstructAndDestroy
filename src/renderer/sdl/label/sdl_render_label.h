@@ -22,9 +22,12 @@ private:
     ResourceType _rt;
 public:
     SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *);
-    SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *, float value);
-    void render(SDLRenderer *renderer) override;
 
+    SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *, float value);
+
+    ~SDLRenderLabel();
+
+    void render(SDLRenderer *renderer) override;
 };
 
 

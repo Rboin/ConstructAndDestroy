@@ -10,6 +10,7 @@
 class SDLPanel : public SDL_UIComponent {
 public:
     explicit SDLPanel(SDL_RenderObject *);
+    virtual ~SDLPanel();
 };
 
 

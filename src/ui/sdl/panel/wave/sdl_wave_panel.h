@@ -21,6 +21,8 @@ private:
 public:
     explicit SDLWavePanel(SDLRenderSolidText *, WaveManager *);
 
+    ~SDLWavePanel();
+
     void render(SDLRenderer *, float) override;
 
     Wave *get_wave();

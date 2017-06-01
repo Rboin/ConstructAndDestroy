@@ -13,6 +13,12 @@ SDL_RenderObject::SDL_RenderObject(const vec2 &position, const vec2 &size, sdl_d
     };
 }
 
+SDL_RenderObject::~SDL_RenderObject() {
+    delete rectangle;
+    delete _data;
+    clear_data();
+}
+
 void SDL_RenderObject::render(SDLRenderer *renderer) {
     SDL_SetRenderDrawColor(renderer->get_engine(), _data->red, _data->green, _data->blue, _data->alpha);
     SDL_RenderFillRect(renderer->get_engine(), rectangle);
@@ -35,3 +41,5 @@ void SDL_RenderObject::clear_data() {
     SDL_DestroyTexture(_result);
     _result = nullptr;
 }
+
+

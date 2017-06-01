@@ -21,6 +21,8 @@ class SDL_ImageRenderObject : public SDL_RenderObject {
 public:
     SDL_ImageRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data);
 
+    virtual ~SDL_ImageRenderObject();
+
     void render(SDLRenderer *) override;
 
     void init_texture(SDLRenderer *) override;

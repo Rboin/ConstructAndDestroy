@@ -52,5 +52,6 @@ void SDLWorldPanel::draw_selection_rect(int start_x, int start_y, int end_x, int
 }
 
 SDLWorldPanel::~SDLWorldPanel() {
+    clear_components();
     _current_world = nullptr;
 }

@@ -13,8 +13,9 @@ private:
     static SDL_KeyEventDispatcher *_instance;
     SDL_KeyEventDispatcher();
 public:
-
     static SDL_KeyEventDispatcher *get_instance();
+
+    ~SDL_KeyEventDispatcher();
 
     void dispatch(sdl_key_event_data d) override;
 };

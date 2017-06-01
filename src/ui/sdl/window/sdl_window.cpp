@@ -68,8 +68,11 @@ void SDLWindow::render(SDLRenderer *renderer, float delta) {
 }
 
 SDLWindow::~SDLWindow() {
+    SDL_DestroyRenderer(_renderer->get_engine());
     if(_renderer) {
         delete _renderer;
     }
     SDL_DestroyWindow(_sdl_window);
+    _mouse_event_dispatcher = nullptr;
+    _key_event_dispatcher = nullptr;
 }

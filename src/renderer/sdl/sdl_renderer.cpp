@@ -13,6 +13,12 @@ SDLRenderer::SDLRenderer(SDL_Renderer *engine) : Renderer<SDL_Renderer>(engine) 
     SDL_SetRenderTarget(engine, _back_buffer);
 }
 
+SDLRenderer::~SDLRenderer() {
+    SDL_DestroyTexture(_back_buffer);
+    SDL_DestroyRenderer(engine);
+    clear();
+}
+
 void SDLRenderer::draw_to_back_buffer(SDL_Texture *t, SDL_Rect *r) {
     SDL_SetRenderTarget(engine, _back_buffer);
     if (SDL_RenderCopy(engine, t, NULL, r) < 0) {

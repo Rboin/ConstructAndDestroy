@@ -14,7 +14,6 @@
 #include "entity/player.h"
 #include "sdl/event/slot/mouse_handler_entitypanel.h"
 #include "sdl_progressbar_panel.h"
-#include "sdl_unit_panel.h"
 #include "entity/moving/spawnable_entity.h"
 
 SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_building) : SDLPanel(r) {
@@ -80,6 +79,13 @@ void SDLEntityPanel::render(SDLRenderer *renderer, float d) {
     update_badges();
     SDLPanel::render(renderer, d);
 }
+
+SDLEntityPanel::~SDLEntityPanel() {
+    _badges.clear();
+    _building= nullptr;
+    clear_components();
+}
+
 
 void SDLEntityPanel::update_badges() {
     std::vector<MovingEntityType> orders = _building->get_orders();

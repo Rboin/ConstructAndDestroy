@@ -27,6 +27,8 @@ protected:
 public:
     SDL_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data);
 
+    ~SDL_RenderObject();
+
     void render(SDLRenderer *t) override;
 
     virtual void init_texture(SDLRenderer *);

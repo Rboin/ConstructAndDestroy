@@ -61,3 +61,7 @@ SDLControlPanel *SDLControlPanel::get_instance() {
        throw;
     return _instance;
 }
+
+SDLControlPanel::~SDLControlPanel() {
+    clear_components();
+}

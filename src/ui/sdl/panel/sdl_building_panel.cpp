@@ -53,6 +53,10 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
     }
 }
 
+SDLBuildingPanel::~SDLBuildingPanel() {
+    clear_components();
+}
+
 void SDLBuildingPanel::render(SDLRenderer *renderer, float d) {
     SDLPanel::render(renderer, d);
 }

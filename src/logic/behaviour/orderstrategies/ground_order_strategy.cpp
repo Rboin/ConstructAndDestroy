@@ -3,6 +3,7 @@
 #include "entity/goal/moving_entity_goal/follow_path_goal.h"
 #include "ground_order_strategy.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
+#include "entity/moving/moving_entity.h"
 
 bool GroundOrderStrategy::applies(std::vector<MovingEntity *> *units, vec2 &targetVector, BaseEntity *target) {
     // when target is nullptr then the user clicked on the ground

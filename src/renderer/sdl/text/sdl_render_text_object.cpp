@@ -9,6 +9,11 @@ SDL_UI_RenderTextObject::SDL_UI_RenderTextObject(const vec2 &position, const vec
         SDL_RenderObject(position, size, data) {
 }
 
+SDL_UI_RenderTextObject::~SDL_UI_RenderTextObject() {
+    clear_result();
+    delete (sdl_text*)_data;
+}
+
 void SDL_UI_RenderTextObject::render(SDLRenderer *renderer) {
     clear_result();
     init_texture(renderer);
@@ -28,4 +33,9 @@ void SDL_UI_RenderTextObject::init_texture(SDLRenderer *renderer) {
 void SDL_UI_RenderTextObject::clear_result() {
     SDL_DestroyTexture(_result);
     _result = nullptr;
+}
+
+sdl_text::~sdl_text() {
+    TTF_CloseFont(font);
+    delete text;
 }

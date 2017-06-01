@@ -43,4 +43,5 @@ SDL_BadgeRenderObject::~SDL_BadgeRenderObject() {
     if(this->_text){
         delete this->_text;
     }
+    clear_data();
 }

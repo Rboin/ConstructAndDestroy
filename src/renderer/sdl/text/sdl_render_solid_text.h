@@ -26,6 +26,8 @@ private:
 public:
     explicit SDLRenderSolidText(const vec2 &, const vec2 &, sdl_solid_text *);
 
+    ~SDLRenderSolidText();
+
     void render(SDLRenderer *) override;
 
     sdl_solid_text *get_data() override;

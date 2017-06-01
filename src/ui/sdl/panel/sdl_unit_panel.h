@@ -20,7 +20,7 @@ private:
 public:
     explicit SDLUnitPanel(std::string texture, vec2 pos, vec2 size, vec2 image_pos, vec2 image_size, SpawnableEntity* spawnable_entity, BuildingEntity* building_entity);
     explicit SDLUnitPanel(std::string texture, vec2 pos, vec2 size, vec2 image_pos, vec2 image_size, BuildingType unit, building_with_texture building);
-
+    ~SDLUnitPanel();
 
     BuildingType get_building_type();
     SpawnableEntity* get_spawnable_entity();

@@ -9,3 +9,7 @@
 
 SDLResourcePanel::SDLResourcePanel(SDL_RenderObject *r) : SDLPanel(r) {
 }
+
+SDLResourcePanel::~SDLResourcePanel() {
+    clear_components();
+}
