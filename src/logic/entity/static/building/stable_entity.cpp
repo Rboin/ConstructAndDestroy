@@ -11,7 +11,7 @@ StableEntity::StableEntity(vec2 position, float mass) : BuildingEntity(position,
     costs = new Resources(0, 0, 50, 0);
 
     spawnable_entities = {
-            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
+            new SpawnableEntity(new Resources(15, 0, 0, 0), MovingEntityType::CAVALIER, "This strong unit will fight your enemies")
     };
 
 }
@@ -20,7 +20,7 @@ StableEntity::StableEntity(float mass) : BuildingEntity(mass, STABLE, STABLETEXT
     costs = new Resources(0, 0, 50, 0);
 
     spawnable_entities = {
-            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
+            new SpawnableEntity(new Resources(15, 0, 0, 0), MovingEntityType::CAVALIER, "This strong unit will fight your enemies")
     };
 
 }
