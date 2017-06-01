@@ -2,6 +2,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "sdl/label/sdl_name_label.h"
+#include "sdl/label/manager/description_manager.h"
+#include "sdl/badge/sdl_badge_render_object.h"
 #include "sdl/sdl_renderer.h"
 #include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
@@ -49,9 +52,9 @@ SDL_Window *window;
 SDL_Renderer *renderer;
 
 // initialize buildings and textures
-std::vector<building_with_texture> buildings_with_textures = std::vector<building_with_texture>{
-        {"castle.png",    BuildingType::CASTLE},
-        {"warehouse.png", BuildingType::WAREHOUSE}
+std::vector<building_with_texture> buildings_with_textures = {
+    {"castle.png", BuildingType::CASTLE, new Resources(0,0,5,0), "Castle", "This building can create new units"},
+    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"}
 };
 
 std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
@@ -407,13 +410,18 @@ int main(int argc, char **argv) {
     SDLControlPanel *control_panel = SDLControlPanel::get_instance(panel_b);
 
 
+    SDLPanel *description_panel = new SDLPanel(DescriptionManager::get_description());
+
+
     resource_panel->add_component(wood_panel);
     resource_panel->add_component(gold_panel);
     resource_panel->add_component(stone_panel);
     main_panel->add_component(resource_panel);
     main_panel->add_component(wave_panel);
     main_panel->add_component(control_panel);
+    main_panel->add_component(description_panel);
     main_window->add_component(main_panel);
+
     main_window->show();
 
 

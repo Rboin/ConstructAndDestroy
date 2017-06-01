@@ -17,12 +17,10 @@ class SpawnableEntity;
 
 class BuildingEntity : public StaticEntity {
 private:
-    BuildingType building_type;
-    float delta_time;
-    float order_time;
-    vec2 spawn;
-    std::vector<MovingEntityType> orders;
-
+    BuildingType _building_type;
+    float _delta_time;
+    float _order_time;
+    std::vector<MovingEntityType> _orders;
 protected:
     Resources* costs;
     std::vector<SpawnableEntity*> spawnable_entities;
@@ -32,12 +30,13 @@ public:
     BuildingEntity(float, BuildingType, TextureTypes);
 
     Resources* get_costs();
+    std::vector<MovingEntityType> get_orders();
 
     void update(float d) override;
-    void set_position(float, float, bool);
     void order_unit_from_factory(Player *player, vec2 position, MovingEntityType moving_entity_type);
     void order_unit(MovingEntityType moving_entity_type);
     int get_order_time();
+    int get_delta_time();
 
     BuildingType get_building_type();
 

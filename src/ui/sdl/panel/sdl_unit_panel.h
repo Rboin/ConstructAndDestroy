@@ -1,9 +1,9 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_UNIT_PANEL_H
 #define CONSTRUCT_AND_DESTROY_SDL_UNIT_PANEL_H
 
-
-#include "sdl_panel.h"
 #include <string>
+#include "settings.h"
+#include "sdl_panel.h"
 #include "building_type.h"
 
 class BuildingEntity;
@@ -12,17 +12,20 @@ class SDL_ImageRenderObject;
 
 class SDLUnitPanel : public SDLPanel {
 private:
-    BuildingType _buildingType;
+    BuildingType _building_type;
     SpawnableEntity* _spawnable_entity;
     BuildingEntity* _building_entity;
-    SDL_ImageRenderObject* get_render_object(std::string texture, vec2 pos, vec2 size);
+    void add_image(std::string texture, vec2 pos, vec2 size);
+    building_with_texture _building;
 public:
-    explicit SDLUnitPanel(std::string texture, vec2 pos, vec2 size, SpawnableEntity* spawnable_entity, BuildingEntity* building_entity);
-    explicit SDLUnitPanel(std::string texture, vec2 pos, vec2 size, BuildingType unit);
+    explicit SDLUnitPanel(std::string texture, vec2 pos, vec2 size, vec2 image_pos, vec2 image_size, SpawnableEntity* spawnable_entity, BuildingEntity* building_entity);
+    explicit SDLUnitPanel(std::string texture, vec2 pos, vec2 size, vec2 image_pos, vec2 image_size, BuildingType unit, building_with_texture building);
+
 
     BuildingType get_building_type();
     SpawnableEntity* get_spawnable_entity();
     BuildingEntity* get_building_entity();
+    building_with_texture get_building_information();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_UNIT_PANEL_H

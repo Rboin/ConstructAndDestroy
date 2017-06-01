@@ -2,10 +2,9 @@
 // Created by Jeroen on 5/19/2017.
 //
 
-#include "sdl/sdl_render_object.h"
+#include "sdl/label/sdl_name_label.h"
 #include "entity/player_manager.h"
 #include "sdl_control_panel.h"
-#include "entity/player_manager.h"
 #include "entity/player.h"
 #include "settings.h"
 #include "sdl_building_panel.h"

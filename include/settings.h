@@ -10,6 +10,8 @@
 #include "moving_entity_types.h"
 #include "building_type.h"
 
+class Resources;
+
 const std::string path_to_texture =  "res/textures/";
 const std::string path_to_selected_texture =  "res/textures/sel_";
 const int player_id = 1;
@@ -23,9 +25,13 @@ const float stat_modifier_increment = 0.25f;
 const int wave_amount = 3;
 const int wave_unit_size = 1;
 //===============================================
+
 struct building_with_texture {
     std::string texture;
     BuildingType type;
+    Resources* cost;
+    std::string name;
+    std::string description;
 };
 
 struct entity_with_texture {

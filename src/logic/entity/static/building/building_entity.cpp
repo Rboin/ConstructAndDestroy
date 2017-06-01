@@ -12,24 +12,20 @@
 BuildingEntity::BuildingEntity(vec2 position, float mass, BuildingType bt, TextureTypes texture_types)
         : StaticEntity(position,
                        mass) {
-    building_type = bt;
+    _building_type = bt;
     costs = new Resources(0, 0, 0, 0);
-    order_time = 10000;
-    spawn = this->_position;
-    spawn.y += 40;
-    delta_time = 0;
+    _order_time = 10000;
+    _delta_time = 0;
     _health = 1000;
     _max_health = 1000;
 }
 
 BuildingEntity::BuildingEntity(float mass, BuildingType bt, TextureTypes texture_types)
         : StaticEntity(mass) {
-    building_type = bt;
+    _building_type = bt;
     costs = new Resources(0, 0, 0, 0);
-    order_time = 10000;
-    spawn = this->_position;
-    spawn.y += 40;
-    delta_time = 0;
+    _order_time = 10000;
+    _delta_time = 0;
     _health = 1000;
     _max_health = 1000;
 }
@@ -39,23 +35,23 @@ Resources *BuildingEntity::get_costs() {
 }
 
 BuildingType BuildingEntity::get_building_type() {
-    return building_type;
+    return _building_type;
 }
 
 void BuildingEntity::update(float d) {
-    if (!this->orders.empty()) {
+    if (!this->_orders.empty()) {
 
-        delta_time += d;
+        _delta_time += d;
 
-        if (delta_time >= order_time) {
+        if (_delta_time >= _order_time) {
 
-            this->order_unit_from_factory(_player, spawn, orders.front());
+            this->order_unit_from_factory(_player, {this->get_position().x, this->get_position().y + 40}, _orders.front());
 
             //remove first from orders.
-            orders.erase(orders.begin());
-            spawn.y += 40;
+            _orders.erase(_orders.begin());
+
             //reset order time.
-            delta_time = 0;
+            _delta_time = 0;
         }
     };
 }
@@ -65,7 +61,7 @@ void BuildingEntity::order_unit_from_factory(Player *player, vec2 position, Movi
 }
 
 void BuildingEntity::order_unit(MovingEntityType moving_entity_type) {
-    this->orders.push_back(moving_entity_type);
+    this->_orders.push_back(moving_entity_type);
 }
 
 std::vector<SpawnableEntity *> BuildingEntity::get_spawnable_entities() {
@@ -79,13 +75,14 @@ BuildingEntity::~BuildingEntity() {
     delete costs;
 }
 
-void BuildingEntity::set_position(float x, float y, bool finalposition) {
-    StaticEntity::set_position(x, y, finalposition);
-
-    spawn = this->_position;
-    spawn.y += 40;
+int BuildingEntity::get_order_time() {
+    return _order_time;
 }
 
-int BuildingEntity::get_order_time() {
-    return order_time;
+int BuildingEntity::get_delta_time() {
+    return _delta_time;
+}
+
+std::vector<MovingEntityType> BuildingEntity::get_orders() {
+    return _orders;
 }

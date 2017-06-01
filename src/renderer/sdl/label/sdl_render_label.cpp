@@ -12,7 +12,7 @@
 
 
 SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string image_path, ResourceType rt, TTF_Font *font) : SDL_RenderObject(position,
-                                                                                                          size, data) , _rt(rt){
+                                                                                                                                                                    size, data) , _rt(rt){
     vec2 image_pos = {_position.x, _position.y}, image_size = {_size.x / 2, _size.y};
     vec2 text_pos = {_position.x + _size.x / 2, _position.y}, text_size = {_size.x / 2, _size.y};
     sdl_image_data *image_data = new sdl_image_data{image_path};
