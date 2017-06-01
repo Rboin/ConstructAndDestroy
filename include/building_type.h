@@ -7,6 +7,7 @@
 
 enum BuildingType {
     CASTLE,
-    WAREHOUSE
+    WAREHOUSE,
+    STABLE
 };
 #endif //C_AND_D_PROJECT_BUILDING_TYPE_H

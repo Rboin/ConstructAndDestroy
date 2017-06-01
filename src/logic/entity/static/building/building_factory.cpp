@@ -7,6 +7,7 @@
 #include "castle_entity.h"
 #include "settings.h"
 #include "warehouse_entity.h"
+#include "stable_entity.h"
 
 BuildingEntity *BuildingFactory::create(BuildingType type) {
     BuildingEntity *be;
@@ -19,6 +20,9 @@ BuildingEntity *BuildingFactory::create(BuildingType type) {
     } else if (type == BuildingType::WAREHOUSE) {
         be = new WarehouseEntity(50);
         bd = new sdl_image_data{"warehouse.png"};
+    } else if(type == BuildingType::STABLE){
+        be = new StableEntity(50);
+        bd = new sdl_image_data("horsestable.png");
     }
 
     iro = new SDL_ImageHealthRenderObject({0, 0}, {50, 50}, bd, be);

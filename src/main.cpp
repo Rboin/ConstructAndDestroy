@@ -54,7 +54,8 @@ SDL_Renderer *renderer;
 // initialize buildings and textures
 std::vector<building_with_texture> buildings_with_textures = {
     {"castle.png", BuildingType::CASTLE, new Resources(0,0,5,0), "Castle", "This building can create new units"},
-    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"}
+    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"},
+    {"horsestable.png", BuildingType::STABLE, new Resources(0,0,50,0), "Stable", "This building can create strong fighters"}
 };
 
 std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
