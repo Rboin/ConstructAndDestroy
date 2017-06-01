@@ -11,7 +11,9 @@
 #include "entity/static/resource_type.h"
 
 class SDL_UI_RenderTextObject;
+
 class SDL_ImageRenderObject;
+
 class Resources;
 
 class SDLRenderLabel : public SDL_RenderObject {
