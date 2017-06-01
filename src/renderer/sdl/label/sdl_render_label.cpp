@@ -10,7 +10,6 @@
 #include "entity/player.h"
 #include "settings.h"
 
-
 SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string image_path,
                                ResourceType rt) : SDL_RenderObject(position,
                                                                                    size, data), _rt(rt) {
