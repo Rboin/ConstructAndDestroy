@@ -1,11 +1,12 @@
 //
 // Created by Jeroen on 5/19/2017.
 //
-
+#include <string>
+#include <sdl/badge/sdl_shortcut_badge_render_object.h>
+#include "sdl/badge/sdl_queue_badge_render_object.h"
 #include "sdl/label/sdl_render_label.h"
 #include "sdl/label/sdl_cost_label.h"
 #include "sdl/label/sdl_name_label.h"
-#include "sdl/badge/sdl_badge_render_object.h"
 #include "settings.h"
 #include "sdl_entity_panel.h"
 #include "sdl/event/slot/mouse_handler_buildingpanel.h"
@@ -15,6 +16,7 @@
 #include "sdl/event/slot/mouse_handler_entitypanel.h"
 #include "sdl_progressbar_panel.h"
 #include "entity/moving/spawnable_entity.h"
+#include "sdl/text/sdl_render_text_object.h"
 
 SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_building) : SDLPanel(r) {
     _building = selected_building;
@@ -62,34 +64,42 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_bui
         SDLPanel *name_panel = new SDLPanel(name_label);
 
         // badge displaying how many entities are in the order queue
-        TTF_Font *font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 25);
+        TTF_Font *font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 50);
         vec2 badge_panel_position = vec2(label_pos_cost.x + cost_size.x, pos.y + size.y - badge_panel_size.y);
-        sdl_data *badge_color = new sdl_data{0, 255, 0, 255};
-        SDL_BadgeRenderObject *badge_renderer = new SDL_BadgeRenderObject(badge_panel_position, badge_panel_size, font,
-                                                                          badge_color, 10);
+        sdl_data *badge_color = new sdl_data{ 0, 255, 0, 255 };
+        SDL_QueueBadgeRenderObject *badge_renderer = new SDL_QueueBadgeRenderObject(badge_panel_position, badge_panel_size, font, badge_color, 10);
         SDLPanel *badge_panel = new SDLPanel(badge_renderer);
-        _badges.insert(std::pair<MovingEntityType, SDL_BadgeRenderObject *>(type, badge_renderer));
+        _queue_badges.insert(std::pair<MovingEntityType, SDL_QueueBadgeRenderObject*>(type, badge_renderer));
+
+        // badge displaying shortcut
+        TTF_Font *font_shortcut = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 30);
+        vec2 badge_panel_position_shortcut = {image_pos.x +10, image_pos.y+10};
+        sdl_data *badge_color_shortcut = new sdl_data{ 220,220,220, 255 };
+        SDL_ShortcutBadgeRenderObject *badge_renderer_shortcut = new SDL_ShortcutBadgeRenderObject(badge_panel_position_shortcut, badge_panel_size, font_shortcut, std::to_string(i+1), badge_color_shortcut, 10);
+        SDLPanel *badge_panel_shortcut = new SDLPanel(badge_renderer_shortcut);
+        _shortcut_badges.insert(std::pair<MovingEntityType, SDL_BadgeRenderObject*>(type, badge_renderer_shortcut));
 
         unit_panel->add_component(cost_panel);
         unit_panel->add_component(name_panel);
         unit_panel->add_component(badge_panel);
+        unit_panel->add_component(badge_panel_shortcut);
 
         this->add_component(unit_panel);
     }
 }
 
 void SDLEntityPanel::render(SDLRenderer *renderer, mat2 &transformations, float d) {
-    update_badges();
+    update_queue_badges();
     SDLPanel::render(renderer, transformations, d);
 }
 
 SDLEntityPanel::~SDLEntityPanel() {
-    _badges.clear();
+    _queue_badges.clear();
     _building = nullptr;
     clear_components();
 }
 
-void SDLEntityPanel::update_badges() {
+void SDLEntityPanel::update_queue_badges() {
     std::vector<MovingEntityType> orders = _building->get_orders();
     std::map<MovingEntityType, int> counts;
 
@@ -108,9 +118,9 @@ void SDLEntityPanel::update_badges() {
 
     // for each badge, update the count using the sum that's calculated above
     // and also update the color of the badge
-    for (std::map<MovingEntityType, SDL_BadgeRenderObject *>::iterator badge = _badges.begin();
-         badge != _badges.end();
-         ++badge) {
+    for(std::map<MovingEntityType, SDL_QueueBadgeRenderObject*>::iterator badge = _queue_badges.begin();
+        badge != _queue_badges.end();
+        ++badge) {
 
         std::map<MovingEntityType, int>::iterator count = counts.find(badge->first);
 
@@ -120,12 +130,13 @@ void SDLEntityPanel::update_badges() {
             badge->second->update_count(0);
         }
 
-        update_badge_color(orders, badge->first, badge->second);
+        update_queue_badge_color(orders, badge->first, badge->second);
     }
 }
 
-void SDLEntityPanel::update_badge_color(std::vector<MovingEntityType> orders, MovingEntityType type,
-                                        SDL_BadgeRenderObject *badge) {
+
+void SDLEntityPanel::update_queue_badge_color(std::vector<MovingEntityType> orders, MovingEntityType type,
+                                              SDL_QueueBadgeRenderObject *badge) {
     // color is grey when
     // - this entitytype is not first in the order queue
     // - there are no orders for this entity type

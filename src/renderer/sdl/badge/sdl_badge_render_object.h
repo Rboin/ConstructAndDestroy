@@ -10,26 +10,24 @@
 #include "types.h"
 
 class sdl_text;
+
 class SDL_UI_RenderTextObject;
+
 class SDL_Renderer;
 
-class SDL_BadgeRenderObject : public SDL_RenderObject{
-private:
+class SDL_BadgeRenderObject : public SDL_RenderObject {
+protected:
     int _count;
     int _radius;
     vec2 _center;
     sdl_text *_textdata;
     SDL_UI_RenderTextObject *_text;
 public:
-    SDL_BadgeRenderObject(const vec2 &position, const vec2 &size, TTF_Font *font, sdl_data *color, int radius);
+    SDL_BadgeRenderObject(const vec2 &position, const vec2 &size, sdl_data *color, int radius);
 
     ~SDL_BadgeRenderObject();
 
-    void render(SDLRenderer *, const mat2 &) override;
-
-    void update_count(int count);
-
-    void update_color(sdl_data *color);
+    //void update_color(sdl_data *color);
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_BADGE_RENDER_OBJECT_H
