@@ -156,6 +156,7 @@ void SDLEntityPanel::update_queue_badge_color(std::vector<MovingEntityType> orde
             color = new sdl_data(255, 255 * (progress * 2), 0, 255);
         }
     }
+    badge->set_data(color);
 }
 
 void SDLEntityPanel::resize(const vec2 &v) {
