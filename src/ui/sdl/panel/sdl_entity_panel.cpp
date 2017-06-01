@@ -2,7 +2,7 @@
 // Created by Jeroen on 5/19/2017.
 //
 #include <string>
-#include <sdl/badge/sdl_shortcut_badge_render_object.h>
+#include "sdl/badge/sdl_shortcut_badge_render_object.h"
 #include "sdl/badge/sdl_queue_badge_render_object.h"
 #include "sdl/label/sdl_render_label.h"
 #include "sdl/label/sdl_cost_label.h"

@@ -29,7 +29,6 @@ void SDLUnitPanel::add_image(std::string texture, vec2 pos, vec2 size) {
     sdl_image_data *building_data = new sdl_image_data{ texture };
     SDL_ImageRenderObject* renderer = new SDL_ImageRenderObject(pos, size, building_data);
     SDLControlSubPanel *image_panel = new SDLControlSubPanel(renderer);
-
     this->add_component(image_panel);
 }
 
@@ -37,11 +36,11 @@ BuildingType SDLUnitPanel::get_building_type() {
     return _building_type;
 }
 
-BuildingEntity* SDLUnitPanel::get_building_entity() {
+BuildingEntity *SDLUnitPanel::get_building_entity() {
     return _building_entity;
 }
 
-SpawnableEntity* SDLUnitPanel::get_spawnable_entity() {
+SpawnableEntity *SDLUnitPanel::get_spawnable_entity() {
     return _spawnable_entity;
 }
 
