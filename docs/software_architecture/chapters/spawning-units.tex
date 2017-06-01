@@ -4,7 +4,13 @@ In this chapter we will explain how creating units is implemented in the game. W
 \subsection{Entity Panel} \label{EntityPanel}
 A unit can be created in a building, in a castle for example. When the player selects a castle the building panel is replaced by a different panel which shows all units that can be spawned from the selected building. This can be seen in \cref{fig:entity-panel}, where the entity panel is the panel at the bottom of the screen. 
 
-When the player clicks on an entity in the entity panel, a progress bar will be displayed to indicate how long it will take for the entity to be actually spawned.
+A player can order many entities, but they won't be spawned right away. Instead, they are queued. The number of entities in the build queue are displayed in a badge. Only one entity can be spawned at a given time. The color of the badge indicates whether an entity is being built and how close it is to actually spawning. 
+
+All variations of the badge can be seen in \cref{fig:unit-panel-order-queue}. If there aren't any entities in the queue, then the badge is grey. If there are entities in the queue, but it isn't currently being built, then the badge is grey as well. When an entity is building, the badge has a red background at first which slowly changes to green over time, and is solid green just before the entity gets spawned.
+
+The cost of spawning an entity can be seen below each entity itself in the panel. The cost will turn red if the player does not have sufficient resources to train the entity. 
+
+If the player wants additional information about something the available entities in the panel the player can hover over the units image. This will trigger a description in the topleft corner giving a short explanation of what the entity does. E.g. for a Knight the description will say something like: "This unit will fight for the safety of you village" and for a lumberjack it will say: "This unit will gather wood."
 
 In \cref{fig:unit-panel} all unit panels are highlighted. For each unit that can be spawned from the selected building, a unit panel is added to the entity panel at the bottom of the screen. A unit panel, as displayed in \cref{fig:unit-panel-class-diagram}, contains the EntityType that belongs to a unit panel which it uses to render the sprite that belongs to the EntityType.
 

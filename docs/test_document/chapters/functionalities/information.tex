@@ -1,11 +1,33 @@
-\subsection{Placing buildings}
+\subsection{Information}
 
 \begin{tabularx}{\textwidth}{|X|X|}
 \hline
 \rowcolor{lightgray}\textcolor{white}{\textbf{Test scenario}} &
 \textcolor{white}{\textbf{Desired result}}       
 \\\hline
-Positioning a building & A building can be positioned and appears at the center of the cursor when a player clicks on a building in the building panel
+Entity descriptions &
+When the player hovers on an entity in the building panel, a description of the entity is displayed to the user
+\\\hline
+\rowcolor{lightgray}\textcolor{white}{\textbf{Comments/suggestions}} & 
+\textcolor{white}{\textbf{Passed}}
+\\\hline
+ & \cellcolor{green}                       
+\\\hline
+\rowcolor{lightgray}\textcolor{white}{\textbf{Tester}} &  
+\textcolor{white}{\textbf{Date}}               
+\\\hline
+Mark van der Woude & May 31, 2017
+                            		 
+\\\hline
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\rowcolor{lightgray}\textcolor{white}{\textbf{Test scenario}} &
+\textcolor{white}{\textbf{Desired result}}       
+\\\hline
+Entity descriptions disappear &
+When the player stops hovers on an entity in the building panel, the description of this entity is no longer being showed
 \\\hline
 \rowcolor{lightgray}\textcolor{white}{\textbf{Comments/suggestions}} & 
 \textcolor{white}{\textbf{Passed}}
@@ -15,7 +37,8 @@ Positioning a building & A building can be positioned and appears at the center 
 \rowcolor{lightgray}\textcolor{white}{\textbf{Tester}} & 
 \textcolor{white}{\textbf{Date}}               
 \\\hline
-Mark van der Woude & May 8, 2017                               		 
+Mark van der Woude & May 31, 2017
+                             		 
 \\\hline
 \end{tabularx}
 
@@ -24,8 +47,8 @@ Mark van der Woude & May 8, 2017
 \rowcolor{lightgray}\textcolor{white}{\textbf{Test scenario}} &
 \textcolor{white}{\textbf{Desired result}}       
 \\\hline
-Placing a building &
-When a player clicks somewhere in the world while positioning a building, the building should be added to the world       
+Lack of resources is visible to the user &
+When the player does not have enough resources to pay for constructing a building or spawning an entity, the player is made aware.
 \\\hline
 \rowcolor{lightgray}\textcolor{white}{\textbf{Comments/suggestions}} & 
 \textcolor{white}{\textbf{Passed}}
@@ -35,26 +58,7 @@ When a player clicks somewhere in the world while positioning a building, the bu
 \rowcolor{lightgray}\textcolor{white}{\textbf{Tester}} & 
 \textcolor{white}{\textbf{Date}}               
 \\\hline
-Mark van der Woude & May 8, 2017                               		 
-\\\hline
-\end{tabularx}
-
-\begin{tabularx}{\textwidth}{|X|X|}
-\hline
-\rowcolor{lightgray}\textcolor{white}{\textbf{Test scenario}} &
-\textcolor{white}{\textbf{Desired result}}       
-\\\hline
-Trying to place a building on top of another static entity &
-A building cannot be positioned on top of an existing building or resource (tree, campfire et cetera), and should give the player feedback when it tries to position on top of it
-\\\hline
-\rowcolor{lightgray}\textcolor{white}{\textbf{Comments/suggestions}} & 
-\textcolor{white}{\textbf{Passed}}
-\\\hline
-Building in positioning state gets a red border while hovering over another static entity & \cellcolor{green}                       
-\\\hline
-\rowcolor{lightgray}\textcolor{white}{\textbf{Tester}} & 
-\textcolor{white}{\textbf{Date}}               
-\\\hline
-Mark van der Woude & May 8, 2017                               		 
+Mark van der Woude & May 31, 2017  
+                           		 
 \\\hline
 \end{tabularx}
