@@ -32,7 +32,15 @@ set(SOURCE_FILES
         sdl/label/manager/description_manager.h
         sdl/label/manager/description_manager.cpp
         sdl/badge/sdl_badge_render_object.cpp
-        sdl/badge/sdl_badge_render_object.h sdl/badge/sdl_circle_badge_render_object.h sdl/badge/sdl_circle_badge_render_object.cpp sdl/badge/sdl_queue_badge_render_object.h sdl/badge/sdl_queue_badge_render_object.cpp sdl/badge/sdl_rectangle_badge_render_object.cpp sdl/badge/sdl_rectangle_badge_render_object.h sdl/badge/sdl_shortcut_badge_render_object.h sdl/badge/sdl_shortcut_badge_render_object.cpp)
+        sdl/badge/sdl_badge_render_object.h
+        sdl/badge/sdl_circle_badge_render_object.h
+        sdl/badge/sdl_circle_badge_render_object.cpp
+        sdl/badge/sdl_queue_badge_render_object.h
+        sdl/badge/sdl_queue_badge_render_object.cpp
+        sdl/badge/sdl_rectangle_badge_render_object.cpp
+        sdl/badge/sdl_rectangle_badge_render_object.h
+        sdl/badge/sdl_shortcut_badge_render_object.h
+        sdl/badge/sdl_shortcut_badge_render_object.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
