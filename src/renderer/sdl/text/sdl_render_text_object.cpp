@@ -11,7 +11,9 @@ SDL_UI_RenderTextObject::SDL_UI_RenderTextObject(const vec2 &position, const vec
 
 SDL_UI_RenderTextObject::~SDL_UI_RenderTextObject() {
     clear_result();
-    delete (sdl_text*)_data;
+    if(!((sdl_text*)_data)->font){
+        delete (sdl_text*)_data;
+    }
 }
 
 void SDL_UI_RenderTextObject::render(SDLRenderer *renderer) {
