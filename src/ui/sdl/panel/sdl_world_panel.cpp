@@ -5,6 +5,7 @@
 #include <cmath>
 #include "sdl_world_panel.h"
 #include "world/world.h"
+#include "sdl/sdl_renderer.h"
 
 SDLWorldPanel::SDLWorldPanel(SDL_RenderObject *r) : SDLPanel(r) {
     _current_world = nullptr;

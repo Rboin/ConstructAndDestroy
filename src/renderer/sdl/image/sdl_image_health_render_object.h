@@ -5,8 +5,6 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_IMAGE_HEALTH_RENDER_OBJECT_H
 #define CONSTRUCT_AND_DESTROY_SDL_IMAGE_HEALTH_RENDER_OBJECT_H
 
-
-#include "sdl/sdl_render_object.h"
 #include "sdl_image_render_object.h"
 
 class BaseEntity;

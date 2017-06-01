@@ -5,6 +5,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "settings.h"
 #include "sdl/event/slot/sdl_mouse_event_slot.h"
 #include "sdl/text/sdl_render_text_object.h"
 #include "sdl/button/sdl_button.h"
@@ -18,6 +19,34 @@ int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
 SDL_Window *window;
 SDL_Renderer *renderer;
+// initialize buildings and textures
+std::vector<building_with_texture>  buildings_with_textures = std::vector<building_with_texture>{
+    {"castle.png", BuildingType::CASTLE},
+    {"warehouse.png", BuildingType::WAREHOUSE}
+};
+
+
+std::vector<entity_with_texture> entities_with_textures =  std::vector<entity_with_texture>{
+    {"lumberjack.png", MovingEntityType::LUMBERJACK},
+    {"miner.png", MovingEntityType::MINER},
+    {"knight.png", MovingEntityType::KNIGHT}
+};
+
+std::string get_texture_of_entity(MovingEntityType type) {
+    for(int i = 0; i < entities_with_textures.size(); i++) {
+        if (entities_with_textures.at(i).type == type) {
+            return entities_with_textures.at(i).texture;
+        }
+    }
+}
+
+std::string get_texture_of_building(BuildingType building) {
+    for(int i = 0; i < buildings_with_textures.size(); i++) {
+        if (buildings_with_textures.at(i).type == building) {
+            return buildings_with_textures.at(i).texture;
+        }
+    }
+}
 
 bool init_sdl() {
     if (SDL_Init(0) == -1) {

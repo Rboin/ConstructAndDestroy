@@ -8,7 +8,10 @@
 #include <vector>
 #include <cstdint>
 #include "render_object.h"
-#include "event/slot.h"
+#include "types.h"
+#include "vector.h"
+
+template<typename T> class Slot;
 
 /**
  * @tparam T = Type of renderer, i.e SDL_Renderer.
@@ -71,6 +74,11 @@ public:
 
     void add_component(UIComponent *child) {
         children.push_back(child);
+    }
+
+    std::vector<UIComponent<T, D, R, S, K> *> get_children()
+    {
+        return children;
     }
 
     void clear_components() {

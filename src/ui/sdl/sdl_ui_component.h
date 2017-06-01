@@ -7,8 +7,12 @@
 
 #include "sdl/sdl_renderer.h"
 #include "component/ui_component.h"
-#include "sdl/sdl_render_object.h"
-#include "sdl/event/sdl_event_types.h"
+
+class SDL_RenderObject;
+
+struct sdl_data;
+struct sdl_mouse_event_data;
+struct sdl_key_event_data;
 
 class SDL_UIComponent : public UIComponent<SDLRenderer, sdl_data, SDL_Texture, sdl_mouse_event_data, sdl_key_event_data> {
 

@@ -20,7 +20,15 @@ set(SOURCE_FILES
         sdl/image/sdl_image_health_render_object.cpp
         sdl/image/sdl_image_health_render_object.h
         sdl/progressbar/sdl_progressbar_render_object.cpp
-        sdl/progressbar/sdl_progressbar_render_object.h)
+        sdl/progressbar/sdl_progressbar_render_object.h
+        sdl/label/sdl_cost_label.h
+        sdl/label/sdl_cost_label.cpp
+        sdl/label/sdl_name_label.h
+        sdl/label/sdl_name_label.cpp
+        sdl/label/manager/description_manager.h
+        sdl/label/manager/description_manager.cpp
+        sdl/badge/sdl_badge_render_object.cpp
+        sdl/badge/sdl_badge_render_object.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

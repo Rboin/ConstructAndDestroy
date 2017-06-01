@@ -2,6 +2,7 @@
 // Created by robin on 4/25/17.
 //
 
+#include "sdl/event/sdl_event_types.h"
 #include "sdl_mouse_event_slot.h"
 
 SDL_MouseEventSlot::SDL_MouseEventSlot() : Slot<sdl_mouse_event_data>() {}

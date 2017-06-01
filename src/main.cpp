@@ -2,6 +2,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include "sdl/label/sdl_name_label.h"
+#include "sdl/label/manager/description_manager.h"
+#include "sdl/badge/sdl_badge_render_object.h"
+#include "sdl/sdl_renderer.h"
 #include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
@@ -49,16 +53,15 @@ SDL_Renderer *renderer;
 
 // initialize buildings and textures
 std::vector<building_with_texture> buildings_with_textures = {
-        {"castle.png",    BuildingType::CASTLE},
-        {"warehouse.png", BuildingType::WAREHOUSE}
+    {"castle.png", BuildingType::CASTLE, new Resources(0,0,5,0), "Castle", "This building can create new units"},
+    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"}
 };
 
-std::vector<entity_with_texture> entities_with_textures = {
+std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
         {"lumberjack.png", MovingEntityType::LUMBERJACK},
         {"miner.png",      MovingEntityType::MINER},
         {"knight.png",     MovingEntityType::KNIGHT}
 };
-
 
 std::string get_texture_of_entity(MovingEntityType type) {
     for (int i = 0; i < entities_with_textures.size(); i++) {
@@ -364,9 +367,6 @@ int main(int argc, char **argv) {
     SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data, "stone.png",
                                                      ResourceType::STONE, f_font);
     SDLPanel *stone_panel = new SDLPanel(stone_label);
-
-
-
     ///End Resource Panel
 
     ///Begin Waves
@@ -402,12 +402,16 @@ int main(int argc, char **argv) {
     mouse_dispatcher->register_callback(restart_button, reset);
     ///End Waves
 
-
     // building/control panel
     vec2 control_panel_pos = {0, 500}, control_panel_size = {800, 100.0};
     sdl_data *control_panel_data = new sdl_data{100, 100, 100, 100};
     SDL_RenderObject *panel_b = new SDL_RenderObject(control_panel_pos, control_panel_size, control_panel_data);
-    SDLControlPanel *control_panel = new SDLControlPanel(panel_b);
+
+    SDLControlPanel *control_panel = SDLControlPanel::get_instance(panel_b);
+
+
+    SDLPanel *description_panel = new SDLPanel(DescriptionManager::get_description());
+
 
     resource_panel->add_component(wood_panel);
     resource_panel->add_component(gold_panel);
@@ -415,7 +419,9 @@ int main(int argc, char **argv) {
     main_panel->add_component(resource_panel);
     main_panel->add_component(wave_panel);
     main_panel->add_component(control_panel);
+    main_panel->add_component(description_panel);
     main_window->add_component(main_panel);
+
     main_window->show();
 
 

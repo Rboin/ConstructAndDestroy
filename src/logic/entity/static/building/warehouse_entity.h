@@ -12,6 +12,9 @@ public:
     WarehouseEntity(vec2, float);
     WarehouseEntity(float);
     void set_transparent_or_border(bool, bool = true);
+
+    void select() override ;
+    void deselect() override;
 };
 
 

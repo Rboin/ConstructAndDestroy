@@ -5,7 +5,6 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_CONTROL_PANEL_H
 #define CONSTRUCT_AND_DESTROY_SDL_CONTROL_PANEL_H
 
-#include "sdl/event/slot/sdl_mouse_event_slot.h"
 #include "sdl_panel.h"
 #include <string>
 
@@ -17,9 +16,12 @@ class SDL_RenderObject;
  */
 class SDLControlPanel : public SDLPanel {
 private:
+    static SDLControlPanel* _instance;
+    explicit SDLControlPanel(SDL_RenderObject *);
     SDL_RenderObject* get_similar_representation();
 public:
-    explicit SDLControlPanel(SDL_RenderObject *);
+    static SDLControlPanel* get_instance(SDL_RenderObject*);
+    static SDLControlPanel* get_instance();
     void render(SDLRenderer *renderer, float d) override;
 };
 

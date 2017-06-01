@@ -21,6 +21,8 @@ float Resources::get_resources(ResourceType rt) {
     return _resources[(int) rt];
 }
 
+
+
 void Resources::subtract_resources(Resources *r) {
     for (int i = 0; i < 4; i++) {
         _resources[i] -= r->_resources[i];

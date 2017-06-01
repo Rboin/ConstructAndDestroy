@@ -7,8 +7,10 @@
 
 #include <string>
 #include <vector>
-#include "../logic/entity/moving/moving_entity_types.h"
-#include "../logic/entity/static/building/building_type.h"
+#include "moving_entity_types.h"
+#include "building_type.h"
+
+class Resources;
 
 const std::string path_to_texture =  "res/textures/";
 const std::string path_to_selected_texture =  "res/textures/sel_";
@@ -23,9 +25,13 @@ const float stat_modifier_increment = 0.25f;
 const int wave_amount = 3;
 const int wave_unit_size = 1;
 //===============================================
+
 struct building_with_texture {
     std::string texture;
     BuildingType type;
+    Resources* cost;
+    std::string name;
+    std::string description;
 };
 
 struct entity_with_texture {

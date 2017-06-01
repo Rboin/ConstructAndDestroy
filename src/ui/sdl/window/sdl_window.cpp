@@ -5,7 +5,8 @@
 #include <sdl/event/sdl_mouse_event_dispatcher.h>
 #include "sdl_window.h"
 #include "world/world.h"
-#include "entity/player.h"
+#include "sdl/event/sdl_event_types.h"
+#include "sdl/sdl_renderer.h"
 
 SDLWindow::SDLWindow(SDL_RenderObject *r) :
         SDLWindow(r, nullptr) {}

@@ -6,7 +6,6 @@ set(SOURCE_FILES
         sdl/window/sdl_window.cpp
         sdl/window/sdl_window.h
         sdl/sdl_ui_component.h
-        sdl/sdl_ui_component.h
         sdl/panel/sdl_panel.h
         sdl/panel/sdl_world_panel.h
         sdl/event/sdl_event_types.h
@@ -42,17 +41,7 @@ set(SOURCE_FILES
         sdl/button/restart_wave_button.cpp
         sdl/button/restart_wave_button.h
         sdl/event/slot/wave_reset_handler.h
-        sdl/event/slot/wave_reset_handler.cpp)
-
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
-# Add the rendering and logic projects as a dependency
-include_directories(../renderer ../logic)
-
-add_library(cd_ui STATIC
-    ${SOURCE_FILES}
+        sdl/event/slot/wave_reset_handler.cpp
         sdl/panel/sdl_building_panel.cpp
         sdl/panel/sdl_building_panel.h
         sdl/event/slot/mouse_handler_buildingpanel.cpp
@@ -66,7 +55,21 @@ add_library(cd_ui STATIC
         sdl/panel/sdl_control_panel.cpp
         sdl/panel/sdl_control_panel.h
         sdl/panel/sdl_progressbar_panel.cpp
-        sdl/panel/sdl_progressbar_panel.h)
+        sdl/panel/sdl_progressbar_panel.h
+        manager/build_and_spawn_manager.h
+        manager/build_and_spawn_manager.cpp
+        )
+
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+# Add the rendering and logic projects as a dependency
+include_directories(../renderer ../logic)
+
+add_library(cd_ui STATIC
+    ${SOURCE_FILES}
+       )
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

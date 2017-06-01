@@ -3,16 +3,17 @@
 //
 
 #include "sdl_mouse_event_dispatcher.h"
+#include "sdl/event/sdl_event_types.h"
 
-SDL_MouseEventDispatcher* SDL_MouseEventDispatcher::INSTANCE = nullptr;
+SDL_MouseEventDispatcher* SDL_MouseEventDispatcher::_instance = nullptr;
 
 SDL_MouseEventDispatcher::SDL_MouseEventDispatcher() : SDL_EventDispatcher<sdl_mouse_event_data>() {}
 
 SDL_MouseEventDispatcher *SDL_MouseEventDispatcher::get_instance() {
-    if(!INSTANCE) {
-        INSTANCE = new SDL_MouseEventDispatcher();
+    if(!_instance) {
+        _instance = new SDL_MouseEventDispatcher();
     }
-    return INSTANCE;
+    return _instance;
 }
 
 void SDL_MouseEventDispatcher::dispatch(sdl_mouse_event_data d) {
