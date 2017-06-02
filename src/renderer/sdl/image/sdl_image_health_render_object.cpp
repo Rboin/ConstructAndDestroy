@@ -31,7 +31,7 @@ void SDL_ImageHealthRenderObject::render(SDLRenderer *renderer) {
 }
 
 void SDL_ImageHealthRenderObject::draw_health_bar(SDLRenderer *renderer) {
-    int x = _owner->get_position().x + 10;
+    int x = _owner->get_position().x + 5;
     int y = _owner->get_position().y - 10;
     int health_bar_width = 30;
     int health_bar_height = 5;

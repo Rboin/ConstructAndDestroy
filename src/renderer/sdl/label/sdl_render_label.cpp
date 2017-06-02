@@ -12,8 +12,9 @@
 
 
 SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string image_path,
-                               ResourceType rt, TTF_Font *font) : SDL_RenderObject(position,
+                               ResourceType rt) : SDL_RenderObject(position,
                                                                                    size, data), _rt(rt) {
+    TTF_Font *font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
     vec2 image_pos = {_position.x, _position.y}, image_size = {_size.x / 2, _size.y};
     vec2 text_pos = {_position.x + _size.x / 2, _position.y}, text_size = {_size.x / 2, _size.y};
     sdl_image_data *image_data = new sdl_image_data{image_path};
@@ -41,8 +42,6 @@ void SDLRenderLabel::render(SDLRenderer *renderer) {
 SDLRenderLabel::~SDLRenderLabel() {
     delete _text;
     delete _image;
-    delete _data;
-    clear_data();
     _resource = nullptr;
 }
 

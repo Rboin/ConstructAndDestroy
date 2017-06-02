@@ -13,4 +13,5 @@ SDLPanel::~SDLPanel() {
         this->children[i]->clear_components();
         delete this->children[i];
     }
-    children.clear();}
+    children.clear();
+}

@@ -15,6 +15,10 @@ struct sdl_image_data : public sdl_data {
     sdl_image_data(const std::string t) : sdl_data(0, 0, 0) {
         type = t;
     }
+
+    virtual ~sdl_image_data() {
+
+    }
 };
 
 class SDL_ImageRenderObject : public SDL_RenderObject {

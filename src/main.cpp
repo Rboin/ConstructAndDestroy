@@ -173,7 +173,7 @@ int main(int argc, char **argv) {
     entity->set_goal(think_goal);
     entity->set_player(player_id);
 
-    vec2 entity_size = {50, 50};
+    vec2 entity_size = {40, 40};
     sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
     SDL_ImageRenderObject *entity_render_object = new SDL_ImageHealthRenderObject(pos, entity_size, entity_data,
                                                                                   entity);
@@ -196,7 +196,7 @@ int main(int argc, char **argv) {
 
     knight_entity->set_player(player_id);
 
-    vec2 knight_entity_size = {50, 50};
+    vec2 knight_entity_size = {40, 40};
     sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};
     SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageHealthRenderObject(pos, knight_entity_size,
                                                                                          knight_entity_data,
@@ -220,7 +220,7 @@ int main(int argc, char **argv) {
 
     gold_miner_entity->set_player(1);
 
-    vec2 gold_miner_entity_size = {50, 50};
+    vec2 gold_miner_entity_size = {40, 40};
     sdl_image_data *gold_miner_entity_data = new sdl_image_data{"miner.png"};
     SDL_ImageRenderObject *gold_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
                                                                                              gold_miner_entity_size,
@@ -244,7 +244,7 @@ int main(int argc, char **argv) {
 
     stone_miner_entity->set_player(1);
 
-    vec2 stone_miner_entity_size = {50, 50};
+    vec2 stone_miner_entity_size = {40, 40};
     sdl_image_data *stone_miner_entity_data = new sdl_image_data{"miner.png"};
     SDL_ImageRenderObject *stone_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
                                                                                               stone_miner_entity_size,
@@ -256,7 +256,7 @@ int main(int argc, char **argv) {
     // End stone mine miner entity
 
     // Begin tree entity
-    vec2 s_position = {400, 280}, s_size = {50, 50};
+    vec2 s_position = {400, 280}, s_size = {40, 40};
     ResourceEntity *s_entity = new TreeEntity(s_position, 50);
     sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
     s_entity->set_textures("tree.png", "trunk.png");
@@ -266,7 +266,7 @@ int main(int argc, char **argv) {
     // End tree entity
 
     // Begin tree entity
-    vec2 s1_position = {400, 240}, s1_size = {50, 50};
+    vec2 s1_position = {400, 240}, s1_size = {40, 40};
     ResourceEntity *s1_entity = new TreeEntity(s1_position, 50);
     sdl_image_data *tree1_data = new sdl_image_data{"tree.png"};
     s1_entity->set_textures("tree.png", "trunk.png");
@@ -275,19 +275,8 @@ int main(int argc, char **argv) {
     World::get_instance()->add_entity(s1_entity);
     // End tree entity
 
-    // Begin warehouse entity
-    vec2 s_position7 = {600, 400};
-    BuildingEntity *s_entity7 = new WarehouseEntity(s_position7, 50);
-    sdl_image_data *entity7_data = new sdl_image_data{"warehouse.png"};
-    SDL_ImageRenderObject *e7_object = new SDL_ImageHealthRenderObject(s_position7, {50, 50}, entity7_data, s_entity7);
-    s_entity7->set_representation(e7_object);
-
-    s_entity7->set_player(player_id);
-//    World::get_instance()->add_entity(s_entity7);
-    // End warehouse entity
-
     // Begin gold mine entity
-    vec2 gold_mine_position = {320, 280}, gold_mine_size = {50, 50};
+    vec2 gold_mine_position = {320, 280}, gold_mine_size = {40, 40};
     ResourceEntity *gold_mine_entity = new GoldMineEntity(gold_mine_position, 50);
     sdl_image_data *gold_mine_data = new sdl_image_data{"goldmine.png"};
     gold_mine_entity->set_textures("goldmine.png", "depletedgoldmine.png");
@@ -299,7 +288,7 @@ int main(int argc, char **argv) {
     // End gold mine entity
 
     // Begin stone mine entity
-    vec2 stone_mine_position = {240, 240}, stone_mine_size = {50, 50};
+    vec2 stone_mine_position = {240, 240}, stone_mine_size = {40, 40};
     ResourceEntity *stone_mine_entity = new StoneMineEntity(stone_mine_position, 50);
     sdl_image_data *stone_mine_data = new sdl_image_data{"stonemine.png"};
     stone_mine_entity->set_textures("stonemine.png", "depletedstonemine.png");
@@ -352,20 +341,22 @@ int main(int argc, char **argv) {
     SDL_RenderObject *panel_o = new SDL_RenderObject(resource_panel_pos, resource_panel_size, resource_panel_data);
     SDLResourcePanel *resource_panel = new SDLResourcePanel(panel_o);
 
-    sdl_data *sdl_label_data = new sdl_data{255, 255, 255, 255};
+    sdl_data *sdl_label_data_wood = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_wood = {605, 5};
-    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data, "log.png",
-                                                    ResourceType::WOOD, f_font);
+    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data_wood, "log.png",
+                                                    ResourceType::WOOD);
     SDLPanel *wood_panel = new SDLPanel(wood_label);
 
+    sdl_data *sdl_label_data_gold = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_gold = {675, 5};
-    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data, "gold.png",
-                                                    ResourceType::GOLD, f_font);
+    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data_gold, "gold.png",
+                                                    ResourceType::GOLD);
     SDLPanel *gold_panel = new SDLPanel(gold_label);
 
+    sdl_data *sdl_label_data_stone = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_stone = {740, 5};
-    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data, "stone.png",
-                                                     ResourceType::STONE, f_font);
+    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone, "stone.png",
+                                                     ResourceType::STONE);
     SDLPanel *stone_panel = new SDLPanel(stone_label);
     ///End Resource Panel
 

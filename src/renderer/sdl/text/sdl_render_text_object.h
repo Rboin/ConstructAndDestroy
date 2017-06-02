@@ -17,7 +17,7 @@ struct sdl_text : public sdl_data {
         font = f;
     }
 
-    ~sdl_text();
+    virtual ~sdl_text();
 };
 
 class SDL_UI_RenderTextObject : public SDL_RenderObject {

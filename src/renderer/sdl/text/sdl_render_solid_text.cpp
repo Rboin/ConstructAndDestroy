@@ -23,9 +23,7 @@ SDLRenderSolidText::SDLRenderSolidText(const vec2 &position, const vec2 &size, s
 }
 
 SDLRenderSolidText::~SDLRenderSolidText() {
-    delete _data;
     delete _text_data;
-    clear_data();
 }
 
 void SDLRenderSolidText::render(SDLRenderer *renderer) {

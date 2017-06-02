@@ -2,7 +2,6 @@
 // Created by robin on 3/11/17.
 //
 
-#include <iostream>
 #include "graph/graph.h"
 #include "graph/graph_manager.h"
 #include "entity/goal/moving_entity_goal/atomic/plan_path_goal.h"
@@ -31,7 +30,6 @@ void WanderGoal::determine_next_goal() {
 Node* WanderGoal::choose_random_goal() {
     GraphManager *gm = GraphManager::get_instance();
     int i = random_number(gm->graph->nodes.size());
-    std::cout << i << std::endl;
     return gm->graph->nodes[i];
 }
 

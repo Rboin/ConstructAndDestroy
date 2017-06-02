@@ -56,6 +56,4 @@ SDLCostLabel::~SDLCostLabel() {
     delete this->_text;
     this->_resources = nullptr;
     delete this->_image;
-    clear_data();
-    delete data;
 }

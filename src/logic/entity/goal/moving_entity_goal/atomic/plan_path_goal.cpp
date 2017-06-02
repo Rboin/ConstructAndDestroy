@@ -28,6 +28,10 @@ const int PlanPathGoal::process() {
 
         //Check if the node still has edges. When a player places a building on this node after the
         //this _goal has been initiated the _goal could become unreachable.
+        if(!n->is_walkable()){
+            n = gm->graph->find_closest_edge(n);
+        }
+
         if(!_goal->is_walkable()){
             _goal = gm->graph->find_closest_edge(_goal);
         }

@@ -19,6 +19,8 @@ struct sdl_data {
         blue = b;
         alpha = a;
     }
+
+    virtual ~sdl_data() {}
 };
 
 class SDL_RenderObject : public RenderObject<SDLRenderer, sdl_data, SDL_Texture> {

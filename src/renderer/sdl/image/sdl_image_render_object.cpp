@@ -11,7 +11,6 @@ SDL_ImageRenderObject::SDL_ImageRenderObject(const vec2 &position, const vec2 &s
 
 SDL_ImageRenderObject::~SDL_ImageRenderObject() {
     clear_data();
-    delete _data;
 }
 
 void SDL_ImageRenderObject::render(SDLRenderer *renderer) {

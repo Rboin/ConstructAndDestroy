@@ -35,5 +35,4 @@ void SDLNameLabel::set_text(std::string text) {
 
 SDLNameLabel::~SDLNameLabel(){
     delete this->_text_object;
-    clear_data();
 }
