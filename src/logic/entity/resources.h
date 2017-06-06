@@ -16,6 +16,8 @@ public:
 
     float get_resources(ResourceType);
 
+    std::string get_texture_by_type(ResourceType);
+
     virtual ~Resources();
 
     bool check_if_sufficient_resources(Resources *);
