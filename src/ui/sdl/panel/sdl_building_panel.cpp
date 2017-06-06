@@ -3,6 +3,7 @@
 //
 
 #include <SDL_ttf.h>
+#include <sdl/badge/sdl_shortcut_badge_render_object.h>
 #include "sdl/label/sdl_cost_label.h"
 #include "sdl/label/sdl_name_label.h"
 #include "sdl_building_panel.h"
@@ -27,6 +28,7 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
         vec2 image_pos = {pos.x, pos.y + name_label_size.y};
         vec2 image_size = {50, 50};
         vec2 cost_size = {60, 30};
+        vec2 badge_panel_size = {10, 10};
 
         SDLUnitPanel *unit_panel = new SDLUnitPanel(building.texture, pos, size, image_pos, image_size, building.type, building);
         unit_panel->set_mouse_callback(slot);
@@ -47,9 +49,17 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
         SDLNameLabel *name_label = new SDLNameLabel(label_pos_name, name_label_size, sdl_label_data2, f_font2, building.name);
         SDLControlSubPanel *name_panel = new SDLControlSubPanel(name_label);
 
+        // badge displaying shortcut
+        TTF_Font *font_shortcut = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 30);
+        vec2 badge_panel_position_shortcut = {image_pos.x +10, image_pos.y+10};
+        sdl_data *badge_color_shortcut = new sdl_data{ 220,220,220, 255 };
+        SDL_ShortcutBadgeRenderObject *badge_renderer_shortcut = new SDL_ShortcutBadgeRenderObject(badge_panel_position_shortcut, badge_panel_size, font_shortcut, std::to_string(i+1), badge_color_shortcut, 10);
+        SDLPanel *badge_panel_shortcut = new SDLPanel(badge_renderer_shortcut);
+
 
         unit_panel->add_component(cost_panel);
         unit_panel->add_component(name_panel);
+        unit_panel->add_component(badge_panel_shortcut);
         this->add_component(unit_panel);
     }
 }

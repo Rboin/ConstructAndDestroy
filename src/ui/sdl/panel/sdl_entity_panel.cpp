@@ -16,7 +16,6 @@
 #include "sdl/event/slot/mouse_handler_entitypanel.h"
 #include "sdl_progressbar_panel.h"
 #include "entity/moving/spawnable_entity.h"
-#include "sdl/text/sdl_render_text_object.h"
 
 SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_building) : SDLPanel(r) {
     _building = selected_building;
@@ -77,7 +76,6 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_bui
         sdl_data *badge_color_shortcut = new sdl_data{ 220,220,220, 255 };
         SDL_ShortcutBadgeRenderObject *badge_renderer_shortcut = new SDL_ShortcutBadgeRenderObject(badge_panel_position_shortcut, badge_panel_size, font_shortcut, std::to_string(i+1), badge_color_shortcut, 10);
         SDLPanel *badge_panel_shortcut = new SDLPanel(badge_renderer_shortcut);
-        _shortcut_badges.insert(std::pair<MovingEntityType, SDL_BadgeRenderObject*>(type, badge_renderer_shortcut));
 
         unit_panel->add_component(cost_panel);
         unit_panel->add_component(name_panel);
