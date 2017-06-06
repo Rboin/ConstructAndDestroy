@@ -41,7 +41,9 @@ MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityType mo
     ThinkGoal *think_goal = new ThinkGoal(me);
 
 
-    if (moving_entity_type == MovingEntityType::KNIGHT) {
+    if (moving_entity_type == MovingEntityType::KNIGHT || moving_entity_type == MovingEntityType::CAVALIER ||
+            moving_entity_type == MovingEntityType::HEAVY_CAVALIER || moving_entity_type == MovingEntityType::LIGHT_CAVALIER
+            || moving_entity_type == MovingEntityType::JUGGERNAUT  || moving_entity_type == MovingEntityType::MERCENARY) {
         think_goal->add_evaluator(new CombatEvaluator());
         think_goal->add_evaluator(new WanderEvaluator());
     } else {

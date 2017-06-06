@@ -10,6 +10,11 @@
 #include "miner_entity.h"
 #include "lumberjack_entity.h"
 #include "../player.h"
+#include "cavalier_entity.h"
+#include "heavy_cavalier_entity.h"
+#include "light_cavalier.h"
+#include "juggernaut_entity.h"
+#include "mercenary_entity.h"
 
 MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingEntityType moving_entity_type) {
 
@@ -24,13 +29,27 @@ MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingE
                 me->set_texture("blackknight.png");
             }
             break;
-
+        case MovingEntityType::LIGHT_CAVALIER:
+            me = new LightCavalierEntity(position, 100, 0.2,0.2);
+            break;
+        case MovingEntityType::CAVALIER:
+            me = new CavalierEntity(position, 100, 0.2,0.2);
+            break;
+        case MovingEntityType::HEAVY_CAVALIER:
+            me = new HeavyCavalierEntity(position, 100, 0.2 , 0.2);
+            break;
         case MovingEntityType::MINER:
             me = new MinerEntity(position, 100, 0.2, 0.2, GOLDMINER);
             break;
 
         case MovingEntityType::LUMBERJACK:
             me = new LumberJackEntity(position, 100, 0.2, 0.2);
+            break;
+        case MovingEntityType::JUGGERNAUT:
+            me = new JuggernautEntity(position, 100, 0.2, 0.2);
+            break;
+        case MovingEntityType::MERCENARY:
+            me = new MercenaryEntity(position, 100, 0.2, 0.2);
             break;
         default:
             me = nullptr;

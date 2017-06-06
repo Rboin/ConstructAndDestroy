@@ -13,7 +13,21 @@ WarehouseEntity::WarehouseEntity(float mass) : BuildingEntity(
 }
 
 void WarehouseEntity::set_transparent_or_border(bool transparent, bool border) {
-    // NOT IMPLEMENTED YET!
+    sdl_image_data *image;
+    if (transparent) {
+        if(!border) {
+            image = new sdl_image_data{"transp_warehouse.png"};
+        }
+        else
+        {
+            image = new sdl_image_data("red_transp_warehouse.png");
+        }
+    } else {
+        image = new sdl_image_data{"warehouse.png"};
+    }
+
+    _representation->set_data(image);
+    _representation->clear_data();
 }
 
 void WarehouseEntity::select() {

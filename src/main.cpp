@@ -58,13 +58,20 @@ float camera_zoom = 1.0f;
 // initialize buildings and textures
 std::vector<building_with_texture> buildings_with_textures = {
     {"castle.png", BuildingType::CASTLE, new Resources(0,0,5,0), "Castle", "This building can create new units"},
-    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"}
+    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"},
+    {"horsestable.png", BuildingType::STABLE, new Resources(0,0,50,0), "Stable", "This building can create strong fighters on horseback"},
+    {"warfactory.png", BuildingType::WARFACTORY, new Resources(0,0,50,0), "Warfactory", "This building can create some advanced warfare units"}
 };
 
 std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
         {"lumberjack.png", MovingEntityType::LUMBERJACK},
         {"miner.png",      MovingEntityType::MINER},
-        {"knight.png",     MovingEntityType::KNIGHT}
+        {"knight.png",     MovingEntityType::KNIGHT},
+        {"lightcavalier.png",   MovingEntityType::LIGHT_CAVALIER},
+        {"cavalier.png",      MovingEntityType::CAVALIER},
+        {"heavycavalier.png", MovingEntityType::HEAVY_CAVALIER},
+        {"mercenary.png", MovingEntityType::MERCENARY},
+        {"juggernaut.png", MovingEntityType::JUGGERNAUT}
 };
 
 std::string get_texture_of_entity(MovingEntityType type) {
