@@ -38,9 +38,13 @@ struct s_mat2 {
 
     static mat2 translate(vec2);
 
+    mat2 inverse();
+
     vec2 operator*(vec2);
 
     mat2 operator*(mat2);
+
+    mat2 operator*(float);
 };
 
 #endif //C_AND_D_PROJECT_MATRIX_H

@@ -13,6 +13,7 @@ class SDLPanel;
 class SDLProgressBarPanel : public SDLPanel {
 public:
     explicit SDLProgressBarPanel(SDL_ProgressbarRenderObject *);
+    ~SDLProgressBarPanel();
     void set_progress(float progress);
 };
 

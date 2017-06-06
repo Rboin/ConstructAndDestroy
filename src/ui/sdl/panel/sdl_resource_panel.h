@@ -11,7 +11,9 @@
 class SDLResourcePanel : public SDLPanel {
 public:
     explicit SDLResourcePanel(SDL_RenderObject *);
+    ~SDLResourcePanel();
 
+    void resize(const vec2 &) override;
 };
 
 

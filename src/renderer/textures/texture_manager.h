@@ -18,6 +18,8 @@ private:
 public:
     static TextureManager *get_instance();
 
+    ~TextureManager();
+
     void setup(SDL_Renderer *);
 
     SDL_Texture* get_texture(TextureTypes);

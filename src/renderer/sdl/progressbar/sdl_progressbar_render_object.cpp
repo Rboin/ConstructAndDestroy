@@ -11,14 +11,12 @@ SDL_ProgressbarRenderObject::SDL_ProgressbarRenderObject(const vec2 &position, c
     _color = color;
 }
 
-void SDL_ProgressbarRenderObject::render(SDLRenderer *renderer) {
+void SDL_ProgressbarRenderObject::render(SDLRenderer *renderer, const mat2 &transformations) {
     if (!_result) {
         init_texture(renderer);
     }
-    rectangle->x = (int) this->get_position()->x;
-    rectangle->y = (int) this->get_position()->y;
 
-    renderer->draw_to_back_buffer(_result, rectangle);
+    renderer->draw_to_buffer(_result, &get_transformed_rectangle(transformations));
 
     draw(renderer);
 }
@@ -42,4 +40,9 @@ void SDL_ProgressbarRenderObject::draw(SDLRenderer *renderer) {
 
 void SDL_ProgressbarRenderObject::set_progress(float progress) {
     _progress = progress;
+}
+
+SDL_ProgressbarRenderObject::~SDL_ProgressbarRenderObject() {
+    delete _data;
+    clear_data();
 }

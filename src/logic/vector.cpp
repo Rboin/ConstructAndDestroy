@@ -34,6 +34,12 @@ vec2 s_vec2::operator-(const vec2 &v) const {
     return {x - v.x, y - v.y, w};
 }
 
+vec2 s_vec2::operator-=(const vec2 &v) {
+    x -= v.x;
+    y -= v.y;
+    return *this;
+}
+
 vec2 s_vec2::operator*(mat2 m) const {
     return m * (*this);
 }
@@ -92,4 +98,8 @@ vec2 s_vec2::normalize() const {
 
 float s_vec2::dot(const vec2 &v) const {
     return (x * v.x) + (y * v.y);
+}
+
+vec2 operator-(const vec2 &v) {
+    return {0 - v.x, 0 - v.y, v.w};
 }

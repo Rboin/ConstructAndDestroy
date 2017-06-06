@@ -10,6 +10,9 @@
 class SDLPanel : public SDL_UIComponent {
 public:
     explicit SDLPanel(SDL_RenderObject *);
+    virtual ~SDLPanel();
+
+    void resize(const vec2 &) override;
 };
 
 

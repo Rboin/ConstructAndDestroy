@@ -26,7 +26,7 @@ private:
 public:
     ~GraphManager();
 
-    void setup(vec2);
+    void setup(vec2, unsigned int);
 
     static GraphManager *get_instance();
 

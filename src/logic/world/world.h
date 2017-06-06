@@ -8,13 +8,12 @@
 #include <vector>
 #include <string>
 #include "types.h"
-#include "graph/graph.h"
-#include "entity/base_entity.h"
-#include "sdl/sdl_render_object.h"
 
 class BaseEntity;
 class MovingEntity;
 class Player;
+class SDL_RenderObject;
+class SDLRenderer;
 
 class World {
 private:
@@ -32,7 +31,7 @@ public:
     /**
      * The render method.
      */
-    void render(SDLRenderer *);
+    void render(SDLRenderer *, const mat2 &);
 
     /**
      * The update loop, where we update our entities.
@@ -48,6 +47,8 @@ public:
     void remove_dead_entities();
 
     BaseEntity *get_closest_to(vec2);
+
+    const vec2 &get_size() const;
 };
 
 #endif //C_AND_D_PROJECT_WORLD_H

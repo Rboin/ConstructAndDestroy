@@ -54,7 +54,7 @@ MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityType mo
     me->set_goal(think_goal);
     me->set_player(player->get_id());
 
-    vec2 entity_size = {50, 50};
+    vec2 entity_size = {40, 40};
 
 
     sdl_image_data *entity_data = new sdl_image_data{me->get_texture()};

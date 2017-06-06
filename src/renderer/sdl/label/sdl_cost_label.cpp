@@ -32,7 +32,7 @@ SDLCostLabel::SDLCostLabel(const vec2 &position, const vec2 &size, sdl_data *dat
 
 
 
-void SDLCostLabel::render(SDLRenderer *renderer) {
+void SDLCostLabel::render(SDLRenderer *renderer,const mat2 &transformations) {
     sdl_text *temp = (sdl_text*)_text->get_data();
     temp->text = std::to_string((int)_resources->get_resources(_rt)).c_str();
 
@@ -48,13 +48,21 @@ void SDLCostLabel::render(SDLRenderer *renderer) {
         temp->red = data->red;
     }
 
-    _image->render(renderer);
-    _text->render(renderer);
+    _image->render(renderer, transformations);
+    _text->render(renderer, transformations);
 }
 
 SDLCostLabel::~SDLCostLabel() {
     delete this->_text;
     this->_resources = nullptr;
     delete this->_image;
-    clear_data();
+}
+
+void SDLCostLabel::set_position(float x, float y) {
+    RenderObject::set_position(x, y);
+    double size_y = _size.y / 1.5;
+    vec2 image_pos = {_position.x, _position.y}, image_size = {_size.x / 3, (float)size_y};
+    vec2 text_pos = {_position.x + _size.x / 2 - 10, _position.y}, text_size = {_size.x / 3, (float)size_y};
+    _image->set_position(image_pos.x, image_pos.y);
+    _text->set_position(text_pos.x, text_pos.y);
 }

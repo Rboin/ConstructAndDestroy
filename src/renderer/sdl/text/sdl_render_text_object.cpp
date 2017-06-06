@@ -9,10 +9,15 @@ SDL_UI_RenderTextObject::SDL_UI_RenderTextObject(const vec2 &position, const vec
         SDL_RenderObject(position, size, data) {
 }
 
-void SDL_UI_RenderTextObject::render(SDLRenderer *renderer) {
+SDL_UI_RenderTextObject::~SDL_UI_RenderTextObject() {
+    clear_result();
+}
+
+void SDL_UI_RenderTextObject::render(SDLRenderer *renderer, const mat2 &m) {
     clear_result();
     init_texture(renderer);
-    renderer->draw_to_back_buffer(_result, rectangle);
+
+    renderer->draw_to_buffer(_result, &get_transformed_rectangle(m));
 }
 
 void SDL_UI_RenderTextObject::init_texture(SDLRenderer *renderer) {
@@ -28,4 +33,8 @@ void SDL_UI_RenderTextObject::init_texture(SDLRenderer *renderer) {
 void SDL_UI_RenderTextObject::clear_result() {
     SDL_DestroyTexture(_result);
     _result = nullptr;
+}
+
+sdl_text::~sdl_text() {
+    TTF_CloseFont(font);
 }

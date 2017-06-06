@@ -47,6 +47,8 @@ struct s_vec2 {
 
     vec2 operator-(const vec2 &) const;
 
+    vec2 operator-=(const vec2 &);
+
     vec2 operator*(mat2) const;
 
     vec2 operator*(float) const;
@@ -54,6 +56,8 @@ struct s_vec2 {
     vec2 operator*=(float);
 
     vec2 operator/(float) const;
+
+    friend vec2 operator-(const vec2 &);
 
 };
 

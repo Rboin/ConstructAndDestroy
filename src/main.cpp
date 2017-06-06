@@ -2,10 +2,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include <stack>
+#include "sdl/button/restart_wave_button.h"
+#include "sdl/panel/sdl_resource_label.h"
 #include "sdl/label/sdl_name_label.h"
 #include "sdl/label/manager/description_manager.h"
 #include "sdl/badge/sdl_badge_render_object.h"
-#include "sdl/sdl_renderer.h"
+#include "camera/camera_manager.h"
 #include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
@@ -30,11 +33,9 @@
 #include "entity/moving/miner_entity.h"
 #include "behaviour/calculator/basic_force_calculator.h"
 #include "entity/goal/evaluator/work_evaluator.h"
-#include "entity/static/building/warehouse_entity.h"
 #include "sdl/event/sdl_key_event_dispatcher.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl/event/slot/sdl_key_event_slot.h"
-#include "entity/static/building/building_manager.h"
 #include "sdl/event/slot/mouse_handler_buildingpanel.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
@@ -43,13 +44,16 @@
 #include "entity/goal/evaluator/combat_evaluator.h"
 #include "wave/wave.h"
 #include "wave/wave_manager.h"
-#include "sdl/button/sdl_button.h"
 #include "sdl/event/slot/wave_reset_handler.h"
+#include "graph/graph.h"
 
-int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
+int pos_x = 100, pos_y = 200;
 
 SDL_Window *window;
 SDL_Renderer *renderer;
+
+vec2 window_size = {800, 600};
+float camera_zoom = 1.0f;
 
 // initialize buildings and textures
 std::vector<building_with_texture> buildings_with_textures = {
@@ -95,8 +99,9 @@ bool init_sdl() {
 }
 
 bool create_window() {
-    window = SDL_CreateWindow("Construct And Destroy", pos_x, pos_y, size_x, size_y, 0);
-
+    window = SDL_CreateWindow("Construct And Destroy", 100, 100,
+                              (int) window_size.x, (int) window_size.y, SDL_WINDOW_RESIZABLE);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     if (!window) {
         std::cout << " Failed to open window: " << SDL_GetError() << std::endl;
         return false;
@@ -115,7 +120,7 @@ bool create_renderer() {
 
 void setup_renderer() {
     // Set size of renderer to the same as window
-    SDL_RenderSetLogicalSize(renderer, size_x, size_y);
+    SDL_RenderSetLogicalSize(renderer, (int) window_size.x, (int) window_size.y);
     // Set color of renderer to green
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 }
@@ -137,9 +142,26 @@ bool init_img() {
     return true;
 }
 
+bool init_world() {
+    sdl_image_data *world_data = new sdl_image_data{"world-large.png"};
+    SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, world_size, world_data);
+
+    if(!world_data || !world_representation) {
+        return false;
+    }
+    World::get_instance()->set_render_object(world_representation);
+    return true;
+}
+
+bool init_camera() {
+    CameraManager *camera = CameraManager::get_instance();
+
+    return camera != nullptr;
+}
+
 // Initializes our window, renderer and sdl itself.
 bool init_everything() {
-    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img())
+    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img() || !init_camera() || !init_world())
         return false;
     setup_renderer();
     return true;
@@ -161,9 +183,7 @@ int main(int argc, char **argv) {
     tm->setup(renderer);
 
     GraphManager *gm = GraphManager::get_instance();
-    gm->setup({(float) size_x, (float) size_y});
-
-    std::stack<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
+    gm->setup(world_size, node_distance);
 
     vec2 pos = {0, 0};
 
@@ -180,7 +200,7 @@ int main(int argc, char **argv) {
     entity->set_goal(think_goal);
     entity->set_player(player_id);
 
-    vec2 entity_size = {50, 50};
+    vec2 entity_size = {40, 40};
     sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
     SDL_ImageRenderObject *entity_render_object = new SDL_ImageHealthRenderObject(pos, entity_size, entity_data,
                                                                                   entity);
@@ -203,7 +223,7 @@ int main(int argc, char **argv) {
 
     knight_entity->set_player(player_id);
 
-    vec2 knight_entity_size = {50, 50};
+    vec2 knight_entity_size = {40, 40};
     sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};
     SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageHealthRenderObject(pos, knight_entity_size,
                                                                                          knight_entity_data,
@@ -227,7 +247,7 @@ int main(int argc, char **argv) {
 
     gold_miner_entity->set_player(1);
 
-    vec2 gold_miner_entity_size = {50, 50};
+    vec2 gold_miner_entity_size = {40, 40};
     sdl_image_data *gold_miner_entity_data = new sdl_image_data{"miner.png"};
     SDL_ImageRenderObject *gold_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
                                                                                              gold_miner_entity_size,
@@ -251,7 +271,7 @@ int main(int argc, char **argv) {
 
     stone_miner_entity->set_player(1);
 
-    vec2 stone_miner_entity_size = {50, 50};
+    vec2 stone_miner_entity_size = {40, 40};
     sdl_image_data *stone_miner_entity_data = new sdl_image_data{"miner.png"};
     SDL_ImageRenderObject *stone_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
                                                                                               stone_miner_entity_size,
@@ -263,7 +283,7 @@ int main(int argc, char **argv) {
     // End stone mine miner entity
 
     // Begin tree entity
-    vec2 s_position = {400, 280}, s_size = {50, 50};
+    vec2 s_position = {400, 280}, s_size = {40, 40};
     ResourceEntity *s_entity = new TreeEntity(s_position, 50);
     sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
     s_entity->set_textures("tree.png", "trunk.png");
@@ -273,7 +293,7 @@ int main(int argc, char **argv) {
     // End tree entity
 
     // Begin tree entity
-    vec2 s1_position = {400, 240}, s1_size = {50, 50};
+    vec2 s1_position = {400, 240}, s1_size = {40, 40};
     ResourceEntity *s1_entity = new TreeEntity(s1_position, 50);
     sdl_image_data *tree1_data = new sdl_image_data{"tree.png"};
     s1_entity->set_textures("tree.png", "trunk.png");
@@ -282,19 +302,8 @@ int main(int argc, char **argv) {
     World::get_instance()->add_entity(s1_entity);
     // End tree entity
 
-    // Begin warehouse entity
-    vec2 s_position7 = {600, 400};
-    BuildingEntity *s_entity7 = new WarehouseEntity(s_position7, 50);
-    sdl_image_data *entity7_data = new sdl_image_data{"warehouse.png"};
-    SDL_ImageRenderObject *e7_object = new SDL_ImageHealthRenderObject(s_position7, {50, 50}, entity7_data, s_entity7);
-    s_entity7->set_representation(e7_object);
-
-    s_entity7->set_player(player_id);
-//    World::get_instance()->add_entity(s_entity7);
-    // End warehouse entity
-
     // Begin gold mine entity
-    vec2 gold_mine_position = {320, 280}, gold_mine_size = {50, 50};
+    vec2 gold_mine_position = {320, 280}, gold_mine_size = {40, 40};
     ResourceEntity *gold_mine_entity = new GoldMineEntity(gold_mine_position, 50);
     sdl_image_data *gold_mine_data = new sdl_image_data{"goldmine.png"};
     gold_mine_entity->set_textures("goldmine.png", "depletedgoldmine.png");
@@ -306,7 +315,7 @@ int main(int argc, char **argv) {
     // End gold mine entity
 
     // Begin stone mine entity
-    vec2 stone_mine_position = {240, 240}, stone_mine_size = {50, 50};
+    vec2 stone_mine_position = {240, 240}, stone_mine_size = {40, 40};
     ResourceEntity *stone_mine_entity = new StoneMineEntity(stone_mine_position, 50);
     sdl_image_data *stone_mine_data = new sdl_image_data{"stonemine.png"};
     stone_mine_entity->set_textures("stonemine.png", "depletedstonemine.png");
@@ -320,14 +329,9 @@ int main(int argc, char **argv) {
     // TODO: when merged enemy_player, change 1 to player_id
 //    BuildingManager::get_instance()->add_building(player_id, s_entity7);
 
-    SDLRenderer *render_engine = new SDLRenderer(renderer);
+    SDLRenderer *render_engine = new SDLRenderer(renderer, {window_size.x, window_size.y});
 
-    sdl_image_data *world_data = new sdl_image_data{"world.png"};
-    SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, {800, 600}, world_data);
-
-    World::get_instance()->set_render_object(world_representation);
-
-    vec2 main_panel_position = {0, 0}, main_panel_size = {800, 600};
+    vec2 main_panel_position = {0, 0}, main_panel_size = {window_size.x, window_size.y};
     sdl_data *panel_data = new sdl_data{255, 255, 255};
 
     SDL_RenderObject *main_panel_representation = new SDL_RenderObject(main_panel_position, main_panel_size,
@@ -359,21 +363,23 @@ int main(int argc, char **argv) {
     SDL_RenderObject *panel_o = new SDL_RenderObject(resource_panel_pos, resource_panel_size, resource_panel_data);
     SDLResourcePanel *resource_panel = new SDLResourcePanel(panel_o);
 
-    sdl_data *sdl_label_data = new sdl_data{255, 255, 255, 255};
+    sdl_data *sdl_label_data_wood = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_wood = {605, 5};
-    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data, "log.png",
-                                                    ResourceType::WOOD, f_font);
-    SDLPanel *wood_panel = new SDLPanel(wood_label);
+    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data_wood, "log.png",
+                                                    ResourceType::WOOD);
+    SDLResourceLabel *wood_panel = new SDLResourceLabel(wood_label);
 
+    sdl_data *sdl_label_data_gold = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_gold = {675, 5};
-    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data, "gold.png",
-                                                    ResourceType::GOLD, f_font);
-    SDLPanel *gold_panel = new SDLPanel(gold_label);
+    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data_gold, "gold.png",
+                                                    ResourceType::GOLD);
+    SDLResourceLabel *gold_panel = new SDLResourceLabel(gold_label);
 
+    sdl_data *sdl_label_data_stone = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_stone = {740, 5};
-    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data, "stone.png",
-                                                     ResourceType::STONE, f_font);
-    SDLPanel *stone_panel = new SDLPanel(stone_label);
+    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone, "stone.png",
+                                                     ResourceType::STONE);
+    SDLResourceLabel *stone_panel = new SDLResourceLabel(stone_label);
     ///End Resource Panel
 
     ///Begin Waves
@@ -400,7 +406,7 @@ int main(int argc, char **argv) {
     sdl_solid_text *restart_text = new sdl_solid_text{{255, 0, 0, 255}, {255, 255, 255, 255}, wave_font, 14, 5,
                                                       restart_content};
     SDLRenderSolidText *restart_o = new SDLRenderSolidText(restart_button_pos, restart_button_size, restart_text);
-    SDLButton *restart_button = new SDLButton(restart_o);
+    RestartWaveButton *restart_button = new RestartWaveButton(restart_o);
 
     wave_panel->add_component(restart_button);
 
@@ -411,7 +417,7 @@ int main(int argc, char **argv) {
 
     // building/control panel
     vec2 control_panel_pos = {0, 500}, control_panel_size = {800, 100.0};
-    sdl_data *control_panel_data = new sdl_data{100, 100, 100, 100};
+    sdl_data *control_panel_data = new sdl_data{0, 0, 0, 100};
     SDL_RenderObject *panel_b = new SDL_RenderObject(control_panel_pos, control_panel_size, control_panel_data);
 
     SDLControlPanel *control_panel = SDLControlPanel::get_instance(panel_b);

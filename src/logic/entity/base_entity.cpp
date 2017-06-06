@@ -50,8 +50,8 @@ const bool BaseEntity::is(int type) {
     return _type == type;
 }
 
-void BaseEntity::render(SDLRenderer *renderer) {
-    _representation->render(renderer);
+void BaseEntity::render(SDLRenderer *renderer, const mat2 &transformations) {
+    _representation->render(renderer, transformations);
 }
 
 Player *BaseEntity::get_player() {

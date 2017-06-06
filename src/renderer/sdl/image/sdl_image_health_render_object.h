@@ -16,9 +16,11 @@ private:
 public:
     SDL_ImageHealthRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data, BaseEntity*);
 
-    void render(SDLRenderer *) override;
+    ~SDL_ImageHealthRenderObject();
 
-    void draw_health_bar(SDLRenderer *);
+    void render(SDLRenderer *, const mat2 &) override;
+
+    void draw_health_bar(SDLRenderer *, vec2);
 };
 
 

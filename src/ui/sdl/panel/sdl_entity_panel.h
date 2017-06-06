@@ -6,11 +6,12 @@
 #define CONSTRUCT_AND_DESTROY_SDL_ENTITY_PANEL_H
 
 #include <map>
-#include "../../../../include/moving_entity_types.h"
+#include "moving_entity_types.h"
 #include "sdl_panel.h"
 
 class BuildingEntity;
 class SDL_BadgeRenderObject;
+class SDL_QueueBadgeRenderObject;
 class SDL_ProgressbarRenderObject;
 
 /**
@@ -18,13 +19,17 @@ class SDL_ProgressbarRenderObject;
  */
 class SDLEntityPanel : public SDLPanel {
 private:
-    std::map<MovingEntityType, SDL_BadgeRenderObject*> _badges;
+    std::map<MovingEntityType, SDL_QueueBadgeRenderObject*> _queue_badges;
     BuildingEntity* _building;
-    void update_badges();
-    void update_badge_color(std::vector<MovingEntityType> orders, MovingEntityType type, SDL_BadgeRenderObject* badge);
+    void update_queue_badges();
+    void update_queue_badge_color(std::vector<MovingEntityType> orders, MovingEntityType type,
+                                  SDL_QueueBadgeRenderObject *badge);
 public:
     explicit SDLEntityPanel(SDL_RenderObject *, BuildingEntity* selected_building);
-    void render(SDLRenderer *renderer, float d) override;
+    ~SDLEntityPanel();
+    void render(SDLRenderer *renderer, mat2 &, float d) override;
+
+    void resize(const vec2 &) override;
 };
 
 

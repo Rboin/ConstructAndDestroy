@@ -11,7 +11,9 @@
 #include "entity/static/resource_type.h"
 
 class SDL_UI_RenderTextObject;
+
 class SDL_ImageRenderObject;
+
 class Resources;
 
 class SDLRenderLabel : public SDL_RenderObject {
@@ -21,10 +23,13 @@ private:
     Resources *_resource;
     ResourceType _rt;
 public:
-    SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *);
-    SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *, float value);
-    void render(SDLRenderer *renderer) override;
+    SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType);
 
+    ~SDLRenderLabel();
+
+    void render(SDLRenderer *renderer, const mat2 &) override;
+
+    void set_position(float x, float y) override;
 };
 
 

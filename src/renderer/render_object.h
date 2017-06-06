@@ -21,9 +21,17 @@
 template<typename T, typename D, typename R>
 class RenderObject {
 protected:
+    vec2 _points[4];
     vec2 _position, _size;
     D *_data;
     R *_result;
+
+    void update_points() {
+        _points[0] = _position;
+        _points[1] = vec2(_position.x + _size.x, _position.y);
+        _points[2] = _position + _size;
+        _points[3] = vec2(_position.x, _position.y + _size.y);
+    }
 public:
 
     explicit RenderObject(vec2 position, vec2 size, D *data) {
@@ -31,6 +39,8 @@ public:
         _size = size;
         _data = data;
         _result = nullptr;
+
+        update_points();
     }
 
     virtual ~RenderObject() {}
@@ -41,13 +51,20 @@ public:
         return &_position;
     }
 
-    void set_position(float x, float y) {
+    virtual void set_position(float x, float y) {
         _position.x = x;
         _position.y = y;
+        update_points();
     }
 
     const vec2 *get_size() {
         return &_size;
+    }
+
+    void set_size(const vec2 &v) {
+        _size.x = v.x;
+        _size.y = v.y;
+        update_points();
     }
 
     virtual D *get_data() {
@@ -76,7 +93,7 @@ public:
         return within_horizontal_bounds && within_vertical_bounds;
     }
 
-    virtual void render(T *) = 0;
+    virtual void render(T *, const mat2 &) = 0;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_RENDERING_OBJECT_H

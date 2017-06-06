@@ -19,21 +19,28 @@ struct sdl_data {
         blue = b;
         alpha = a;
     }
+
+    virtual ~sdl_data() {}
 };
 
 class SDL_RenderObject : public RenderObject<SDLRenderer, sdl_data, SDL_Texture> {
 protected:
-    SDL_Rect *rectangle;
+    vec2 point_buffer[4];
+    SDL_Rect rectangle;
 public:
     SDL_RenderObject(const vec2 &position, const vec2 &size, sdl_data *data);
 
-    void render(SDLRenderer *t) override;
+    ~SDL_RenderObject();
+
+    void render(SDLRenderer *t, const mat2 &) override;
 
     virtual void init_texture(SDLRenderer *);
 
     void clear_texture(SDLRenderer *, SDL_Rect *);
 
     void clear_data() override;
+
+    SDL_Rect &get_transformed_rectangle(const mat2 &);
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_UI_RENDER_OBJECT_H

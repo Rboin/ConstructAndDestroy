@@ -2,6 +2,7 @@
 // Created by Jeroen on 5/11/2017.
 //
 
+#include "manager/build_and_spawn_manager.h"
 #include "sdl/label/manager/description_manager.h"
 #include "sdl/label/sdl_name_label.h"
 #include "sdl/event/sdl_event_types.h"
@@ -16,20 +17,13 @@
 #include "state/state_machine.h"
 
 MouseHandlerBuildingPanel::MouseHandlerBuildingPanel() {
+
 }
 
 MouseHandlerBuildingPanel::~MouseHandlerBuildingPanel() {}
 
-void MouseHandlerBuildingPanel::handle_up(sdl_mouse_event_data data, SDLUnitPanel *sdl_panel) {
-    Player *p = PlayerManager::get_instance()->get_player(player_id);
-
-    // If current state of an user is NOT ChoosingBuildingPosition,
-    // then let it position a building
-    // If it is positioning a building, the user has found a position so change
-    // the state to PlacingBuilding
-    if (dynamic_cast<const ChoosingBuildingPosition *>(p->state_machine->current_state) == 0) {
-        BuildingManager::get_instance()->choose_building_position(player_id, sdl_panel->get_building_type());
-    }
+void MouseHandlerBuildingPanel::handle_up(SDLUnitPanel *sdl_panel) {
+    BuildAndSpawnManager::get_instance()->build_building(sdl_panel);
 }
 
 
@@ -48,7 +42,7 @@ void MouseHandlerBuildingPanel::handle(sdl_mouse_event_data data, SDLUnitPanel *
     switch(data.button) {
         case SDL_BUTTON_LEFT:
             if (data.type == SDL_MOUSEBUTTONUP) {
-                return handle_up(data, sdl_panel);
+                return handle_up(sdl_panel);
             }
 
             return;

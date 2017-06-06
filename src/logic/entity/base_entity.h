@@ -45,7 +45,7 @@ public:
 
     const bool is(int);
 
-    virtual void render(SDLRenderer *);
+    virtual void render(SDLRenderer *, const mat2 &);
 
     virtual void update(float){};
 

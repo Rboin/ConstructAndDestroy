@@ -18,7 +18,9 @@ private:
 public:
     SDL_ProgressbarRenderObject(const vec2 &position, const vec2 &size, SDL_Color color, sdl_data *data);
 
-    void render(SDLRenderer *) override;
+    ~SDL_ProgressbarRenderObject();
+
+    void render(SDLRenderer *, const mat2 &) override;
 
     void set_progress(float progress);
 };

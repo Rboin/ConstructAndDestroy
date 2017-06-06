@@ -36,7 +36,7 @@ BuildingEntity *BuildingFactory::create(BuildingType type) {
             break;
     }
 
-    iro = new SDL_ImageHealthRenderObject({0, 0}, {50, 50}, bd, be);
+    iro = new SDL_ImageHealthRenderObject({0, 0}, {40, 40}, bd, be);
     be->set_player(player_id);
     be->set_representation(iro);
     return be;

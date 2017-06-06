@@ -16,6 +16,10 @@ SDL_MouseEventDispatcher *SDL_MouseEventDispatcher::get_instance() {
     return _instance;
 }
 
+SDL_MouseEventDispatcher::~SDL_MouseEventDispatcher() {
+    _instance = nullptr;
+}
+
 void SDL_MouseEventDispatcher::dispatch(sdl_mouse_event_data d) {
     SDL_UIComponent *best_component = nullptr;
     Slot<sdl_mouse_event_data> *best_slot = nullptr;
@@ -34,5 +38,3 @@ void SDL_MouseEventDispatcher::dispatch(sdl_mouse_event_data d) {
         best_slot->on(d);
     }
 }
-
-

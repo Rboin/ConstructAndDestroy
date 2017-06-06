@@ -4,10 +4,13 @@
 
 #include "settings.h"
 #include <cmath>
+#include <iostream>
 #include "mouse_handler_world.h"
+#include "settings.h"
 #include "world/world.h"
 #include "entity/player.h"
 #include "behaviour/move_order.h"
+#include "camera/camera_manager.h"
 #include <iostream>
 #include "sdl/event/sdl_event_types.h"
 
@@ -28,6 +31,7 @@ MouseHandlerWorld::~MouseHandlerWorld() {}
 
 
 void MouseHandlerWorld::handle_down(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
+    start_world = CameraManager::to_world(data.position);
     start_drag_x = (int)data.position.x;
     start_drag_y = (int)data.position.y;
     world_panel->start_drag.x =  data.position.x;
@@ -44,7 +48,7 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
         //check if event is a click or a drag.
         if (std::abs(start_drag_x - data.position.x) < 10 && std::abs(start_drag_y - data.position.y) < 10) {
             //it is a click
-            vec2 pos = {data.position.x, data.position.y};
+            vec2 pos = CameraManager::to_world(data.position);
             player->select_one_unit(pos);
 
             if (player->selected_units.empty()) {
@@ -53,8 +57,8 @@ void MouseHandlerWorld::handle_up(sdl_mouse_event_data data) {
 
         } else {
             //it is a drag.
-            player->select_units_in_rectangle(start_drag_x, start_drag_y,
-                                              data.position.x, data.position.y);
+            player->select_units_in_rectangle(start_world.x, start_world.y,
+                                              end_world.x, end_world.y);
         }
     }
 }
@@ -67,20 +71,22 @@ void MouseHandlerWorld::on(sdl_mouse_event_data data) {
     }
     else if( data.type == SDL_MOUSEBUTTONDOWN || data.type == SDL_MOUSEBUTTONUP){
         handle(data, world_panel);
+    } else if(data.type == SDL_MOUSEWHEEL) {
+        handle_mouse_scroll(data);
     }
 }
 
 void MouseHandlerWorld::handle_motion(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
     if(data.button == SDL_BUTTON_LEFT){
+        end_world = CameraManager::to_world(data.position);
         world_panel->dragging = true;
         world_panel->end_drag.x = data.position.x;
         world_panel->end_drag.y =  data.position.y;
     }
-
 }
 
 void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_panel) {
-    vec2 pos = data.position;
+    vec2 pos = CameraManager::to_world(data.position);
 
     switch(data.button) {
         case SDL_BUTTON_LEFT:
@@ -108,5 +114,11 @@ void MouseHandlerWorld::handle(sdl_mouse_event_data data, SDLWorldPanel *world_p
 
 void MouseHandlerWorld::handle_right_button(sdl_mouse_event_data &data, const vec2 &v) {
     MoveOrder::get_instance()->orderMove(&PlayerManager::get_instance()->get_player(player_id)->selected_units, v);
+}
+
+void MouseHandlerWorld::handle_mouse_scroll(sdl_mouse_event_data &data) {
+    // Using the button variable as the direction of the scroll,
+    // which is 1 for scroll up, and -1 for scroll down.
+    CameraManager::get_instance()->zoom(camera_initial_scroll_speed * data.button);
 }
 

@@ -11,7 +11,6 @@
 StaticEntity::StaticEntity(vec2 position, float mass) : BaseEntity(STATIC, position, mass) {
     // Remove edges from graph
     GraphManager *gm = GraphManager::get_instance();
-    gm->setup({800, 600});
     gm->graph->remove_edge(position);
 
     // Set current node to unwalkable
@@ -29,8 +28,6 @@ StaticEntity::StaticEntity(vec2 position, float mass) : BaseEntity(STATIC, posit
  * that would affect A*
  */
 StaticEntity::StaticEntity(float mass) : BaseEntity(STATIC, {0,0}, mass) {
-    GraphManager *gm = GraphManager::get_instance();
-    gm->setup({800, 600});
 };
 
 void StaticEntity::set_position(float x, float y, bool finalposition) {
@@ -40,7 +37,6 @@ void StaticEntity::set_position(float x, float y, bool finalposition) {
     if(finalposition) {
         // Remove edges from graph
         GraphManager *gm = GraphManager::get_instance();
-        gm->setup({800, 600});
         gm->graph->remove_edge(_position);
 
         // Set current node to unwalkable

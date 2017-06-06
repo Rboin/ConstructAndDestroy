@@ -12,8 +12,9 @@ private:
     static SDL_MouseEventDispatcher *_instance;
     SDL_MouseEventDispatcher();
 public:
-
     static SDL_MouseEventDispatcher *get_instance();
+
+    ~SDL_MouseEventDispatcher();
 
     void dispatch(sdl_mouse_event_data d) override;
 };

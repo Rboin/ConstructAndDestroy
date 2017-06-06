@@ -13,7 +13,12 @@
 class SDLBuildingPanel : public SDLPanel {
 public:
     explicit SDLBuildingPanel(SDL_RenderObject *);
-    void render(SDLRenderer *renderer, float d) override;
+
+    ~SDLBuildingPanel();
+
+    void resize(const vec2 &) override;
+
+    void render(SDLRenderer *renderer, mat2 &, float d) override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_BUILDING_PANEL_H

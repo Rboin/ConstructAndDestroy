@@ -7,10 +7,24 @@
 
 #include <string>
 #include <vector>
+#include "types.h"
+#include "vector.h"
+#include "building_type.h"
 #include "moving_entity_types.h"
 #include "building_type.h"
 
 class Resources;
+
+extern float camera_zoom;
+extern vec2 window_size;
+const vec2 world_size = {3000.0f, 3000.0f};
+const unsigned int node_distance = 40;
+const vec2 camera_initial_position = {0.0f, 0.0f};
+const float camera_initial_scroll_speed = 0.01f;
+const float camera_min_zoom = 0.75f;
+const float camera_max_zoom = 1.25f;
+const float camera_movement_speed = 0.1f;
+const float camera_scroll_margin = 20.0f;
 
 const std::string path_to_texture =  "res/textures/";
 const std::string path_to_selected_texture =  "res/textures/sel_";

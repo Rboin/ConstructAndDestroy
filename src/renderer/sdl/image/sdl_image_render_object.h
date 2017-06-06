@@ -15,13 +15,19 @@ struct sdl_image_data : public sdl_data {
     sdl_image_data(const std::string t) : sdl_data(0, 0, 0) {
         type = t;
     }
+
+    virtual ~sdl_image_data() {
+
+    }
 };
 
 class SDL_ImageRenderObject : public SDL_RenderObject {
 public:
     SDL_ImageRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data);
 
-    void render(SDLRenderer *) override;
+    virtual ~SDL_ImageRenderObject();
+
+    void render(SDLRenderer *, const mat2 &) override;
 
     void init_texture(SDLRenderer *) override;
 

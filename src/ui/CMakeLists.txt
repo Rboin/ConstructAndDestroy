@@ -58,7 +58,10 @@ set(SOURCE_FILES
         sdl/panel/sdl_progressbar_panel.h
         manager/build_and_spawn_manager.h
         manager/build_and_spawn_manager.cpp
-        )
+        sdl/panel/sdl_resource_label.cpp
+        sdl/panel/sdl_resource_label.h
+        sdl/panel/sdl_control_sub_panel.cpp
+        sdl/panel/sdl_control_sub_panel.h)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -68,8 +71,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(../renderer ../logic)
 
 add_library(cd_ui STATIC
-    ${SOURCE_FILES}
-       )
+    ${SOURCE_FILES})
 
 target_link_libraries(cd_ui cd_renderer cd_logic)
 

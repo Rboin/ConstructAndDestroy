@@ -18,7 +18,7 @@ SDLNameLabel::SDLNameLabel(const vec2 &position, const vec2 &size, sdl_data *dat
 
 }
 
-void SDLNameLabel::render(SDLRenderer *renderer) {
+void SDLNameLabel::render(SDLRenderer *renderer, const mat2 &transformations) {
     if (_text == "") {
         return;
     }
@@ -26,7 +26,7 @@ void SDLNameLabel::render(SDLRenderer *renderer) {
     sdl_text *temp = (sdl_text*)_text_object->get_data();
     temp->text = _text.c_str();
 
-    _text_object->render(renderer);
+    _text_object->render(renderer, transformations);
 }
 
 void SDLNameLabel::set_text(std::string text) {
@@ -35,4 +35,9 @@ void SDLNameLabel::set_text(std::string text) {
 
 SDLNameLabel::~SDLNameLabel(){
     delete this->_text_object;
+}
+
+void SDLNameLabel::set_position(float x, float y) {
+    RenderObject::set_position(x, y);
+    _text_object->set_position(x, y);
 }

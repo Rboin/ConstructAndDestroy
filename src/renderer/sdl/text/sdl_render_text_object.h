@@ -16,13 +16,17 @@ struct sdl_text : public sdl_data {
         text = c;
         font = f;
     }
+
+    virtual ~sdl_text();
 };
 
 class SDL_UI_RenderTextObject : public SDL_RenderObject {
 public:
     SDL_UI_RenderTextObject(const vec2 &position, const vec2 &size, sdl_text *data);
 
-    void render(SDLRenderer *) override;
+    ~SDL_UI_RenderTextObject();
+
+    void render(SDLRenderer *, const mat2 &) override;
 
     void init_texture(SDLRenderer *renderer) override;
 

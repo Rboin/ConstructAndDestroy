@@ -3,6 +3,7 @@
 #include "iostream"
 #include "entity/static/tree_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
+#include "entity/moving/moving_entity.h"
 
 bool LumberOrderStrategy::applies(std::vector<MovingEntity *> *units, vec2 &targetVector, BaseEntity *target) {
     if (target == nullptr) {
