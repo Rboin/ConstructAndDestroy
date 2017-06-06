@@ -13,7 +13,7 @@ class SDLUnitPanel;
 
 class MouseHandlerBuildingPanel : public SDL_MouseEventSlot {
 private:
-    void handle_up(sdl_mouse_event_data data, SDLUnitPanel *sdl_panel);
+    void handle_up(SDLUnitPanel *sdl_panel);
     void handle(sdl_mouse_event_data, SDLUnitPanel *);
     void handle_motion(sdl_mouse_event_data data, SDLUnitPanel* sdl_panel);
 public:
