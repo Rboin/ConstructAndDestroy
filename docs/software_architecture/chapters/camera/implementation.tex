@@ -2,9 +2,15 @@
 To use the camera we created two classes: the Camera and the CameraManager 
 classes. The Camera class is the actual camera that moves around and updates 
 its model matrix. The CameraManager is used as a proxy for interacting with 
-the Camera class. Other classes, like the SDLWindow class, can use the 
+the Camera class. Other classes, like the SDLRenderer class, can use the 
 CameraManager class to call the camera's resize method once the resize event 
-has been called, as shown in \cref{fig:window-resize}.
+has been called, as shown in \cref{fig:renderer-resize}.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{res/renderer-resize.png}
+    \caption{Resizing the window.}\label{fig:renderer-resize}
+\end{figure}
 
 The only thing the Camera class needs to do is update it's model matrix and 
 the matrix that is while rendering objects in the world. The matrix that is 
