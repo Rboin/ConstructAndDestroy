@@ -17,6 +17,7 @@ public:
 
     std::string get_texture() override ;
     void set_texture(std::string src) override ;
+    void render(SDLRenderer *renderer, const mat2 &mat);
 };
 
 

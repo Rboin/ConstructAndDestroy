@@ -5,6 +5,7 @@
 #include "lumberjack_entity.h"
 #include "sdl/image/sdl_image_render_object.h"
 #include <iostream>
+#include <cmath>
 
 LumberJackEntity::LumberJackEntity(vec2 position, float mass,
                                    const float max_force, const float max_speed) :
@@ -32,4 +33,9 @@ std::string LumberJackEntity::get_texture() {
 
 void LumberJackEntity::set_texture(std::string src) {
     this->texture = src;
+}
+
+void LumberJackEntity::render(SDLRenderer *renderer, const mat2 &mat) {
+    upsert_attribute("log.png", this->get_carrying());
+    MovingEntity::render(renderer, mat);
 }

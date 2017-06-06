@@ -77,6 +77,8 @@ public:
     std::stack<vec2 *>& get_path();
 
     float get_delta_time();
+
+    void render(SDLRenderer *renderer, const mat2 &) override;
 };
 
 #endif //C_AND_D_PROJECT_MOVINGENTITY_H
