@@ -11,7 +11,7 @@ class MovingEntity;
 
 class MinerEntity : public MovingEntity {
 public:
-    MinerEntity(vec2, float, const float, const float, const JobType);
+    MinerEntity(vec2, float, const JobType);
     void select();
     void deselect();
 

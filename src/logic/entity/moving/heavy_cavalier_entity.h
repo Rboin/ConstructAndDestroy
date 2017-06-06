@@ -9,7 +9,7 @@
 
 class HeavyCavalierEntity : public MovingEntity {
 public:
-    HeavyCavalierEntity(vec2, float, const float, const float);
+    HeavyCavalierEntity(vec2, float);
     void select();
     void deselect();
 

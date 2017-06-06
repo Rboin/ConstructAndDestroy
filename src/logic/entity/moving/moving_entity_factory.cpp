@@ -23,33 +23,33 @@ MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingE
     switch(moving_entity_type){
 
         case MovingEntityType::KNIGHT:
-            me = new KnightEntity(position, 100, 0.2, 0.2);
+            me = new KnightEntity(position, 100);
             if(player->get_id() != player_id)
             {
                 me->set_texture("blackknight.png");
             }
             break;
         case MovingEntityType::LIGHT_CAVALIER:
-            me = new LightCavalierEntity(position, 100, 0.2,0.2);
+            me = new LightCavalierEntity(position, 100);
             break;
         case MovingEntityType::CAVALIER:
-            me = new CavalierEntity(position, 100, 0.2,0.2);
+            me = new CavalierEntity(position, 100);
             break;
         case MovingEntityType::HEAVY_CAVALIER:
-            me = new HeavyCavalierEntity(position, 100, 0.2 , 0.2);
+            me = new HeavyCavalierEntity(position, 100);
             break;
         case MovingEntityType::MINER:
-            me = new MinerEntity(position, 100, 0.2, 0.2, GOLDMINER);
+            me = new MinerEntity(position, 100, GOLDMINER);
             break;
 
         case MovingEntityType::LUMBERJACK:
-            me = new LumberJackEntity(position, 100, 0.2, 0.2);
+            me = new LumberJackEntity(position, 100);
             break;
         case MovingEntityType::JUGGERNAUT:
-            me = new JuggernautEntity(position, 100, 0.2, 0.2);
+            me = new JuggernautEntity(position, 100);
             break;
         case MovingEntityType::MERCENARY:
-            me = new MercenaryEntity(position, 100, 0.2, 0.2);
+            me = new MercenaryEntity(position, 100);
             break;
         default:
             me = nullptr;

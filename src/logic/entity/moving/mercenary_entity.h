@@ -9,7 +9,7 @@
 
 class MercenaryEntity : public MovingEntity {
 public:
-    MercenaryEntity(vec2, float, const float, const float);
+    MercenaryEntity(vec2, float);
     void select();
     void deselect();
 

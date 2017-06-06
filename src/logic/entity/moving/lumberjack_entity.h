@@ -13,7 +13,7 @@ class LumberJackEntity : public MovingEntity {
 private:
 
 public:
-    LumberJackEntity(vec2, float, const float, const float);
+    LumberJackEntity(vec2, float);
     void select();
     void deselect();
 

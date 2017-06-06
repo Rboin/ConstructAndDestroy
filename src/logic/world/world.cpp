@@ -37,9 +37,12 @@ void World::update(float d_t) {
     remove_dead_entities();
     for (unsigned int i = 0; i < _entities.size(); i++) {
         _entities.at(i)->update(d_t);
+        _entities.at(i)->regenerate_hp(d_t);
     }
     ResourceManager *rm = ResourceManager::get_instance();
     rm->replenish_resources(d_t);
+
+
 
     std::vector<int> player_ids = PlayerManager::get_instance()->get_player_ids();
     for (int i = 0; i < player_ids.size(); i++) {

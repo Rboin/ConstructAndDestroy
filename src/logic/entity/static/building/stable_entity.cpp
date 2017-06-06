@@ -8,7 +8,7 @@
 #include "entity/moving/spawnable_entity.h"
 
 StableEntity::StableEntity(vec2 position, float mass) : BuildingEntity(position, mass, STABLE, STABLETEXTURE) {
-    costs = new Resources(0, 0, 50, 0);
+    costs = new Resources(0, 50, 50, 0);
 
     spawnable_entities = {
             new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::LIGHT_CAVALIER, "Simple knight that will fight your enemies from a horse."),
@@ -19,7 +19,7 @@ StableEntity::StableEntity(vec2 position, float mass) : BuildingEntity(position,
 }
 
 StableEntity::StableEntity(float mass) : BuildingEntity(mass, STABLE, STABLETEXTURE) {
-    costs = new Resources(0, 0, 50, 0);
+    costs = new Resources(0, 50, 50, 0);
 
     spawnable_entities = {
             new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::LIGHT_CAVALIER, "Simple knight that will fight your enemies from a horse."),

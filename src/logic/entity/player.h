@@ -55,7 +55,7 @@ public:
 
     void clear_units();
 
-    KnightEntity* has_knight();
+    MovingEntity* get_combat_unit();
 };
 
 

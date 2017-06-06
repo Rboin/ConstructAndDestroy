@@ -18,6 +18,7 @@ BaseEntity::BaseEntity(int type, vec2 position, float mass) {
     _attack_damage = 2;
     _attack_speed = 1;
     _marking = 0;
+    _regeneration_rate = 0.001f;
 }
 
 void BaseEntity::set_representation(SDL_RenderObject *r) {
@@ -25,7 +26,7 @@ void BaseEntity::set_representation(SDL_RenderObject *r) {
 }
 
 BaseEntity::~BaseEntity() {
-    if(_representation) {
+    if (_representation) {
         delete _representation;
     }
     _player = nullptr;
@@ -63,8 +64,9 @@ void BaseEntity::set_player(int p) {
     _player = pm->get_player(p);
 }
 
-void BaseEntity::select() {std::cout << "Can't select base entity" << std::endl;}
-void BaseEntity::deselect() {std::cout << "Can't deselect base entity" << std::endl;}
+void BaseEntity::select() { std::cout << "Can't select base entity" << std::endl; }
+
+void BaseEntity::deselect() { std::cout << "Can't deselect base entity" << std::endl; }
 
 SDL_RenderObject *BaseEntity::get_representation() {
     return _representation;
@@ -99,4 +101,13 @@ void BaseEntity::multiply_stats(float f) {
     _health *= f;
     _attack_damage *= f;
     _attack_speed *= f;
+}
+
+void BaseEntity::regenerate_hp(float d_t) {
+    float regen = _regeneration_rate * d_t;
+    if (_health + regen > _max_health) {
+        _health = _max_health;
+    } else {
+        _health += regen;
+    }
 }

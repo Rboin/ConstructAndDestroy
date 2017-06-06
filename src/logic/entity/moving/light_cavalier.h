@@ -9,7 +9,7 @@
 
 class LightCavalierEntity : public MovingEntity {
 public:
-    LightCavalierEntity(vec2, float, const float, const float);
+    LightCavalierEntity(vec2, float);
     void select();
     void deselect();
 

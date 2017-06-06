@@ -4,12 +4,15 @@
 
 #include "sdl/image/sdl_image_render_object.h"
 #include "warehouse_entity.h"
+#include "entity/resources.h"
 
 WarehouseEntity::WarehouseEntity(vec2 position, float mass) : BuildingEntity(
         position, mass, WAREHOUSE, WAREHOUSETEXTURE) {
+    costs = new Resources(0,10,10,0);
 }
 WarehouseEntity::WarehouseEntity(float mass) : BuildingEntity(
         mass, WAREHOUSE, WAREHOUSETEXTURE) {
+    costs = new Resources(0,10,10,0);
 }
 
 void WarehouseEntity::set_transparent_or_border(bool transparent, bool border) {

@@ -7,16 +7,19 @@
 #include "mercenary_entity.h"
 
 
-MercenaryEntity::MercenaryEntity(vec2 position, float mass,
-                                   const float max_force, const float max_speed) :
-        MovingEntity(position, mass, max_force, max_speed, ENEMY) {
+MercenaryEntity::MercenaryEntity(vec2 position, float mass) :
+        MovingEntity(position, mass, ENEMY) {
     carrying = 0;
-    _attack_damage = 12;
+    max_force = 0.2;
+    max_speed = 0.1;
+    _attack_damage = 20;
+    _max_health = 50;
+    _health = 50;
     texture = "mercenary.png";
 }
 
 void MercenaryEntity::select() {
-    sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
+    sdl_image_data *entity_data = new sdl_image_data{"sel_" + texture};
     _representation->set_data(entity_data);
     _representation->clear_data();
 }

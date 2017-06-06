@@ -9,7 +9,7 @@
 
 class JuggernautEntity : public MovingEntity {
 public:
-    JuggernautEntity(vec2, float, const float, const float);
+    JuggernautEntity(vec2, float);
     void select();
     void deselect();
 

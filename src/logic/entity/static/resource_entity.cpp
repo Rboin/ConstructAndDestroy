@@ -10,10 +10,10 @@ ResourceEntity::ResourceEntity(vec2 position, float mass, ResourceType rt)
         : StaticEntity(position,
                        mass) {
     _resource_type = rt;
-    _units = 50.f;
+    _units = 250.f;
     _depleted = false;
     _max_units = 250.f;
-    _replenish_rate = 0.000001f;
+    _replenish_rate = 0.0001f;
     //add resource to resource manager
     ResourceManager *rm = ResourceManager::get_instance();
     rm->add_resource(this);
@@ -45,7 +45,7 @@ void ResourceEntity::replenish_resource(float d_t) {
     if (_units <= _max_units) {
         _units += _replenish_rate * d_t;
     }
-    if (_units >= 100) {
+    if (_units >= 100 && _depleted) {
         _depleted = false;
         update_texture();
     }
