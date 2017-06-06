@@ -136,7 +136,7 @@ set(SOURCE_FILES
         wave/wave_manager.h
         entity/entity_marks.h
         entity/moving/spawnable_entity_manager.h
-        entity/moving/spawnable_entity_manager.cpp entity/static/building/stable_entity.h entity/static/building/stable_entity.cpp entity/moving/cavalier_entity.h entity/moving/cavalier_entity.cpp)
+        entity/moving/spawnable_entity_manager.cpp entity/static/building/stable_entity.h entity/static/building/stable_entity.cpp entity/moving/cavalier_entity.h entity/moving/cavalier_entity.cpp entity/moving/heavy_cavalier_entity.h entity/moving/heavy_cavalier_entity.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

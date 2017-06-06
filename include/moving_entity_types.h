@@ -9,7 +9,8 @@ enum MovingEntityType {
     KNIGHT,
     LUMBERJACK,
     MINER,
-    CAVALIER
+    CAVALIER,
+    HEAVY_CAVALIER
 };
 
 #endif //CONSTRUCT_AND_DESTROY_MOVING_ENTITY_TYPES_H

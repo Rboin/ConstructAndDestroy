@@ -62,7 +62,8 @@ std::vector<entity_with_texture> entities_with_textures = std::vector<entity_wit
         {"lumberjack.png", MovingEntityType::LUMBERJACK},
         {"miner.png",      MovingEntityType::MINER},
         {"knight.png",     MovingEntityType::KNIGHT},
-        {"rider.png",      MovingEntityType::CAVALIER}
+        {"rider.png",      MovingEntityType::CAVALIER},
+        {"heavycavalier.png", MovingEntityType::HEAVY_CAVALIER}
 };
 
 std::string get_texture_of_entity(MovingEntityType type) {
