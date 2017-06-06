@@ -1,0 +1,28 @@
+\subsection{Used in rendering}
+
+When rendering, we need a way to determine what entities need to be drawn to 
+the screen, since screen coordinates and world coordinates are not connected. 
+This is where the camera's matrix comes into play, because this matrix 
+transforms the world coordinates into screen coordinates.
+\\
+The CameraManager class has a method that accepts a reference to a different 
+class method, almost like a callback function. This method passes the 
+camera's matrix to the given method. This is done so that you can reuse this 
+method and add functionality to it that you want to be run before calling the 
+world's render method. The whole method looks like 
+(\cref{lst:cameramanager-render}):
+\\
+\begin{lstlisting}[caption={CameraManager render method.},
+label={lst:cameramanager-render}]
+template<typename W, typename T, typename M>
+void CameraManager::render(T *t, W *w, void (W::*f)(T *, const M &)) {
+    (w->*f)(t, _camera->get_world_model());
+}
+\end{lstlisting}
+~\\
+The way to use this method is shown in \cref{lst:cameramanager-render-call}:
+\\
+\begin{lstlisting}[caption={Using the CameraManager::render method.},
+label={lst:cameramanager-render-call}]
+CameraManager::get_instance()->render<World, SDLRenderer, mat2>(renderer, _current_world, &World::render);
+\end{lstlisting}
