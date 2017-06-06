@@ -11,6 +11,7 @@ WarfactoryEntity::WarfactoryEntity(vec2 position, float mass) : BuildingEntity(p
     costs = new Resources(0, 0, 50, 0);
 
     spawnable_entities = {
+            new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::MERCENARY, "Wielding a big sword, lots of damage but not very durable."),
             new SpawnableEntity(new Resources(15, 0, 0, 0), MovingEntityType::JUGGERNAUT, "Almost unkillable unit, very strong but very slow.")
     };
 
@@ -20,6 +21,7 @@ WarfactoryEntity::WarfactoryEntity(float mass) : BuildingEntity(mass, WARFACTORY
     costs = new Resources(0, 0, 50, 0);
 
     spawnable_entities = {
+            new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::MERCENARY, "Wielding a big sword, lots of damage but not very durable."),
             new SpawnableEntity(new Resources(15, 0, 0, 0), MovingEntityType::JUGGERNAUT, "Almost unkillable unit, very strong but very slow.")
     };
 }
