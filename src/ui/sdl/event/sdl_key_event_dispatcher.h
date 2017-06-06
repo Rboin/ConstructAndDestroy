@@ -6,6 +6,7 @@
 #define CONSTRUCT_AND_DESTROY_SDL_KEY_EVENT_DISPATCHER_H
 
 #include "sdl_event_dispatcher.h"
+#include "sdl_event_types.h"
 
 class SDL_KeyEventDispatcher : public SDL_EventDispatcher<sdl_key_event_data> {
 private:
