@@ -23,7 +23,10 @@ public:
     static SDLControlPanel* get_instance(SDL_RenderObject*);
     static SDLControlPanel* get_instance();
     ~SDLControlPanel();
-    void render(SDLRenderer *renderer, float d) override;
+
+    void resize(const vec2 &) override;
+
+    void render(SDLRenderer *renderer, mat2 &, float d) override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_CONTROL_PANEL_H

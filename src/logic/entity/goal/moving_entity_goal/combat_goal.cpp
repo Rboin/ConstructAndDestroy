@@ -91,7 +91,7 @@ void CombatGoal::set_goal_move_to_building(Player *enemy_player) {
     }
 
 
-//    float distance_to_enemy = _enemy->get_position().distance(owner->get_position());
+//    float distance_to_enemy = _enemy->get_position().distance(owner->get_world_translation());
     if (closest > 40) {
         this->sub_goals.push_front(new HuntTargetGoal(owner, _building));
     }

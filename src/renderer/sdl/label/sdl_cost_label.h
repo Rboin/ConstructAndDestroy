@@ -26,7 +26,9 @@ public:
 
     ~SDLCostLabel();
 
-    void render(SDLRenderer *renderer) override;
+    void render(SDLRenderer *renderer, const mat2 &) override;
+
+    void set_position(float x, float y) override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_COST_LABEL_H

@@ -20,10 +20,10 @@ SDLWavePanel::~SDLWavePanel() {
     _wave_panel_state_machine = nullptr;
 }
 
-void SDLWavePanel::render(SDLRenderer *renderer, float delta) {
+void SDLWavePanel::render(SDLRenderer *renderer, mat2 &transformations, float delta) {
     _wave_manager->update(delta);
     _wave_panel_state_machine->update();
-    SDL_UIComponent::render(renderer, delta);
+    SDL_UIComponent::render(renderer, transformations, delta);
 }
 
 Wave *SDLWavePanel::get_wave() {
@@ -32,4 +32,11 @@ Wave *SDLWavePanel::get_wave() {
 
 StateMachine<SDLWavePanel> *SDLWavePanel::get_state_machine() {
     return _wave_panel_state_machine;
+}
+
+void SDLWavePanel::resize(const vec2 &v) {
+    vec2 offset = old_window_size - (*representation->get_position());
+    representation->set_position(representation->get_position()->x, v.y - offset.y);
+    old_window_size = v;
+    resize_children(v);
 }

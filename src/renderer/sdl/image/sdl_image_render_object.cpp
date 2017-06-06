@@ -5,6 +5,7 @@
 #include "sdl_image_render_object.h"
 #include "textures/texture_manager.h"
 #include "sdl/sdl_renderer.h"
+#include "matrix.h"
 
 SDL_ImageRenderObject::SDL_ImageRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data)
         : SDL_RenderObject(position, size, data) {}
@@ -13,14 +14,12 @@ SDL_ImageRenderObject::~SDL_ImageRenderObject() {
     clear_data();
 }
 
-void SDL_ImageRenderObject::render(SDLRenderer *renderer) {
+void SDL_ImageRenderObject::render(SDLRenderer *renderer, const mat2 &transformations) {
     if (!_result) {
         init_texture(renderer);
     }
-    rectangle->x = (int) _position.x;
-    rectangle->y = (int) _position.y;
 
-    renderer->draw_to_back_buffer(_result, rectangle);
+    renderer->draw_to_buffer(_result, &get_transformed_rectangle(transformations));
 }
 
 void SDL_ImageRenderObject::init_texture(SDLRenderer *renderer) {

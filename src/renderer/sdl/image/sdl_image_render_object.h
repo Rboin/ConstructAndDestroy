@@ -27,7 +27,7 @@ public:
 
     virtual ~SDL_ImageRenderObject();
 
-    void render(SDLRenderer *) override;
+    void render(SDLRenderer *, const mat2 &) override;
 
     void init_texture(SDLRenderer *) override;
 

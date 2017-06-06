@@ -6,7 +6,8 @@
 #define CONSTRUCT_AND_DESTROY_SDL_ENTITY_PANEL_H
 
 #include <map>
-#include "../../../../include/moving_entity_types.h"
+#include <vector>
+#include "moving_entity_types.h"
 #include "sdl_panel.h"
 
 class BuildingEntity;
@@ -25,7 +26,9 @@ private:
 public:
     explicit SDLEntityPanel(SDL_RenderObject *, BuildingEntity* selected_building);
     ~SDLEntityPanel();
-    void render(SDLRenderer *renderer, float d) override;
+    void render(SDLRenderer *renderer, mat2 &, float d) override;
+
+    void resize(const vec2 &) override;
 };
 
 

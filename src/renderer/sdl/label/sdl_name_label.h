@@ -23,9 +23,11 @@ public:
 
     ~SDLNameLabel();
 
-    void render(SDLRenderer *renderer) override;
+    void render(SDLRenderer *renderer, const mat2 &) override;
 
     void set_text(std::string text);
+
+    void set_position(float x, float y) override;
 };
 
 

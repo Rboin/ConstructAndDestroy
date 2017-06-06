@@ -21,14 +21,14 @@ class SDLRenderSolidText : public SDL_RenderObject {
 private:
     sdl_solid_text *_text_data;
 
-    void draw_background(SDLRenderer *);
-    void draw_foreground(SDLRenderer *);
+    void draw_background(SDLRenderer *, const mat2 &);
+    void draw_foreground(SDLRenderer *, const mat2 &);
 public:
     explicit SDLRenderSolidText(const vec2 &, const vec2 &, sdl_solid_text *);
 
     ~SDLRenderSolidText();
 
-    void render(SDLRenderer *) override;
+    void render(SDLRenderer *, const mat2 &) override;
 
     sdl_solid_text *get_data() override;
 };

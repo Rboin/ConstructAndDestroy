@@ -25,7 +25,7 @@ public:
 
     ~SDL_BadgeRenderObject();
 
-    void render(SDLRenderer *) override;
+    void render(SDLRenderer *, const mat2 &) override;
 
     void update_count(int count);
 

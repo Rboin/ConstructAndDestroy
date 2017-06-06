@@ -18,9 +18,9 @@ public:
 
     ~SDL_ImageHealthRenderObject();
 
-    void render(SDLRenderer *) override;
+    void render(SDLRenderer *, const mat2 &) override;
 
-    void draw_health_bar(SDLRenderer *);
+    void draw_health_bar(SDLRenderer *, vec2);
 };
 
 

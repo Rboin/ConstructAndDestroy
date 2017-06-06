@@ -10,6 +10,7 @@
 #include "sdl/event/slot/mouse_handler_buildingpanel.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl_unit_panel.h"
+#include "sdl_control_sub_panel.h"
 
 SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
@@ -37,14 +38,14 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
         vec2 label_pos_cost = {pos.x, pos.y + size.y - cost_size.y + 10};
         SDLCostLabel *cost_label = new SDLCostLabel(label_pos_cost, cost_size, sdl_label_data1, "stone.png",
                                                     ResourceType::STONE, f_font1, building.cost);
-        SDLPanel *cost_panel = new SDLPanel(cost_label);
+        SDLControlSubPanel *cost_panel = new SDLControlSubPanel(cost_label);
 
 
         TTF_Font *f_font2 = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
         sdl_data *sdl_label_data2 = new sdl_data{255, 255, 255, 255};
         vec2 label_pos_name = {pos.x, pos.y};
         SDLNameLabel *name_label = new SDLNameLabel(label_pos_name, name_label_size, sdl_label_data2, f_font2, building.name);
-        SDLPanel *name_panel = new SDLPanel(name_label);
+        SDLControlSubPanel *name_panel = new SDLControlSubPanel(name_label);
 
 
         unit_panel->add_component(cost_panel);
@@ -57,6 +58,13 @@ SDLBuildingPanel::~SDLBuildingPanel() {
     clear_components();
 }
 
-void SDLBuildingPanel::render(SDLRenderer *renderer, float d) {
-    SDLPanel::render(renderer, d);
+void SDLBuildingPanel::render(SDLRenderer *renderer, mat2 &transformations, float d) {
+    SDLPanel::render(renderer, transformations, d);
+}
+
+void SDLBuildingPanel::resize(const vec2 &v) {
+    vec2 offset = old_window_size - (*representation->get_position());
+    representation->set_position(representation->get_position()->x, v.y - offset.y);
+    old_window_size = v;
+    resize_children(v);
 }

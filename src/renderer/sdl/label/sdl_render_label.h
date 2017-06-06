@@ -25,7 +25,9 @@ public:
 
     ~SDLRenderLabel();
 
-    void render(SDLRenderer *renderer) override;
+    void render(SDLRenderer *renderer, const mat2 &) override;
+
+    void set_position(float x, float y) override;
 };
 
 

@@ -5,6 +5,7 @@
 #include "sdl_image_health_render_object.h"
 #include "sdl/sdl_renderer.h"
 #include "entity/base_entity.h"
+#include "matrix.h"
 
 SDL_ImageHealthRenderObject::SDL_ImageHealthRenderObject(const vec2 &position, const vec2 &size, sdl_image_data *data,
                                                          BaseEntity *owner)
@@ -14,25 +15,21 @@ SDL_ImageHealthRenderObject::SDL_ImageHealthRenderObject(const vec2 &position, c
 
 SDL_ImageHealthRenderObject::~SDL_ImageHealthRenderObject() {
     _owner = nullptr;
-    delete _data;
-    clear_data();
 }
 
-void SDL_ImageHealthRenderObject::render(SDLRenderer *renderer) {
+void SDL_ImageHealthRenderObject::render(SDLRenderer *renderer, const mat2 &transformations) {
     if (!_result) {
         init_texture(renderer);
     }
-    rectangle->x = (int) _position.x;
-    rectangle->y = (int) _position.y;
 
-    renderer->draw_to_back_buffer(_result, rectangle);
+    renderer->draw_to_buffer(_result, &get_transformed_rectangle(transformations));
 
-    draw_health_bar(renderer);
+    draw_health_bar(renderer, point_buffer[0]);
 }
 
-void SDL_ImageHealthRenderObject::draw_health_bar(SDLRenderer *renderer) {
-    int x = _owner->get_position().x + 5;
-    int y = _owner->get_position().y - 10;
+void SDL_ImageHealthRenderObject::draw_health_bar(SDLRenderer *renderer, vec2 owner_pos) {
+    int x = owner_pos.x + 5;
+    int y = owner_pos.y - 10;
     int health_bar_width = 30;
     int health_bar_height = 5;
 

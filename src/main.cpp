@@ -2,10 +2,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL_image.h>
+#include <stack>
+#include "sdl/button/restart_wave_button.h"
+#include "sdl/panel/sdl_resource_label.h"
 #include "sdl/label/sdl_name_label.h"
 #include "sdl/label/manager/description_manager.h"
 #include "sdl/badge/sdl_badge_render_object.h"
-#include "sdl/sdl_renderer.h"
+#include "camera/camera_manager.h"
 #include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
@@ -30,11 +33,9 @@
 #include "entity/moving/miner_entity.h"
 #include "behaviour/calculator/basic_force_calculator.h"
 #include "entity/goal/evaluator/work_evaluator.h"
-#include "entity/static/building/warehouse_entity.h"
 #include "sdl/event/sdl_key_event_dispatcher.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl/event/slot/sdl_key_event_slot.h"
-#include "entity/static/building/building_manager.h"
 #include "sdl/event/slot/mouse_handler_buildingpanel.h"
 #include "logic/world/world.h"
 #include "behaviour/behaviour.h"
@@ -43,13 +44,16 @@
 #include "entity/goal/evaluator/combat_evaluator.h"
 #include "wave/wave.h"
 #include "wave/wave_manager.h"
-#include "sdl/button/sdl_button.h"
 #include "sdl/event/slot/wave_reset_handler.h"
+#include "graph/graph.h"
 
-int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
+int pos_x = 100, pos_y = 200;
 
 SDL_Window *window;
 SDL_Renderer *renderer;
+
+vec2 window_size = {800, 600};
+float camera_zoom = 1.0f;
 
 // initialize buildings and textures
 std::vector<building_with_texture> buildings_with_textures = {
@@ -88,8 +92,9 @@ bool init_sdl() {
 }
 
 bool create_window() {
-    window = SDL_CreateWindow("Construct And Destroy", pos_x, pos_y, size_x, size_y, 0);
-
+    window = SDL_CreateWindow("Construct And Destroy", 100, 100,
+                              (int) window_size.x, (int) window_size.y, SDL_WINDOW_RESIZABLE);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     if (!window) {
         std::cout << " Failed to open window: " << SDL_GetError() << std::endl;
         return false;
@@ -108,7 +113,7 @@ bool create_renderer() {
 
 void setup_renderer() {
     // Set size of renderer to the same as window
-    SDL_RenderSetLogicalSize(renderer, size_x, size_y);
+    SDL_RenderSetLogicalSize(renderer, (int) window_size.x, (int) window_size.y);
     // Set color of renderer to green
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 }
@@ -130,9 +135,26 @@ bool init_img() {
     return true;
 }
 
+bool init_world() {
+    sdl_image_data *world_data = new sdl_image_data{"world-large.png"};
+    SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, world_size, world_data);
+
+    if(!world_data || !world_representation) {
+        return false;
+    }
+    World::get_instance()->set_render_object(world_representation);
+    return true;
+}
+
+bool init_camera() {
+    CameraManager *camera = CameraManager::get_instance();
+
+    return camera != nullptr;
+}
+
 // Initializes our window, renderer and sdl itself.
 bool init_everything() {
-    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img())
+    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img() || !init_camera() || !init_world())
         return false;
     setup_renderer();
     return true;
@@ -154,9 +176,7 @@ int main(int argc, char **argv) {
     tm->setup(renderer);
 
     GraphManager *gm = GraphManager::get_instance();
-    gm->setup({(float) size_x, (float) size_y});
-
-    std::stack<vec2 *> path = gm->graph->a_star_path(gm->graph->nodes[0], gm->graph->nodes[99]);
+    gm->setup(world_size, node_distance);
 
     vec2 pos = {0, 0};
 
@@ -302,14 +322,9 @@ int main(int argc, char **argv) {
     // TODO: when merged enemy_player, change 1 to player_id
 //    BuildingManager::get_instance()->add_building(player_id, s_entity7);
 
-    SDLRenderer *render_engine = new SDLRenderer(renderer);
+    SDLRenderer *render_engine = new SDLRenderer(renderer, {window_size.x, window_size.y});
 
-    sdl_image_data *world_data = new sdl_image_data{"world.png"};
-    SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, {800, 600}, world_data);
-
-    World::get_instance()->set_render_object(world_representation);
-
-    vec2 main_panel_position = {0, 0}, main_panel_size = {800, 600};
+    vec2 main_panel_position = {0, 0}, main_panel_size = {window_size.x, window_size.y};
     sdl_data *panel_data = new sdl_data{255, 255, 255};
 
     SDL_RenderObject *main_panel_representation = new SDL_RenderObject(main_panel_position, main_panel_size,
@@ -345,19 +360,19 @@ int main(int argc, char **argv) {
     vec2 resource_panel_pos_wood = {605, 5};
     SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data_wood, "log.png",
                                                     ResourceType::WOOD);
-    SDLPanel *wood_panel = new SDLPanel(wood_label);
+    SDLResourceLabel *wood_panel = new SDLResourceLabel(wood_label);
 
     sdl_data *sdl_label_data_gold = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_gold = {675, 5};
     SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data_gold, "gold.png",
                                                     ResourceType::GOLD);
-    SDLPanel *gold_panel = new SDLPanel(gold_label);
+    SDLResourceLabel *gold_panel = new SDLResourceLabel(gold_label);
 
     sdl_data *sdl_label_data_stone = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_stone = {740, 5};
     SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone, "stone.png",
                                                      ResourceType::STONE);
-    SDLPanel *stone_panel = new SDLPanel(stone_label);
+    SDLResourceLabel *stone_panel = new SDLResourceLabel(stone_label);
     ///End Resource Panel
 
     ///Begin Waves
@@ -384,7 +399,7 @@ int main(int argc, char **argv) {
     sdl_solid_text *restart_text = new sdl_solid_text{{255, 0, 0, 255}, {255, 255, 255, 255}, wave_font, 14, 5,
                                                       restart_content};
     SDLRenderSolidText *restart_o = new SDLRenderSolidText(restart_button_pos, restart_button_size, restart_text);
-    SDLButton *restart_button = new SDLButton(restart_o);
+    RestartWaveButton *restart_button = new RestartWaveButton(restart_o);
 
     wave_panel->add_component(restart_button);
 
@@ -395,7 +410,7 @@ int main(int argc, char **argv) {
 
     // building/control panel
     vec2 control_panel_pos = {0, 500}, control_panel_size = {800, 100.0};
-    sdl_data *control_panel_data = new sdl_data{100, 100, 100, 100};
+    sdl_data *control_panel_data = new sdl_data{0, 0, 0, 100};
     SDL_RenderObject *panel_b = new SDL_RenderObject(control_panel_pos, control_panel_size, control_panel_data);
 
     SDLControlPanel *control_panel = SDLControlPanel::get_instance(panel_b);

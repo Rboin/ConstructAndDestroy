@@ -26,18 +26,18 @@ SDLRenderSolidText::~SDLRenderSolidText() {
     delete _text_data;
 }
 
-void SDLRenderSolidText::render(SDLRenderer *renderer) {
-    draw_background(renderer);
-    draw_foreground(renderer);
+void SDLRenderSolidText::render(SDLRenderer *renderer, const mat2 &m) {
+    draw_background(renderer, m);
+    draw_foreground(renderer, m);
 }
 
-void SDLRenderSolidText::draw_background(SDLRenderer *renderer) {
+void SDLRenderSolidText::draw_background(SDLRenderer *renderer, const mat2 &m) {
     SDL_SetRenderDrawColor(renderer->get_engine(), _text_data->background.r, _text_data->background.g,
                            _text_data->background.b, _text_data->background.a);
-    SDL_RenderFillRect(renderer->get_engine(), rectangle);
+    SDL_RenderFillRect(renderer->get_engine(), &get_transformed_rectangle(m));
 }
 
-void SDLRenderSolidText::draw_foreground(SDLRenderer *renderer) {
+void SDLRenderSolidText::draw_foreground(SDLRenderer *renderer, const mat2 &m) {
     TTF_Font *font = TTF_OpenFont(_text_data->font.c_str(), _text_data->font_size);
     if(!font) {
         std::cout << "Could not open font: " << SDL_GetError() << std::endl;
@@ -51,12 +51,13 @@ void SDLRenderSolidText::draw_foreground(SDLRenderer *renderer) {
     }
     SDL_Texture *text_texture = SDL_CreateTextureFromSurface(renderer->get_engine(), text_surface);
 
-    SDL_Rect padded_rect = {
-        (int) (_position.x + _text_data->padding), (int) (_position.y + _text_data->padding),
-        (int) (_size.x - (_text_data->padding * 2)), (int) (_size.y - (_text_data->padding * 2))
-    };
+    SDL_Rect padded_rect = get_transformed_rectangle(m);
+    padded_rect.x += _text_data->padding;
+    padded_rect.y += _text_data->padding;
+    padded_rect.w -= (_text_data->padding * 2);
+    padded_rect.h -= (_text_data->padding * 2);
 
-    renderer->draw_to_back_buffer(text_texture, &padded_rect);
+    renderer->draw_to_buffer(text_texture, &padded_rect);
 
     // Destroy the textures and font
     SDL_FreeSurface(text_surface);

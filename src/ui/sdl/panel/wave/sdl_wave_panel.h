@@ -23,11 +23,13 @@ public:
 
     ~SDLWavePanel();
 
-    void render(SDLRenderer *, float) override;
+    void render(SDLRenderer *, mat2 &, float) override;
 
     Wave *get_wave();
 
     StateMachine<SDLWavePanel> *get_state_machine();
+
+    void resize(const vec2 &) override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_WAVE_PANEL_H

@@ -2,8 +2,8 @@
 #define CONSTRUCT_AND_DESTROY_SDL_UNIT_PANEL_H
 
 #include <string>
-#include "settings.h"
 #include "sdl_panel.h"
+#include "settings.h"
 #include "building_type.h"
 
 class BuildingEntity;
@@ -26,6 +26,8 @@ public:
     SpawnableEntity* get_spawnable_entity();
     BuildingEntity* get_building_entity();
     building_with_texture get_building_information();
+
+    void resize(const vec2 &) override;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_SDL_UNIT_PANEL_H

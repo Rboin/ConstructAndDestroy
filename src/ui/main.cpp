@@ -14,26 +14,30 @@
 #include "sdl/panel/sdl_panel.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "world/world.h"
+#include "entity/resources.h"
 
 int pos_x = 100, pos_y = 200, size_x = 800, size_y = 600, count = 4;
 
 SDL_Window *window;
 SDL_Renderer *renderer;
+
+vec2 window_size = {800, 600};
+float camera_zoom = 1.0f;
+
 // initialize buildings and textures
-std::vector<building_with_texture>  buildings_with_textures = std::vector<building_with_texture>{
-    {"castle.png", BuildingType::CASTLE},
-    {"warehouse.png", BuildingType::WAREHOUSE}
+std::vector<building_with_texture> buildings_with_textures = {
+    {"castle.png", BuildingType::CASTLE, new Resources(0,0,5,0), "Castle", "This building can create new units"},
+    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"}
 };
 
-
-std::vector<entity_with_texture> entities_with_textures =  std::vector<entity_with_texture>{
+std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
     {"lumberjack.png", MovingEntityType::LUMBERJACK},
-    {"miner.png", MovingEntityType::MINER},
-    {"knight.png", MovingEntityType::KNIGHT}
+    {"miner.png",      MovingEntityType::MINER},
+    {"knight.png",     MovingEntityType::KNIGHT}
 };
 
 std::string get_texture_of_entity(MovingEntityType type) {
-    for(int i = 0; i < entities_with_textures.size(); i++) {
+    for (int i = 0; i < entities_with_textures.size(); i++) {
         if (entities_with_textures.at(i).type == type) {
             return entities_with_textures.at(i).texture;
         }
@@ -41,7 +45,7 @@ std::string get_texture_of_entity(MovingEntityType type) {
 }
 
 std::string get_texture_of_building(BuildingType building) {
-    for(int i = 0; i < buildings_with_textures.size(); i++) {
+    for (int i = 0; i < buildings_with_textures.size(); i++) {
         if (buildings_with_textures.at(i).type == building) {
             return buildings_with_textures.at(i).texture;
         }
@@ -109,7 +113,7 @@ int main(int argc, char **argv) {
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
     SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
 
-    SDLRenderer *r = new SDLRenderer(renderer);
+    SDLRenderer *r = new SDLRenderer(renderer, {window_size.x, window_size.y});
 
     vec2 main_window_position = {0, 0}, main_window_size = {800, 600};
     sdl_data main_window_data = {255, 0, 0};

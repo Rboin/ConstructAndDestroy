@@ -18,7 +18,7 @@ SDL_BadgeRenderObject::SDL_BadgeRenderObject(const vec2 &position, const vec2 &s
     _text = new SDL_UI_RenderTextObject(text_pos, text_size, _textdata);
 }
 
-void SDL_BadgeRenderObject::render(SDLRenderer *renderer) {
+void SDL_BadgeRenderObject::render(SDLRenderer *renderer, const mat2 &transformations) {
     SDL_SetRenderDrawColor(renderer->get_engine(), this->get_data()->red, this->get_data()->green, this->get_data()->blue, this->get_data()->alpha);
     for (int w = 0; w < _radius * 2; w++) {
         for (int h = 0; h < _radius * 2; h++) {
@@ -31,7 +31,7 @@ void SDL_BadgeRenderObject::render(SDLRenderer *renderer) {
     }
 
     _textdata->text = std::to_string((int)_count).c_str();
-    _text->render(renderer);
+    _text->render(renderer, transformations);
 }
 
 void SDL_BadgeRenderObject::update_count(int count) {

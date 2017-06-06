@@ -15,3 +15,8 @@ SDLPanel::~SDLPanel() {
     }
     children.clear();
 }
+
+void SDLPanel::resize(const vec2 &v) {
+    old_window_size = v;
+    resize_children(v);
+}

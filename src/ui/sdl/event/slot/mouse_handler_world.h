@@ -21,10 +21,13 @@ private:
     int start_drag_x;
     int start_drag_y;
 
+    vec2 start_world, end_world;
 public:
     MouseHandlerWorld();
     ~MouseHandlerWorld();
     void  on(sdl_mouse_event_data d) override;
+
+    void handle_mouse_scroll(sdl_mouse_event_data &);
 };
 
 #endif //CONSTRUCT_AND_DESTROY_MOUSE_HANDLER_WORLD_H

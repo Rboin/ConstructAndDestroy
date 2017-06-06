@@ -9,8 +9,8 @@
 
 class SDL_UIComponent;
 struct sdl_mouse_event_data : public mouse_event_data<SDL_UIComponent> {
-    uint8_t button;
-    sdl_mouse_event_data(uint32_t ty, uint8_t b,uint32_t time, vec2 &pos) : mouse_event_data<SDL_UIComponent>(ty, time, pos) {
+    int32_t button;
+    sdl_mouse_event_data(uint32_t ty, int32_t b,uint32_t time, vec2 &pos) : mouse_event_data<SDL_UIComponent>(ty, time, pos) {
         button = b;
     }
 };

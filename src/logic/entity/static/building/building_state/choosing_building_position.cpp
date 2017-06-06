@@ -3,6 +3,7 @@
 //
 
 #include "SDL_mouse.h"
+#include "camera/camera_manager.h"
 #include "graph/graph_manager.h"
 #include "graph/graph.h"
 #include "world/world.h"
@@ -43,9 +44,9 @@ void ChoosingBuildingPosition::execute(Player *p) {
          * UNCOMMENT UNTIL HERE TO SET OBJECT TO MOUSE POSITION
         */
 
-
+        vec2 world_position = CameraManager::to_world({(float)x, (float)y});
         GraphManager *gm = GraphManager::get_instance();
-        int node_index = gm->graph->get_node_with_position({(float)x, (float)y});
+        int node_index = gm->graph->get_node_with_position(world_position);
         Node *curr_node = gm->graph->nodes.at((unsigned int)node_index);
 
         float new_obj_x = curr_node->get_position()->x;

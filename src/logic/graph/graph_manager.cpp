@@ -18,9 +18,9 @@ GraphManager::~GraphManager() {
     _instance = nullptr;
 }
 
-void GraphManager::setup(vec2 world_size) {
+void GraphManager::setup(vec2 world_size, unsigned int node_distance) {
     if(!graph){
-        graph = new Graph(world_size);
+        graph = new Graph(world_size, node_distance);
     }
 }
 

@@ -20,7 +20,7 @@ public:
 
     ~SDL_ProgressbarRenderObject();
 
-    void render(SDLRenderer *) override;
+    void render(SDLRenderer *, const mat2 &) override;
 
     void set_progress(float progress);
 };

@@ -102,7 +102,9 @@ public:
         return representation->contains(v);
     }
 
-    virtual void render(T *, float) = 0;
+    virtual void render(T *, mat2 &, float) = 0;
+
+    virtual void resize(const vec2 &) = 0;
 };
 
 #endif //CONSTRUCT_AND_DESTROY_UI_COMPONENT_H

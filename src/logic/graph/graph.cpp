@@ -11,8 +11,10 @@
 #include "graph.h"
 #include "a_star_node.h"
 
-Graph::Graph(vec2 world_s) {
+Graph::Graph(vec2 world_s, unsigned int node_distance) {
+    _node_distance = node_distance;
     _world_size = world_s;
+    _node_row_length = (unsigned int) (_world_size.x / _node_distance);
     generate_nodes();
     generate_adjacency_edges();
 }
@@ -25,10 +27,9 @@ Graph::~Graph() {
 }
 
 void Graph::generate_nodes() {
-    nodes.reserve(300);
     int index = 0;
-    for (int row = 0; row < _world_size.y; row += 40) {
-        for (int column = 0; column < _world_size.x; column += 40) {
+    for (int row = 0; row < _world_size.y; row += _node_distance) {
+        for (int column = 0; column < _world_size.x; column += _node_distance) {
             Node *node = new Node(index, {(float) column, (float) row});
             nodes.emplace_back(node);
             index++;
@@ -38,46 +39,55 @@ void Graph::generate_nodes() {
 
 void Graph::generate_adjacency_edges() {
     int index = 0;
-    for (int row = 0; row < _world_size.y; row += 40) {
-        for (int column = 0; column < _world_size.x; column += 40) {
+    for (int row = 0; row < _world_size.y; row += _node_distance) {
+        for (int column = 0; column < _world_size.x; column += _node_distance) {
+            int top = index - _node_row_length,
+                top_left = index - (_node_row_length+1),
+                top_right = index - (_node_row_length-1),
+                right = index + 1,
+                bottom_right = index + (_node_row_length+1),
+                bottom = index + _node_row_length,
+                bottom_left = index + (_node_row_length-1),
+                left = index - 1;
+
             //don't add edges top when this is a node of the top row
             if (row != 0) {
-                Edge *e1 = new Edge(index, index - 20);
+                Edge *e1 = new Edge(index, top);
                 nodes.at(index)->add_neighbors(e1);
                 //add edge to top left
                 if (column != 0) {
-                    Edge *v1 = new Edge(index, index - 21);
+                    Edge *v1 = new Edge(index, top_left);
                     nodes.at(index)->add_neighbors(v1);
                 }
                 //add edge to top right
-                if (column != 760) {
-                    Edge *v2 = new Edge(index, index - 19);
+                if (column != _world_size.x - _node_distance) {
+                    Edge *v2 = new Edge(index, top_right);
                     nodes.at(index)->add_neighbors(v2);
                 }
             }
             //don't add edges below when this is the last node of a row
-            if (row != 560) {
-                Edge *e2 = new Edge(index, index + 20);
+            if (row != _world_size.y - _node_distance) {
+                Edge *e2 = new Edge(index, bottom);
                 nodes.at(index)->add_neighbors(e2);
                 //add edge to bottom left
                 if (column != 0) {
-                    Edge *v3 = new Edge(index, index + 19);
+                    Edge *v3 = new Edge(index, bottom_left);
                     nodes.at(index)->add_neighbors(v3);
                 }
                 //add edge to bottom right
-                if (column != 760) {
-                    Edge *v4 = new Edge(index, index + 21);
+                if (column != _world_size.x - _node_distance) {
+                    Edge *v4 = new Edge(index, bottom_right);
                     nodes.at(index)->add_neighbors(v4);
                 }
             }
             //don't add edges left when this is the first node of a column
             if (column != 0) {
-                Edge *e3 = new Edge(index, index - 1);
+                Edge *e3 = new Edge(index, left);
                 nodes.at(index)->add_neighbors(e3);
             }
             //don't add edges right when this is the last node of a column
-            if (column != 760) {
-                Edge *e4 = new Edge(index, index + 1);
+            if (column != _world_size.x - _node_distance) {
+                Edge *e4 = new Edge(index, right);
                 nodes.at(index)->add_neighbors(e4);
             }
             index++;
@@ -172,8 +182,8 @@ T *Graph::get_best(std::vector<T *> list) {
 }
 
 int Graph::manhattan_heuristic(vec2 *current, vec2 *end) {
-    int cost_x = std::abs((current->x / 40) - (end->x / 40));
-    int cost_y = std::abs((current->y / 40) - (end->y / 40));
+    int cost_x = std::abs((current->x / _node_distance) - (end->x / _node_distance));
+    int cost_y = std::abs((current->y / _node_distance) - (end->y / _node_distance));
 
     if (cost_x > cost_y) {
         return 14 * cost_y + 10 * (cost_x - cost_y);
@@ -188,6 +198,7 @@ T *Graph::in_list(std::vector<T *> list, int index) {
             return list[i];
         }
     }
+    return nullptr;
 }
 
 template<class T>
@@ -233,7 +244,7 @@ int Graph::get_node_with_exact_position(vec2 pos) {
 
 Node *Graph::find_closest_edge(Node * node) {
     int j = 0;
-    for (int i = node->get_index(); i < 300; i++) {
+    for (int i = node->get_index(); i < nodes.size(); i++) {
         j++;
         //right of current node
         for (int k = 0; k < nodes[i]->get_neighbors().size(); k++) {

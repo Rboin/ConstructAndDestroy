@@ -2,13 +2,17 @@
 // Created by robin on 2/21/17.
 //
 
-#include "entity/entity_marks.h"
 #include "world.h"
+#include "entity/entity_marks.h"
 #include "entity/moving/moving_entity.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/static/resource_manager.h"
 #include "entity/player.h"
 #include "entity/player_manager.h"
+#include "sdl/sdl_renderer.h"
+#include "camera/camera_manager.h"
+#include "sdl/sdl_render_object.h"
+#include "graph/graph.h"
 
 //declaration of global variable.
 World *World::_instance = nullptr;
@@ -43,11 +47,11 @@ void World::update(float d_t) {
     }
 }
 
-void World::render(SDLRenderer *renderer) {
-    _representation->render(renderer);
+void World::render(SDLRenderer *renderer, const mat2 &transformations) {
+    _representation->render(renderer, transformations);
 
     for (unsigned long i = 0; i < _entities.size(); i++) {
-        _entities.at(i)->render(renderer);
+        _entities.at(i)->render(renderer, transformations);
     }
 }
 
@@ -99,6 +103,10 @@ void World::remove_dead_entities() {
             ++it;
         }
     }
+}
+
+const vec2 &World::get_size() const {
+    return *_representation->get_size();
 }
 
 BaseEntity *World::get_closest_to(vec2 v) {

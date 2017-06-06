@@ -21,6 +21,10 @@ set(SOURCE_FILES
         sdl/image/sdl_image_health_render_object.h
         sdl/progressbar/sdl_progressbar_render_object.cpp
         sdl/progressbar/sdl_progressbar_render_object.h
+        camera/camera.h
+        camera/camera.cpp
+        camera/camera_manager.cpp
+        camera/camera_manager.h
         sdl/label/sdl_cost_label.h
         sdl/label/sdl_cost_label.cpp
         sdl/label/sdl_name_label.h

@@ -49,6 +49,15 @@ mat2 s_mat2::translate(float x, float y) {
     };
 }
 
+mat2 s_mat2::inverse() {
+    float a = x1, b = x2, c = y1, d = y2, reciprocal_determinant = 1 / (a * d - b * c);
+    return (mat2) {
+        reciprocal_determinant * d, reciprocal_determinant * -b, x3,
+        reciprocal_determinant * -c, reciprocal_determinant * a, y3,
+        w1, w2, w3
+    };
+}
+
 vec2 s_mat2::operator*(vec2 v) {
     return {
             v.x * x1 + v.y * x2 + v.w * x3,
@@ -62,5 +71,13 @@ mat2 s_mat2::operator*(mat2 m) {
             x1 * m.x1 + x2 * m.y1 + x3 * m.w1, x1 * m.x2 + x2 * m.y2 + x3 * m.w2, x1 * m.x3 + x2 * m.y3 + x3 * m.w3,
             y1 * m.x1 + y2 * m.y1 + y3 * m.w1, y1 * m.x2 + y2 * m.y2 + y3 * m.w2, y1 * m.x3 + y2 * m.y3 + y3 * m.w3,
             w1 * m.x1 + w2 * m.y1 + w3 * m.w1, w1 * m.x2 + w2 * m.y2 + w3 * m.w2, w1 * m.x3 + w2 * m.y3 + w3 * m.w3,
+    };
+}
+
+mat2 s_mat2::operator*(float f) {
+    return {
+        x1 * f, x2 * f, x3 * f,
+        y1 * f, y2 * f, y3 * f,
+        w1 * f, w2 * f, w3 * f
     };
 }

@@ -31,17 +31,26 @@ SDLRenderLabel::SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data 
     _image = new SDL_ImageRenderObject(image_pos, image_size, image_data);
 }
 
-void SDLRenderLabel::render(SDLRenderer *renderer) {
-    sdl_text *temp = (sdl_text *) _text->get_data();
-    temp->text = std::to_string((int) _resource->get_resources(_rt)).c_str();
+void SDLRenderLabel::render(SDLRenderer *renderer, const mat2 &transformations) {
+    sdl_text *temp = (sdl_text*)_text->get_data();
+    int a = (int)_resource->get_resources(_rt);
+    temp->text = std::to_string((int)_resource->get_resources(_rt)).c_str();
 
-    _image->render(renderer);
-    _text->render(renderer);
+    _image->render(renderer, transformations);
+    _text->render(renderer, transformations);
 }
 
 SDLRenderLabel::~SDLRenderLabel() {
     delete _text;
     delete _image;
     _resource = nullptr;
+}
+
+void SDLRenderLabel::set_position(float x, float y) {
+    RenderObject::set_position(x, y);
+    vec2 image_pos = {_position.x, _position.y}, image_size = {_size.x / 2, _size.y};
+    vec2 text_pos = {_position.x + _size.x / 2, _position.y}, text_size = {_size.x / 2, _size.y};
+    _image->set_position(image_pos.x, image_pos.y);
+    _text->set_position(text_pos.x, text_pos.y);
 }
 

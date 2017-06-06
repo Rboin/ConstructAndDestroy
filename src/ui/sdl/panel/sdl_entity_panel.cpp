@@ -75,9 +75,9 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_bui
     }
 }
 
-void SDLEntityPanel::render(SDLRenderer *renderer, float d) {
+void SDLEntityPanel::render(SDLRenderer *renderer, mat2 &transformations, float d) {
     update_badges();
-    SDLPanel::render(renderer, d);
+    SDLPanel::render(renderer, transformations, d);
 }
 
 SDLEntityPanel::~SDLEntityPanel() {
@@ -144,4 +144,12 @@ void SDLEntityPanel::update_badge_color(std::vector<MovingEntityType> orders, Mo
     }
 
     badge->set_data(color);
+}
+
+void SDLEntityPanel::resize(const vec2 &v) {
+    vec2 offset = old_window_size - (*representation->get_position());
+    representation->set_position(representation->get_position()->x, v.y - offset.y);
+    representation->set_size({v.x, representation->get_size()->y});
+    old_window_size = v;
+    resize_children(v);
 }

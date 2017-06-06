@@ -13,10 +13,11 @@ SDL_UI_RenderTextObject::~SDL_UI_RenderTextObject() {
     clear_result();
 }
 
-void SDL_UI_RenderTextObject::render(SDLRenderer *renderer) {
+void SDL_UI_RenderTextObject::render(SDLRenderer *renderer, const mat2 &m) {
     clear_result();
     init_texture(renderer);
-    renderer->draw_to_back_buffer(_result, rectangle);
+
+    renderer->draw_to_buffer(_result, &get_transformed_rectangle(m));
 }
 
 void SDL_UI_RenderTextObject::init_texture(SDLRenderer *renderer) {

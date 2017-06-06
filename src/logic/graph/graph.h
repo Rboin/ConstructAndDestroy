@@ -17,8 +17,9 @@ class AStarNode;
 class Graph {
 private:
     vec2 _world_size;
+    unsigned int _node_distance, _node_row_length;
 public:
-    Graph(vec2 world_size);
+    Graph(vec2 world_size, unsigned int);
 
     ~Graph();
 

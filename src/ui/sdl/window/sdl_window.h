@@ -5,9 +5,8 @@
 #ifndef CONSTRUCT_AND_DESTROY_SDL_WINDOW_H
 #define CONSTRUCT_AND_DESTROY_SDL_WINDOW_H
 
-#include "event/event_dispatcher.h"
 #include "sdl/sdl_ui_component.h"
-#include "sdl/sdl_render_object.h"
+#include "event/event_dispatcher.h"
 
 struct SDL_Window;
 
@@ -35,7 +34,11 @@ public:
 
     int show();
 
-    void render(SDLRenderer *t, float d) override;
+    void handle_window_events(SDL_Event);
+
+    void render(SDLRenderer *t, mat2 &, float d) override;
+
+    void resize(const vec2 &) override;
 };
 
 
