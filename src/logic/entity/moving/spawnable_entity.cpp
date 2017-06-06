@@ -48,6 +48,8 @@ std::string SpawnableEntity::get_name() {
         case MovingEntityType::HEAVY_CAVALIER:
             name = "Heavy Cavalier";
             break;
+        case MovingEntityType::LIGHT_CAVALIER:
+            name = "Light Cavalier";
     }
 
     return name;

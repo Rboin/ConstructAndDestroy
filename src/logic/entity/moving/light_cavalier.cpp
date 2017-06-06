@@ -1,38 +1,36 @@
 //
-// Created by Mark on 1-6-2017.
+// Created by Mark on 6-6-2017.
 //
 
 #include <types.h>
 #include "sdl/image/sdl_image_render_object.h"
-#include "cavalier_entity.h"
+#include "light_cavalier.h"
 
-
-CavalierEntity::CavalierEntity(vec2 position, float mass,
+LightCavalierEntity::LightCavalierEntity(vec2 position, float mass,
                                const float max_force, const float max_speed) :
         MovingEntity(position, mass, max_force, max_speed, ENEMY) {
     carrying = 0;
     _attack_damage = 12;
-    texture = "cavalier.png";
-
+    texture = "lightcavalier.png";
 }
 
-void CavalierEntity::select() {
+void LightCavalierEntity::select() {
     sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
     _representation->set_data(entity_data);
     _representation->clear_data();
 }
 
 
-void CavalierEntity::deselect() {
+void LightCavalierEntity::deselect() {
     sdl_image_data *entity_data = new sdl_image_data{texture};
     _representation->set_data(entity_data);
     _representation->clear_data();
 }
 
-std::string CavalierEntity::get_texture() {
+std::string LightCavalierEntity::get_texture() {
     return texture;
 }
 
-void CavalierEntity::set_texture(std::string src) {
+void LightCavalierEntity::set_texture(std::string src) {
     this->texture = src;
 }

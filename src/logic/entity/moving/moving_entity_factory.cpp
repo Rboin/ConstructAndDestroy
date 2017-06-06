@@ -12,6 +12,7 @@
 #include "../player.h"
 #include "cavalier_entity.h"
 #include "heavy_cavalier_entity.h"
+#include "light_cavalier.h"
 
 MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingEntityType moving_entity_type) {
 
@@ -25,6 +26,9 @@ MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingE
             {
                 me->set_texture("blackknight.png");
             }
+            break;
+        case MovingEntityType::LIGHT_CAVALIER:
+            me = new LightCavalierEntity(position, 100, 0.2,0.2);
             break;
         case MovingEntityType::CAVALIER:
             me = new CavalierEntity(position, 100, 0.2,0.2);
