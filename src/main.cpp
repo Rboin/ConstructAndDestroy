@@ -358,20 +358,20 @@ int main(int argc, char **argv) {
 
     sdl_data *sdl_label_data_wood = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_wood = {605, 5};
-    SDLRenderLabel *wood_label = new SDLRenderLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data_wood, "log.png",
-                                                    ResourceType::WOOD);
+    SDLRenderResourceLabel *wood_label = new SDLRenderResourceLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data_wood, "log.png",
+                                                    ResourceType::WOOD, f_font);
     SDLResourceLabel *wood_panel = new SDLResourceLabel(wood_label);
 
     sdl_data *sdl_label_data_gold = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_gold = {675, 5};
-    SDLRenderLabel *gold_label = new SDLRenderLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data_gold, "gold.png",
-                                                    ResourceType::GOLD);
+    SDLRenderResourceLabel *gold_label = new SDLRenderResourceLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data_gold, "gold.png",
+                                                    ResourceType::GOLD, f_font);
     SDLResourceLabel *gold_panel = new SDLResourceLabel(gold_label);
 
     sdl_data *sdl_label_data_stone = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_stone = {740, 5};
-    SDLRenderLabel *stone_label = new SDLRenderLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone, "stone.png",
-                                                     ResourceType::STONE);
+    SDLRenderResourceLabel *stone_label = new SDLRenderResourceLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone, "stone.png",
+                                                     ResourceType::STONE, f_font);
     SDLResourceLabel *stone_panel = new SDLResourceLabel(stone_label);
     ///End Resource Panel
 
