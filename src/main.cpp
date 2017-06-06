@@ -9,6 +9,8 @@
 #include "sdl/label/manager/description_manager.h"
 #include "sdl/badge/sdl_badge_render_object.h"
 #include "camera/camera_manager.h"
+#include <sdl/panel/sdl_unit_info_panel.h>
+#include <sdl/label/sdl_render_resource_label.h>
 #include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"
@@ -409,7 +411,7 @@ int main(int argc, char **argv) {
     ///End Waves
 
     // building/control panel
-    vec2 control_panel_pos = {0, 500}, control_panel_size = {800, 100.0};
+    vec2 control_panel_pos = {0, 500}, control_panel_size = {680, 100.0};
     sdl_data *control_panel_data = new sdl_data{0, 0, 0, 100};
     SDL_RenderObject *panel_b = new SDL_RenderObject(control_panel_pos, control_panel_size, control_panel_data);
 
@@ -419,11 +421,22 @@ int main(int argc, char **argv) {
     SDLPanel *description_panel = new SDLPanel(DescriptionManager::get_description());
 
 
+
+    // unit information panel
+    vec2 unit_info_panel_pos = {680, 500};
+    vec2 unit_info_panel_size = {120, 100};
+    sdl_data *unit_info_panel_data = new sdl_data{0, 0, 0, 100};
+    SDL_RenderObject *unit_info_panel_renderer = new SDL_RenderObject(unit_info_panel_pos, unit_info_panel_size, unit_info_panel_data);
+    SDLUnitInfoPanel *unit_info_panel = new SDLUnitInfoPanel(unit_info_panel_renderer);
+
+
+
     resource_panel->add_component(wood_panel);
     resource_panel->add_component(gold_panel);
     resource_panel->add_component(stone_panel);
     main_panel->add_component(resource_panel);
     main_panel->add_component(wave_panel);
+    main_panel->add_component(unit_info_panel);
     main_panel->add_component(control_panel);
     main_panel->add_component(description_panel);
     main_window->add_component(main_panel);

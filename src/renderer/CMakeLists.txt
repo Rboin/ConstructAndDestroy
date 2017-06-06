@@ -40,7 +40,9 @@ set(SOURCE_FILES
         sdl/badge/sdl_rectangle_badge_render_object.cpp
         sdl/badge/sdl_rectangle_badge_render_object.h
         sdl/badge/sdl_shortcut_badge_render_object.h
-        sdl/badge/sdl_shortcut_badge_render_object.cpp)
+        sdl/badge/sdl_shortcut_badge_render_object.cpp
+        sdl/label/sdl_render_resource_label.cpp
+        sdl/label/sdl_render_resource_label.h)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

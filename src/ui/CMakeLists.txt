@@ -61,7 +61,16 @@ set(SOURCE_FILES
         sdl/panel/sdl_resource_label.cpp
         sdl/panel/sdl_resource_label.h
         sdl/panel/sdl_control_sub_panel.cpp
-        sdl/panel/sdl_control_sub_panel.h)
+        sdl/panel/sdl_control_sub_panel.h
+        sdl/panel/sdl_unit_info_panel.cpp
+        sdl/panel/sdl_unit_info_panel.h
+        sdl/panel/sdl_stacked_panel.cpp
+        sdl/panel/sdl_stacked_panel.h
+        sdl/panel/unit_info/sdl_unit_info_entity.cpp
+        sdl/panel/unit_info/sdl_unit_info_entity.h
+        sdl/panel/unit_info/sdl_unit_info_entities.cpp
+        sdl/panel/unit_info/sdl_unit_info_entities.h
+        )
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
