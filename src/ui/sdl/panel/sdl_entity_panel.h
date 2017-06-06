@@ -12,6 +12,7 @@
 class BuildingEntity;
 class SDL_BadgeRenderObject;
 class SDL_QueueBadgeRenderObject;
+class SDL_ShortcutBadgeRenderObject;
 class SDL_ProgressbarRenderObject;
 
 /**
@@ -20,6 +21,7 @@ class SDL_ProgressbarRenderObject;
 class SDLEntityPanel : public SDLPanel {
 private:
     std::map<MovingEntityType, SDL_QueueBadgeRenderObject*> _queue_badges;
+    std::map<MovingEntityType, SDL_ShortcutBadgeRenderObject*> _shortcut_badges;
     BuildingEntity* _building;
     void update_queue_badges();
     void update_queue_badge_color(std::vector<MovingEntityType> orders, MovingEntityType type,

@@ -76,6 +76,7 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_bui
         sdl_data *badge_color_shortcut = new sdl_data{ 220,220,220, 255 };
         SDL_ShortcutBadgeRenderObject *badge_renderer_shortcut = new SDL_ShortcutBadgeRenderObject(badge_panel_position_shortcut, badge_panel_size, font_shortcut, std::to_string(i+1), badge_color_shortcut, 10);
         SDLPanel *badge_panel_shortcut = new SDLPanel(badge_renderer_shortcut);
+        _shortcut_badges.insert(std::pair<MovingEntityType, SDL_ShortcutBadgeRenderObject*>(type, badge_renderer_shortcut));
 
         unit_panel->add_component(cost_panel);
         unit_panel->add_component(name_panel);
@@ -163,4 +164,14 @@ void SDLEntityPanel::resize(const vec2 &v) {
     representation->set_size({v.x, representation->get_size()->y});
     old_window_size = v;
     resize_children(v);
+
+    for(std::map<MovingEntityType, SDL_QueueBadgeRenderObject*>::iterator it = _queue_badges.begin();
+        it != _queue_badges.end(); ++it) {
+        (*it).second->set_position(v.x, v.y);
+    }
+
+    for(std::map<MovingEntityType, SDL_ShortcutBadgeRenderObject*>::iterator it = _shortcut_badges.begin();
+        it != _shortcut_badges.end(); ++it) {
+        (*it).second->set_position(v.x, v.y);
+    }
 }

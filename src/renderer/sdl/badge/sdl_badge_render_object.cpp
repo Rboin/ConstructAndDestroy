@@ -18,3 +18,9 @@ SDL_BadgeRenderObject::~SDL_BadgeRenderObject() {
     }
     clear_data();
 }
+
+void SDL_BadgeRenderObject::set_position(float x, float y) {
+    _center =  vec2{_position.x, _position.y};
+    RenderObject::set_position(x, y);
+    _text->set_position(x, y);
+}
