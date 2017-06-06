@@ -61,7 +61,9 @@ set(SOURCE_FILES
         sdl/panel/sdl_resource_label.cpp
         sdl/panel/sdl_resource_label.h
         sdl/panel/sdl_control_sub_panel.cpp
-        sdl/panel/sdl_control_sub_panel.h)
+        sdl/panel/sdl_control_sub_panel.h
+        sdl/panel/sdl_badge_panel.cpp
+        sdl/panel/sdl_badge_panel.h)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

@@ -16,6 +16,8 @@
 #include "sdl/event/slot/mouse_handler_entitypanel.h"
 #include "sdl_progressbar_panel.h"
 #include "entity/moving/spawnable_entity.h"
+#include "sdl_badge_panel.h"
+#include "sdl_control_sub_panel.h"
 
 SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_building) : SDLPanel(r) {
     _building = selected_building;
@@ -52,7 +54,7 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_bui
         vec2 label_pos_cost = {pos.x, pos.y + size.y - cost_size.y + 10};
         SDLCostLabel *cost_label = new SDLCostLabel(label_pos_cost, cost_size, sdl_label_data1, "gold.png",
                                                     ResourceType::GOLD, f_font1, se->get_cost());
-        SDLPanel *cost_panel = new SDLPanel(cost_label);
+        SDLControlSubPanel *cost_panel = new SDLControlSubPanel(cost_label);
 
 
         sdl_data *sdl_label_data2 = new sdl_data{255, 255, 255, 255};
@@ -60,14 +62,14 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_bui
         vec2 label_pos_name = {pos.x, pos.y};
         SDLNameLabel *name_label = new SDLNameLabel(label_pos_name, name_label_size, sdl_label_data2, f_font2,
                                                     se->get_name());
-        SDLPanel *name_panel = new SDLPanel(name_label);
+        SDLControlSubPanel *name_panel = new SDLControlSubPanel(name_label);
 
         // badge displaying how many entities are in the order queue
         TTF_Font *font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 50);
         vec2 badge_panel_position = vec2(label_pos_cost.x + cost_size.x, pos.y + size.y - badge_panel_size.y);
         sdl_data *badge_color = new sdl_data{ 0, 255, 0, 255 };
         SDL_QueueBadgeRenderObject *badge_renderer = new SDL_QueueBadgeRenderObject(badge_panel_position, badge_panel_size, font, badge_color, 10);
-        SDLPanel *badge_panel = new SDLPanel(badge_renderer);
+        SDLBadgePanel *badge_panel = new SDLBadgePanel(badge_renderer);
         _queue_badges.insert(std::pair<MovingEntityType, SDL_QueueBadgeRenderObject*>(type, badge_renderer));
 
         // badge displaying shortcut
@@ -75,7 +77,7 @@ SDLEntityPanel::SDLEntityPanel(SDL_RenderObject *r, BuildingEntity *selected_bui
         vec2 badge_panel_position_shortcut = {image_pos.x +10, image_pos.y+10};
         sdl_data *badge_color_shortcut = new sdl_data{ 220,220,220, 255 };
         SDL_ShortcutBadgeRenderObject *badge_renderer_shortcut = new SDL_ShortcutBadgeRenderObject(badge_panel_position_shortcut, badge_panel_size, font_shortcut, std::to_string(i+1), badge_color_shortcut, 10);
-        SDLPanel *badge_panel_shortcut = new SDLPanel(badge_renderer_shortcut);
+        SDLBadgePanel *badge_panel_shortcut = new SDLBadgePanel(badge_renderer_shortcut);
         _shortcut_badges.insert(std::pair<MovingEntityType, SDL_ShortcutBadgeRenderObject*>(type, badge_renderer_shortcut));
 
         unit_panel->add_component(cost_panel);
@@ -164,14 +166,4 @@ void SDLEntityPanel::resize(const vec2 &v) {
     representation->set_size({v.x, representation->get_size()->y});
     old_window_size = v;
     resize_children(v);
-
-    for(std::map<MovingEntityType, SDL_QueueBadgeRenderObject*>::iterator it = _queue_badges.begin();
-        it != _queue_badges.end(); ++it) {
-        (*it).second->set_position(v.x, v.y);
-    }
-
-    for(std::map<MovingEntityType, SDL_ShortcutBadgeRenderObject*>::iterator it = _shortcut_badges.begin();
-        it != _shortcut_badges.end(); ++it) {
-        (*it).second->set_position(v.x, v.y);
-    }
 }
