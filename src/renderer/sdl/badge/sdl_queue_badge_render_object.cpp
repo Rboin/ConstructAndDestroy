@@ -9,11 +9,12 @@ SDL_QueueBadgeRenderObject::SDL_QueueBadgeRenderObject(const vec2 &position, con
                                                        sdl_data *color, int radius)
         : SDL_CircleBadgeRenderObject(position, size, color, radius) {
 
-    vec2 text_size = {(float)_radius, (float)_radius};
+    vec2 text_size = {(float) _radius, (float) _radius};
     vec2 text_pos = _center - vec2(text_size.x / 2, text_size.y / 2);
 
     sdl_data textcolor = sdl_data(0, 0, 0, 255);
-    _textdata = new sdl_text{textcolor.red, textcolor.green, textcolor.blue, std::to_string((int)_count).c_str(), font};
+    _textdata = new sdl_text{textcolor.red, textcolor.green, textcolor.blue, std::to_string((int) _count).c_str(),
+                             font};
     _text = new SDL_UI_RenderTextObject(text_pos, text_size, _textdata);
 }
 
@@ -26,5 +27,8 @@ void SDL_QueueBadgeRenderObject::render(SDLRenderer *renderer,  const mat2 & tra
 
     _textdata->text = std::to_string((int)_count).c_str();
     _text->render(renderer, transformations);
+}
 
+SDL_QueueBadgeRenderObject::~SDL_QueueBadgeRenderObject() {
+    clear_data();
 }

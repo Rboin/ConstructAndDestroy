@@ -14,6 +14,8 @@ private:
 public:
     SDL_QueueBadgeRenderObject(const vec2 &position, const vec2 &size, TTF_Font *font,
                                                              sdl_data *color, int radius);
+
+    ~SDL_QueueBadgeRenderObject();
     void update_count(int count);
 
     virtual void render(SDLRenderer*,const mat2 &) override;

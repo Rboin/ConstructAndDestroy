@@ -20,9 +20,13 @@ void SDL_RectangleBadgeRenderObject::render(SDLRenderer *renderer, const mat2 & 
             int dx = _radius - w; // horizontal offset
             int dy = _radius - h; // vertical offset
             //if ((dx * dx + dy * dy) <= (_radius * _radius)) {
-                SDL_RenderDrawPoint(renderer->get_engine(), _center.x + dx, _center.y + dy);
+            SDL_RenderDrawPoint(renderer->get_engine(), _center.x + dx, _center.y + dy);
             //}
 
         }
     }
+}
+
+SDL_RectangleBadgeRenderObject::~SDL_RectangleBadgeRenderObject() {
+    clear_data();
 }

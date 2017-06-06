@@ -22,3 +22,7 @@ void SDL_CircleBadgeRenderObject::render(SDLRenderer * renderer,  const mat2 &tr
         }
     }
 }
+
+SDL_CircleBadgeRenderObject::~SDL_CircleBadgeRenderObject() {
+    clear_data();
+}
