@@ -16,6 +16,8 @@ In \cref{fig:unit-panel} all unit panels are highlighted. For each unit that can
 
 In order to capture click events, and trigger the unit spawning process, a MouseHandlerEntityPanel is used. When the player clicks on an entity, the mouse handler takes care of spawning the unit and subtracing the resource cost. The entity will only be ordered if the player has enough resources to pay for the unit, as shown below.
 
+Another way to spawn a unit is to press the shortcut key. This shortcut key will is shown in the top left badge of the unit panel.
+
 \begin{lstlisting}
  if (p->resources->check_if_sufficient_resources(spawnable_entity->get_cost())) {
     // tell the building to spawn the selected entity type

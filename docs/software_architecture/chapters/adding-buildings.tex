@@ -3,12 +3,12 @@
 As a player you may want to add buildings to the world. In this section we will explain how a player can add buildings and how we have implemented this feature.
 
 \subsection{Controls and feedback}
-Buildings can be spawned via the building panel (see \cref{fig:building-panel}). When the player clicks on the building that he/she wishes to spawn, a slightly transparent texture of the building appears at the mouse position. When the player hovers the mouse over another static entity, the texture gets a red border. This will notify the player that the building cannot be placed at that current mouse position. If the player decides not to place a building after all, the action can be cancelled by pressing the escape key. More on this subject is described in \cref{AbortPlacingBuilding}. When the player is satisfied with the position to place the building on, it can be placed by clicking the left mouse button. 
+Buildings can be spawned via the building panel (see \cref{fig:building-panel}). When the player clicks on the building that he/she wishes to spawn, or presses the key that belongs to the building (displayed in the top left corner of the building in the building panel), a slightly transparent texture of the building appears at the mouse position. When the player hovers the mouse over another static entity, the texture gets a red border. This will notify the player that the building cannot be placed at that current mouse position. If the player decides not to place a building after all, the action can be cancelled by pressing the escape key. More on this subject is described in \cref{AbortPlacingBuilding}. When the player is satisfied with the position to place the building on, it can be placed by clicking the left mouse button. 
 
 \subsection{Building panel}
 The building panel, as displayed in \cref{fig:building-panel}, iterates over the buildings\_with\_textures enum, and for each entry it adds a UnitPanel to the Building Panel. UnitPanels are used for the EntityPanel (see \ref{EntityPanel}) as well as the Building Panel. These UnitPanels render an image, and contain objects of whatever it renders (buildings or entities). Unit panels are highlighted in \cref{fig:unit-panel}.
 
-A mouse handler of which a diagram is shown in \cref{fig:mousehandlerbuildingpanel} takes care of actually starting the process of positioning and placing a building.
+A mouse handler of which a diagram is shown in \cref{fig:mousehandlerbuildingpanel} or the key event handler takes care of actually starting the process of positioning and placing a building.
 
 \subsection{States}
 We are using the state pattern during positioning and placing buildings, because this pattern makes it easy to extend the behaviour of the player or entity, which can be different each state.\\
