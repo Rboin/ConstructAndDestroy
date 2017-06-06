@@ -8,6 +8,7 @@
 enum BuildingType {
     CASTLE,
     WAREHOUSE,
-    STABLE
+    STABLE,
+    WARFACTORY
 };
 #endif //C_AND_D_PROJECT_BUILDING_TYPE_H

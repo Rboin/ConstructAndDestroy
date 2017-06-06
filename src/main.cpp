@@ -55,7 +55,8 @@ SDL_Renderer *renderer;
 std::vector<building_with_texture> buildings_with_textures = {
     {"castle.png", BuildingType::CASTLE, new Resources(0,0,5,0), "Castle", "This building can create new units"},
     {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"},
-    {"horsestable.png", BuildingType::STABLE, new Resources(0,0,50,0), "Stable", "This building can create strong fighters"}
+    {"horsestable.png", BuildingType::STABLE, new Resources(0,0,50,0), "Stable", "This building can create strong fighters on horseback"},
+    {"warfactory.png", BuildingType::WARFACTORY, new Resources(0,0,50,0), "Warfactory", "This building can create some advanced warfare units"}
 };
 
 std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
@@ -64,7 +65,8 @@ std::vector<entity_with_texture> entities_with_textures = std::vector<entity_wit
         {"knight.png",     MovingEntityType::KNIGHT},
         {"lightcavalier.png",   MovingEntityType::LIGHT_CAVALIER},
         {"cavalier.png",      MovingEntityType::CAVALIER},
-        {"heavycavalier.png", MovingEntityType::HEAVY_CAVALIER}
+        {"heavycavalier.png", MovingEntityType::HEAVY_CAVALIER},
+        {"juggernaut.png", MovingEntityType::JUGGERNAUT}
 };
 
 std::string get_texture_of_entity(MovingEntityType type) {

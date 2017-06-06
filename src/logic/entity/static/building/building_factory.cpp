@@ -8,21 +8,32 @@
 #include "settings.h"
 #include "warehouse_entity.h"
 #include "stable_entity.h"
+#include "warfactory_entity.h"
 
 BuildingEntity *BuildingFactory::create(BuildingType type) {
     BuildingEntity *be;
     SDL_ImageHealthRenderObject *iro;
     sdl_image_data *bd;
 
-    if (type == BuildingType::CASTLE) {
-        be = new CastleEntity(50);
-        bd = new sdl_image_data{"castle.png"};
-    } else if (type == BuildingType::WAREHOUSE) {
-        be = new WarehouseEntity(50);
-        bd = new sdl_image_data{"warehouse.png"};
-    } else if(type == BuildingType::STABLE){
-        be = new StableEntity(50);
-        bd = new sdl_image_data("horsestable.png");
+    switch(type){
+        case BuildingType::CASTLE:
+            be = new CastleEntity(50);
+            bd = new sdl_image_data{"castle.png"};
+            break;
+        case BuildingType::WAREHOUSE:
+            be = new WarehouseEntity(50);
+            bd = new sdl_image_data{"warehouse.png"};
+            break;
+        case BuildingType::STABLE:
+            be = new StableEntity(50);
+            bd = new sdl_image_data("horsestable.png");
+            break;
+        case BuildingType::WARFACTORY:
+            be = new WarfactoryEntity(50);
+            bd = new sdl_image_data("warfactory.png");
+            break;
+        default:
+            break;
     }
 
     iro = new SDL_ImageHealthRenderObject({0, 0}, {50, 50}, bd, be);

@@ -13,6 +13,7 @@
 #include "cavalier_entity.h"
 #include "heavy_cavalier_entity.h"
 #include "light_cavalier.h"
+#include "juggernaut_entity.h"
 
 MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingEntityType moving_entity_type) {
 
@@ -42,6 +43,9 @@ MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingE
 
         case MovingEntityType::LUMBERJACK:
             me = new LumberJackEntity(position, 100, 0.2, 0.2);
+            break;
+        case MovingEntityType::JUGGERNAUT:
+            me = new JuggernautEntity(position, 100, 0.2, 0.2);
             break;
         default:
             me = nullptr;
