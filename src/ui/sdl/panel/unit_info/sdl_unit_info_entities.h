@@ -13,7 +13,10 @@ class MovingEntity;
 class SDLUnitInfoEntities : public SDLPanel {
 public:
     SDLUnitInfoEntities(std::vector<MovingEntity *> entities, SDL_RenderObject *r);
+
     void render(SDLRenderer *renderer, mat2 &m, float d) override;
+
+    void resize(const vec2 &) override;
 };
 
 

@@ -27,6 +27,7 @@ public:
 
     ~SDL_BadgeRenderObject();
 
+    void set_position(float x, float y) override;
     //void update_color(sdl_data *color);
 };
 

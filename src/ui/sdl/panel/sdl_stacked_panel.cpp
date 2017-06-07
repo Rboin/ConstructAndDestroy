@@ -31,3 +31,12 @@ void SDLStackedPanel::render(SDLRenderer *renderer, mat2 &m, float d) {
 void SDLStackedPanel::add_component(SDLPanel *child) {
     SDLPanel::add_component(child);
 }
+
+
+void SDLStackedPanel::resize(const vec2 &v) {
+    vec2 offset = old_window_size - (*representation->get_position());
+
+    representation->set_position(v.x - offset.x, v.y - offset.y);
+    old_window_size = v;
+    resize_children(v);
+}

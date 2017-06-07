@@ -29,6 +29,8 @@ public:
     SDLUnitInfoEntity(BaseEntity *entity, SDL_RenderObject *r, std::string texture);
 
     void render(SDLRenderer *renderer, mat2 &m, float d) override;
+
+    void resize(const vec2 &) override;
 };
 
 

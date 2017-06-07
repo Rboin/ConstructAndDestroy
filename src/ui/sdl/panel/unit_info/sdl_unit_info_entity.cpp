@@ -64,3 +64,11 @@ void SDLUnitInfoEntity::render(SDLRenderer *renderer, mat2 &m, float d) {
 
     SDL_UIComponent::render(renderer, m, d);
 }
+
+void SDLUnitInfoEntity::resize(const vec2 &v) {
+    vec2 current_offset = old_window_size - (*representation->get_position());
+    old_window_size = v;
+    vec2 new_pos = v - current_offset;
+    representation->set_position(new_pos.x, new_pos.y);
+    resize_children(v);
+}

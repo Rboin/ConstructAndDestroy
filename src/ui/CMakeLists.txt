@@ -70,7 +70,8 @@ set(SOURCE_FILES
         sdl/panel/unit_info/sdl_unit_info_entity.h
         sdl/panel/unit_info/sdl_unit_info_entities.cpp
         sdl/panel/unit_info/sdl_unit_info_entities.h
-        )
+        sdl/panel/sdl_badge_panel.cpp
+        sdl/panel/sdl_badge_panel.h)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

@@ -3,7 +3,7 @@
 //
 
 #include <SDL_ttf.h>
-#include <sdl/badge/sdl_shortcut_badge_render_object.h>
+#include "sdl/badge/sdl_shortcut_badge_render_object.h"
 #include "sdl/label/sdl_cost_label.h"
 #include "sdl/label/sdl_name_label.h"
 #include "sdl_building_panel.h"
@@ -13,6 +13,7 @@
 #include "sdl_unit_panel.h"
 #include "sdl_control_sub_panel.h"
 #include "../../../logic/entity/resources.h"
+#include "sdl_badge_panel.h"
 
 SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
@@ -37,8 +38,6 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
         unit_panel->set_mouse_callback(slot);
         mouse_dispatcher->register_callback(unit_panel, slot);
 
-
-
         float posx = pos.x;
 
         for (int index = ResourceType::GOLD; index < ResourceType::IRON; index++) {
@@ -46,7 +45,7 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
                 TTF_Font *f_font1 = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
                 sdl_data *sdl_label_data1 = new sdl_data{255, 255, 255, 255};
                 vec2 label_pos_cost = {posx, pos.y + size.y - cost_size.y + 10};
-                std::string texture = building.cost->get_texture_by_type((ResourceType)index);
+                std::string texture = building.cost->get_texture_by_type((ResourceType) index);
                 SDLCostLabel *cost_label = new SDLCostLabel(label_pos_cost, cost_size, sdl_label_data1, texture,
                                                             (ResourceType) index, f_font1, building.cost);
                 SDLControlSubPanel *cost_panel = new SDLControlSubPanel(cost_label);
@@ -55,8 +54,6 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
                 posx += cost_size.x - 10;
             }
         }
-
-
 
         TTF_Font *f_font2 = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
         sdl_data *sdl_label_data2 = new sdl_data{255, 255, 255, 255};
@@ -72,7 +69,7 @@ SDLBuildingPanel::SDLBuildingPanel(SDL_RenderObject *r) : SDLPanel(r) {
         SDL_ShortcutBadgeRenderObject *badge_renderer_shortcut = new SDL_ShortcutBadgeRenderObject(
                 badge_panel_position_shortcut, badge_panel_size, font_shortcut, std::to_string(i + 1),
                 badge_color_shortcut, 10);
-        SDLPanel *badge_panel_shortcut = new SDLPanel(badge_renderer_shortcut);
+        SDLBadgePanel *badge_panel_shortcut = new SDLBadgePanel(badge_renderer_shortcut);
 
 
         unit_panel->add_component(name_panel);
@@ -90,8 +87,9 @@ void SDLBuildingPanel::render(SDLRenderer *renderer, mat2 &transformations, floa
 }
 
 void SDLBuildingPanel::resize(const vec2 &v) {
-    vec2 offset = old_window_size - (*representation->get_position());
-    representation->set_position(representation->get_position()->x, v.y - offset.y);
+    float size_x = old_window_size.x - representation->get_size()->x;
+    representation->set_position(representation->get_position()->x, v.y - representation->get_size()->y);
+    representation->set_size({v.x - size_x, representation->get_size()->y});
     old_window_size = v;
     resize_children(v);
 }

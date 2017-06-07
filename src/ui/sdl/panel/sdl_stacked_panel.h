@@ -21,6 +21,8 @@ public:
     void render(SDLRenderer *renderer, mat2 &m, float d) override;
 
     void add_component(SDLPanel *child);
+
+    void resize(const vec2 &) override;
 };
 
 
