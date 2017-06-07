@@ -2,6 +2,9 @@
 // Created by Sander on 20-3-2017.
 //
 
+#include <iostream>
+#include "entity/upgrade_manager.h"
+#include "settings.h"
 #include "sdl/image/sdl_image_render_object.h"
 #include "resource_entity.h"
 #include "resource_manager.h"
@@ -32,7 +35,7 @@ int ResourceEntity::get_units() {
 }
 
 float ResourceEntity::gather(float d_t) {
-    float units_to_extract = 0.001 * d_t;
+    float units_to_extract = 0.001 * d_t * UpgradeManager::get_instance()->gather_speed;
     _units -= units_to_extract;
     if (_units < 10) {
         _depleted = true;

@@ -44,13 +44,13 @@ void WaveManager::set_wave(Wave *w) {
 void WaveManager::reset() {
     reset_computer();
     reset_player();
-
     _wave->reset();
 }
 
 void WaveManager::reset_player() {
     Player *player = PlayerManager::get_instance()->get_player(player_id);
-    player->clear_units();
+    player->reset();
+
 }
 
 void WaveManager::reset_computer() {

@@ -25,6 +25,14 @@ SDLUnitPanel::SDLUnitPanel(std::string texture, vec2 pos, vec2 size, vec2 image_
     add_image(texture, image_pos, image_size);
 }
 
+SDLUnitPanel::SDLUnitPanel(std::string texture, vec2 pos, vec2 size, vec2 image_pos, vec2 image_size, Upgrade *upgrade) :
+        SDLPanel(new SDL_RenderObject(pos, size, new sdl_data{0,0,0,100})) {
+    _spawnable_entity = nullptr;
+    _building_entity = nullptr;
+    _upgrade = upgrade;
+    add_image(texture, image_pos, image_size);
+}
+
 void SDLUnitPanel::add_image(std::string texture, vec2 pos, vec2 size) {
     sdl_image_data *building_data = new sdl_image_data{ texture };
     SDL_ImageRenderObject* renderer = new SDL_ImageRenderObject(pos, size, building_data);
@@ -58,4 +66,8 @@ void SDLUnitPanel::resize(const vec2 &v) {
     representation->set_position(representation->get_position()->x, v.y - representation->get_size()->y);
     old_window_size = v;
     resize_children(v);
+}
+
+Upgrade *SDLUnitPanel::get_upgrade() {
+    return _upgrade;
 }

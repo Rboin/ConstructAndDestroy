@@ -3,6 +3,7 @@
 #include "player.h"
 #include "state/state_machine.h"
 #include "entity/moving/moving_entity.h"
+#include "upgrade_manager.h"
 
 
 Player::Player(int id) {
@@ -13,7 +14,7 @@ Player::Player(int id) {
     buildings = std::vector<BuildingEntity *>();
     units = std::vector<MovingEntity *>();
     selected_units = std::vector<MovingEntity *>();
-    resources = new Resources(50, 50, 50, 50);
+    resources = new Resources(50,50,50,50);
 }
 
 void Player::update() {
@@ -25,13 +26,13 @@ Player::~Player() {
     delete state_machine;
     delete positioning_building;
     delete selected_building;
-    for(int i = 0; i < buildings.size(); i++){
+    for (int i = 0; i < buildings.size(); i++) {
         delete buildings.at(i);
     }
-    for(int i = 0; i < units.size(); i++){
+    for (int i = 0; i < units.size(); i++) {
         delete units.at(i);
     }
-    for(int i = 0; i < selected_units.size(); i++){
+    for (int i = 0; i < selected_units.size(); i++) {
         delete selected_units.at(i);
     }
 }
@@ -195,9 +196,23 @@ void Player::clear_selected_building(BaseEntity *be) {
 }
 
 MovingEntity *Player::get_combat_unit() {
-    for(int i = 0; i < units.size(); i++){
-        if(units.at(i)->get_job_type() == ENEMY){
+    for (int i = 0; i < units.size(); i++) {
+        if (units.at(i)->get_job_type() == ENEMY) {
             return units.at(i);
         }
     }
+}
+
+void Player::reset() {
+    clear_units();
+    clear_buildings();
+    resources->reset();
+    UpgradeManager::get_instance()->reset();
+}
+
+void Player::clear_buildings() {
+    for (int i = 0; i < buildings.size(); i++) {
+        World::get_instance()->remove_entity(buildings.at(i));
+    }
+    buildings.clear();
 }

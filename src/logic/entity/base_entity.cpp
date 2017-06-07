@@ -8,15 +8,16 @@
 #include <cstring>
 #include "base_entity.h"
 #include "player_manager.h"
+#include "upgrade_manager.h"
 #include "sdl/label/sdl_render_resource_label.h"
 
 BaseEntity::BaseEntity(int type, vec2 position, float mass) {
     _type = type;
     _mass = mass;
     _position = position;
-    _max_health = 100;
-    _health = 100;
-    _attack_damage = 2;
+    _max_health = 100 * UpgradeManager::get_instance()->extra_hp;
+    _health = 100 * UpgradeManager::get_instance()->extra_hp;
+    _attack_damage = 2 * UpgradeManager::get_instance()->extra_damage;
     _attack_speed = 1;
     _marking = 0;
     _regeneration_rate = 0.001f;
@@ -136,4 +137,13 @@ void BaseEntity::regenerate_hp(float d_t) {
     } else {
         _health += regen;
     }
+}
+
+void BaseEntity::upgrade_health() {
+    _health = _health * UpgradeManager::get_instance()->extra_hp;
+    _max_health = _max_health * UpgradeManager::get_instance()->extra_hp;
+}
+
+void BaseEntity::upgrade_attack() {
+    _attack_damage = _attack_damage * UpgradeManager::get_instance()->extra_damage;
 }

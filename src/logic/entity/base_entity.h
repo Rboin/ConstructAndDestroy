@@ -93,6 +93,10 @@ public:
 
     void regenerate_hp(float d_t);
 
+    void upgrade_health();
+
+    void upgrade_attack();
+
 };
 
 #endif //C_AND_D_PROJECT_BASE_GAME_ENTITY_H

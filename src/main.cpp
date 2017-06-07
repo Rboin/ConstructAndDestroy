@@ -20,21 +20,15 @@
 #include "entity/player.h"
 #include "sdl/label/sdl_render_label.h"
 #include "entity/static/gold_mine_entity.h"
-#include "entity/moving/knight_entity.h"
-#include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "graph/graph_manager.h"
 #include "entity/goal/moving_entity_goal/work_goal.h"
 #include "textures/texture_manager.h"
-#include "entity/moving/lumberjack_entity.h"
 #include "sdl/panel/sdl_world_panel.h"
 #include "sdl/panel/wave/sdl_wave_panel.h"
 #include "sdl/window/sdl_window.h"
 #include "entity/static/tree_entity.h"
-#include "entity/goal/evaluator/wander_evaluator.h"
-#include "entity/moving/miner_entity.h"
 #include "behaviour/calculator/basic_force_calculator.h"
-#include "entity/goal/evaluator/work_evaluator.h"
 #include "sdl/event/sdl_key_event_dispatcher.h"
 #include "sdl/event/sdl_mouse_event_dispatcher.h"
 #include "sdl/event/slot/sdl_key_event_slot.h"
@@ -43,7 +37,6 @@
 #include "behaviour/behaviour.h"
 #include "sdl/event/slot/mouse_handler_world.h"
 #include "entity/player_manager.h"
-#include "entity/goal/evaluator/combat_evaluator.h"
 #include "wave/wave.h"
 #include "wave/wave_manager.h"
 #include "sdl/event/slot/wave_reset_handler.h"
@@ -62,7 +55,8 @@ std::vector<building_with_texture> buildings_with_textures = {
     {"castle.png", BuildingType::CASTLE, new Resources(0,25,25,0), "Castle", "This building can create new units"},
     {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,10,10,0), "Warehouse", "This building is used to store resources"},
     {"horsestable.png", BuildingType::STABLE, new Resources(0,50,50,0), "Stable", "This building can create strong fighters on horseback"},
-    {"warfactory.png", BuildingType::WARFACTORY, new Resources(0,50,50,0), "Warfactory", "This building can create some advanced warfare units"}
+    {"warfactory.png", BuildingType::WARFACTORY, new Resources(0,50,50,0), "Warfactory", "This building can create some advanced warfare units"},
+    {"research.png", BuildingType::RESEARCH, new Resources(0,25,25,0), "Research", "Research upgrades for units here"}
 };
 
 std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{

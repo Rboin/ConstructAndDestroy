@@ -151,6 +151,12 @@ set(SOURCE_FILES
         entity/moving/juggernaut_entity.cpp
         entity/moving/mercenary_entity.h
         entity/moving/mercenary.cpp
+        entity/static/building/research_entity.cpp
+        entity/static/building/research_entity.h
+        entity/upgrade.cpp entity/upgrade.h
+        entity/upgrade_type.h
+        entity/upgrade_manager.cpp
+        entity/upgrade_manager.h
         entity/moving/gold_miner_entity.h
         entity/moving/gold_miner_entity.cpp
         entity/moving/stone_miner_entity.h

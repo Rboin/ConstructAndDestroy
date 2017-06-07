@@ -71,7 +71,11 @@ set(SOURCE_FILES
         sdl/panel/unit_info/sdl_unit_info_entities.cpp
         sdl/panel/unit_info/sdl_unit_info_entities.h
         sdl/panel/sdl_badge_panel.cpp
-        sdl/panel/sdl_badge_panel.h)
+        sdl/panel/sdl_badge_panel.h
+        sdl/panel/sdl_research_panel.cpp
+        sdl/panel/sdl_research_panel.h
+        sdl/event/slot/mouse_handler_researchpanel.cpp
+        sdl/event/slot/mouse_handler_researchpanel.h)
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

@@ -5,6 +5,7 @@
 #include <types.h>
 #include "sdl/image/sdl_image_render_object.h"
 #include "cavalier_entity.h"
+#include "entity/upgrade_manager.h"
 
 
 CavalierEntity::CavalierEntity(vec2 position, float mass) :
@@ -12,9 +13,9 @@ CavalierEntity::CavalierEntity(vec2 position, float mass) :
     carrying = 0;
     max_force = 0.2;
     max_speed = 0.2;
-    _attack_damage = 10;
-    _max_health = 200;
-    _health = 200;
+    _attack_damage = 10 * UpgradeManager::get_instance()->extra_damage;
+    _max_health = 200 * UpgradeManager::get_instance()->extra_hp;
+    _health = 200 * UpgradeManager::get_instance()->extra_hp;
     texture = "cavalier.png";
 
 }

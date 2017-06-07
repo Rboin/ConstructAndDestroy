@@ -14,6 +14,7 @@
 template<class T> class StateMachine;
 class Resources;
 class SpawnableEntity;
+class Upgrade;
 
 class BuildingEntity : public StaticEntity {
 private:
@@ -24,6 +25,7 @@ private:
 protected:
     Resources* costs;
     std::vector<SpawnableEntity*> spawnable_entities;
+    std::vector<Upgrade*> upgrades;
 public:
     ~BuildingEntity();
     BuildingEntity(vec2, float, BuildingType, TextureTypes);
@@ -41,6 +43,8 @@ public:
     BuildingType get_building_type();
 
     std::vector<SpawnableEntity*> get_spawnable_entities();
+
+    std::vector<Upgrade*> get_upgrades();
 
     /*
      * This will change the texture of a building entity.

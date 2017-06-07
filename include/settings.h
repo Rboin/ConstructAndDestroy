@@ -39,7 +39,6 @@ const float stat_modifier_increment = 0.25f;
 const int wave_amount = 3;
 const int wave_unit_size = 1;
 //===============================================
-
 struct building_with_texture {
     std::string texture;
     BuildingType type;
@@ -57,7 +56,6 @@ extern std::vector<building_with_texture> buildings_with_textures;
 extern std::vector<entity_with_texture> entities_with_textures;
 
 extern std::string get_texture_of_entity(MovingEntityType type);
-
 extern std::string get_texture_of_building(BuildingType building);
 
 #endif //CONSTRUCT_AND_DESTROY_SETTINGS_H

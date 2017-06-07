@@ -53,9 +53,13 @@ public:
 
     void remove_building(BuildingEntity*);
 
+    void clear_buildings();
+
     void clear_units();
 
     MovingEntity* get_combat_unit();
+
+    void reset();
 };
 
 

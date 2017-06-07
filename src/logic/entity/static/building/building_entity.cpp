@@ -86,3 +86,7 @@ int BuildingEntity::get_delta_time() {
 std::vector<MovingEntityType> BuildingEntity::get_orders() {
     return _orders;
 }
+
+std::vector<Upgrade *> BuildingEntity::get_upgrades() {
+    return upgrades;
+}

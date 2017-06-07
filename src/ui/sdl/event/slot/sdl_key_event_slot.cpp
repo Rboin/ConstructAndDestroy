@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <iostream>
-#include "sdl/panel/sdl_world_panel.h"
+#include "sdl/panel/sdl_research_panel.h"
 #include "sdl/panel/sdl_entity_panel.h"
 #include "sdl/event/sdl_event_types.h"
 #include "manager/build_and_spawn_manager.h"
@@ -19,6 +19,9 @@
 #include "sdl_key_event_slot.h"
 #include "settings.h"
 #include "entity/static/building/building_manager.h"
+#include "entity/upgrade.h"
+#include "sdl/sdl_render_object.h"
+
 
 SDL_KeyEventSlot::SDL_KeyEventSlot() : Slot<sdl_key_event_data>() {
     this->_building_index = -1;
@@ -55,12 +58,24 @@ void SDL_KeyEventSlot::on(sdl_key_event_data d) {
             // _key_event_handler_entity:
             BuildingEntity *selected_building = player->selected_building;
             std::vector<SpawnableEntity *> se = selected_building->get_spawnable_entities();
-
+            std::vector<Upgrade *> up = selected_building->get_upgrades();
 
             int key = (int) d.key - 49;
             if (key < se.size() && key >= 0) {
                 SDLUnitPanel *panel = (SDLUnitPanel *) SDLControlPanel::get_instance()->get_children()[0]->get_children()[key];
                 BuildAndSpawnManager::get_instance()->spawn_spawnable_entity(panel);
+            }
+
+            if( key < up.size() && key >= 0){
+                up.at(key)->upgrade();
+                SDLResearchPanel *panel = (SDLResearchPanel *) SDLControlPanel::get_instance()->get_children()[0];
+
+                sdl_data *data = panel->get_representation()->get_data();
+                sdl_data *similar_data = new sdl_data{data->red, data->green, data->blue, data->alpha};
+                SDL_RenderObject *re = new SDL_RenderObject(panel->get_position()->clone(), panel->get_size()->clone(), similar_data);
+                SDLResearchPanel *new_panel = new SDLResearchPanel(re ,player->selected_building);
+                SDLControlPanel::get_instance()->add_component(new_panel);
+                SDLControlPanel::get_instance()->remove_component(panel);
             }
 
         } else {

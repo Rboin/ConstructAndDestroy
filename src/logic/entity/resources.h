@@ -1,9 +1,9 @@
 #ifndef CONSTRUCT_AND_DESTROY_RESOURCES_H
 #define CONSTRUCT_AND_DESTROY_RESOURCES_H
 
+#include <string>
 #include "entity/static/resource_type.h"
 #include <string>
-
 
 class Resources {
 private:
@@ -24,6 +24,8 @@ public:
     bool check_if_sufficient_resources(Resources *);
 
     void subtract_resources(Resources *);
+
+    void reset();
 };
 
 #endif //CONSTRUCT_AND_DESTROY_RESOURCES_H

@@ -9,6 +9,7 @@
 #include "warehouse_entity.h"
 #include "stable_entity.h"
 #include "warfactory_entity.h"
+#include "research_entity.h"
 
 BuildingEntity *BuildingFactory::create(BuildingType type) {
     BuildingEntity *be;
@@ -31,6 +32,10 @@ BuildingEntity *BuildingFactory::create(BuildingType type) {
         case BuildingType::WARFACTORY:
             be = new WarfactoryEntity(50);
             bd = new sdl_image_data("warfactory.png");
+            break;
+        case BuildingType ::RESEARCH:
+            be = new ResearchEntity(50);
+            bd = new sdl_image_data("research.png");
             break;
         default:
             break;
