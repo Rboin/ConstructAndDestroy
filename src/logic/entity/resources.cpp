@@ -1,3 +1,5 @@
+
+#include <string>
 #include "resources.h"
 
 
@@ -36,4 +38,21 @@ bool Resources::check_if_sufficient_resources(Resources *r) {
         }
     }
     return true;
+}
+
+std::string Resources::get_texture_by_type(ResourceType resource_type) {
+    std::string result = "";
+    switch(resource_type){
+        case STONE:
+            result = "stone.png";
+            break;
+        case GOLD:
+            result = "gold.png";
+            break;
+        case WOOD:
+            result = "log.png";
+            break;
+    }
+
+    return result;
 }

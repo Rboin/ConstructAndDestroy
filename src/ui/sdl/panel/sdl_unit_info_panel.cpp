@@ -6,6 +6,7 @@
 #include "entity/player.h"
 #include "entity/player_manager.h"
 #include "settings.h"
+#include <string>
 #include <iostream>
 #include "sdl/panel/unit_info/sdl_unit_info_entities.h"
 #include "sdl/panel/unit_info/sdl_unit_info_entity.h"

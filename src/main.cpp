@@ -59,14 +59,21 @@ float camera_zoom = 1.0f;
 
 // initialize buildings and textures
 std::vector<building_with_texture> buildings_with_textures = {
-    {"castle.png", BuildingType::CASTLE, new Resources(0,0,5,0), "Castle", "This building can create new units"},
-    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,0,0,0), "Warehouse", "This building is used to store resources"}
+    {"castle.png", BuildingType::CASTLE, new Resources(0,25,25,0), "Castle", "This building can create new units"},
+    {"warehouse.png", BuildingType::WAREHOUSE, new Resources(0,10,10,0), "Warehouse", "This building is used to store resources"},
+    {"horsestable.png", BuildingType::STABLE, new Resources(0,50,50,0), "Stable", "This building can create strong fighters on horseback"},
+    {"warfactory.png", BuildingType::WARFACTORY, new Resources(0,50,50,0), "Warfactory", "This building can create some advanced warfare units"}
 };
 
 std::vector<entity_with_texture> entities_with_textures = std::vector<entity_with_texture>{
         {"lumberjack.png", MovingEntityType::LUMBERJACK},
         {"miner.png",      MovingEntityType::MINER},
-        {"knight.png",     MovingEntityType::KNIGHT}
+        {"knight.png",     MovingEntityType::KNIGHT},
+        {"lightcavalier.png",   MovingEntityType::LIGHT_CAVALIER},
+        {"cavalier.png",      MovingEntityType::CAVALIER},
+        {"heavycavalier.png", MovingEntityType::HEAVY_CAVALIER},
+        {"mercenary.png", MovingEntityType::MERCENARY},
+        {"juggernaut.png", MovingEntityType::JUGGERNAUT}
 };
 
 std::string get_texture_of_entity(MovingEntityType type) {
@@ -141,7 +148,7 @@ bool init_world() {
     sdl_image_data *world_data = new sdl_image_data{"world-large.png"};
     SDL_ImageRenderObject *world_representation = new SDL_ImageRenderObject({0, 0}, world_size, world_data);
 
-    if(!world_data || !world_representation) {
+    if (!world_data || !world_representation) {
         return false;
     }
     World::get_instance()->set_render_object(world_representation);
@@ -156,11 +163,66 @@ bool init_camera() {
 
 // Initializes our window, renderer and sdl itself.
 bool init_everything() {
-    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img() || !init_camera() || !init_world())
+    if (!init_sdl() || !create_window() || !create_renderer() || !init_font() || !init_img() || !init_camera() ||
+        !init_world())
         return false;
     setup_renderer();
     return true;
 }
+
+int random_number(int size) {
+    static int number = 1;
+    number = (221 * number + 1) % size;
+    return number;
+}
+
+void add_trees(int amount) {
+    GraphManager *gm = GraphManager::get_instance();
+    World *w = World::get_instance();
+    sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
+
+
+    for (int i = 0; i < amount; i++) {
+        vec2 s_position = gm->graph->nodes[random_number(gm->graph->nodes.size())]->get_position()->clone();
+        ResourceEntity *s_entity = new TreeEntity(s_position, 50);
+        s_entity->set_textures("tree.png", "trunk.png");
+        SDL_ImageRenderObject *tree_object = new SDL_ImageRenderObject(s_position, {40, 40}, tree_data);
+        s_entity->set_representation(tree_object);
+        w->add_entity(s_entity);
+    }
+}
+
+void add_stones(int amount) {
+    GraphManager *gm = GraphManager::get_instance();
+    World *w = World::get_instance();
+    sdl_image_data *stone_mine_data = new sdl_image_data{"stonemine.png"};
+
+    for (int i = 0; i < amount; i++) {
+        vec2 s_position = gm->graph->nodes[random_number(gm->graph->nodes.size())]->get_position()->clone();
+        ResourceEntity *stone_mine_entity = new StoneMineEntity(s_position, 50);
+        stone_mine_entity->set_textures("stonemine.png", "depletedstonemine.png");
+        SDL_ImageRenderObject *stone_mine = new SDL_ImageRenderObject(s_position, {40, 40}, stone_mine_data);
+        stone_mine_entity->set_representation(stone_mine);
+        w->add_entity(stone_mine_entity);
+    }
+}
+
+void add_gold_mines(int amount){
+    GraphManager *gm = GraphManager::get_instance();
+    World *w = World::get_instance();
+    sdl_image_data *gold_mine_data = new sdl_image_data{"goldmine.png"};
+
+    for(int i = 0; i < amount; i++) {
+        vec2 s_position = gm->graph->nodes[random_number(gm->graph->nodes.size())]->get_position()->clone();
+        ResourceEntity *gold_mine_entity = new GoldMineEntity(s_position, 50);
+        gold_mine_entity->set_textures("goldmine.png", "depletedgoldmine.png");
+        SDL_ImageRenderObject *gold_mine_object = new SDL_ImageRenderObject(s_position, {40,40},
+                                                                            gold_mine_data);
+        gold_mine_entity->set_representation(gold_mine_object);
+        w->add_entity(gold_mine_entity);
+    }
+}
+
 
 int main(int argc, char **argv) {
     if (!init_everything()) {
@@ -180,149 +242,11 @@ int main(int argc, char **argv) {
     GraphManager *gm = GraphManager::get_instance();
     gm->setup(world_size, node_distance);
 
-    vec2 pos = {0, 0};
-
-    // Begin lumberjack entity
-    ForceCalculator *calculator = new BasicForceCalculator();
-    Behaviour *behaviour = new Behaviour(calculator);
-    MovingEntity *entity = new LumberJackEntity(pos, 100, 0.2, 0.2);
-    ThinkGoal *think_goal = new ThinkGoal(entity);
-
-    think_goal->add_evaluator(new WorkEvaluator());
-    think_goal->add_evaluator(new FollowPathEvaluator());
-
-    entity->set_behaviour(behaviour);
-    entity->set_goal(think_goal);
-    entity->set_player(player_id);
-
-    vec2 entity_size = {40, 40};
-    sdl_image_data *entity_data = new sdl_image_data{"lumberjack.png"};
-    SDL_ImageRenderObject *entity_render_object = new SDL_ImageHealthRenderObject(pos, entity_size, entity_data,
-                                                                                  entity);
-    entity->set_representation(entity_render_object);
-
-    World::get_instance()->add_entity(entity);
-    // End lumberjack entity
-
-
-    // Begin knight entity
-    MovingEntity *knight_entity = new KnightEntity({100, 100}, 100, 0.2, 0.2);
-    ForceCalculator *knight_calculator = new BasicForceCalculator();
-    Behaviour *knight_behaviour = new Behaviour(knight_calculator);
-
-    ThinkGoal *knight_think_goal = new ThinkGoal(knight_entity);
-    knight_think_goal->add_evaluator(new CombatEvaluator());
-    knight_think_goal->add_evaluator(new WanderEvaluator());
-    knight_entity->set_behaviour(knight_behaviour);
-    knight_entity->set_goal(knight_think_goal);
-
-    knight_entity->set_player(player_id);
-
-    vec2 knight_entity_size = {40, 40};
-    sdl_image_data *knight_entity_data = new sdl_image_data{"knight.png"};
-    SDL_ImageRenderObject *knight_entity_render_object = new SDL_ImageHealthRenderObject(pos, knight_entity_size,
-                                                                                         knight_entity_data,
-                                                                                         knight_entity);
-
-    knight_entity->set_representation(knight_entity_render_object);
-
-    World::get_instance()->add_entity(knight_entity);
-    // End knight entity
-
-    // Begin gold miner entity
-    ForceCalculator *gold_miner_calculator = new BasicForceCalculator();
-    Behaviour *gold_miner_behaviour = new Behaviour(gold_miner_calculator);
-    MovingEntity *gold_miner_entity = new MinerEntity({100, 100}, 100, 0.2, 0.2, GOLDMINER);
-    ThinkGoal *gold_miner_think_goal = new ThinkGoal(gold_miner_entity);
-    gold_miner_think_goal->add_evaluator(new WorkEvaluator());
-    gold_miner_think_goal->add_evaluator(new FollowPathEvaluator());
-
-    gold_miner_entity->set_behaviour(gold_miner_behaviour);
-    gold_miner_entity->set_goal(gold_miner_think_goal);
-
-    gold_miner_entity->set_player(1);
-
-    vec2 gold_miner_entity_size = {40, 40};
-    sdl_image_data *gold_miner_entity_data = new sdl_image_data{"miner.png"};
-    SDL_ImageRenderObject *gold_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
-                                                                                             gold_miner_entity_size,
-                                                                                             gold_miner_entity_data,
-                                                                                             gold_miner_entity);
-    gold_miner_entity->set_representation(gold_miner_entity_render_object);
-
-    World::get_instance()->add_entity(gold_miner_entity);
-    // End gold mine miner entity
-
-    // Begin stone miner entity
-    ForceCalculator *stone_miner_calculator = new BasicForceCalculator();
-    Behaviour *stone_miner_behaviour = new Behaviour(stone_miner_calculator);
-    MovingEntity *stone_miner_entity = new MinerEntity({100, 100}, 100, 0.2, 0.2, STONEMINER);
-    ThinkGoal *stone_miner_think_goal = new ThinkGoal(stone_miner_entity);
-    stone_miner_think_goal->add_evaluator(new WorkEvaluator());
-    stone_miner_think_goal->add_evaluator(new FollowPathEvaluator());
-
-    stone_miner_entity->set_behaviour(stone_miner_behaviour);
-    stone_miner_entity->set_goal(stone_miner_think_goal);
-
-    stone_miner_entity->set_player(1);
-
-    vec2 stone_miner_entity_size = {40, 40};
-    sdl_image_data *stone_miner_entity_data = new sdl_image_data{"miner.png"};
-    SDL_ImageRenderObject *stone_miner_entity_render_object = new SDL_ImageHealthRenderObject(pos,
-                                                                                              stone_miner_entity_size,
-                                                                                              stone_miner_entity_data,
-                                                                                              stone_miner_entity);
-    stone_miner_entity->set_representation(stone_miner_entity_render_object);
-
-    World::get_instance()->add_entity(stone_miner_entity);
-    // End stone mine miner entity
-
-    // Begin tree entity
-    vec2 s_position = {400, 280}, s_size = {40, 40};
-    ResourceEntity *s_entity = new TreeEntity(s_position, 50);
-    sdl_image_data *tree_data = new sdl_image_data{"tree.png"};
-    s_entity->set_textures("tree.png", "trunk.png");
-    SDL_ImageRenderObject *tree_object = new SDL_ImageRenderObject(s_position, s_size, tree_data);
-    s_entity->set_representation(tree_object);
-    World::get_instance()->add_entity(s_entity);
-    // End tree entity
-
-    // Begin tree entity
-    vec2 s1_position = {400, 240}, s1_size = {40, 40};
-    ResourceEntity *s1_entity = new TreeEntity(s1_position, 50);
-    sdl_image_data *tree1_data = new sdl_image_data{"tree.png"};
-    s1_entity->set_textures("tree.png", "trunk.png");
-    SDL_ImageRenderObject *tree1_object = new SDL_ImageRenderObject(s1_position, s1_size, tree1_data);
-    s1_entity->set_representation(tree1_object);
-    World::get_instance()->add_entity(s1_entity);
-    // End tree entity
-
-    // Begin gold mine entity
-    vec2 gold_mine_position = {320, 280}, gold_mine_size = {40, 40};
-    ResourceEntity *gold_mine_entity = new GoldMineEntity(gold_mine_position, 50);
-    sdl_image_data *gold_mine_data = new sdl_image_data{"goldmine.png"};
-    gold_mine_entity->set_textures("goldmine.png", "depletedgoldmine.png");
-    SDL_ImageRenderObject *gold_mine_object = new SDL_ImageRenderObject(gold_mine_position, gold_mine_size,
-                                                                        gold_mine_data);
-    gold_mine_entity->set_representation(gold_mine_object);
-
-    World::get_instance()->add_entity(gold_mine_entity);
-    // End gold mine entity
-
-    // Begin stone mine entity
-    vec2 stone_mine_position = {240, 240}, stone_mine_size = {40, 40};
-    ResourceEntity *stone_mine_entity = new StoneMineEntity(stone_mine_position, 50);
-    sdl_image_data *stone_mine_data = new sdl_image_data{"stonemine.png"};
-    stone_mine_entity->set_textures("stonemine.png", "depletedstonemine.png");
-    SDL_ImageRenderObject *stone_mine_object = new SDL_ImageRenderObject(stone_mine_position, stone_mine_size,
-                                                                         stone_mine_data);
-    stone_mine_entity->set_representation(stone_mine_object);
-
-    World::get_instance()->add_entity(stone_mine_entity);
-    // End gold mine entity
-
-    // TODO: when merged enemy_player, change 1 to player_id
-//    BuildingManager::get_instance()->add_building(player_id, s_entity7);
+    /// Add resources
+    add_trees(100);
+    add_stones(100);
+    add_gold_mines(100);
+    ///End resources
 
     SDLRenderer *render_engine = new SDLRenderer(renderer, {window_size.x, window_size.y});
 
@@ -372,7 +296,8 @@ int main(int argc, char **argv) {
 
     sdl_data *sdl_label_data_stone = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_stone = {740, 5};
-    SDLRenderResourceLabel *stone_label = new SDLRenderResourceLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone, "stone.png",
+    SDLRenderLabel *stone_label = new SDLRenderResourceLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone,
+                                                     "stone.png",
                                                      ResourceType::STONE, f_font);
     SDLResourceLabel *stone_panel = new SDLResourceLabel(stone_label);
     ///End Resource Panel
@@ -442,7 +367,6 @@ int main(int argc, char **argv) {
     main_window->add_component(main_panel);
 
     main_window->show();
-
 
 
     delete main_window;

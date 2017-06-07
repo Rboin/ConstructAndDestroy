@@ -20,8 +20,7 @@ class ThinkGoal;
 
 class MovingEntity : public BaseEntity {
 private:
-    const float MAX_FORCE, MAX_SPEED;
-    vec2 _velocity;
+        vec2 _velocity;
     bool _engaged;
     Behaviour *_behaviour;
     ThinkGoal *_brain;
@@ -31,10 +30,12 @@ private:
 
 protected:
     float carrying;
+    float max_force;
+    float max_speed;
 public:
     std::string texture;
 
-    MovingEntity(vec2, float, const float, const float, JobType);
+    MovingEntity(vec2, float, JobType);
 
     ~MovingEntity();
 

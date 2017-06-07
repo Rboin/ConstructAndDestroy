@@ -2,6 +2,7 @@
 #define CONSTRUCT_AND_DESTROY_RESOURCES_H
 
 #include "entity/static/resource_type.h"
+#include <string>
 
 
 class Resources {
@@ -15,6 +16,8 @@ public:
     void add_resources(ResourceType, float);
 
     float get_resources(ResourceType);
+
+    std::string get_texture_by_type(ResourceType);
 
     virtual ~Resources();
 

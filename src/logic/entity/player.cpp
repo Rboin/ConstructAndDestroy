@@ -194,16 +194,10 @@ void Player::clear_selected_building(BaseEntity *be) {
     }
 }
 
-KnightEntity *Player::has_knight() {
-    for(int i = 0; i <units.size(); i++){
-        if(KnightEntity* knight_entity = dynamic_cast<KnightEntity*>(units.at(i)))
-        {
-            if(knight_entity == nullptr){
-                delete knight_entity;
-                return knight_entity;
-            } else {
-                return knight_entity;
-            }
+MovingEntity *Player::get_combat_unit() {
+    for(int i = 0; i < units.size(); i++){
+        if(units.at(i)->get_job_type() == ENEMY){
+            return units.at(i);
         }
     }
 }

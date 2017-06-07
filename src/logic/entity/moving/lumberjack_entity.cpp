@@ -7,21 +7,22 @@
 #include <iostream>
 #include <cmath>
 
-LumberJackEntity::LumberJackEntity(vec2 position, float mass,
-                                   const float max_force, const float max_speed) :
-        MovingEntity(position, mass, max_force, max_speed, WOODCUTTER) {
+LumberJackEntity::LumberJackEntity(vec2 position, float mass) :
+        MovingEntity(position, mass, WOODCUTTER) {
     carrying = 0;
     texture = "lumberjack.png";
+    max_force = 0.2;
+    max_speed = 0.1;
 }
 
 void LumberJackEntity::select() {
-    sdl_image_data* entity_data =  new sdl_image_data{"sel_" + texture};
+    sdl_image_data *entity_data = new sdl_image_data{"sel_" + texture};
     this->_representation->set_data(entity_data);
     this->_representation->clear_data();
 }
 
 void LumberJackEntity::deselect() {
-    sdl_image_data* entity_data = new sdl_image_data{texture};
+    sdl_image_data *entity_data = new sdl_image_data{texture};
     this->_representation->set_data(entity_data);
     this->_representation->clear_data();
 

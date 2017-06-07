@@ -30,9 +30,9 @@ CombatGoal::CombatGoal(MovingEntity *e, MovingEntity *enemy) : GoalComposite(e, 
 
         if (!enemy_player->units.empty()) {
             ///If there is an knight attack that first
-            KnightEntity *knight_entity = enemy_player->has_knight();
-            if (knight_entity) {
-                _enemy = knight_entity;
+            MovingEntity *enemy_entity = enemy_player->get_combat_unit();
+            if (enemy_entity) {
+                _enemy = enemy_entity;
             } else {
                 _enemy = enemy_player->units.front();
             }

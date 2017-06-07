@@ -42,6 +42,21 @@ std::string SpawnableEntity::get_name() {
         case MovingEntityType::KNIGHT:
             name = "Knight";
             break;
+        case  MovingEntityType::CAVALIER:
+            name = "Cavalier";
+            break;
+        case MovingEntityType::HEAVY_CAVALIER:
+            name = "Heavy Cavalier";
+            break;
+        case MovingEntityType::LIGHT_CAVALIER:
+            name = "Light Cavalier";
+            break;
+        case MovingEntityType::JUGGERNAUT:
+            name = "Juggernaut";
+            break;
+        case MovingEntityType::MERCENARY:
+            name = "Mercenary";
+            break;
     }
 
     return name;

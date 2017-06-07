@@ -31,6 +31,7 @@ protected:
     float _health;
     float _attack_damage;
     float _attack_speed;
+    float _regeneration_rate;
 
     std::map<std::string, const char *> _info_attributes;
 
@@ -89,6 +90,8 @@ public:
     bool has_mark(uint8_t);
 
     virtual void multiply_stats(float);
+
+    void regenerate_hp(float d_t);
 
 };
 

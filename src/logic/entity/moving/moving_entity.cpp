@@ -11,10 +11,7 @@
 #include "entity/goal/moving_entity_goal/think_goal.h"
 #include "entity/entity_types.h"
 
-MovingEntity::MovingEntity(vec2 position, float mass,
-                           const float max_force, const float max_speed, JobType jt) :
-        MAX_FORCE(max_force), MAX_SPEED(max_speed),
-        BaseEntity(MOVING, position, mass) {
+MovingEntity::MovingEntity(vec2 position, float mass, JobType jt) : BaseEntity(MOVING, position, mass) {
     _velocity = {0, 0, 0};
     _behaviour = NULL;
     _brain = NULL;
@@ -59,9 +56,7 @@ void MovingEntity::update(float d_t) {
     else
         steering_force = {0, 0, 0};
 
-    //todo:: for now setting velocity to 0 if the steering force = 0, otherwise the flee behaviour
-    //todo::keeps moving, even if there is nothing in panic range. This only happens after it show moving.
-    if (steering_force.x == 0) {
+    if (steering_force.x == 0 && steering_force.y == 0) {
         _velocity.x = 0;
         _velocity.y = 0;
     }
@@ -72,14 +67,14 @@ void MovingEntity::update(float d_t) {
     _velocity += acceleration * d_t;
 
     //Make sure vehicle doesn't exceed maximum velocity
-    _velocity = _velocity.truncate(MAX_SPEED);
+    _velocity = _velocity.truncate(max_speed);
 
     //Update vehicle's position
     add_to_position(_velocity * d_t);
 }
 
 float MovingEntity::get_max_speed() {
-    return MAX_SPEED;
+    return max_speed;
 }
 
 vec2 MovingEntity::get_velocity() {

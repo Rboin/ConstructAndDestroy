@@ -11,24 +11,24 @@
 
 CastleEntity::CastleEntity(vec2 position, float mass) : BuildingEntity(
         position, mass, CASTLE, WAREHOUSETEXTURE) {
-    costs = new Resources(0, 0, 5, 0);
+    costs = new Resources(0,25,25,0);
 
     spawnable_entities = {
             new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK, "This unit can gather wood"),
             new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER, "This unit will mine resources like stone and gold"),
-            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
+            new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
     };
 }
 
 
 CastleEntity::CastleEntity(float mass) : BuildingEntity(
         mass, CASTLE, WAREHOUSETEXTURE) {
-    costs = new Resources(0, 0, 5, 0);
+    costs = new Resources(0,25,25,0);
 
     spawnable_entities = {
             new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK, "This unit can gather wood"),
             new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER, "This unit will mine resources like stone and gold"),
-            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
+            new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
     };
 }
 
