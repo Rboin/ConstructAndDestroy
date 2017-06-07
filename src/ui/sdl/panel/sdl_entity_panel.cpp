@@ -162,8 +162,8 @@ void SDLEntityPanel::update_queue_badge_color(std::vector<MovingEntityType> orde
 
 void SDLEntityPanel::resize(const vec2 &v) {
     vec2 offset = old_window_size - (*representation->get_position());
-    representation->set_position(representation->get_position()->x, v.y - offset.y);
-    representation->set_size({v.x, representation->get_size()->y});
+
+    representation->set_position(v.x - offset.x, v.y - offset.y);
     old_window_size = v;
     resize_children(v);
 }

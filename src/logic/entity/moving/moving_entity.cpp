@@ -133,3 +133,9 @@ std::stack<vec2 *> &MovingEntity::get_path() {
 float MovingEntity::get_delta_time() {
     return _delta_time;
 }
+
+void MovingEntity::render(SDLRenderer *renderer, const mat2 &transformations) {
+    upsert_attribute("knife.png", this->get_attack_damage());
+
+    BaseEntity::render(renderer, transformations);
+}

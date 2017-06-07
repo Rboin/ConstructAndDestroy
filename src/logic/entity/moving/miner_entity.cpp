@@ -33,3 +33,12 @@ std::string MinerEntity::get_texture() {
 void MinerEntity::set_texture(std::string src) {
     texture = src;
 }
+
+void MinerEntity::render(SDLRenderer *renderer, const mat2 &mat) {
+    if (get_job_type() == JobType::SMINER) {
+        upsert_attribute("stone.png", this->get_carrying());
+    } else if (get_job_type() == JobType::GMINER) {
+        upsert_attribute("gold.png", this->get_carrying());
+    }
+    MovingEntity::render(renderer, mat);
+}

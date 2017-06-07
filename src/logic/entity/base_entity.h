@@ -8,11 +8,14 @@
 #include <cstdint>
 #include "types.h"
 #include "vector.h"
+#include <string>
+#include <map>
 #include "textures/texture_types.h"
 
 class Player;
 class SDL_RenderObject;
 class SDLRenderer;
+class SDLStackedPanel;
 
 class BaseEntity {
 protected:
@@ -29,6 +32,12 @@ protected:
     float _attack_damage;
     float _attack_speed;
     float _regeneration_rate;
+
+    std::map<std::string, const char *> _info_attributes;
+
+    void upsert_attribute(std::string, const char *);
+
+    void upsert_attribute(std::string image, float value);
 
 public:
 
@@ -49,6 +58,8 @@ public:
     virtual void render(SDLRenderer *, const mat2 &);
 
     virtual void update(float){};
+
+    std::map<std::string, const char *> get_info_attributes();
 
     void set_player(int);
 

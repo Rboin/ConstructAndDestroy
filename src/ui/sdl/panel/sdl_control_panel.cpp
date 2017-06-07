@@ -67,8 +67,9 @@ SDLControlPanel::~SDLControlPanel() {
 }
 
 void SDLControlPanel::resize(const vec2 &v) {
+    float size_x = old_window_size.x - representation->get_size()->x;
     representation->set_position(representation->get_position()->x, v.y - representation->get_size()->y);
-    representation->set_size({v.x, representation->get_size()->y});
+    representation->set_size({v.x - size_x, representation->get_size()->y});
     old_window_size = v;
     resize_children(v);
 }

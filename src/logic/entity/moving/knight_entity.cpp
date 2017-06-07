@@ -30,7 +30,6 @@ void KnightEntity::deselect() {
 }
 
 std::string KnightEntity::get_texture() {
-    std::cout << texture << std::endl;
     return texture;
 }
 

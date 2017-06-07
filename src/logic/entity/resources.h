@@ -2,6 +2,7 @@
 #define CONSTRUCT_AND_DESTROY_RESOURCES_H
 
 #include "entity/static/resource_type.h"
+#include <string>
 
 
 class Resources {

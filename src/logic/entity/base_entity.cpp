@@ -4,10 +4,11 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
+#include <cstring>
 #include "base_entity.h"
-#include "matrix.h"
-#include "sdl/sdl_render_object.h"
 #include "player_manager.h"
+#include "sdl/label/sdl_render_resource_label.h"
 
 BaseEntity::BaseEntity(int type, vec2 position, float mass) {
     _type = type;
@@ -52,6 +53,8 @@ const bool BaseEntity::is(int type) {
 }
 
 void BaseEntity::render(SDLRenderer *renderer, const mat2 &transformations) {
+    upsert_attribute("health.png", this->get_health());
+
     _representation->render(renderer, transformations);
 }
 
@@ -101,6 +104,29 @@ void BaseEntity::multiply_stats(float f) {
     _health *= f;
     _attack_damage *= f;
     _attack_speed *= f;
+}
+
+std::map<std::string, const char *> BaseEntity::get_info_attributes() {
+    return _info_attributes;
+}
+
+void BaseEntity::upsert_attribute(std::string image, const char *value) {
+    auto existing = _info_attributes.find(image);
+    if (existing == _info_attributes.end())
+    {
+        _info_attributes.insert(std::pair<std::string, const char *>(image, value));
+    }
+    else
+    {
+        _info_attributes[image] = value;
+    }
+}
+
+void BaseEntity::upsert_attribute(std::string image, float value) {
+    std::string temp_str = std::to_string(static_cast<int>(std::round(value)));
+    char* char_type = new char[temp_str.length()];
+    strcpy(char_type, temp_str.c_str());
+    return upsert_attribute(image, char_type);
 }
 
 void BaseEntity::regenerate_hp(float d_t) {
