@@ -22,6 +22,8 @@ public:
     void render(SDLRenderer *renderer, mat2 &m, float d) override;
 
     SDLUnitInfoPanel(SDL_RenderObject *r);
+
+    void resize(const vec2 &) override;
 };
 
 

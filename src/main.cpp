@@ -352,7 +352,7 @@ int main(int argc, char **argv) {
     // unit information panel
     vec2 unit_info_panel_pos = {680, 500};
     vec2 unit_info_panel_size = {120, 100};
-    sdl_data *unit_info_panel_data = new sdl_data{0, 0, 0, 100};
+    sdl_data *unit_info_panel_data = new sdl_data{255, 0, 0, 100};
     SDL_RenderObject *unit_info_panel_renderer = new SDL_RenderObject(unit_info_panel_pos, unit_info_panel_size, unit_info_panel_data);
     SDLUnitInfoPanel *unit_info_panel = new SDLUnitInfoPanel(unit_info_panel_renderer);
 
