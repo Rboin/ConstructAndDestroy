@@ -20,22 +20,30 @@
 #include "settings.h"
 #include "entity/static/building/building_manager.h"
 
-SDL_KeyEventSlot::SDL_KeyEventSlot() : Slot<sdl_key_event_data>() {}
+SDL_KeyEventSlot::SDL_KeyEventSlot() : Slot<sdl_key_event_data>() {
+    this->_building_index = 0;
+}
 
 void SDL_KeyEventSlot::on(sdl_key_event_data d) {
     // Get  player
     // TODO: Resolve correct player id
-    Player *p = PlayerManager::get_instance()->get_player(player_id);
+    Player *player = PlayerManager::get_instance()->get_player(player_id);
 
     // On ESC
     if (d.key == 27) {
         // If the current player state is ChoosingBuildingPosition then abort
-        if (dynamic_cast<const ChoosingBuildingPosition *>(p->state_machine->current_state) != 0) {
-            p->state_machine->change_state(new AbortPlacingBuilding());
+        if (dynamic_cast<const ChoosingBuildingPosition *>(player->state_machine->current_state) != 0) {
+            player->state_machine->change_state(new AbortPlacingBuilding());
+            return;
         }
     }
 
-    Player *player = PlayerManager::get_instance()->get_player(player_id);
+    if(d.key == 9 && d.type == SDL_KEYUP){
+        handle_tab(player);
+        return;
+    }
+
+
     try {
         if (player->selected_building != nullptr) {
             // _key_event_handler_entity:
@@ -61,3 +69,28 @@ void SDL_KeyEventSlot::on(sdl_key_event_data d) {
     }
 }
 
+void SDL_KeyEventSlot::handle_tab(Player* player) {
+    if(player->selected_building == nullptr){
+        this->_building_index = 0;
+        player->buildings[this->_building_index]->select();
+        player->selected_building =  player->buildings[this->_building_index];
+    } else {
+        player->selected_building->deselect();
+
+        this->_building_index++;
+        if(this->_building_index == player->buildings.size()){
+            this->_building_index = 0;
+        }
+
+        if(player->selected_building == player->buildings[this->_building_index]){
+            //the currently selected building is the same as found at the building index.
+            //So this method is called again so it will select the next building instead.
+            handle_tab(player);
+        } else {
+            player->buildings[this->_building_index]->select();
+            player->selected_building = player->buildings[this->_building_index];
+        }
+
+
+    }
+}
