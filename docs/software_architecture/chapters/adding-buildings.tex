@@ -8,7 +8,7 @@ Buildings can be spawned via the building panel (see \cref{fig:building-panel}).
 \subsection{Building panel}
 The building panel, as displayed in \cref{fig:building-panel}, iterates over the buildings\_with\_textures enum, and for each entry it adds a UnitPanel to the Building Panel. UnitPanels are used for the EntityPanel (see \ref{EntityPanel}) as well as the Building Panel. These UnitPanels render an image, and contain objects of whatever it renders (buildings or entities). Unit panels are highlighted in \cref{fig:unit-panel}.
 
-A mouse handler of which a diagram is shown in \cref{fig:mousehandlerbuildingpanel} or the key event handler takes care of actually starting the process of positioning and placing a building.
+A mouse handler of which a diagram is shown in \cref{fig:mousehandlerbuildingpanel}, or the key event handler takes care of actually starting the process of positioning and placing a building. The shortcut keys to start this process are located at the top left corner of the unit panel, as shown in \cref{fig:building-shortcuts}.
 
 \subsection{States}
 We are using the state pattern during positioning and placing buildings, because this pattern makes it easy to extend the behaviour of the player or entity, which can be different each state.\\
