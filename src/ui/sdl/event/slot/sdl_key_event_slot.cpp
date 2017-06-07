@@ -21,7 +21,7 @@
 #include "entity/static/building/building_manager.h"
 
 SDL_KeyEventSlot::SDL_KeyEventSlot() : Slot<sdl_key_event_data>() {
-    this->_building_index = 0;
+    this->_building_index = -1;
 }
 
 void SDL_KeyEventSlot::on(sdl_key_event_data d) {
@@ -38,7 +38,7 @@ void SDL_KeyEventSlot::on(sdl_key_event_data d) {
         }
     }
 
-    if(d.key == 9 && d.type == SDL_KEYUP){
+    if (d.key == 9 && d.type == SDL_KEYUP) {
         handle_tab(player);
         return;
     }
@@ -69,28 +69,23 @@ void SDL_KeyEventSlot::on(sdl_key_event_data d) {
     }
 }
 
-void SDL_KeyEventSlot::handle_tab(Player* player) {
-    if(player->selected_building == nullptr){
-        this->_building_index = 0;
-        player->buildings[this->_building_index]->select();
-        player->selected_building =  player->buildings[this->_building_index];
-    } else {
+void SDL_KeyEventSlot::handle_tab(Player *player) {
+
+    if (player->selected_building != nullptr) {
         player->selected_building->deselect();
+    }
 
-        this->_building_index++;
-        if(this->_building_index == player->buildings.size()){
-            this->_building_index = 0;
-        }
+    this->_building_index++;
+    if (this->_building_index == player->buildings.size()) {
+        this->_building_index = 0;
+    }
 
-        if(player->selected_building == player->buildings[this->_building_index]){
-            //the currently selected building is the same as found at the building index.
-            //So this method is called again so it will select the next building instead.
-            handle_tab(player);
-        } else {
-            player->buildings[this->_building_index]->select();
-            player->selected_building = player->buildings[this->_building_index];
-        }
-
-
+    if (player->selected_building == player->buildings[this->_building_index]) {
+        //the currently selected building is the same as found at the building index.
+        //So this method is called again so it will select the next building instead.
+        handle_tab(player);
+    } else {
+        player->buildings[this->_building_index]->select();
+        player->selected_building = player->buildings[this->_building_index];
     }
 }
