@@ -66,8 +66,8 @@ ResourceType ResourceManager::get_resource_type(JobType jt) {
     ResourceType rt;
     if (jt == WOODCUTTER) { rt = WOOD; }
     if (jt == IRONMINER) { rt = IRON; }
-    if (jt == GOLDMINER) {rt = GOLD;}
-    if (jt == STONEMINER) {rt = STONE;}
+    if (jt == GMINER) {rt = GOLD;}
+    if (jt == SMINER) {rt = STONE;}
     return rt;
 }
 

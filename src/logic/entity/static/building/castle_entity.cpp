@@ -15,7 +15,8 @@ CastleEntity::CastleEntity(vec2 position, float mass) : BuildingEntity(
 
     spawnable_entities = {
             new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK, "This unit can gather wood"),
-            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER, "This unit will mine resources like stone and gold"),
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::STONEMINER, "This unit will mine stone resources"),
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::GOLDMINER, "This unit will mine gold resources"),
             new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
     };
 }
@@ -27,7 +28,8 @@ CastleEntity::CastleEntity(float mass) : BuildingEntity(
 
     spawnable_entities = {
             new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::LUMBERJACK, "This unit can gather wood"),
-            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::MINER, "This unit will mine resources like stone and gold"),
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::STONEMINER, "This unit will mine stone resources"),
+            new SpawnableEntity(new Resources(5, 0, 0, 0), MovingEntityType::GOLDMINER, "This unit will mine gold resources"),
             new SpawnableEntity(new Resources(10, 0, 0, 0), MovingEntityType::KNIGHT, "This unit will fight your enemies")
     };
 }
