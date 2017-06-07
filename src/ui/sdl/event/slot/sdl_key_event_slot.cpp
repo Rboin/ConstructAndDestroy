@@ -25,6 +25,12 @@ SDL_KeyEventSlot::SDL_KeyEventSlot() : Slot<sdl_key_event_data>() {
 }
 
 void SDL_KeyEventSlot::on(sdl_key_event_data d) {
+
+    if(d.type != SDL_KEYUP)
+    {
+        // ONLY HANDLE KEY UP EVENTS
+        return;
+    }
     // Get  player
     // TODO: Resolve correct player id
     Player *player = PlayerManager::get_instance()->get_player(player_id);
