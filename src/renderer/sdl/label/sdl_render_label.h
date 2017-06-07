@@ -20,7 +20,7 @@ private:
     SDL_UI_RenderTextObject *_text;
     SDL_ImageRenderObject *_image;
 public:
-    SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string texture, const char *text, TTF_Font *);
+    SDLRenderLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string texture,std::string, TTF_Font *);
 
     ~SDLRenderLabel();
 

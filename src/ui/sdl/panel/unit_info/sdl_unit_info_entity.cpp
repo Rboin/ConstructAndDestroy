@@ -37,8 +37,8 @@ SDLUnitInfoEntity::SDLUnitInfoEntity(BaseEntity *entity, SDL_RenderObject *r, st
 }
 
 void SDLUnitInfoEntity::render(SDLRenderer *renderer, mat2 &m, float d) {
-    std::map<std::string, const char *> attributes = _entity->get_info_attributes();
-    std::map<std::string, const char *>::iterator it;
+    std::map<std::string, std::string> attributes = _entity->get_info_attributes();
+    std::map<std::string, std::string>::iterator it;
 
     for ( it = attributes.begin(); it != attributes.end(); it++ ) {
         if (_labels.count(it->first) == 0) {
@@ -52,7 +52,7 @@ void SDLUnitInfoEntity::render(SDLRenderer *renderer, mat2 &m, float d) {
         } else {
             SDLRenderLabel *r = _labels[it->first];
 
-            r->set_text(it->second);
+            r->set_text(it->second.c_str());
         }
     }
 

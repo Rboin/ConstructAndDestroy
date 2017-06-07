@@ -33,9 +33,9 @@ protected:
     float _attack_speed;
     float _regeneration_rate;
 
-    std::map<std::string, const char *> _info_attributes;
+    std::map<std::string, std::string> _info_attributes;
 
-    void upsert_attribute(std::string, const char *);
+    void upsert_attribute(std::string, std::string);
 
     void upsert_attribute(std::string image, float value);
 
@@ -59,7 +59,7 @@ public:
 
     virtual void update(float){};
 
-    std::map<std::string, const char *> get_info_attributes();
+    std::map<std::string, std::string> get_info_attributes();
 
     void set_player(int);
 

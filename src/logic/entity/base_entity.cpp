@@ -106,15 +106,15 @@ void BaseEntity::multiply_stats(float f) {
     _attack_speed *= f;
 }
 
-std::map<std::string, const char *> BaseEntity::get_info_attributes() {
+std::map<std::string, std::string > BaseEntity::get_info_attributes() {
     return _info_attributes;
 }
 
-void BaseEntity::upsert_attribute(std::string image, const char *value) {
+void BaseEntity::upsert_attribute(std::string image, std::string value) {
     auto existing = _info_attributes.find(image);
     if (existing == _info_attributes.end())
     {
-        _info_attributes.insert(std::pair<std::string, const char *>(image, value));
+        _info_attributes.insert(std::pair<std::string, std::string>(image, value));
     }
     else
     {
@@ -124,9 +124,9 @@ void BaseEntity::upsert_attribute(std::string image, const char *value) {
 
 void BaseEntity::upsert_attribute(std::string image, float value) {
     std::string temp_str = std::to_string(static_cast<int>(std::round(value)));
-    char* char_type = new char[temp_str.length()];
-    strcpy(char_type, temp_str.c_str());
-    return upsert_attribute(image, char_type);
+//    char* char_type = new char[temp_str.length()];
+//    strcpy(char_type, temp_str.c_str());
+    return upsert_attribute(image, temp_str);
 }
 
 void BaseEntity::regenerate_hp(float d_t) {
