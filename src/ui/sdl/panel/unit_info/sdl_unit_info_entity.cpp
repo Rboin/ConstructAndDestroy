@@ -30,7 +30,7 @@ SDLUnitInfoEntity::SDLUnitInfoEntity(BaseEntity *entity, SDL_RenderObject *r, st
     SDLPanel* image_panel = new SDLPanel(image_renderer);
 
     sdl_data* attrstack_data = new sdl_data { parent_data->red, parent_data->green, parent_data->blue, parent_data->alpha };
-    _attributes_stackpanel = new SDLStackedPanel(new SDL_RenderObject(this->get_position()->clone(), this->get_size()->clone() - vec2(image_size), attrstack_data), Orientation::vertical);
+    _attributes_stackpanel = new SDLStackedPanel(new SDL_RenderObject(this->get_position()->clone(), {60, 100}, attrstack_data), Orientation::vertical);
 
     add_component(image_panel);
     add_component(_attributes_stackpanel);
@@ -45,7 +45,7 @@ void SDLUnitInfoEntity::render(SDLRenderer *renderer, mat2 &m, float d) {
             vec2 panel_pos = {};
             sdl_data *sdl_label_data = new sdl_data{255, 255, 255, 255};
             TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
-            SDLRenderLabel *label_renderer = new SDLRenderLabel(panel_pos, {60, 30}, sdl_label_data, it->first, it->second, f_font);
+            SDLRenderLabel *label_renderer = new SDLRenderLabel(panel_pos, {50, 30}, sdl_label_data, it->first, it->second, f_font);
 
             _labels[it->first] = label_renderer;
             _attributes_stackpanel->add_component(new SDLPanel(label_renderer));
