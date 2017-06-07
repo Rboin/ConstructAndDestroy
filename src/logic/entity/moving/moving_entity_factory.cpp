@@ -15,6 +15,8 @@
 #include "light_cavalier.h"
 #include "juggernaut_entity.h"
 #include "mercenary_entity.h"
+#include "gold_miner_entity.h"
+#include "stone_miner_entity.h"
 
 MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingEntityType moving_entity_type) {
 
@@ -38,10 +40,12 @@ MovingEntity *MovingEntityFactory::create(Player* player, vec2 position, MovingE
         case MovingEntityType::HEAVY_CAVALIER:
             me = new HeavyCavalierEntity(position, 100);
             break;
-        case MovingEntityType::MINER:
-            me = new MinerEntity(position, 100, GOLDMINER);
+        case MovingEntityType::GOLDMINER:
+            me = new GoldMinerEntity(position, 100);
             break;
-
+        case MovingEntityType::STONEMINER:
+            me = new StoneMinerEntity(position, 100);
+            break;
         case MovingEntityType::LUMBERJACK:
             me = new LumberJackEntity(position, 100);
             break;

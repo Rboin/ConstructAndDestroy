@@ -8,7 +8,8 @@
 enum MovingEntityType {
     KNIGHT,
     LUMBERJACK,
-    MINER,
+    GOLDMINER,
+    STONEMINER,
     LIGHT_CAVALIER,
     CAVALIER,
     HEAVY_CAVALIER,

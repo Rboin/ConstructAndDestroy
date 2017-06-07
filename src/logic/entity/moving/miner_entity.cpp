@@ -9,7 +9,7 @@
 MinerEntity::MinerEntity(vec2 position, float mass, const JobType jt) :
         MovingEntity(position, mass, jt) {
     carrying = 0;
-    texture = "miner.png";
+
     max_force = 0.2;
     max_speed = 0.1;
 }

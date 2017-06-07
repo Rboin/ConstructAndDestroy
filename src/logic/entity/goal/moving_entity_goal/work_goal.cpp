@@ -80,10 +80,10 @@ Node *WorkGoal::find_resource_node() {
     if (owner->get_job_type() == IRONMINER) {
         _rt = IRON;
     }
-    if (owner->get_job_type() == GOLDMINER) {
+    if (owner->get_job_type() == GMINER) {
         _rt = GOLD;
     }
-    if (owner->get_job_type() == STONEMINER) {
+    if (owner->get_job_type() == SMINER) {
         _rt = STONE;
     }
     ResourceManager *rm = ResourceManager::get_instance();
