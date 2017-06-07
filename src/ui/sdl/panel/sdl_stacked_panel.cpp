@@ -16,12 +16,33 @@ void SDLStackedPanel::render(SDLRenderer *renderer, mat2 &m, float d) {
     float y = this->get_position()->y;
 
     for(unsigned i = 0; i < children.size(); i++) {
+        float sizex = children.at(i)->get_size()->x;
+        float sizey = children.at(i)->get_size()->y;
+
+        if(_orientation == Orientation::horizontal) {
+            if (x + sizex > this->get_position()->x + this->get_size()->x) {
+                y += sizey;
+                x = this->get_position()->x;
+            }
+        }
+
+        if(_orientation == Orientation::vertical) {
+            if (y + sizey > this->get_position()->y + this->get_size()->y) {
+                x += sizex;
+                y = this->get_position()->y;
+            }
+        }
+
         children.at(i)->get_representation()->set_position(x, y);
 
         if (_orientation == Orientation::horizontal) {
-            x += children.at(i)->get_size()->x;
+            x += sizex;
+//            x += children.at(i)->get_size()->x;
+
         } else {
-            y += children.at(i)->get_size()->y;
+//            y += children.at(i)->get_size()->y;
+
+            y += sizey;
         }
     }
 

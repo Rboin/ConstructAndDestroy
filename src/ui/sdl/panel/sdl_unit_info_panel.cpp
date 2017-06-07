@@ -7,7 +7,6 @@
 #include "entity/player_manager.h"
 #include "settings.h"
 #include <string>
-#include <iostream>
 #include "sdl/panel/unit_info/sdl_unit_info_entities.h"
 #include "sdl/panel/unit_info/sdl_unit_info_entity.h"
 #include "sdl_unit_info_panel.h"
@@ -70,4 +69,8 @@ void SDLUnitInfoPanel::resize(const vec2 &v) {
     representation->set_position(v.x - offset.x, v.y - offset.y);
     old_window_size = v;
     resize_children(v);
+}
+
+SDLUnitInfoPanel::~SDLUnitInfoPanel() {
+    _previous_building = nullptr;
 }

@@ -6,11 +6,11 @@
 #define CONSTRUCT_AND_DESTROY_SDL_UNIT_INFO_ENTITIES_H
 
 #include <vector>
-#include "sdl/panel/sdl_panel.h"
+#include "sdl/panel/sdl_stacked_panel.h"
 
 class MovingEntity;
 
-class SDLUnitInfoEntities : public SDLPanel {
+class SDLUnitInfoEntities : public SDLStackedPanel {
 public:
     SDLUnitInfoEntities(std::vector<MovingEntity *> entities, SDL_RenderObject *r);
 

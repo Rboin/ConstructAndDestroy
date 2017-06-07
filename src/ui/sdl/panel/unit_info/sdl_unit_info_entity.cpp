@@ -6,10 +6,9 @@
 #include <string>
 #include <map>
 #include "sdl/label/sdl_render_label.h"
-#include <iostream>
 #include "sdl/image/sdl_image_render_object.h"
 #include "settings.h"
-#include <entity/static/building/building_entity.h>
+#include "entity/static/building/building_entity.h"
 #include "sdl_unit_info_entity.h"
 #include "../sdl_stacked_panel.h"
 #include "../../../../logic/entity/moving/moving_entity.h"
@@ -20,13 +19,10 @@ SDLUnitInfoEntity::SDLUnitInfoEntity(MovingEntity *entity, SDL_RenderObject *r) 
 SDLUnitInfoEntity::SDLUnitInfoEntity(BuildingEntity *entity, SDL_RenderObject *r) : SDLUnitInfoEntity(entity, r, get_texture_of_building(entity->get_building_type())) {
 }
 
-SDLUnitInfoEntity::SDLUnitInfoEntity(BaseEntity *entity, SDL_RenderObject *r, std::string texture) : SDLPanel(r) {
+SDLUnitInfoEntity::SDLUnitInfoEntity(BaseEntity *entity, SDL_RenderObject *r, std::string texture) : SDLStackedPanel(r, Orientation::horizontal) {
     _entity = entity;
 
     sdl_data* parent_data = this->get_representation()->get_data();
-
-    sdl_data* stack_data = new sdl_data { parent_data->red, parent_data->green, parent_data->blue, parent_data->alpha };
-    _stackpanel = new SDLStackedPanel(new SDL_RenderObject(this->get_position()->clone(), this->get_size()->clone(), stack_data), Orientation::horizontal);
 
     sdl_image_data *building_data = new sdl_image_data{ texture };
     vec2 image_size = {60, 60};
@@ -36,10 +32,8 @@ SDLUnitInfoEntity::SDLUnitInfoEntity(BaseEntity *entity, SDL_RenderObject *r, st
     sdl_data* attrstack_data = new sdl_data { parent_data->red, parent_data->green, parent_data->blue, parent_data->alpha };
     _attributes_stackpanel = new SDLStackedPanel(new SDL_RenderObject(this->get_position()->clone(), this->get_size()->clone() - vec2(image_size), attrstack_data), Orientation::vertical);
 
-    _stackpanel->add_component(image_panel);
-    _stackpanel->add_component(_attributes_stackpanel);
-
-    add_component(_stackpanel);
+    add_component(image_panel);
+    add_component(_attributes_stackpanel);
 }
 
 void SDLUnitInfoEntity::render(SDLRenderer *renderer, mat2 &m, float d) {
@@ -62,7 +56,7 @@ void SDLUnitInfoEntity::render(SDLRenderer *renderer, mat2 &m, float d) {
         }
     }
 
-    SDL_UIComponent::render(renderer, m, d);
+    SDLStackedPanel::render(renderer, m, d);
 }
 
 void SDLUnitInfoEntity::resize(const vec2 &v) {
@@ -71,4 +65,9 @@ void SDLUnitInfoEntity::resize(const vec2 &v) {
     vec2 new_pos = v - current_offset;
     representation->set_position(new_pos.x, new_pos.y);
     resize_children(v);
+}
+
+SDLUnitInfoEntity::~SDLUnitInfoEntity() {
+    _entity = nullptr;
+    _attributes_stackpanel = nullptr;
 }

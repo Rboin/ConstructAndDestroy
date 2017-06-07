@@ -33,3 +33,7 @@ const char *SDLRenderResourceLabel::get_resource_text() {
 
     return char_type;
 }
+
+SDLRenderResourceLabel::~SDLRenderResourceLabel() {
+    _resource = nullptr;
+}

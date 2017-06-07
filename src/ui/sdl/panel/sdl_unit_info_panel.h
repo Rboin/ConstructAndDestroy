@@ -23,6 +23,8 @@ public:
 
     SDLUnitInfoPanel(SDL_RenderObject *r);
 
+    ~SDLUnitInfoPanel();
+
     void resize(const vec2 &) override;
 };
 

@@ -6,17 +6,15 @@
 #define CONSTRUCT_AND_DESTROY_SDL_UNIT_INFO_ENTITY_H
 
 #include "sdl/panel/sdl_panel.h"
+#include "sdl/panel/sdl_stacked_panel.h"
 
 class MovingEntity;
 class BaseEntity;
-class SDLStackedPanel;
 class SDLRenderLabel;
 
-class SDLUnitInfoEntity : public SDLPanel {
+class SDLUnitInfoEntity : public SDLStackedPanel {
 private:
     SDLStackedPanel* _attributes_stackpanel;
-
-    SDLStackedPanel* _stackpanel;
 
     BaseEntity *_entity;
 
@@ -27,6 +25,8 @@ public:
     SDLUnitInfoEntity(BuildingEntity *entity, SDL_RenderObject *r);
 
     SDLUnitInfoEntity(BaseEntity *entity, SDL_RenderObject *r, std::string texture);
+
+    ~SDLUnitInfoEntity();
 
     void render(SDLRenderer *renderer, mat2 &m, float d) override;
 

@@ -9,8 +9,8 @@
 #include "sdl/label/manager/description_manager.h"
 #include "sdl/badge/sdl_badge_render_object.h"
 #include "camera/camera_manager.h"
-#include <sdl/panel/sdl_unit_info_panel.h>
-#include <sdl/label/sdl_render_resource_label.h>
+#include "sdl/panel/sdl_unit_info_panel.h"
+#include "sdl/label/sdl_render_resource_label.h"
 #include "entity/static/stone_mine_entity.h"
 #include "sdl/panel/sdl_control_panel.h"
 #include "settings.h"

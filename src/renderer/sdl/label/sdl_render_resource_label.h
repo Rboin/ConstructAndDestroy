@@ -19,6 +19,8 @@ private:
 public:
     SDLRenderResourceLabel(const vec2 &position, const vec2 &size, sdl_data *data, std::string, ResourceType, TTF_Font *);
 
+    ~SDLRenderResourceLabel();
+
     void render(SDLRenderer *renderer, const mat2 &) override;
 };
 
