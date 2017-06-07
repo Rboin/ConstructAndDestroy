@@ -20,12 +20,13 @@ SDL_KeyEventDispatcher *SDL_KeyEventDispatcher::get_instance() {
 void SDL_KeyEventDispatcher::dispatch(sdl_key_event_data d) {
     // Wait 100ms between key events to prevent that 1 tap will te
     // triggered twice (or more).
-    if (previous_event < d.timestamp - 250) {
+    if ( previous_event_time < d.timestamp -500 || previous_event_button != d.key) {
         for (std::map<SDL_UIComponent *, Slot<sdl_key_event_data> *>::iterator it = _registered_slots.begin();
              it != _registered_slots.end(); ++it) {
             (*it).second->on(d);
         }
-        previous_event = d.timestamp;
+        previous_event_time = d.timestamp;
+        previous_event_button = d.key;
     }
 }
 

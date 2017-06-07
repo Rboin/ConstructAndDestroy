@@ -10,7 +10,9 @@
 
 class SDL_KeyEventDispatcher : public SDL_EventDispatcher<sdl_key_event_data> {
 private:
-    uint32_t previous_event = 0;
+    uint32_t previous_event_time = 0;
+    char previous_event_button = 0;
+
     static SDL_KeyEventDispatcher *_instance;
     SDL_KeyEventDispatcher();
 public:
