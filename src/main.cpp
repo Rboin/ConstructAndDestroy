@@ -228,7 +228,6 @@ int main(int argc, char **argv) {
     if (!init_everything()) {
         return -1;
     }
-    TTF_Font *f_font = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
 
     SDL_MouseEventDispatcher *mouse_dispatcher = SDL_MouseEventDispatcher::get_instance();
     SDL_KeyEventDispatcher *key_dispatcher = SDL_KeyEventDispatcher::get_instance();
@@ -282,23 +281,26 @@ int main(int argc, char **argv) {
     SDL_RenderObject *panel_o = new SDL_RenderObject(resource_panel_pos, resource_panel_size, resource_panel_data);
     SDLResourcePanel *resource_panel = new SDLResourcePanel(panel_o);
 
+    TTF_Font *f_wood = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
     sdl_data *sdl_label_data_wood = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_wood = {605, 5};
     SDLRenderResourceLabel *wood_label = new SDLRenderResourceLabel(resource_panel_pos_wood, {60, 30}, sdl_label_data_wood, "log.png",
-                                                    ResourceType::WOOD, f_font);
+                                                    ResourceType::WOOD, f_wood);
     SDLResourceLabel *wood_panel = new SDLResourceLabel(wood_label);
 
+    TTF_Font *f_gold = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
     sdl_data *sdl_label_data_gold = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_gold = {675, 5};
     SDLRenderResourceLabel *gold_label = new SDLRenderResourceLabel(resource_panel_pos_gold, {60, 30}, sdl_label_data_gold, "gold.png",
-                                                    ResourceType::GOLD, f_font);
+                                                    ResourceType::GOLD, f_gold);
     SDLResourceLabel *gold_panel = new SDLResourceLabel(gold_label);
 
+    TTF_Font *f_stone = TTF_OpenFont("res/font/Roboto/Roboto-Regular.ttf", 100);
     sdl_data *sdl_label_data_stone = new sdl_data{255, 255, 255, 255};
     vec2 resource_panel_pos_stone = {740, 5};
     SDLRenderLabel *stone_label = new SDLRenderResourceLabel(resource_panel_pos_stone, {60, 30}, sdl_label_data_stone,
                                                      "stone.png",
-                                                     ResourceType::STONE, f_font);
+                                                     ResourceType::STONE, f_stone);
     SDLResourceLabel *stone_panel = new SDLResourceLabel(stone_label);
     ///End Resource Panel
 
