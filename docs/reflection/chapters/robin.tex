@@ -17,3 +17,59 @@
 
 Write  a  coherent  text  instead  of  just  answering  the  questions  one  by  one.   Make
 sure you give concrete examples instead of vague observations.
+
+\subsection{Contributions}
+I contributed mostly to the backend of our game. I set up the initial 
+project, with the base- and movingentity, the rendering with SDL2 and the 
+documentation with \LaTeX. I also wrote the initial framework for 
+Goal-driven behaviours, including the Think goal, and some steering 
+behaviours such as the Seek- and Arrivebehaviour. 
+
+Secondly, I made sure to split our game into three different projects, 
+namely the logic, rendering and UI projects. I did this to create a better 
+overview of our project and to create a divide between gamelogic and 
+rendering/ui. Besides the better overview, it also gave us a way to switch to 
+OpenGL more easily, if we so desired, because the rendering is completely 
+seperate from the actualy game logic. I'm very happy with this divide, even 
+though I could've handled the updating of the other branches (on github) 
+better.
+
+I also made it possible to create UI elements, such as panels, buttons and 
+text. SDL2 is just a simple rendering library which supplies 
+you with a window handle and a renderer, so I came up with a way for us to 
+create these UI elements. Besides the UI elements, I also wrote the event 
+system, which includes event dispatchers and a way to hook up a UI element 
+to an event. The way the UI framework and event system turned out, I'm pretty 
+happy with. It's really extensible because of the composite pattern used, and 
+simple to use.
+Also, I wrote a wrapper that handles the rendering to textures and the 
+screen, with different back buffers for the UI and the world/entities. I 
+think this simplified the rendering logic a lot, since you don't have to copy 
+your own texture to the correct back buffer anymore.
+
+The Camera, with corresponding manager class, is also written by me, the 
+camera makes it possible to move around within the world, to zoom and it's 
+also used for transforming world coordinates into screen coordinates. I'm 
+very happy with how the camera turned out. First we just had a static world, 
+which was just the initial screen, but now the screen and world coordinates 
+are seperated and we can create larger maps.
+
+I also wrote the wave system and corresponding panel with button. 
+The creation of the panel, button and click event was really simple, because 
+I have extensive knowledge about how our UI framework works, since I wrote it.
+Making the wave system was more difficult, because I had to use multiple 
+timers for the preparation stages and spawning stages.
+
+Besides the material contributions that I have made, I also supported my teammates 
+when they had difficulties using the UI or rendering frameworks. I tried to 
+help and give feedback when someone got stuck on a problem.
+
+Overall I'm very happy with my contributions, I feel like I contributed a lot 
+to the backend and over quality of our game and programming. The things that 
+I programmed, I tried to do the best I could by researching a lot and reading 
+about how other people approached those problems.
+
+\subsection{Qualities}
+
+\subsection{Difficulties}
+\subsection{New Goals}
