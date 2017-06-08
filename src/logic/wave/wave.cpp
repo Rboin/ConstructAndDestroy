@@ -43,6 +43,7 @@ void Wave::update(float delta) {
 
         if(player_won() || computer_won()) {
             _finished = true;
+            _preparing = false;
             return;
         }
 
@@ -150,8 +151,10 @@ const bool Wave::player_won() const {
 
 const bool Wave::computer_won() const {
     bool sufficient_units_player = PlayerManager::get_instance()->get_player(player_id)->units.size() > 0;
+    bool sufficient_buildings_player = PlayerManager::get_instance()->get_player(player_id)->buildings.size() > 0;
     bool sufficient_units_computer = PlayerManager::get_instance()->get_player(computer_id)->units.size() > 0;
-    return sufficient_units_computer && !sufficient_units_player && time_limit_reached();
+    bool killed_player = sufficient_units_computer && !sufficient_units_player && !sufficient_buildings_player;
+    return killed_player;
 }
 
 const bool Wave::time_limit_reached() const {

@@ -214,6 +214,7 @@ MovingEntity *Player::get_combat_unit() {
 }
 
 void Player::reset() {
+    clear_all_selections();
     clear_units();
     clear_buildings();
     resources->reset();

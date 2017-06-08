@@ -79,7 +79,8 @@ World &World::add_entity(BaseEntity *e) {
 World &World::remove_entity(BaseEntity *e) {
     for (std::vector<BaseEntity *>::iterator iter = _entities.begin(); iter != _entities.end(); ++iter) {
         if (*iter == e) {
-            _entities.erase(iter);
+            delete (*iter);
+            iter = _entities.erase(iter);
             break;
         }
     }
