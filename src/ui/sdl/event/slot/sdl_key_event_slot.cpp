@@ -91,7 +91,17 @@ void SDL_KeyEventSlot::on(sdl_key_event_data d) {
 }
 
 void SDL_KeyEventSlot::handle_tab(Player *player) {
-
+    if(player->buildings.size() ==0)
+    {
+        return;
+    }
+    else if (player->buildings.size() == 1)
+    {
+        player->buildings[0]->select();
+        player->selected_building = player->buildings[0];
+        return;
+    }
+    
     if (player->selected_building != nullptr) {
         player->selected_building->deselect();
     }
