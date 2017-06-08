@@ -35,25 +35,28 @@ Camera *Camera::get_instance() {
 
 void Camera::update(float delta) {
     vec2 delta_move = _movement_buffer * delta;
-    _position += delta_move;
+    vec2 tmp_position = _position + delta_move;
+    mat2 tmp_translation = mat2::translate(tmp_position);
+
     _movement_buffer = vec2();
 
-    vec2 top_left = (_world_rectangle[0] * get_translation()),
-        bottom_right = (_world_rectangle[2] * get_translation()) * _scale.inverse();
+    vec2 top_left = (_world_rectangle[0] * tmp_translation),
+        bottom_right = (_world_rectangle[2] * tmp_translation) * _scale.inverse();
     if(top_left.x < 0) {
-        _position.x = 0;
+        tmp_position.x = 0;
     }
     if(top_left.y < 0) {
-        _position.y = 0;
+        tmp_position.y = 0;
     }
     if(bottom_right.x > world_size.x) {
         float new_x = world_size.x - (bottom_right.x - top_left.x);
-        _position.x = new_x - 1;
+        tmp_position.x = new_x - 1;
     }
     if(bottom_right.y > world_size.y) {
         float new_y = world_size.y - (bottom_right.y - top_left.y);
-        _position.y = new_y - 1;
+        tmp_position.y = new_y - 1;
     }
+    _position = tmp_position;
     update_all();
 }
 
