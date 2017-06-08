@@ -31,12 +31,12 @@ const std::string path_to_selected_texture =  "res/textures/sel_";
 const int player_id = 1;
 const int computer_id = 0;
 //================ Wave settings ================
-const float wave_pre_stage_time = 60000.0f;
-const float wave_preparation_time = 30000.0f;
+const float wave_pre_stage_time = 120000.0f;
+const float wave_preparation_time = 90000.0f;
 const float wave_duration = 10000.0f;
 const float stat_modifier = 1.0f;
 const float stat_modifier_increment = 0.25f;
-const int wave_amount = 3;
+const int wave_amount = 10;
 const int wave_unit_size = 1;
 //===============================================
 struct building_with_texture {

@@ -10,14 +10,14 @@
 #include "sdl/panel/unit_info/sdl_unit_info_entities.h"
 #include "sdl/panel/unit_info/sdl_unit_info_entity.h"
 #include "sdl_unit_info_panel.h"
-#include "../../../logic/entity/moving/moving_entity.h"
+#include "entity/moving/moving_entity.h"
 
 template<typename T>
-std::string get_vector_hash(const std::vector<T> *pointer) {
+std::string get_vector_hash(std::vector<T> *pointer) {
     std::string total = "";
 
     for(unsigned int i = 0; i < pointer->size(); i++) {
-        total += (char*)&pointer->at(i);
+        total += (char*)pointer->at(i);
     }
 
     return total;
@@ -31,7 +31,7 @@ SDLUnitInfoPanel::SDLUnitInfoPanel(SDL_RenderObject *r) : SDLPanel(r) {
 void SDLUnitInfoPanel::render(SDLRenderer *renderer, mat2 &m, float d) {
     Player *player = PlayerManager::get_instance()->get_player(player_id);
 
-    std::string hash = get_vector_hash(&player->selected_units);
+    std::string hash = get_vector_hash<MovingEntity*>(&player->selected_units);
 
     // don't change this panel when the selection hasn't changed
     if (_previous_building != player->selected_building || _previous_units_hash != hash) {

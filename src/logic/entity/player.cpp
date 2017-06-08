@@ -14,7 +14,7 @@ Player::Player(int id) {
     buildings = std::vector<BuildingEntity *>();
     units = std::vector<MovingEntity *>();
     selected_units = std::vector<MovingEntity *>();
-    resources = new Resources(50,50,50,50);
+    resources = new Resources(50, 50, 50, 50);
 }
 
 void Player::update() {
@@ -190,15 +190,12 @@ void Player::clear_units() {
 }
 
 void Player::clear_selected_entity(BaseEntity *be) {
-    int index = -1;
-
-    for (int i = 0; i < this->selected_units.size(); i++) {
-        if (this->selected_units[i] == be) {
-            index = i;
+    for (std::vector<MovingEntity *>::iterator iter = selected_units.begin(); iter != selected_units.end(); ++iter) {
+        if ((*iter) == be) {
+            iter = this->selected_units.erase(iter);
+            break;
         }
     }
-
-    this->selected_units.erase(this->selected_units.begin() + index);
 }
 
 
