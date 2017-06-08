@@ -99,6 +99,7 @@ void World::remove_dead_entities() {
         if((*it)->has_mark(EntityMark::DEAD)) {
             //clear selected buildings if the entity that is destroyed is a building.
             (*it)->get_player()->clear_selected_building((*it));
+            (*it)->get_player()->clear_selected_entity((*it));
             (*it)->get_player()->remove_entity((*it));
             delete (*it);
             it = _entities.erase(it);

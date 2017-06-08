@@ -189,6 +189,19 @@ void Player::clear_units() {
     units.clear();
 }
 
+void Player::clear_selected_entity(BaseEntity *be) {
+    int index = -1;
+
+    for (int i = 0; i < this->selected_units.size(); i++) {
+        if (this->selected_units[i] == be) {
+            index = i;
+        }
+    }
+
+    this->selected_units.erase(this->selected_units.begin() + index);
+}
+
+
 void Player::clear_selected_building(BaseEntity *be) {
     if (be == selected_building) {
         selected_building = nullptr;

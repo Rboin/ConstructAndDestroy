@@ -47,6 +47,8 @@ public:
 
     void clear_selected_building(BaseEntity* be);
 
+    void clear_selected_entity(BaseEntity *be);
+
     void remove_entity(BaseEntity*);
 
     void remove_unit(MovingEntity*);

@@ -125,8 +125,6 @@ void BaseEntity::upsert_attribute(std::string image, std::string value) {
 
 void BaseEntity::upsert_attribute(std::string image, float value) {
     std::string temp_str = std::to_string(static_cast<int>(std::round(value)));
-//    char* char_type = new char[temp_str.length()];
-//    strcpy(char_type, temp_str.c_str());
     return upsert_attribute(image, temp_str);
 }
 
