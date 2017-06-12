@@ -15,3 +15,5 @@ script:
     -   latexmk -pdflatex=lualatex -pdf -halt-on-error project-plan.tex
     -   cd ../software_architecture
     -   latexmk -pdflatex=lualatex -pdf -halt-on-error software_architecture.tex
+    -   cd ../test_document
+    -   latexmk -pdflatex=lualatex -pdf -halt-on-error test_document.tex
