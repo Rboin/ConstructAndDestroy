@@ -51,11 +51,8 @@
 \usetikzlibrary{decorations.pathreplacing}
 \usepackage{pdfpages}
 \usepackage{apacite}
-\bibliographystyle{apacite}
-
-% set Listing settings -------------------------------------
 \usepackage{listings}
-\usepackage{color}
+\bibliographystyle{apacite}
 
 % Input and output encoding ---------------------------------------------------
 \usepackage{iftex}
@@ -115,33 +112,7 @@
 \usepackage{changepage}
 
 %Other settings
-
-% Code listing settings
-\definecolor{back-color}{rgb}{1,1,1}
-\definecolor{keywords}{rgb}{0.654,0.113,0.364}
-\definecolor{comments}{rgb}{0.588,0.596,0.588}
-\definecolor{strings}{rgb}{0.094,0.211,0.568}
-
-\lstdefinestyle{c++} {
-    % Basic settings
-    language=[ISO]C++,
-    frame=tb,
-    tabsize=4,
-    showspaces=false,
-    showtabs=false,
-    showstringspaces=false,
-    captionpos=b,
-    breaklines=true,
-    breakatwhitespace=true,
-    numbers=left,
-    basicstyle=\scriptsize\ttfamily,
-    % Color settings
-    backgroundcolor=\color{back-color},
-    keywordstyle=\color{keywords},
-    commentstyle=\color{comments},
-    stringstyle=\color{strings}
-}
-\lstset{style=c++}
+\lstset{basicstyle=\ttfamily}
 
 \begin{document}
 \doctitlepage{}
@@ -162,16 +133,11 @@
 %----------------------------------
 % Put new chapters in this block
 
-\input{chapters/overview.tex}
-\newpage
-
-\input{chapters/steering.tex}
-\newpage
-
+<<<<<<< HEAD
 \input{chapters/selection.tex}
-\newpage
-
+=======
 \input{chapters/graph.tex}
+>>>>>>> Docs for graph, path planning, gathering resources
 \newpage
 
 \input{chapters/path-planning.tex}
@@ -180,49 +146,7 @@
 \input{chapters/behaviour.tex}
 \newpage
 
-\input{chapters/ui.tex}
-\newpage
-
-\input{chapters/rendering.tex}
-\newpage
-
-\input{chapters/camera.tex}
-\newpage
-
-\input{chapters/eventhandling.tex}
-\newpage
-
-\input{chapters/selection.tex}
-\newpage
-
 \input{chapters/control-workers.tex}
-\newpage
-
-\input{chapters/adding-buildings.tex}
-\newpage
-
-\input{chapters/spawning-units.tex}
-\newpage
-
-\input{chapters/unit-information.tex}
-\newpage
-
-\input{chapters/wave.tex}
-\newpage
-
-\input{chapters/design-decisions.tex}
-\newpage
-
-\input{chapters/security-measures.tex}
-\newpage
-
-\input{chapters/algorithm-designs.tex}
-\newpage
-
-\input{chapters/non-functional-requirements.tex}
-\newpage
-
-\input{chapters/conventions.tex}
 \newpage
 %----------------------------------
 
@@ -231,3 +155,4 @@
 
 \input{chapters/appendix.tex}
 \end{document}
+
