@@ -1,22 +1,4 @@
 \section{Robin Koning}
-\begin{itemize}
-    \item Provide a detailed list of the functionality and other 
-    contributions you have made to the project.
-    \item Evaluate your contribution to the project. What are you happy 
-    about, and what could have been better?
-    \item Which personal qualities did you show during the project?
-    \item What do you think of the quality of your own work?
-    \item Which qualities did you show as a team? What are the pitfalls of your team?
-    \item Describe some difficult issues your team encountered, and how you 
-    contributed to solving these issues.
-    \item What do you think of your contribution compared to the rest of 
-    the team?
-    \item What did you learn from the project?
-    \item Which new personal learning goals have emerged for a future project?
-\end{itemize}
-
-Write  a  coherent  text  instead  of  just  answering  the  questions  one  by  one.   Make
-sure you give concrete examples instead of vague observations.
 
 \subsection{Contributions}
 I contributed mostly to the backend of our game. I set up the initial 
@@ -30,8 +12,8 @@ namely the logic, rendering and UI projects. I did this to create a better
 overview of our project and to create a divide between gamelogic and 
 rendering/ui. Besides the better overview, it also gave us a way to switch to 
 OpenGL more easily, if we so desired, because the rendering is completely 
-seperate from the actualy game logic. I'm very happy with this divide, even 
-though I could've handled the updating of the other branches (on github) 
+seperate from the actual game logic and UI. I'm very happy with this divide, 
+even though I could've handled the updating of the other branches (on github) 
 better.
 
 I also made it possible to create UI elements, such as panels, buttons and 
@@ -45,7 +27,9 @@ simple to use.
 Also, I wrote a wrapper that handles the rendering to textures and the 
 screen, with different back buffers for the UI and the world/entities. I 
 think this simplified the rendering logic a lot, since you don't have to copy 
-your own texture to the correct back buffer anymore.
+your own texture to the correct back buffer anymore. Instead, you can now 
+send an image to the backbuffer or use SDL2's RenderDraw functions, and 
+it will be applied to the correct back buffer.
 
 The Camera, with corresponding manager class, is also written by me, the 
 camera makes it possible to move around within the world, to zoom and it's 
@@ -57,19 +41,34 @@ are seperated and we can create larger maps.
 I also wrote the wave system and corresponding panel with button. 
 The creation of the panel, button and click event was really simple, because 
 I have extensive knowledge about how our UI framework works, since I wrote it.
-Making the wave system was more difficult, because I had to use multiple 
-timers for the preparation stages and spawning stages.
+Making the wave system was a little bit more difficult, because I had to use 
+multiple timers for the different stages of a wave and it was hard to keep 
+track of those timers while programming.
 
-Besides the material contributions that I have made, I also supported my teammates 
-when they had difficulties using the UI or rendering frameworks. I tried to 
-help and give feedback when someone got stuck on a problem.
+Besides the material contributions that I have made, I also supported my 
+teammates when they had difficulties using the UI or rendering frameworks or 
+just C++ in general. I tried to help and give feedback when someone got 
+stuck on a problem.
 
 Overall I'm very happy with my contributions, I feel like I contributed a lot 
-to the backend and over quality of our game and programming. The things that 
-I programmed, I tried to do the best I could by researching a lot and reading 
-about how other people approached those problems.
+to the backend, the overall quality of our game and programming. The things 
+that I programmed, I tried to do the best I could by researching a lot and 
+reading about how other people approached those problems.
 
 \subsection{Qualities}
+Qualities that I think I have shown during this project are:
+
+\textbf{Helpful.} Whenever someone asked for my help I tried to do this as best 
+as I could. If I didn't know how to resolve a problem immediately, I hopped on to 
+the other's branch and tried to resolve the problem by looking through his 
+programming and giving pointers on what could be wrong or how to proceed from 
+the current state.
+
+\textbf{Self-sufficient.} I 
+
+\textbf{Productive.}
 
 \subsection{Difficulties}
 \subsection{New Goals}
+Be more vigilant while reviewing, some small issues still slipped through 
+the cracks, like unnecessary includes or non-initialized members.
