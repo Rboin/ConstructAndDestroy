@@ -1,4 +1,5 @@
 
+#include "entity/goal/evaluator/follow_path_evaluator.h"
 #include "entity/goal/evaluator/combat_evaluator.h"
 #include "entity/goal/evaluator/wander_evaluator.h"
 #include "sdl/image/sdl_image_health_render_object.h"
@@ -46,8 +47,10 @@ MovingEntityManager::add_unit(Player *player, vec2 position, MovingEntityType mo
             || moving_entity_type == MovingEntityType::JUGGERNAUT  || moving_entity_type == MovingEntityType::MERCENARY) {
         think_goal->add_evaluator(new CombatEvaluator());
         think_goal->add_evaluator(new WanderEvaluator());
+        think_goal->add_evaluator(new FollowPathEvaluator());
     } else {
         think_goal->add_evaluator(new WorkEvaluator());
+        think_goal->add_evaluator(new FollowPathEvaluator());
     }
 
     me->set_behaviour(behaviour);

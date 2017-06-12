@@ -10,7 +10,7 @@
 const float WanderEvaluator::calculate_desirability(MovingEntity *t) {
     // This has low desirability, because you don't actually want to just wander around.
     // You only want this when there's nothing else to do.
-    return 0.01;
+    return 0.03;
 }
 
 void WanderEvaluator::set_goal(MovingEntity *t) {
