@@ -1,0 +1,52 @@
+\section{Unit information}
+
+In order for the player to see detailed information about a unit, we decided to add a unit information panel to the game. This panel shows information about the unit that is selected at that time. This information is updated in real time. Because it is updated in real time, players can see things like woodcutters getting more and more wood, until a maximum has been reached at which point the woodcutter is heading for the warehouse to drop the resources. The unit information panel is visible when a single entity, a single building or multiple entities have been selected.
+
+When a single entity is selected, a panel appears in the bottom right corner as shown in \cref{fig:unitinfopanelsingleentity}. The panel is in a similar location when a building (\cref{fig:unitinfopanelbuildingentity}) or multiple entities are selected (\cref{fig:unitinfopanelmultipleentity}).
+
+The unit information panel either has no child panel, a SDLUnitInfoEntity panel or a SDLUnitInfoEntities panel. The class diagram for these classes can be found in \cref{fig:unitinfopaneldiagram}. The unit information panel has a mechanism that's similar to caching, so that the panel does not update when the selection does not change.
+
+This caching mechanism looks like this:
+
+\begin{lstlisting}[caption={Unit information panel}]
+void SDLUnitInfoPanel::render(SDLRenderer *renderer, mat2 &m, float d) {
+    Player *player = PlayerManager::get_instance()->get_player(player_id);
+
+    std::string hash = get_vector_hash<MovingEntity*>(&player->selected_units);
+
+    // don't change this panel when the selection hasn't changed
+    if (_previous_building != player->selected_building || _previous_units_hash != hash) {
+        clear_components();
+
+        if (player->selected_building != nullptr) {
+            add_component(new SDLUnitInfoEntity(player->selected_building, get_similar_representation()));
+        } else if (player->selected_units.size() == 1) {
+            add_component(new SDLUnitInfoEntity(player->selected_units.front(), get_similar_representation()));
+        } else if(player->selected_units.size() > 1) {
+            add_component(new SDLUnitInfoEntities(player->selected_units, get_similar_representation()));
+        }
+
+        _previous_building = player->selected_building;
+        _previous_units_hash = hash;
+    }
+
+    SDLPanel::render(renderer, m, d);
+}
+\end{lstlisting}
+
+With the above code, child panels will only be removed and added when the selection changes. Since the selected\_units property of the player is a vector, we decided to write a hashing function for a vector of pointers. The implementation of the get\_vector\_hash function is as follows:
+
+\begin{lstlisting}[caption={Vector hash}]
+template<typename T>
+std::string get_vector_hash(std::vector<T> *pointer) {
+    std::string total = "";
+
+    for(unsigned int i = 0; i < pointer->size(); i++) {
+        total += (char*)pointer->at(i);
+    }
+
+    return total;
+}
+\end{lstlisting}
+
+In this function the addresses of all pointers in the vector are concatenated into a single string. This hash is then compared with the previous hash of the vector, and the child panels are left untouched if the hash hasn't changed.
