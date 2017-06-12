@@ -28,15 +28,7 @@ public:
 };
 \end{lstlisting}
 
-The class has a lot of private methods that handle the user input separately. It has one method that has been overridden from the base class, which is the on-method. The on-method is where user inputs comes in. In this method the input is separated into two groups and will be handled further by other methods. To make clear how this works an explanatory activity diagram can be found below to illustrate the process. Below the image we will globally explain what the methods do individually. 
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.55]{res/ActivityDiagramMouseHandler.png}
-    \caption{Handling user input activity diagram.}
-\end{figure}
-
-If the text in the image is unreadable, we recommend taking a look at the image in the Appendix of this document.
+The class has a lot of private methods that handle the user input separately. It has one method that has been overridden from the base class, which is the on-method. The on-method is where user inputs comes in. In this method the input is separated into two groups and will be handled further by other methods. To make clear how this works an explanatory activity diagram can be found at \cref{fig:activitymousehandler} in the appendix to illustrate the process. 
 
 After the on-method has determined whether the incoming data is a motion event or button it will be handled further by other methods. We will start with a motion input.
 

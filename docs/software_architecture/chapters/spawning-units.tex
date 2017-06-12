@@ -74,15 +74,7 @@ The order\_unit\_from\_factory method calls the MovingEntityManager's method add
 \item A vec2 Position, the X and Y coordinates where the unit should be spawned.
 \item A MovingEntityType, type of the unit(FE: Lumberjack, Miner, Knight and more...)
 \end{itemize}
-The MovingEntityManager handles any interaction with the factory. And uses the parameters to call the factory and create the unit. We have implemented the structure of this code like a factory pattern as can be seen in the following class diagram below. The class diagram focusses on the factory and the classes that use and so only the really important classes are completely shown with all it's methods and attributes.  
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.55]{res/MovingEntityFactoryClass.png}
-    \caption{Class structure around the MovingEntity factory.}
-\end{figure}
-\newpage
- 
-There is also a rotated version of this image in the appendix for a sharper image if needed.
+The MovingEntityManager handles any interaction with the factory. And uses the parameters to call the factory and create the unit. We have implemented the structure of this code like a factory pattern as can be seen in the following class diagram below. The class diagram found at \cref{fig:movingentityfactory} focusses on the factory and the classes that use and so only the really important classes are completely shown with all it's methods and attributes.  
 
 After the MovingEntityManager has completed an order from the factory the unit will spawn in the given location. This process will repeat until all orders have been handled.
 
