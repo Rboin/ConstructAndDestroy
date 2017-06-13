@@ -29,8 +29,7 @@ SDL_KeyEventSlot::SDL_KeyEventSlot() : Slot<sdl_key_event_data>() {
 
 void SDL_KeyEventSlot::on(sdl_key_event_data d) {
 
-    if(d.type != SDL_KEYUP)
-    {
+    if (d.type != SDL_KEYUP) {
         // ONLY HANDLE KEY UP EVENTS
         return;
     }
@@ -66,14 +65,15 @@ void SDL_KeyEventSlot::on(sdl_key_event_data d) {
                 BuildAndSpawnManager::get_instance()->spawn_spawnable_entity(panel);
             }
 
-            if( key < up.size() && key >= 0){
+            if (key < up.size() && key >= 0) {
                 up.at(key)->upgrade();
                 SDLResearchPanel *panel = (SDLResearchPanel *) SDLControlPanel::get_instance()->get_children()[0];
 
                 sdl_data *data = panel->get_representation()->get_data();
                 sdl_data *similar_data = new sdl_data{data->red, data->green, data->blue, data->alpha};
-                SDL_RenderObject *re = new SDL_RenderObject(panel->get_position()->clone(), panel->get_size()->clone(), similar_data);
-                SDLResearchPanel *new_panel = new SDLResearchPanel(re ,player->selected_building);
+                SDL_RenderObject *re = new SDL_RenderObject(panel->get_position()->clone(), panel->get_size()->clone(),
+                                                            similar_data);
+                SDLResearchPanel *new_panel = new SDLResearchPanel(re, player->selected_building);
                 SDLControlPanel::get_instance()->add_component(new_panel);
                 SDLControlPanel::get_instance()->remove_component(panel);
             }
@@ -91,17 +91,14 @@ void SDL_KeyEventSlot::on(sdl_key_event_data d) {
 }
 
 void SDL_KeyEventSlot::handle_tab(Player *player) {
-    if(player->buildings.size() ==0)
-    {
+    if (player->buildings.size() == 0) {
         return;
-    }
-    else if (player->buildings.size() == 1)
-    {
+    } else if (player->buildings.size() == 1) {
         player->buildings[0]->select();
         player->selected_building = player->buildings[0];
         return;
     }
-    
+
     if (player->selected_building != nullptr) {
         player->selected_building->deselect();
     }
