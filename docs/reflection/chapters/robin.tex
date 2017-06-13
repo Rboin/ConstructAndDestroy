@@ -1,6 +1,5 @@
 \section{Robin Koning}
 
-\subsection{Contributions}
 I contributed mostly to the backend of our game. I set up the initial 
 project, with the base- and movingentity, the rendering with SDL2 and the 
 documentation with \LaTeX. I also wrote the initial framework for 
@@ -50,25 +49,46 @@ teammates when they had difficulties using the UI or rendering frameworks or
 just C++ in general. I tried to help and give feedback when someone got 
 stuck on a problem.
 
-Overall I'm very happy with my contributions, I feel like I contributed a lot 
-to the backend, the overall quality of our game and programming. The things 
-that I programmed, I tried to do the best I could by researching a lot and 
-reading about how other people approached those problems.
+There were also some difficulties concerning memory leaks and Git.
+About halfway through the project, we found out that we had some memory leaks.
+It was pretty difficult finding out exactly where the leaks occurred, without 
+using a memory monitoring tool like Valgrind.
+Also, when I split the project into some smaller ones, we had a lot of 
+difficulties applying those changes to the other branches. I could've handled
+this better by creating smaller patches instead of one big patch.
 
-\subsection{Qualities}
-Qualities that I think I have shown during this project are:
+Some personal qualities that I think I have shown during this project are:
 
-\textbf{Helpful.} Whenever someone asked for my help I tried to do this as best 
-as I could. If I didn't know how to resolve a problem immediately, I hopped on to 
-the other's branch and tried to resolve the problem by looking through his 
-programming and giving pointers on what could be wrong or how to proceed from 
-the current state.
+\textbf{Helpful.} Whenever someone asked for my help I tried to do this as 
+best as I could. If I didn't know how to resolve a problem immediately, I 
+hopped on to the other's branch and tried to resolve the problem by looking 
+through his programming and giving pointers on what could be wrong or how to 
+proceed from the current state.
 
-\textbf{Self-sufficient.} I 
+\textbf{Initiative.} If I found something in our code that could be improved 
+I created an issue on GitHub. If it was something in the backend, like the 
+camera and rendering, I assigned it to myself. There was also the splitting 
+of our project into smaller ones, which I thought of as pretty high priority.
+I assigned this to myself to do during the holidays.
 
-\textbf{Productive.}
+\textbf{Self-Critical.} I had a pretty high standard for my own code quality.
+If I wasn't satisfied with my own code or if it didn't work exactly how I 
+wanted it to work; I was not afraid to throw it all away and start over again.
 
-\subsection{Difficulties}
-\subsection{New Goals}
-Be more vigilant while reviewing, some small issues still slipped through 
-the cracks, like unnecessary includes or non-initialized members.
+About halfway through the project, we found out that we had some memory leaks.
+It was pretty difficult finding out exactly where the leaks occurred, without 
+using a memory monitoring tool like Valgrind.
+
+When I split the project into some smaller ones, we had a lot of difficulties 
+applying those changes to the other branches. 
+
+Some new goals for a future project are:
+
+\textbf{Be more vigilant while reviewing}, some small issues still slipped 
+through the cracks, like unnecessary includes or non-initialized members.
+
+\textbf{Use Valgrind (or Dr. Memory) from the start while programming in C++.} 
+This would lower the total count of uninitialized members and other memory 
+related leaks. It would save a lot of time if I used it from the start, 
+instead of searching through a lot of code before finding the actual source 
+of a leak.
