@@ -17,3 +17,20 @@
 
 Write  a  coherent  text  instead  of  just  answering  the  questions  one  by  one.   Make
 sure you give concrete examples instead of vague observations.
+
+\subsection{Contributions}
+I have contributed to this project by picking up several user stories.
+The first sprint I started with the user story 'Adding buildings'. Because this game was the first C++ project I contributed to, it took me some time to get comfortable and familiar with the code base and structure. With some help of Robin I started with processing key events. First we decided that the 'N' key should trigger the game to position a castle. During the sprints we wanted to extend this by triggering this process with a panel to be able to build multiple types of buildings and actually check and subtract the resources of a player when the player builds a building.
+
+I have implemented a generic state machine, which could be used by different classes and for different purposes. I've added the state machine to the 'Player' object, so we were able to track the current state of the player, so we can decide what kind of action an event should trigger. I have build several states that helped us to position a building, actually add a building to the world and subtract the costs from the player it's gathered resources.
+
+Besides adding buildings, I implemented several resources like gold and stone and the entities which are able to gather these resources. Finding/editing textures, creating objects and adding them to the panels were part of implementing these resources. I also added the knight entity and the enemy version of the knight. After that was done, Sander added their behaviour.
+
+In the last sprint we decided to trigger events like adding buildings and spawning entities by pushing shortcut keys. First I implemented this user story without any additions to the user interface. Jeroen implemented the queue badges, and after I added more inheritance to his implementation I was able to reuse his code to display shortcut badges.
+
+I think that I can be proud of my contribution to this project. I was afraid that , because of the programming language and my limited knowledge of it, I would become a liability. After I got more familiar with the code base I was able to pick up more tasks. Of course I asked a lot but I hope it wasn't annoying, at least people didn't say so.
+
+\subsection{Qualities}
+
+
+
