@@ -1,7 +1,7 @@
 \section{Creating units}
 In this chapter we will explain how creating units is implemented in the game. We will go through some of the code and show the design patterns we used.
 
-\subsection{Entity Panel} \label{EntityPanel}
+\subsection{Entity Panel} \label{sec:EntityPanel}
 A unit can be created in a building, in a castle for example. When the player selects a castle the building panel is replaced by a different panel which shows all units that can be spawned from the selected building. This can be seen in \cref{fig:entity-panel}, where the entity panel is the panel at the bottom of the screen. 
 
 A player can order many entities, but they won't be spawned right away. Instead, they are queued. The number of entities in the build queue are displayed in a badge. Only one entity can be spawned at a given time. The color of the badge indicates whether an entity is being built and how close it is to actually spawning. 
