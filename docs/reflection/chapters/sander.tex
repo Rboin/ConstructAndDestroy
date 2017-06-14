@@ -1,0 +1,51 @@
+\section{Sander Bouwman}
+I would like to start off with the contributions I’ve made to the project.
+\begin{itemize}
+\item Gather resources: I’ve implemented different goals for this functionality.  I made the work goal, which is a composite goal. This goal exists out of different composite and atomic goals like plan path, follow path,  traverse edge, gather resources, which I’ve also made. A bit later during the project we decided that gather resources should depend on time, otherwise faster machines would gather resources much faster than slower machines.
+
+\item No infinite resources: we decided that resource nodes should have limited resources and that resources should replenish resources slowly over time. Workers also shouldn't be able to gather resources from a depleted node.
+
+\item Generate resources: at first we had some hardcoded trees, I made a simple algorithm that generates resource nodes in the game world using a random number generator.
+
+\item Pathfinding: we used the pathfinding algorithm from the AAI simulation. However, there were still some bugs in it and it and had to be optimized better. I added things like diagonal movement and some preventions that would prevent the bots from getting stuck.
+
+\item Resource panel: added a panel which shows the current resources of the player.
+ 
+\item Combat system: for this functionality I had to implement new goals. I added the goals combat, hunt target, fight and used some other goals that I’ve implemented earlier during this project. At this point we also found out that the follow path and traverse edge goals weren’t working as well as we expected so I’ve improved these goals as well. 
+
+\item Health bar: added health bars for all entities. 
+
+\item Wander goal: combat entities were just standing still when there were no enemies in the game world. I adjusted the wander goal to use the A* algorithm and added this goal to the combat entities. 
+
+\item Fine tuning: adjusted the health, attack damage and movement speed of different entities and made it match the costs of the entities. Added HP regeneration of entities. Adjusted the starting resources of the player. Improved the restart button, now it completely resets the game.
+
+\item Destructors: we hardly had any destructors and this caused that we had major memory leaks. In week 7 I went through the whole project and added destructors.
+
+\item Upgrades: in the last sprint I completed all my user stories so I could pick up another extra user story. I added the upgrade system, which gives the player the ability to purchase different upgrades.
+
+\end{itemize}
+
+Overall I’m really satisfied with my contributions to the project. I believe I’ve added a decent amount of functionalities and these functionalities are rather important ones as well. The goal system wasn’t as easy to use as I’ve hoped, and at times it was truly frustrating. However, in the end I made some basic AI and of that I’m proud.
+
+I’m also quite happy with the quality of my work. I used design patterns were possible, always kept our code standards in mind and tried to optimize were possible. I also believe that we as a team did a really awesome job of reviewing each other’s code. Which in term lead to qualitatively good code.
+
+As mentioned earlier we hardly wrote any destructors, so for a future project in an unmanaged language this is something I will pay attention to right from the start. We didn’t wrote any unit tests, I believe if we did that it would have made debugging easier. Besides that everything went pretty well. 
+
+I showed a lot of initiative during this project. I reviewed a lot of pull requests without team members having to ask, worked during the holidays, when I completed my user stories for the sprint and the sprint wasn’t over I asked the team if I could help anyone or pick up a new user story. 
+
+I was always prepared to help others as well. E.g. Mark needed some help with a panel and we went on discord, a free voice platform, and together we looked at the problem and solved it. The day before Winnovation I found out that a memory leak slipped into the development branch. I knew this wasn’t my memory leak, however I was working on solving the memory leak till late in the evening. 
+
+I really enjoyed working with this team. Everyone was always willing to help each other. Every team member is highly motivated, there was a lot of initiative. It was just great.
+
+Also, when we had different opinions on a subject we were always able to come to a consensus within a reasonable amount of time. In other projects, discussions could go on for hours without agreeing on anything. In this team we can be open and honest about everything as well. E.g. if someone didn’t know how to do something he could just say it. 
+As mentioned before, we had some major memory leaks. I helped solving this problem by adding destructors to the whole project.
+
+I think the contribution in this team is equally divided. I’ve done most work on the AI part, however others did work a lot on the backend or on the panels. I believe because everyone specialized in certain parts we were able implement a lot of features. However, your greatest strength is your greatest weakness. Since everyone mainly focused on certain parts, this could mean that when someone becomes ill or isn’t available for a while it costs more effort to pick up that persons user story. Fortunately for us, this didn’t happen.
+
+I’ve learned a lot about C++ and how important destructors are. Programming C++ really learned me to think about my code and design. If you make one small mistake it can have major consequences. During this project I’ve also got used to working with different data structures and the power of them. E.g. a graph, a stack or queue.
+
+During this project we made good use of the power of GitHub. Making use of branches, creating pull requests, rebasing and merging. We used the GitHub project board for our scrum board. We linked issues to tasks on the project board, made milestones for each sprint, etc. It gives you good insight in the progress of a sprint and made the project progress as a whole really clear. I truly enjoyed working with GitHub the way we did.
+
+If I ever have to do a project in an unmanaged language I will make use of memory tools and I will also be more wary of destructors. I want to keep improving on thinking about my code design, making sure its SOLID. Recently I saw there is a marketplace for GitHub tools, perhaps in a new project I want to make more use of these tools, this project we used TravisCI and it was certainly helpful. I also want to work on Test Driven Development.
+
+

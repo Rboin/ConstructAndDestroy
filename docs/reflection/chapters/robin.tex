@@ -1,0 +1,94 @@
+\section{Robin Koning}
+
+I contributed mostly to the backend of our game. I set up the initial 
+project, with the base- and movingentity, the rendering with SDL2 and the 
+documentation with \LaTeX. I also wrote the initial framework for 
+Goal-driven behaviours, including the Think goal, and some steering 
+behaviours such as the Seek- and Arrivebehaviour. 
+
+Secondly, I made sure to split our game into three different projects, 
+namely the logic, rendering and UI projects. I did this to create a better 
+overview of our project and to create a divide between gamelogic and 
+rendering/ui. Besides the better overview, it also gave us a way to switch to 
+OpenGL more easily, if we so desired, because the rendering is completely 
+seperate from the actual game logic and UI. I'm very happy with this divide, 
+even though I could've handled the updating of the other branches (on github) 
+better.
+
+I also made it possible to create UI elements, such as panels, buttons and 
+text. SDL2 is just a simple rendering library which supplies 
+you with a window handle and a renderer, so I came up with a way for us to 
+create these UI elements. Besides the UI elements, I also wrote the event 
+system, which includes event dispatchers and a way to hook up a UI element 
+to an event. The way the UI framework and event system turned out, I'm pretty 
+happy with. It's really extensible because of the composite pattern used, and 
+simple to use.
+Also, I wrote a wrapper that handles the rendering to textures and the 
+screen, with different back buffers for the UI and the world/entities. I 
+think this simplified the rendering logic a lot, since you don't have to copy 
+your own texture to the correct back buffer anymore. Instead, you can now 
+send an image to the backbuffer or use SDL2's RenderDraw functions, and 
+it will be applied to the correct back buffer.
+
+The Camera, with corresponding manager class, is also written by me, the 
+camera makes it possible to move around within the world, to zoom and it's 
+also used for transforming world coordinates into screen coordinates. I'm 
+very happy with how the camera turned out. First we just had a static world, 
+which was just the initial screen, but now the screen and world coordinates 
+are seperated and we can create larger maps.
+
+I also wrote the wave system and corresponding panel with button. 
+The creation of the panel, button and click event was really simple, because 
+I have extensive knowledge about how our UI framework works, since I wrote it.
+Making the wave system was a little bit more difficult, because I had to use 
+multiple timers for the different stages of a wave and it was hard to keep 
+track of those timers while programming.
+
+Besides the material contributions that I have made, I also supported my 
+teammates when they had difficulties using the UI or rendering frameworks or 
+just C++ in general. I tried to help and give feedback when someone got 
+stuck on a problem.
+
+There were also some difficulties concerning memory leaks and Git.
+About halfway through the project, we found out that we had some memory leaks.
+It was pretty difficult finding out exactly where the leaks occurred, without 
+using a memory monitoring tool like Valgrind.
+Also, when I split the project into some smaller ones, we had a lot of 
+difficulties applying those changes to the other branches. I could've handled
+this better by creating smaller patches instead of one big patch.
+
+Some personal qualities that I think I have shown during this project are:
+
+\textbf{Helpful.} Whenever someone asked for my help I tried to do this as 
+best as I could. If I didn't know how to resolve a problem immediately, I 
+hopped on to the other's branch and tried to resolve the problem by looking 
+through his programming and giving pointers on what could be wrong or how to 
+proceed from the current state.
+
+\textbf{Initiative.} If I found something in our code that could be improved 
+I created an issue on GitHub. If it was something in the backend, like the 
+camera and rendering, I assigned it to myself. There was also the splitting 
+of our project into smaller ones, which I thought of as pretty high priority.
+I assigned this to myself to do during the holidays.
+
+\textbf{Self-Critical.} I had a pretty high standard for my own code quality.
+If I wasn't satisfied with my own code or if it didn't work exactly how I 
+wanted it to work; I was not afraid to throw it all away and start over again.
+
+About halfway through the project, we found out that we had some memory leaks.
+It was pretty difficult finding out exactly where the leaks occurred, without 
+using a memory monitoring tool like Valgrind.
+
+When I split the project into some smaller ones, we had a lot of difficulties 
+applying those changes to the other branches. 
+
+Some new goals for a future project are:
+
+\textbf{Be more vigilant while reviewing}, some small issues still slipped 
+through the cracks, like unnecessary includes or non-initialized members.
+
+\textbf{Use Valgrind (or Dr. Memory) from the start while programming in C++.} 
+This would lower the total count of uninitialized members and other memory 
+related leaks. It would save a lot of time if I used it from the start, 
+instead of searching through a lot of code before finding the actual source 
+of a leak.
