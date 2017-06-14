@@ -9,11 +9,14 @@ seen in \cref{lst:uicomponent-rendering}.
 \\
 \begin{lstlisting}[caption={UIComponent rendering.},
 label={lst:uicomponent-rendering}]
-void SDL_UIComponent::render(SDLRenderer *renderer, float delta) {
-    representation->render(renderer);
+void SDL_UIComponent::render(SDLRenderer *renderer, mat2 &transformations, float delta) {
+    renderer->set_render_target(renderer->get_ui_buffer());
+    if(representation) {
+        representation->render(renderer, transformations);
+    }
 
     for (int i = 0; i < this->children.size(); i++) {
-        children[i]->render(renderer, delta);
+        children[i]->render(renderer, transformations, delta);
     }
 }
 \end{lstlisting}

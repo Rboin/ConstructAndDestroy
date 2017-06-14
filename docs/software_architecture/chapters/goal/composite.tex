@@ -1,0 +1,62 @@
+\subsection{Composite goals} 
+We created a couple of Composite goals for moving entities which we describe 
+below. There is a class diagram \cref{fig:goalcomposite-inherit} in the 
+appendix that illustrates the structure. This diagram doesn't show all 
+composite goals, however it should give an impressions how we implemented this. 
+
+\subsubsection{Think} 
+The Think goal is a goal that never gets removed. This goal is needed to 
+determine an entity's next goal and activates that goal. It does so by calling 
+the goals evaluator class, which returns a desirability value. The goal with 
+the highest desirability gets chosen as the next goal. Desirability’s can be 
+influenced by a variant of factors. E.g., how far away is the entity from an 
+hostile entity. When there is an hostile enemy close it might not want to 
+gather resources. Evaluators are a great way to create AI. 
+
+\subsubsection{Follow Path} 
+\label{sec:followpath} 
+This goal traverses a path by adding the TraverseEdgeGoal class to its subgoals. 
+This way a path consists of multiple instances of TraverseEdgeGoals 
+(\cref{sec:traverseedge}) which can be paused if the entity needs to do 
+something else first, i.e. fleeing. Once there are no more edges to traverse, 
+this goal will be completed and removed from the entity's subgoals.
+
+\subsubsection{Work} 
+This goal makes the entity go to the nearest resource to work. It first plans 
+a path (\cref{sec:planpath}) to the nearest resource and then it follows that 
+path (\cref{sec:followpath}). Once it arrives on the resource's location it 
+starts to gather the resource (\cref{sec:gatherresource}). Once it's done 
+gathering it plans another path, this time to the closest warehouse/depot. It 
+follows this path and after it arrives it drops its resources 
+(\cref{sec:dropresources}). Once all these goals are completed the work goal 
+is completed as well.
+
+\subsubsection{Combat} 
+\label{sec:combat} 
+This goal can be initialized with or without an enemy. When this goal is 
+initialized with an enemy it means the owner of this goal is being attacked, 
+thus it doesn’t have to hunt a target (\cref{sec:hunttarget}) and the fight 
+goal can be added right away. When the goal is initialized without an enemy it 
+means this entity will look for an enemy. If there is no enemy entity present 
+the goal will be removed, if there is an enemy the goals hunt target and fight 
+goal will be added to the owner.
+
+\subsubsection{Hunt Target} 
+\label{sec:hunttarget} 
+This goal will hunt down an enemy moving entity. This is done by using the 
+plan path (\cref{sec:planpath}) and follow path (\cref{sec:followpath}) goals. 
+The most notable thing for this goal is when it is completed or terminated. If 
+the sub goals of hunt target are empty it means we have followed the path to 
+the enemy’s location. Since we are chasing moving entities we regularly have 
+to check whether or not the enemy has moved to much from its initial location. 
+When this is the case we set a seek to the current enemy location, after that 
+the goal will be removed. We have to do this otherwise the entity will stop 
+moving for a bit. After this the combat goal (\cref{sec:combat}) will be called 
+again and the hunt target goal can plan a new path to the enemy’s location. 
+This process is repeated untill we are close enough to attack the enemy entity.
+
+\subsubsection{Wander} 
+The wander goal is a goal that gets activated when there are no enemies 
+present on the map. A random node is chosen and we plan a path to that node. 
+Then the followpath goal will be activated and we traverse the edges. This 
+process is continued until a new enemy enters the game world.
