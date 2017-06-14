@@ -1,7 +1,7 @@
 \section{Creating units}
 In this chapter we will explain how creating units is implemented in the game. We will go through some of the code and show the design patterns we used.
 
-\subsection{Entity Panel} \label{EntityPanel}
+\subsection{Entity Panel} \label{sec:EntityPanel}
 A unit can be created in a building, in a castle for example. When the player selects a castle the building panel is replaced by a different panel which shows all units that can be spawned from the selected building. This can be seen in \cref{fig:entity-panel}, where the entity panel is the panel at the bottom of the screen. 
 
 A player can order many entities, but they won't be spawned right away. Instead, they are queued. The number of entities in the build queue are displayed in a badge. Only one entity can be spawned at a given time. The color of the badge indicates whether an entity is being built and how close it is to actually spawning. 
@@ -15,6 +15,8 @@ If the player wants additional information about something the available entitie
 In \cref{fig:unit-panel} all unit panels are highlighted. For each unit that can be spawned from the selected building, a unit panel is added to the entity panel at the bottom of the screen. A unit panel, as displayed in \cref{fig:unit-panel-class-diagram}, contains the EntityType that belongs to a unit panel which it uses to render the sprite that belongs to the EntityType.
 
 In order to capture click events, and trigger the unit spawning process, a MouseHandlerEntityPanel is used. When the player clicks on an entity, the mouse handler takes care of spawning the unit and subtracing the resource cost. The entity will only be ordered if the player has enough resources to pay for the unit, as shown below.
+
+Another way to spawn a unit is to press the shortcut key. This shortcut key is shown in the top left badge of the unit panel, as you can see in  \cref{fig:entity-shortcuts}.
 
 \begin{lstlisting}
  if (p->resources->check_if_sufficient_resources(spawnable_entity->get_cost())) {
@@ -72,15 +74,7 @@ The order\_unit\_from\_factory method calls the MovingEntityManager's method add
 \item A vec2 Position, the X and Y coordinates where the unit should be spawned.
 \item A MovingEntityType, type of the unit(FE: Lumberjack, Miner, Knight and more...)
 \end{itemize}
-The MovingEntityManager handles any interaction with the factory. And uses the parameters to call the factory and create the unit. We have implemented the structure of this code like a factory pattern as can be seen in the following class diagram below. The class diagram focusses on the factory and the classes that use and so only the really important classes are completely shown with all it's methods and attributes.  
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[scale=0.55]{res/MovingEntityFactoryClass.png}
-    \caption{Class structure around the MovingEntity factory.}
-\end{figure}
-\newpage
- 
-There is also a rotated version of this image in the appendix for a sharper image if needed.
+The MovingEntityManager handles any interaction with the factory. And uses the parameters to call the factory and create the unit. We have implemented the structure of this code like a factory pattern as can be seen in the following class diagram below. The class diagram found at \cref{fig:movingentityfactory} focusses on the factory and the classes that use and so only the really important classes are completely shown with all it's methods and attributes.  
 
 After the MovingEntityManager has completed an order from the factory the unit will spawn in the given location. This process will repeat until all orders have been handled.
 
