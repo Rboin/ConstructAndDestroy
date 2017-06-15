@@ -21,8 +21,8 @@ at \cref{lst:mousehandlerheader}.
 label={lst:mousehandlerheader}]
 class MouseHandlerWorld : public SDL_MouseEventSlot {
 private: 
-    int start_drag_x; 
-    int start_drag_y;
+    int _start_drag_x; 
+    int _start_drag_y;
     void handle_up(sdl_mouse_event_data data); 
     void handle_down(sdl_mouse_event_data data); 
     void handle(sdl_mouse_event_data);
